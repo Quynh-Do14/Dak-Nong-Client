@@ -3,10 +3,11 @@ import HeaderPage from './header'
 import FooterPage from './footer'
 
 const MainLayout = (props) => {
+    const { className = "" } = props;
     return (
         <div>
             <HeaderPage />
-            <div>{props.children} </div>
+            <div className={className}>{props.children} </div>
             <FooterPage />
         </div>
     )

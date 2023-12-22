@@ -1,5 +1,6 @@
 import React from 'react'
 import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper'
+import { ROUTE_PATH } from '../../core/common/appRouter'
 
 const Festival = ({ data = [] }) => {
     return (
@@ -28,7 +29,7 @@ const Festival = ({ data = [] }) => {
                                     } className='img-page' alt="photo" />
                                 </div>
                                 <div className="activities-content">
-                                    <a className='text-truncate position-relative' href="">{it.tenDiaDiem} </a>
+                                    <a className='text-truncate position-relative' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>{it.tenDiaDiem} </a>
                                     <ul className='position-relative'>
                                         <li><i className="fa fa-calendar mr-10"></i>{convertDateOnly(it.gioMoCua)} </li>
                                         -

@@ -9,6 +9,8 @@ import Destination from './destination';
 import Festival from './festival';
 import SlideBanner from '../../infratructure/common/controls/slide-banner';
 import Specialty from './specialty';
+import LoadingFullPage from '../../infratructure/common/controls/loading';
+import { ROUTE_PATH } from '../../core/common/appRouter';
 
 const HomePage = () => {
     const [loading, setLoading] = useState(false);
@@ -145,7 +147,7 @@ const HomePage = () => {
                                 </h2>
                             </div>
                             <div className="btn-group">
-                                <div className="header-link-btn"><a href="gallery.html" className="btn-1">Khám phá ngay <span></span></a></div>
+                                <div className="header-link-btn"><a href={ROUTE_PATH.TOUR} className="btn-1">Khám phá ngay <span></span></a></div>
                             </div>
                         </div>
                     </div>
@@ -167,9 +169,9 @@ const HomePage = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="divider-content">
-                                <h5>Sẵn sáng cho những</h5>
-                                <h2> trải nghiệm
-                                    <span> du lịch mới
+                                <h5>Trải nghiệm những</h5>
+                                <h2> đặc sản của
+                                    <span> Đắk Nông
                                         <svg className="banner-text-shape" width="247" height="38" viewBox="0 0 247 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path id="signature3" d="M3.18577 22.2125C3.18577 22.2125 155.675 -3.21963 241.039 14.2277" stroke="#FE7524" stroke-width="5" stroke-linecap="round" />
                                             <path id="signature4" d="M3.55141 17.792C3.55141 17.792 158.876 1.54075 243.929 23.8236" stroke="#FE7524" stroke-width="5" stroke-linecap="round" />
@@ -178,7 +180,7 @@ const HomePage = () => {
                                 </h2>
                             </div>
                             <div className="btn-group">
-                                <div className="header-link-btn"><a href="gallery.html" className="btn-1">Khám phá ngay <span></span></a></div>
+                                <div className="header-link-btn"><a href={ROUTE_PATH.SPECIALTY} className="btn-1">Khám phá ngay <span></span></a></div>
                             </div>
                         </div>
                     </div>
@@ -220,18 +222,20 @@ const HomePage = () => {
                             {
                                 listDiaDiemTop2.map((it, index) => (
                                     <div key={index} className="destination-container mb-24">
-                                        <div className="destination-image">
-                                            <a href="destination-details.html"><img src={
-                                                it?.hinhAnh?.indexOf("http") == -1
-                                                    ?
-                                                    showImageCommon(it?.hinhAnh)
-                                                    :
-                                                    it?.hinhAnh
-                                            } alt="image" className='img-destination-s' /></a>
-                                        </div>
-                                        <div className="destination-content destination-content-2">
-                                            <h6>{it?.tenDiaDiem}</h6>
-                                        </div>
+                                        <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
+                                            <div className="destination-image">
+                                                <a href="destination-details.html"><img src={
+                                                    it?.hinhAnh?.indexOf("http") == -1
+                                                        ?
+                                                        showImageCommon(it?.hinhAnh)
+                                                        :
+                                                        it?.hinhAnh
+                                                } alt="image" className='img-destination-s' /></a>
+                                            </div>
+                                            <div className="destination-content destination-content-2">
+                                                <h6>{it?.tenDiaDiem}</h6>
+                                            </div>
+                                        </a>
                                     </div>
                                 ))}
                         </div>
@@ -239,6 +243,7 @@ const HomePage = () => {
                 </div>
             </section>
             {/* //////////////// */}
+            <LoadingFullPage loading={loading} />
         </MainLayout>
     )
 }

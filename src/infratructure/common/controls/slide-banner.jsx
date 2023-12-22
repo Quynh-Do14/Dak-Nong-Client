@@ -359,7 +359,7 @@ const SlideBanner = () => {
                                                     Một chuyến đi không chỉ là sự di chuyển, đó là một hành trình trải nghiệm</p>
                                                 <div className="banner-btn-media">
                                                     <div className="btn-group">
-                                                        <div className="header-link-btn"><a href="tour-package.html" className="btn-1 btn-2"> Khám phá ngay<span></span></a></div>
+                                                        <div className="header-link-btn"><a href={ROUTE_PATH.DESTINATION} className="btn-1 btn-2"> Khám phá ngay<span></span></a></div>
                                                     </div>
                                                 </div>
                                             </div>

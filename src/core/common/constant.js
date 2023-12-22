@@ -15,9 +15,13 @@ export default class Constants {
                 label: "Bài viết",
                 link: ROUTE_PATH.ARTICLE,
             },
+            // {
+            //     label: "Điểm du lịch",
+            //     link: ROUTE_PATH.DESTINATION,
+            // },
             {
-                label: "Điểm du lịch",
-                link: ROUTE_PATH.DESTINATION,
+                label: "Tour",
+                link: ROUTE_PATH.TOUR,
             },
             {
                 label: "Lễ hội",
@@ -27,10 +31,10 @@ export default class Constants {
                 label: "Đặc sản",
                 link: ROUTE_PATH.SPECIALTY,
             },
-            {
-                label: "Bản đồ",
-                link: ROUTE_PATH.LAYOUT_MAP,
-            },
+            // {
+            //     label: "Bản đồ",
+            //     link: ROUTE_PATH.LAYOUT_MAP,
+            // },
 
         ]
     };
@@ -194,7 +198,7 @@ export default class Constants {
             {
                 name: "Địa điểm du lịch",
                 img: homePageImg1,
-                link: ROUTE_PATH.DESTINATION,
+                link: ROUTE_PATH.TOUR,
                 description: "Khám phá những địa điểm du lịch mới",
             },
             {
@@ -216,6 +220,23 @@ export default class Constants {
                 description: "Tìm hiểu các lễ hội truyền thống",
             },
 
+        ]
+    }
+
+    static TabDetailTour = class {
+        static list = [
+            {
+                name: "Thông tin",
+                icon: "fa fa-circle-info"
+            },
+            {
+                name: "Ảnh",
+                icon: "fa fa-file-image"
+            },
+            {
+                name: "Điều khoản",
+                icon: "fa fa-file-lines"
+            },
         ]
     }
 };

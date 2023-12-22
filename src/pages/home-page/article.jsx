@@ -1,5 +1,6 @@
 import React from 'react'
 import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper'
+import { ROUTE_PATH } from '../../core/common/appRouter'
 
 const Article = ({ data = [] }) => {
     return (
@@ -29,13 +30,13 @@ const Article = ({ data = [] }) => {
                                 <div className="blog-info">
                                     <div class="blog-info">
                                         <div class="footer-info">
-                                            <ul className='flex justify-center'>
+                                            <ul className='flex justify-center mb-10'>
                                                 {/* <li><i className="fa-regular fa-user"></i> </li> */}
                                                 <li><i className="fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
                                             </ul>
-                                            <a href="" className="blog-title text-truncate-title">{it.tieuDe} </a>
+                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title">{it.tieuDe} </a>
                                             <p className='text-truncate-description'>{it.tieuDeCon} </p>
-                                            <a href="">Xem thêm </a>
+                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>Xem thêm </a>
                                         </div>
                                     </div>
                                 </div>

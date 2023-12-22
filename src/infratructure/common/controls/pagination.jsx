@@ -13,16 +13,20 @@ const PaginationCommon = (props) => {
     }, [pagination])
 
     return (
-        <div className="row">
-            <div className="col-lg-12">
-                <ul className="gowilds-pagination wow fadeInUp text-center">
-                    <button className={`bg-light ${changePage == 1 ? "not-allowed" : ""}`} disabled={changePage == 1 ? true : false}>
-                        <li onClick={onPreviousPage}><a><i className="fas fa-arrow-left"></i></a></li>
-                    </button>
-                    <li><a className="active ml-20 mr-20">{changePage}</a></li>
-                    <button className={`bg-light ${isLastPage ? "not-allowed" : ""}`} disabled={isLastPage ? true : false}>
-                        <li onClick={onNextPage}><a><i className="fas fa-arrow-right"></i></a></li>
-                    </button>
+        <div className="col-lg-12">
+            <div className="paigination">
+                <ul className=''>
+                    <li>
+                        <button onClick={onPreviousPage} className={`bg-white ${changePage == 1 ? "not-allowed" : ""}`} disabled={changePage == 1 ? true : false}>
+                            <a><i className="fa fa-arrow-left"></i></a>
+                        </button>
+                    </li>
+                    <li><a>{changePage} </a></li>
+                    <li>
+                        <button onClick={onNextPage} className={`bg-white ${isLastPage ? "not-allowed" : ""}`} disabled={isLastPage ? true : false}>
+                            <a><i className="fa fa-arrow-right"></i></a>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>

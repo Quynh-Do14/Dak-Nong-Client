@@ -20,8 +20,8 @@ const Tour = ({ data = [] }) => {
                         <div className="popular-ture-overlay place-overlay">
                             <div className="popular-ture-text place-text">
                                 <ul>
-                                    <li><i className="fa-solid fa-star"></i>{it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </li>
-                                    <li><span>From</span><span> {it.giaVe === Constants.FreePrice || Constants.Undefined ? it.giaVe : `Chỉ từ: ${it.giaVe}`} </span></li>
+                                    <li><i className="fa fa-star"></i>{it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </li>
+                                    <li><span> {it.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${it.giaVe}`} </span></li>
                                 </ul>
                                 <a href="">{it.tenDiaDiem}</a>
                                 <h6><i className="flaticon-placeholder"></i>{it.diaChi} </h6>

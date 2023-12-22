@@ -7,48 +7,44 @@ import { ROUTE_PATH } from '../../../core/common/appRouter';
 const RelationDestination = (props) => {
     const { title, data = [] } = props;
     return (
-        <section className="places-seciton pt-95 pb-100">
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="section-title text-center mb-45 wow fadeInDown">
-                            <h2>{title} </h2>
-                        </div>
-                    </div>
-                </div>
-                <div className="slider-active-3-item-dot wow fadeInUp row">
-                    {data.map((it, index) => (
-                        <div key={index} className="col-xl-4 col-md-6 col-sm-12 places-column">
-                            <div className="single-place-item mb-60">
-                                <div className="place-img">
-                                    <img src={
-                                        it.hinhAnh?.indexOf("http") == -1
-                                            ?
-                                            showImageCommon(it.hinhAnh)
-                                            :
-                                            it.hinhAnh
-                                    } height={220} alt="Image" className='object-cover' />
-                                </div>
-                                <div className="place-content">
-                                    <div className="info">
-                                        <div>{ViewStarCommon(convertNumber(it.soSaoTrungBinh))}</div>
-                                        <h4 className="title text-truncate-title"><a>{it.tenDiaDiem} </a></h4>
-                                        <p className="location text-truncate-title"><i className="far fa-map-marker-alt "></i>{it.diaChi} </p>
-                                        <p className="price"><i className="fas fa-usd-circle"></i> {it.giaVe === Constants.FreePrice || Constants.Undefined ? it.giaVe : `Chỉ từ: ${it.giaVe}`}</p>
-                                        <div className="meta">
-                                            <span><i className="far fa-clock"></i>{it.gioMoCua} </span>
-                                            <span>-</span>
-                                            <span><i className="far fa-clock"></i>{it.gioDongCua} </span>
-                                            <span><a href={`${ROUTE_PATH.VIEW_DESTINATION}?${it.idDiaDiem}`}>Xem chi tiết<i className="far fa-long-arrow-right"></i></a></span>
-                                        </div>
+        <div>
+            <div className="pkg-common-title mt-30">
+                <h4>{title}</h4>
+            </div>
+
+            <div className="row">
+                {data.map((it, index) => (
+                    <div key={index} className="col-lg-6 col-md-6">
+                        <div className="tour-package-container">
+                            <div className="activities-image">
+                                <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}><img src={
+                                    it.hinhAnh?.indexOf("http") == -1
+                                        ?
+                                        showImageCommon(it.hinhAnh)
+                                        :
+                                        it.hinhAnh
+                                } className='img-page' alt="photo" /></a>
+                            </div>
+                            <div className="activities-content">
+                                <div className="tour-package-info">
+                                    <div className="rating">
+                                        <p><i className="fa fa-star"></i> {it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </p>
+                                    </div>
+                                    <div className="doller">
+                                        <span> {it.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${it.giaVe}`} </span>
                                     </div>
                                 </div>
+                                <a className='text-truncate' href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
+                                <ul>
+                                    <h6 className='text-truncate-address'><i className="flaticon-placeholder"></i>{it.diaChi} </h6>
+                                </ul>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
-        </section>
+        </div>
+
     )
 }
 

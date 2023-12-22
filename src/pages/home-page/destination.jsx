@@ -1,6 +1,7 @@
 import React from 'react'
 import { showImageCommon } from '../../infratructure/utils/helper'
 import Constants from '../../core/common/constant'
+import { ROUTE_PATH } from '../../core/common/appRouter'
 
 const Destination = ({ data = [] }) => {
     return (
@@ -24,7 +25,7 @@ const Destination = ({ data = [] }) => {
                         <div key={index} className="pl-10 pr-10 col-lg-4 col-xs-12">
                             <div className='deals-content '>
                                 <div className="deals-image custom-image">
-                                    <a href=""><img src={
+                                    <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}><img src={
                                         it.hinhAnh?.indexOf("http") == -1
                                             ?
                                             showImageCommon(it.hinhAnh)
@@ -35,9 +36,9 @@ const Destination = ({ data = [] }) => {
                                 <div className="deals-info">
                                     <ul>
                                         <li><i className="fa fa-star"></i>{it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </li>
-                                        <li><span> {it.giaVe === Constants.FreePrice || Constants.Undefined ? it.giaVe : `Chỉ từ: ${it.giaVe}`} </span></li>
+                                        <li><span> {it.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${it.giaVe}`} </span></li>
                                     </ul>
-                                    <a href="" className="deals-info-link text-truncate">{it.tenDiaDiem} </a>
+                                    <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`} className="deals-info-link text-truncate">{it.tenDiaDiem} </a>
                                     <p><i className="flaticon-map"></i>{it.diaChi} </p>
                                 </div>
                             </div>

@@ -92,7 +92,7 @@ const HeaderPage = () => {
                                     <nav className="main-menu navbar-expand-md navbar-light">
                                         <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                             <ul className="navigation clearfix">
-                                                <li className="dropdown"><a>Đăng nhập </a></li>
+                                                <li onClick={onOpenPopupLogin} className="dropdown"><a>Đăng nhập </a></li>
                                             </ul>
                                         </div>
                                     </nav>
@@ -142,6 +142,28 @@ const HeaderPage = () => {
                     </div>
                 </nav>
             </div>
+            <LoginPopup
+                title={"Đăng nhập"}
+                visible={isOpenPopupLogin}
+                onCancel={onClosePopupLogin}
+                setLoading={setLoading}
+                onOpenRegister={onOpenModalRegister}
+            />
+
+            <RegisterPopup
+                title={"Đăng Kí"}
+                visible={isOpenModalRegister}
+                onCancel={onCloseModalRegister}
+                setLoading={setLoading}
+            />
+            <ConfirmModal
+                title={'Đăng xuất'}
+                message={"Bạn có muốn đăng xuất khỏi hệ thống"}
+                visible={isOpenModalLogout}
+                onOk={onLogout}
+                onCancel={onCloseModalLogout}
+            />
+            <LoadingFullPage loading={loading} />
         </div>
     )
 }

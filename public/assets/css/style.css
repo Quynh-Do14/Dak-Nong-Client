@@ -209,7 +209,7 @@ Home-Page-One-Starts
    float: left;
    cursor: pointer;
    z-index: 2;
-   padding: 80px 0px;
+   padding: 60px 0px;
    margin: 0px 30px;
    -webkit-transition: all 300ms ease;
    -moz-transition: all 300ms ease;
@@ -247,7 +247,7 @@ Home-Page-One-Starts
  }
 
  .main-menu .navigation>li.dropdown>a {
-   margin-right: 19px;
+   margin-right: 10px;
  }
 
  .main-menu .navigation>li>ul,
@@ -1031,7 +1031,7 @@ Home-Page-One-Starts
  }
 
  .banner-content-wrapper-inner h2 {
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-weight: 400;
    font-size: 70px;
    line-height: 102px;
@@ -1391,6 +1391,10 @@ Home-Page-One-Starts
    padding: 40px 60px;
    display: flex;
    justify-content: space-between;
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: 400px;
  }
 
  .service-content {
@@ -1434,7 +1438,7 @@ Home-Page-One-Starts
  .service-form-option label {
    font-size: 18px;
    line-height: 28px;
-   letter-spacing: 0.2em;
+   letter-spacing: 0em;
    color: #777777;
  }
 
@@ -1735,7 +1739,7 @@ Home-Page-One-Starts
  }
 
  .destination-vedio h5 {
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-weight: 400;
    font-size: 24px;
    line-height: 29px;
@@ -1757,7 +1761,7 @@ Home-Page-One-Starts
  .video-content h5 span {
    display: inline-block;
    color: #FE7524;
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
  }
 
  .video-info {
@@ -1775,7 +1779,7 @@ Home-Page-One-Starts
  }
 
  .video-info ul li {
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-weight: 400;
    font-size: 14px;
    line-height: 20px;
@@ -1893,7 +1897,7 @@ Home-Page-One-Starts
  }
 
  .destination-content h6 {
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-weight: 400;
    font-size: 24px;
    line-height: 29px;
@@ -1958,7 +1962,7 @@ Home-Page-One-Starts
  }
 
  .testimonial-content h5 {
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-size: 24px;
    line-height: 29px;
    color: #FE7524;
@@ -2129,7 +2133,7 @@ Home-Page-One-Starts
  .blog-image {
    border-radius: 20px 20px 0px 0px;
    width: 100%;
-   height: 311px;
+   height: 260px;
    overflow: hidden;
  }
 
@@ -2475,7 +2479,7 @@ Home-Page-Two-Starts
 
  .home-two-banner-media ul li a {
    display: inline-block;
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-size: 20px;
    color: #777777;
    transition: 0.3s;
@@ -2619,13 +2623,13 @@ Home-Page-Two-Starts
  .add-content h6 {
    font-size: 14px;
    color: #094174;
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
  }
 
  .add-content h6 span {
    display: inline-block;
    color: #FE7524;
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
  }
 
  .add-content {
@@ -2659,7 +2663,7 @@ Home-Page-Two-Starts
  .add-content span {
    display: inline-block;
    color: #FE7524;
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
  }
 
  /* home two add ends */
@@ -3170,7 +3174,7 @@ Home-Page-Three-Starts
 
  .home-three-header-media ul li a {
    display: inline-block;
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-size: 20px;
    color: #777777;
    transition: 0.3s;
@@ -3289,7 +3293,7 @@ Home-Page-Three-Starts
  }
 
  .home3-banner-content h3 {
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-size: 36px;
    line-height: 46px;
    color: #FFFFFF;
@@ -3435,7 +3439,7 @@ Home-Page-Three-Starts
 
  .choose-content span {
    display: block;
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-weight: 400;
    font-size: 14px;
    line-height: 20px;
@@ -3547,7 +3551,7 @@ Home-Page-Three-Starts
 
  .home-three-blog .blog-title {
    margin-top: 0;
-   margin-bottom: 10px;
+   /* margin-bottom: 10px; */
    font-size: 24px !important;
    line-height: 34px !important;
  }
@@ -3589,7 +3593,7 @@ Destination page
 
  .common-banner-title a,
  .common-banner-title span {
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-size: 24px;
    line-height: 46px;
    color: #FFFFFF;
@@ -4289,7 +4293,7 @@ Tour page
    background: transparent;
  }
 
- .package-details-right-form .form-label label .svg-inline--fa {
+ .package-details-right-form .form-label label {
    color: #FE7524;
    font-size: 14px;
    margin-right: 15px;
@@ -4352,7 +4356,7 @@ About page
 
  .tour-guid-content span {
    display: block;
-   font-family: 'Permanent Marker';
+   font-family: 'Pacifico';
    font-weight: 400;
    font-size: 14px;
    line-height: 20px;
@@ -4768,6 +4772,12 @@ contact
    height: 260px !important;
  }
 
+ img.img-page-detail {
+   max-height: 100px !important;
+   min-width: 160px !important;
+   object-fit: cover;
+ }
+
  .text-truncate-title {
    white-space: initial;
    overflow: hidden;
@@ -4786,6 +4796,16 @@ contact
    display: -webkit-box;
    -webkit-box-orient: vertical;
    height: 9.5vh;
+ }
+
+ .text-truncate-address {
+   white-space: initial;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   -webkit-line-clamp: 2;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   height: 4vh;
  }
 
  .text-truncate-description {
@@ -4820,4 +4840,17 @@ contact
 
  .justify-center {
    justify-content: center;
+ }
+
+
+ .pointer {
+   cursor: pointer;
+ }
+
+ .not-allowed {
+   cursor: not-allowed;
+ }
+
+ .text-align-justify {
+   text-align: justify;
  }
