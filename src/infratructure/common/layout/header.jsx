@@ -68,7 +68,7 @@ const HeaderPage = () => {
                         <div className="auto_container">
                             <div className="outer-box">
                                 <div className="logo-box">
-                                    <figure className="logo"><a href="index.html"><img src="assets/images/logo.png" alt="" /></a></figure>
+                                    <figure className="logo"><a href="index.html"><img src="assets/images/logo.png" alt="" className='logo-header'/></a></figure>
                                 </div>
                                 <div className="menu-area">
                                     <div className="mobile-nav-toggler">

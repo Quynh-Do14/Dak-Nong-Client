@@ -209,7 +209,7 @@ Home-Page-One-Starts
    float: left;
    cursor: pointer;
    z-index: 2;
-   padding: 60px 0px;
+   padding: 40px 0px;
    margin: 0px 30px;
    -webkit-transition: all 300ms ease;
    -moz-transition: all 300ms ease;
@@ -2242,7 +2242,7 @@ Home-Page-One-Starts
  }
 
  .footer__middle {
-   padding: 70px 0 50px 0;
+   padding: 10px 0 20px 0;
  }
 
  .footer__logo {
@@ -3623,7 +3623,7 @@ Destination page
  }
 
  .common-footer {
-   padding: 50px 0;
+   /* padding: 20px 0; */
    background: #F7FCFF;
  }
 
@@ -4866,6 +4866,15 @@ contact
    text-align: justify;
  }
 
+ .text-align-left {
+   text-align: left !important;
+ }
+
  .color-orange {
    color: #FE7524 !important;
+ }
+
+ .logo-header {
+   height: 50px !important;
+   width: auto;
  }

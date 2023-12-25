@@ -323,7 +323,7 @@ const HomePage = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="align-title">
-                            <h3>Địa điểm du lịch</h3>
+                                <h3>Địa điểm du lịch</h3>
                             </div>
                         </div>
                         {listDiaDiem.map((it, index) => (
