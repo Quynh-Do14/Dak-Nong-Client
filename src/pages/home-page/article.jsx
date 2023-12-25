@@ -31,8 +31,8 @@ const Article = ({ data = [] }) => {
                                     <div class="blog-info">
                                         <div class="footer-info">
                                             <ul className='flex justify-center mb-10'>
-                                                {/* <li><i className="fa-regular fa-user"></i> </li> */}
-                                                <li><i className="fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
+                                                <li><i className="color-orange mr-10 fa fa-user"></i>Duong Nguyen </li>
+                                                <li><i className="color-orange mr-10 fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
                                             </ul>
                                             <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title">{it.tieuDe} </a>
                                             <p className='text-truncate-description'>{it.tieuDeCon} </p>

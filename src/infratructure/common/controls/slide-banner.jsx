@@ -1,6 +1,6 @@
 import React from 'react';
-import slide from "../../../asset/img/slide-banner.jpg";
-import slide1 from "../../../asset/img/slide-banner2.jpg";
+import slide from "../../../asset/img/extra/slide-banner.jpg";
+import slide1 from "../../../asset/img/extra/slide-banner2.jpg";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { useNavigate } from 'react-router-dom';

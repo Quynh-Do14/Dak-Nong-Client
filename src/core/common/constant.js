@@ -1,8 +1,8 @@
 import { ROUTE_PATH } from "./appRouter";
-import homePageImg1 from "../../asset/img/home1.jpg";
-import homePageImg2 from "../../asset/img/home2.jpg";
-import homePageImg3 from "../../asset/img/home3.jpg";
-import homePageImg4 from "../../asset/img/home4.jpg";
+import homePageImg1 from "../../asset/img/extra/home1.jpg";
+import homePageImg2 from "../../asset/img/extra/home2.jpg";
+import homePageImg3 from "../../asset/img/extra/home3.jpg";
+import homePageImg4 from "../../asset/img/extra/home4.jpg";
 
 export default class Constants {
     static Menu = class {

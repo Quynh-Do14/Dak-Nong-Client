@@ -27,7 +27,7 @@ const Specialty = ({ data = [] }) => {
                                         <p>{it.luotXem} Lượt xem  </p>
                                         <h5>{it.tenDiaDiem} </h5>
                                         <h6>{it.diaChi} </h6>
-                                        <span className='mt-10 text-truncate-title'>{it.moTa} </span>
+                                        <p className='text-custom mt-10 text-truncate-description'>{it.moTa} </p>
                                     </div>
                                 </div>
                             </a>

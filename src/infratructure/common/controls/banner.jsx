@@ -1,5 +1,5 @@
 import React from 'react'
-import banner from '../../../asset/img/banner.png'
+import banner from '../../../asset/img/extra/banner.png'
 const BannerCommon = (props) => {
     const { title, redirect, redirectPage, currentPage } = props;
     return (

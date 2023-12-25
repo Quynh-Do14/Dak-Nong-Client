@@ -11,7 +11,7 @@ import SlideBanner from '../../infratructure/common/controls/slide-banner';
 import Specialty from './specialty';
 import LoadingFullPage from '../../infratructure/common/controls/loading';
 import { ROUTE_PATH } from '../../core/common/appRouter';
-
+import sail from '../../asset/img/shape/sail.png'
 const HomePage = () => {
     const [loading, setLoading] = useState(false);
     const [listTinTuc, setListTinTuc] = useState([]);
@@ -93,6 +93,83 @@ const HomePage = () => {
 
         <MainLayout>
             <SlideBanner />
+            {/* //////////////// */}
+            {/* //////////////// */}
+            <section className="category home3-category bg-white">
+                <div className="sail-image">
+                    <img src={sail} alt="shape" className='mt-200'/>
+                </div>
+                <div className="add-spring">
+                    <img src={sail} alt="shape" />
+                </div>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="align-title">
+                                <h5>Loại hình du lịch</h5>
+                                <h3>Những loại hình du lịch nổi bật nhất</h3>
+                            </div>
+                        </div>
+
+                        <div className="col-xl-3 col-lg-4 col-md-6">
+                            <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1000ms">
+                                <div className="category-content-inner">
+                                    <div className="category-image-container">
+                                        <div className="category-image">
+                                            <img src="assets/images/icons/c-1.png" alt="icon" />
+                                        </div>
+                                    </div>
+                                    <h5>Du lịch thành phố</h5>
+                                    <span>30 Địa Điểm</span>
+                                    <a href="destination-details.html" className="category-btn"><i className="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl-3 col-lg-4 col-md-6">
+                            <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1200ms">
+                                <div className="category-content-inner">
+                                    <div className="category-image-container">
+                                        <div className="category-image">
+                                            <img src="assets/images/icons/c-2.png" alt="icon" />
+                                        </div>
+                                    </div>
+                                    <h5>Thiên nhiên</h5>
+                                    <span>30 Địa Điểm</span>
+                                    <a href="destination-details.html" className="category-btn"><i className="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl-3 col-lg-4 col-md-6">
+                            <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1600ms">
+                                <div className="category-content-inner">
+                                    <div className="category-image-container">
+                                        <div className="category-image">
+                                            <img src="assets/images/icons/c-4.png" alt="icon" />
+                                        </div>
+                                    </div>
+                                    <h5>Du lịch tâm linh</h5>
+                                    <span>30 Địa Điểm</span>
+                                    <a href="destination-details.html" className="category-btn"><i className="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl-3 col-lg-4 col-md-6">
+                            <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1800ms">
+                                <div className="category-content-inner">
+                                    <div className="category-image-container">
+                                        <div className="category-image">
+                                            <img src="assets/images/icons/c-5.png" alt="icon" />
+                                        </div>
+                                    </div>
+                                    <h5>Lịch sử văn hóa</h5>
+                                    <span>30 Địa Điểm</span>
+                                    <a href="destination-details.html" className="category-btn"><i className="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             {/* //////////////// */}
             <section className="popular-ture home3-popular-ture">
                 <div className="sail-image">
@@ -189,8 +266,8 @@ const HomePage = () => {
             {/* //////////////// */}
 
             {/* //////////////// */}
-            <section className="destination">
-                <div className="destination-icon">
+            {/* <section className="destination">
+                <div className="destination-icon"/>
                     <img src="assets/images/icons/plan.png" alt="icon" />
                 </div>
                 <div className="container">
@@ -213,7 +290,6 @@ const HomePage = () => {
                                 </div>
                                 <div className="destination-content destination-content-1">
                                     <h6>{listDiaDiem[0]?.tenDiaDiem}</h6>
-                                    {/* <p>24 trips</p> */}
                                 </div>
                             </div>
                         </div>
@@ -239,6 +315,50 @@ const HomePage = () => {
                                     </div>
                                 ))}
                         </div>
+                    </div>
+                </div>
+            </section> */}
+            <section className="portfolio">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="align-title">
+                            <h3>Địa điểm du lịch</h3>
+                            </div>
+                        </div>
+                        {listDiaDiem.map((it, index) => (
+
+                            <div key={index} className="col-lg-4">
+                                <div className="portfolio-content">
+                                    <div className="portfolio-info">
+                                        <img src={
+                                            it?.hinhAnh?.indexOf("http") == -1
+                                                ?
+                                                showImageCommon(it?.hinhAnh)
+                                                :
+                                                it?.hinhAnh
+                                        } alt="img" />
+                                        <div className="personal-info">
+                                            <ul>
+                                                <li><i className="fa fa-star"></i></li>
+                                                <li><i className="fa fa-star"></i></li>
+                                                <li><i className="fa fa-star"></i></li>
+                                                <li><i className="fa fa-star"></i></li>
+                                                <li><i className="fa fa-star"></i></li>
+                                                <li><span>5.0</span></li>
+                                            </ul>
+                                            <h6 className='text-truncate-title'>{it.tenDiaDiem}</h6>
+                                            <span>{it.tenQuanHuyen}</span>
+                                        </div>
+                                    </div>
+                                    <p className='text-truncate-description'>{it.moTa} </p>
+                                    <div className="qutetion">
+                                        <img src="assets/images/icons/qutation.png" alt="qutation" />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
                     </div>
                 </div>
             </section>
