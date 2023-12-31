@@ -3,16 +3,17 @@ import homePageImg1 from "../../asset/img/extra/home1.jpg";
 import homePageImg2 from "../../asset/img/extra/home2.jpg";
 import homePageImg3 from "../../asset/img/extra/home3.jpg";
 import homePageImg4 from "../../asset/img/extra/home4.jpg";
+import useTranslate from "./hook/useTranslate";
 
 export default class Constants {
     static Menu = class {
         static List = [
             {
-                label: "Trang chủ",
+                label: "homePage",
                 link: ROUTE_PATH.HOME_PAGE,
             },
             {
-                label: "Bài viết",
+                label: "article",
                 link: ROUTE_PATH.ARTICLE,
             },
             // {
@@ -24,11 +25,11 @@ export default class Constants {
                 link: ROUTE_PATH.TOUR,
             },
             {
-                label: "Lễ hội",
+                label: "festival",
                 link: ROUTE_PATH.FESTIVAL,
             },
             {
-                label: "Đặc sản",
+                label: "specialty",
                 link: ROUTE_PATH.SPECIALTY,
             },
             // {
@@ -196,28 +197,28 @@ export default class Constants {
     static DataHomePage = class {
         static list = [
             {
-                name: "Địa điểm du lịch",
+                name: "destination",
                 img: homePageImg1,
                 link: ROUTE_PATH.TOUR,
-                description: "Khám phá những địa điểm du lịch mới",
+                description: "destinationDes",
             },
             {
-                name: "Bài viết hôm nay",
+                name: "todayArticle",
                 img: homePageImg2,
                 link: ROUTE_PATH.ARTICLE,
-                description: "Đọc những bài viết, tin tức mới nhất",
+                description: "todayArticleDes",
             },
             {
-                name: "Khám phá ẩm thực",
+                name: "exploreCuisine",
                 img: homePageImg3,
                 link: ROUTE_PATH.SPECIALTY,
-                description: "Khám phá ẩm thực phong phú tại vùng đất này",
+                description: "exploreCuisineDes",
             },
             {
-                name: "Lễ hội truyền thống",
+                name: "traditionalFestival",
                 img: homePageImg4,
                 link: ROUTE_PATH.FESTIVAL,
-                description: "Tìm hiểu các lễ hội truyền thống",
+                description: "traditionalFestivalDes",
             },
 
         ]

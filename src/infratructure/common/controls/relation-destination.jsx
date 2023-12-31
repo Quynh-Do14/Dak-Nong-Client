@@ -34,7 +34,7 @@ const RelationDestination = (props) => {
                                         <span> {it.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${it.giaVe}`} </span>
                                     </div>
                                 </div>
-                                <a className='text-truncate' href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
+                                <a className='text-truncate-origin' href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
                                 <ul>
                                     <h6 className='text-truncate-address'><i className="flaticon-placeholder"></i>{it.diaChi} </h6>
                                 </ul>

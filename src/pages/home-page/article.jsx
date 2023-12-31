@@ -1,8 +1,10 @@
 import React from 'react'
 import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper'
 import { ROUTE_PATH } from '../../core/common/appRouter'
+import useTranslate from '../../core/common/hook/useTranslate';
 
 const Article = ({ data = [] }) => {
+    const { translate } = useTranslate();
     return (
         <section className="deals home-three-blog">
             <div className="blog-icon">
@@ -12,7 +14,7 @@ const Article = ({ data = [] }) => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="align-title">
-                            <h3>Bài viết hôm nay</h3>
+                            <h3>{translate('todayArticle')}</h3>
                         </div>
                     </div>
                     {data.map((it, index) => (
@@ -28,15 +30,15 @@ const Article = ({ data = [] }) => {
                                     } alt="image" className='img-page' /></a>
                                 </div>
                                 <div className="blog-info">
-                                    <div class="blog-info">
-                                        <div class="footer-info">
+                                    <div className="blog-info">
+                                        <div className="footer-info">
                                             <ul className='flex justify-center mb-10'>
                                                 <li><i className="color-orange mr-10 fa fa-user"></i>Duong Nguyen </li>
                                                 <li><i className="color-orange mr-10 fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
                                             </ul>
                                             <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title">{it.tieuDe} </a>
                                             <p className='text-truncate-description'>{it.tieuDeCon} </p>
-                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>Xem thêm </a>
+                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>{translate("viewMore")} </a>
                                         </div>
                                     </div>
                                 </div>

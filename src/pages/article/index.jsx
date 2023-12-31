@@ -80,8 +80,8 @@ const ArticlePage = () => {
                                         } alt="image" className='img-page' /></a>
                                     </div>
                                     <div className="blog-info">
-                                        <div class="blog-info">
-                                            <div class="footer-info">
+                                        <div className="blog-info">
+                                            <div className="footer-info">
                                                 <ul className='flex justify-center mb-10'>
                                                     {/* <li><i className="fa-regular fa-user"></i> </li> */}
                                                     <li><i className="fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>

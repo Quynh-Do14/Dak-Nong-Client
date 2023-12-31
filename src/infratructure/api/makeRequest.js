@@ -244,11 +244,13 @@ const request = {
       console.log(e);
     });
     if (result.ok) {
+      setTimeout(() => setLoading(false), 2000)
       SuccessMessage(`${title} thành công`, "");
       callBack()
       setLoading(false);
       return result.json();
     } else {
+      setTimeout(() => setLoading(false), 2000)
       FailMessage(`${title} thất bại`, "");
       setLoading(false);
       return {

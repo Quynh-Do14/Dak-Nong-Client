@@ -243,7 +243,7 @@ Home-Page-One-Starts
    -ms-transition: all 500ms ease;
    -o-transition: all 500ms ease;
    transition: all 500ms ease;
-   letter-spacing: 5px;
+   letter-spacing: 1px;
  }
 
  .main-menu .navigation>li.dropdown>a {
@@ -594,7 +594,7 @@ Home-Page-One-Starts
 
  .mobile-menu .menu-backdrop {
    position: fixed;
-   left: 0;
+   left: 300px;
    top: 0;
    width: 100%;
    height: 100%;
@@ -610,6 +610,7 @@ Home-Page-One-Starts
  }
 
  .mobile-menu-visible .mobile-menu .menu-backdrop {
+   background-color: rgba(0, 0, 0, 0.5);
    opacity: 0.70;
    visibility: visible;
    -webkit-transition: all 0.7s ease;
@@ -624,7 +625,7 @@ Home-Page-One-Starts
 
  .mobile-menu .menu-box {
    position: absolute;
-   left: 0px;
+   left: 0;
    top: 0px;
    width: 100%;
    height: 100%;
@@ -712,9 +713,10 @@ Home-Page-One-Starts
    display: block;
    line-height: 24px;
    padding: 10px 25px;
-   font-size: 15px;
+   font-size: 20px;
    font-weight: 500;
    text-transform: capitalize;
+   text-align: left;
    -webkit-transition: all 500ms ease;
    -moz-transition: all 500ms ease;
    -ms-transition: all 500ms ease;
@@ -1394,7 +1396,7 @@ Home-Page-One-Starts
    position: absolute;
    left: 0;
    right: 0;
-   top: 400px;
+   top: -100px;
  }
 
  .service-content {
@@ -2723,7 +2725,8 @@ Home-Page-Two-Starts
    font-size: 20px;
    position: absolute;
    bottom: 40px;
-   left: 40px;
+   left: 0;
+   right: 0;
  }
 
  .popular-ture-text a {
@@ -4799,7 +4802,7 @@ contact
    height: 8vh;
  }
 
- .text-truncate {
+ .text-truncate-origin {
    white-space: initial;
    overflow: hidden;
    text-overflow: ellipsis;
@@ -4878,3 +4881,38 @@ contact
    height: 50px !important;
    width: auto;
  }
+
+ span.anticon.anticon-close.ant-modal-close-icon {
+   display: none;
+ }
+
+ .header-right-option .ant-select-selector {
+   background-color: transparent;
+   border: 1px solid rgba(9, 65, 116, 0.3) !important;
+   font-family: inherit;
+   font-size: 16px;
+   padding: 12px 40px 12px 20px !important;
+   border-radius: 0;
+ }
+
+ .header-right-option span.ant-select-selection-item {
+   display: inline-block;
+   text-transform: uppercase;
+   color: #094174;
+   font-size: 16px;
+ }
+
+ .menu-drop-item {
+   padding: 20px 0 !important;
+ }
+
+ @media only screen and (max-width: 1024px) {
+
+   /* layout */
+   .main-layout {
+     width: 100%;
+     max-width: 1024px;
+   }
+ }
+
+ /* layout */

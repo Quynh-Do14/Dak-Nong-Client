@@ -8,6 +8,7 @@ import Constants from '../../../core/common/constant';
 import { validateEmail, validateInputPassword } from '../../utils/validate';
 import { WarningMessage } from '../toast/toastMessage';
 import { validateFields } from '../../utils/helper';
+import useTranslate from '../../../core/common/hook/useTranslate';
 
 const LoginPopup = (props) => {
     const {
@@ -23,6 +24,8 @@ const LoginPopup = (props) => {
     const [validate, setValidate] = useState({})
     const [submittedTime, setSubmittedTime] = useState(null);
     const navigate = useNavigate();
+    const { translate } = useTranslate();
+
     const isValidData = () => {
         onBlurEmail(true);
         onBlurPassword(true);
@@ -87,6 +90,7 @@ const LoginPopup = (props) => {
             width={400}
             footer={false}
             onCancel={onCancel}
+            className='modal-dialog'
         >
             <div className="modal-content">
                 <div className="modal-header border-bottom-0">
@@ -106,7 +110,7 @@ const LoginPopup = (props) => {
                             <div className="form-group">
                                 <input value={password} onChange={onChangePassword} onBlur={onBlurPassword} type="password" className="form-control" id="password1" placeholder="Nhập Mật khẩu..." />
                             </div>
-                            <button onClick={onSubmit} type="button" className="btn btn-info btn-block btn-round">Đăng nhập</button>
+                            <button onClick={onSubmit} type="button" className="btn btn-info btn-block btn-round">{translate("signIn")}</button>
                         </form>
                     </div>
                 </div>

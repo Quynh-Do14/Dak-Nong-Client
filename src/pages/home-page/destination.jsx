@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { showImageCommon } from '../../infratructure/utils/helper'
 import Constants from '../../core/common/constant'
 import { ROUTE_PATH } from '../../core/common/appRouter'
+import useTranslate from '../../core/common/hook/useTranslate'
 
 const Destination = ({ data = [] }) => {
+    const { translate } = useTranslate();
     return (
         <section className="deals">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="common-title">
-                            <h3>Địa điểm du lịch</h3>
+                            <h3>{translate("destination")} </h3>
                             <div className="deal-icon">
                                 <img src="assets/images/icons/doler.png" alt="doler" />
                             </div>

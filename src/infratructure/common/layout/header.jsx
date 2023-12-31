@@ -7,6 +7,10 @@ import { SuccessMessage } from '../toast/toastMessage';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ConfirmModal from '../popup/confirm-modal';
 import RegisterPopup from '../popup/register-modal';
+import { Drawer, Dropdown, Menu, Select, Space, Switch } from 'antd';
+import { useRecoilState } from 'recoil';
+import { LanguageState } from '../../../core/common/atoms/language/languageState';
+import useTranslate from '../../../core/common/hook/useTranslate';
 
 const HeaderPage = () => {
     const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
@@ -15,9 +19,15 @@ const HeaderPage = () => {
     const [isOpenModalLogout, setIsOpenModalLogout] = useState(false);
 
     const [loading, setLoading] = useState(false);
+
+    const [isOpenShowDrawer, setIsOpenShowDrawer] = useState(false)
+    const [swicthLanguage, setSwicthLanguage] = useState(false);
+    const [dataLanguage, setDataLanguage] = useRecoilState(LanguageState);
     const navigate = useNavigate();
     const location = useLocation();
     let pathname = location.pathname;
+    const { translate } = useTranslate();
+
     const onOpenMobileMenu = () => {
         setIsOpenMobileMenu(true);
     }
@@ -58,6 +68,65 @@ const HeaderPage = () => {
     const onCloseModalRegister = () => {
         setIsOpenModalRegister(false);
     }
+    // Ngôn ngữ
+    const onChangeLanguage = (value) => {
+        setSwicthLanguage(value)
+        if (value == true) {
+            setDataLanguage("en");
+            sessionStorage.setItem("language", "en");
+        }
+        if (value == false) {
+            setDataLanguage("vi")
+            sessionStorage.setItem("language", "vi");
+        }
+        setLoading(true);
+        setTimeout(() => setLoading(false), 2000)
+    }
+    // Ngôn ngữ
+
+    // Drawer
+    const onOpenShowDrawer = () => {
+        setIsOpenShowDrawer(true);
+    }
+
+    const onCloseShowDrawer = () => {
+        setIsOpenShowDrawer(false);
+    }
+    // Drawer
+    const listAction = () => {
+        return (
+            <Menu>
+                <Menu.Item className='title-action'>
+                    <nav className="main-menu navbar-expand-md navbar-light">
+                        <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                            <ul className=" navigation clearfix">
+
+                                <li className="menu-drop-item dropdown"><a>{translate("english")} <Switch value={swicthLanguage} defaultChecked onChange={onChangeLanguage} /></a></li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </Menu.Item>
+                <Menu.Item className='title-action'>
+                    <nav className="main-menu navbar-expand-md navbar-light">
+                        <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                            <ul className=" navigation clearfix">
+                                {
+                                    storage
+                                        ?
+
+                                        < li onClick={onOpenModalLogout} className="menu-drop-item dropdown"><a><i className="fa fa-sign-out" aria-hidden="true"></i> {translate("logOut")} </a></li>
+                                        :
+                                        <li onClick={onOpenPopupLogin} className="menu-drop-item dropdown"> <a><i className="fa fa-sign-in" aria-hidden="true"></i> {translate("signIn")}</a></li>
+
+                                }
+                            </ul>
+                        </div>
+                    </nav>
+                </Menu.Item>
+            </Menu>
+        )
+    };
 
     return (
         <div>
@@ -68,19 +137,20 @@ const HeaderPage = () => {
                         <div className="auto_container">
                             <div className="outer-box">
                                 <div className="logo-box">
-                                    <figure className="logo"><a href="index.html"><img src="assets/images/logo.png" alt="" className='logo-header'/></a></figure>
+                                    <figure className="logo"><a href="index.html"><img src="assets/images/logo.png" alt="" className='logo-header' /></a></figure>
                                 </div>
-                                <div className="menu-area">
+                                <div onClick={onOpenShowDrawer} className="menu-area">
                                     <div className="mobile-nav-toggler">
                                         <i className="icon-bar"></i>
                                         <i className="icon-bar"></i>
                                         <i className="icon-bar"></i>
                                     </div>
+
                                     <nav className="main-menu navbar-expand-md navbar-light">
                                         <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                             <ul className="navigation clearfix">
                                                 {Constants.Menu.List.map((it, index) => (
-                                                    <li key={index} className="dropdown"><a href={it.link} className={`${pathname == it.link ? "active" : ""}`}>{it.label}</a>
+                                                    <li key={index} className="dropdown"><a href={it.link} className={`${pathname == it.link ? "active" : ""}`}>{translate(it.label)}</a>
 
                                                     </li>
                                                 ))}
@@ -88,20 +158,44 @@ const HeaderPage = () => {
                                         </div>
                                     </nav>
                                 </div>
-                                <div className="menu-area">
-                                    <nav className="main-menu navbar-expand-md navbar-light">
+                                <div className="menu-area dropdown-action">
+                                    {/* <div className="header-right-option">
+                                        <Select
+                                            style={{ width: "100%", height: "100%" }}
+                                            defaultValue="Tiếng Việt"
+                                            onChange={onChangeLanguage}
+                                        >
+                                            <Select.Option value="en">{translate("english")} </Select.Option>
+                                            <Select.Option value="vi">{translate("vietnamese")} </Select.Option>
+                                        </Select>
+                                    </div> */}
+                                    <Dropdown overlay={listAction()} trigger={['click']}>
+                                        <a onClick={(e) => e.preventDefault()}>
+                                            <Space>
+                                                <button className="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style={{ fontSize: 30 }} className="flaticon-menu-1"></i></button>
+                                            </Space>
+                                        </a>
+                                    </Dropdown>
+                                    {/* <nav className="main-menu navbar-expand-md navbar-light ml-20">
                                         <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                             <ul className="navigation clearfix">
-                                                <li onClick={onOpenPopupLogin} className="dropdown"><a>Đăng nhập </a></li>
+                                                {
+                                                    storage
+                                                        ?
+
+                                                        < li onClick={onOpenModalLogout} className="dropdown"><a>{translate("logOut")} </a></li>
+                                                        :
+                                                        <li onClick={onOpenPopupLogin} className="dropdown"><a>{translate("signIn")} </a></li>
+
+                                                }
                                             </ul>
                                         </div>
-                                    </nav>
+                                    </nav> */}
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </div >
                 <div className="sticky-header">
                     <div className="auto_container">
                         <div className="outer-box">
@@ -115,35 +209,41 @@ const HeaderPage = () => {
                         </div>
                     </div>
                 </div>
-            </header>
-            <div className="mobile-menu">
-                <div className="menu-backdrop"></div>
-                <div className="close-btn"><i className="fas fa-times"></i></div>
-                <nav className="menu-box">
-                    <div className="nav-logo"><a href="index.html"><img src="assets/images/logo.png" alt="logo" /></a></div>
-                    <div className="menu-outer">
-                        {/* <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--> */}
-                    </div>
-                    <div className="contact-info">
-                        <h4>Contact Info</h4>
-                        <ul>
-                            <li>Chicago 12, Melborne City, USA</li>
-                        </ul>
-                    </div>
-                    <div className="social-links">
-                        <div className="banner-media">
-                            <ul>
-                                <li><a href="#"><i className="fa-brands fa-instagram"></i></a></li>
-                                <li><a href="#"><i className="fa-brands fa-twitter"></i></a></li>
-                                <li><a href="#"><i className="fa-brands fa-linkedin"></i></a></li>
-                                <li><a href="#"><i className="fa-brands fa-facebook-f"></i></a></li>
-                            </ul>
+
+            </header >
+            <div className={`${isOpenShowDrawer ? "mobile-menu-visible" : ""}`}>
+                <div className="mobile-menu">
+                    <div onClick={onCloseShowDrawer} className="close-btn"><i className="fas fa-times"></i></div>
+                    <nav className="menu-box">
+                        <div className="nav-logo"><a href="index.html"><img src="assets/images/logo.png" alt="logo" /></a></div>
+                        <div className="menu-outer">
+                            <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                <ul className="navigation clearfix">
+                                    {Constants.Menu.List.map((it, index) => (
+                                        <li key={index} className="dropdown"><a href={it.link} className={`${pathname == it.link ? "active" : ""}`}>{translate(it.label)}</a>
+
+                                        </li>
+                                    ))}
+                                    <li className="menu-drop-item dropdown"><a>{translate("english")} <Switch className='ml-10' value={swicthLanguage} defaultChecked onChange={onChangeLanguage} /></a></li>
+
+                                    {
+                                        storage
+                                            ?
+
+                                            < li onClick={onOpenModalLogout} className="menu-drop-item dropdown"><a>{translate("logOut")} <i className="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                                            :
+                                            <li onClick={onOpenPopupLogin} className="menu-drop-item dropdown"> <a>{translate("signIn")} <i className="fa fa-sign-in" aria-hidden="true"></i></a></li>
+
+                                    }
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </div>
+                    </nav>
+                    <div onClick={onCloseShowDrawer} className="menu-backdrop"></div>
+                </div>
+            </div >
             <LoginPopup
-                title={"Đăng nhập"}
+                title={translate("signIn")}
                 visible={isOpenPopupLogin}
                 onCancel={onClosePopupLogin}
                 setLoading={setLoading}
@@ -151,20 +251,20 @@ const HeaderPage = () => {
             />
 
             <RegisterPopup
-                title={"Đăng Kí"}
+                title={translate("register")}
                 visible={isOpenModalRegister}
                 onCancel={onCloseModalRegister}
                 setLoading={setLoading}
             />
             <ConfirmModal
-                title={'Đăng xuất'}
+                title={translate("logOut")}
                 message={"Bạn có muốn đăng xuất khỏi hệ thống"}
                 visible={isOpenModalLogout}
                 onOk={onLogout}
                 onCancel={onCloseModalLogout}
             />
             <LoadingFullPage loading={loading} />
-        </div>
+        </div >
     )
 }
 export default HeaderPage;

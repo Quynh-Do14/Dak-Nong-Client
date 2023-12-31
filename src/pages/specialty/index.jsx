@@ -112,7 +112,7 @@ const SpecialtyPage = () => {
                                             -
                                             <li><i className="fa fa-clock"></i>{convertTimeOnly(it.gioDongCua)} </li>
                                         </ul>
-                                        <a className='text-truncate' href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
+                                        <a className='text-truncate-origin' href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
                                         <ul>
                                             <h6 className='text-truncate-address'><i className="flaticon-placeholder"></i>{it.diaChi} </h6>
                                         </ul>

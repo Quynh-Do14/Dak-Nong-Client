@@ -1,5 +1,9 @@
 import moment from "moment";
 import { API, PUBLIC } from "../../core/common/apiLinks";
+import { LanguageState } from "../../core/common/atoms/language/languageState";
+import { translations } from "./data";
+
+
 export const DebounceInput = (func, delay) => {
     let timer;
     return function (...args) {
@@ -70,4 +74,9 @@ export const convertNumber = (number) => {
         return parseFloat(number)?.toFixed(1);
 
     }
+}
+export const translation = (translation) => {
+    console.log('LanguageState',LanguageState);
+    console.log("translations", translations?.[LanguageState]?.[translation]);
+    return translations?.[LanguageState]?.homePage
 }

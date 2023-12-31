@@ -5,12 +5,14 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '../../../core/common/appRouter';
+import useTranslate from '../../../core/common/hook/useTranslate';
 const dataImg = [
     { img: slide },
     { img: slide1 }
 ]
 const SlideBanner = () => {
     const navigate = useNavigate();
+    const { translate } = useTranslate();
 
     const onNavigate = () => {
         // navigate(ROUTE_PATH.DESTINATION)
@@ -36,18 +38,17 @@ const SlideBanner = () => {
                                     <div className="banner-content">
                                         <div className="banner-content-wrapper">
                                             <div className="banner-content-wrapper-inner">
-                                                <h2>Chào mừng đến với <br />
-                                                    <span>Đắk Nông
+                                                <h2>{translate("wellcome")}<br />
+                                                    <span>{translate("daknong")}
                                                         <svg className="banner-text-shape" width="247" height="38" viewBox="0 0 247 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path id="signature1" d="M3.18577 22.2125C3.18577 22.2125 155.675 -3.21963 241.039 14.2277" stroke="#FE7524" stroke-width="5" stroke-linecap="round" />
                                                             <path id="signature2" d="M3.55141 17.792C3.55141 17.792 158.876 1.54075 243.929 23.8236" stroke="#FE7524" stroke-width="5" stroke-linecap="round" />
                                                         </svg>
                                                     </span>
                                                 </h2>
-                                                <p>Tận hưởng mọi khoảnh khắc của chuyến đi của bạn.<br />
-                                                    Một chuyến đi không chỉ là sự di chuyển, đó là một hành trình trải nghiệm</p>
+                                                <p>{translate("wellcomeText")}</p>
                                                 <div className="banner-btn-media">
-                                                    <div className="header-link-btn"><a href="tour-package.html" className="btn-1"> Đặt ngay<span></span></a></div>
+                                                    <div className="header-link-btn"><a href="tour-package.html" className="btn-1">{translate("exploreNow")} <span></span></a></div>
                                                     <div className="banner-media">
                                                         <ul>
                                                             <li><a href="#">

@@ -12,6 +12,7 @@ import Specialty from './specialty';
 import LoadingFullPage from '../../infratructure/common/controls/loading';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import sail from '../../asset/img/shape/sail.png'
+import useTranslate from '../../core/common/hook/useTranslate';
 const HomePage = () => {
     const [loading, setLoading] = useState(false);
     const [listTinTuc, setListTinTuc] = useState([]);
@@ -21,6 +22,7 @@ const HomePage = () => {
     const [listDacSan, setListDacSan] = useState([]);
     const [listLeHoi, setListLeHoi] = useState([]);
 
+    const { translate } = useTranslate();
 
     const onGetListDiemDenAsync = async () => {
         const response = await api.getAllDiaDiem(
@@ -88,7 +90,6 @@ const HomePage = () => {
         onGetTop4TuTop2DiaDiemDuLich().then((_) => { });
     }, []);
     let newArr = listDiaDiemTop2.filter((it, index) => index !== 0)
-    console.log(newArr);
     return (
 
         <MainLayout>
@@ -97,7 +98,7 @@ const HomePage = () => {
             {/* //////////////// */}
             <section className="category home3-category bg-white">
                 <div className="sail-image">
-                    <img src={sail} alt="shape" className='mt-200'/>
+                    <img src={sail} alt="shape" className='mt-200' />
                 </div>
                 <div className="add-spring">
                     <img src={sail} alt="shape" />
@@ -111,7 +112,7 @@ const HomePage = () => {
                             </div>
                         </div>
 
-                        <div className="col-xl-3 col-lg-4 col-md-6">
+                        <div className="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
                             <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1000ms">
                                 <div className="category-content-inner">
                                     <div className="category-image-container">
@@ -125,12 +126,12 @@ const HomePage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
+                        <div className="col-xl-3 col-lg-4 col-md-6 justify-content-center">
                             <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1200ms">
                                 <div className="category-content-inner">
                                     <div className="category-image-container">
                                         <div className="category-image">
-                                            <img src="assets/images/icons/c-2.png" alt="icon" />
+                                            <img src="assets/images/icons/choose-bottom-03.png" alt="icon" />
                                         </div>
                                     </div>
                                     <h5>Thiên nhiên</h5>
@@ -139,7 +140,7 @@ const HomePage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
+                        <div className="col-xl-3 col-lg-4 col-md-6 justify-content-center">
                             <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1600ms">
                                 <div className="category-content-inner">
                                     <div className="category-image-container">
@@ -153,7 +154,7 @@ const HomePage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6">
+                        <div className="col-xl-3 col-lg-4 col-md-6 justify-content-center">
                             <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1800ms">
                                 <div className="category-content-inner">
                                     <div className="category-image-container">
@@ -182,7 +183,7 @@ const HomePage = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="align-title">
-                                <h3>Khám phá du lịch Đắk Nông</h3>
+                                <h3>{translate("exploreTravel")}</h3>
                             </div>
                         </div>
                         {Constants.DataHomePage.list.map((it, index) => (
@@ -193,8 +194,8 @@ const HomePage = () => {
                                     </div>
                                     <div className="popular-ture-overlay">
                                         <div className="popular-ture-text">
-                                            <a href={it.link}>{it.name} </a>
-                                            <h6> {it.description} </h6>
+                                            <a href={it.link}>{translate(it.name)} </a>
+                                            <h6> {translate(it.description)} </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -213,9 +214,9 @@ const HomePage = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="divider-content">
-                                <h5>Sẵn sáng cho những</h5>
-                                <h2> trải nghiệm
-                                    <span> du lịch mới
+                                <h5>{translate("readyFor")}</h5>
+                                <h2> 
+                                    <span> {translate("experienceTravel")}
                                         <svg className="banner-text-shape" width="247" height="38" viewBox="0 0 247 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path id="signature3" d="M3.18577 22.2125C3.18577 22.2125 155.675 -3.21963 241.039 14.2277" stroke="#FE7524" stroke-width="5" stroke-linecap="round" />
                                             <path id="signature4" d="M3.55141 17.792C3.55141 17.792 158.876 1.54075 243.929 23.8236" stroke="#FE7524" stroke-width="5" stroke-linecap="round" />
@@ -224,7 +225,7 @@ const HomePage = () => {
                                 </h2>
                             </div>
                             <div className="btn-group">
-                                <div className="header-link-btn"><a href={ROUTE_PATH.TOUR} className="btn-1">Khám phá ngay <span></span></a></div>
+                                <div className="header-link-btn"><a href={ROUTE_PATH.TOUR} className="btn-1">{translate("exploreNow")} <span></span></a></div>
                             </div>
                         </div>
                     </div>
@@ -246,9 +247,9 @@ const HomePage = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="divider-content">
-                                <h5>Trải nghiệm những</h5>
-                                <h2> đặc sản của
-                                    <span> Đắk Nông
+                                <h5>{translate("experienceThese")} </h5>
+                                <h2>{translate("specialtyOf")}
+                                    <span>{translate("daknong")}
                                         <svg className="banner-text-shape" width="247" height="38" viewBox="0 0 247 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path id="signature3" d="M3.18577 22.2125C3.18577 22.2125 155.675 -3.21963 241.039 14.2277" stroke="#FE7524" stroke-width="5" stroke-linecap="round" />
                                             <path id="signature4" d="M3.55141 17.792C3.55141 17.792 158.876 1.54075 243.929 23.8236" stroke="#FE7524" stroke-width="5" stroke-linecap="round" />
@@ -257,7 +258,7 @@ const HomePage = () => {
                                 </h2>
                             </div>
                             <div className="btn-group">
-                                <div className="header-link-btn"><a href={ROUTE_PATH.SPECIALTY} className="btn-1">Khám phá ngay <span></span></a></div>
+                                <div className="header-link-btn"><a href={ROUTE_PATH.SPECIALTY} className="btn-1">{translate("exploreNow")} <span></span></a></div>
                             </div>
                         </div>
                     </div>
@@ -323,7 +324,7 @@ const HomePage = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="align-title">
-                                <h3>Địa điểm du lịch</h3>
+                                <h3>{translate("destination")} </h3>
                             </div>
                         </div>
                         {listDiaDiem.map((it, index) => (

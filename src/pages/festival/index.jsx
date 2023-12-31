@@ -110,7 +110,7 @@ const FestivalPage = () => {
                                             -
                                             <li><i className="fa fa-calendar mr-10"></i>{convertDateOnly(it.gioDongCua)} </li>
                                         </ul>
-                                        <a className='text-truncate' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
+                                        <a className='text-truncate-origin' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
                                         <ul>
                                             <h6 className='text-truncate-address'><i className="flaticon-placeholder"></i>{it.diaChi} </h6>
                                         </ul>
