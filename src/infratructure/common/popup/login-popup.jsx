@@ -50,13 +50,13 @@ const LoginPopup = (props) => {
     const onBlurEmail = (isImplicitChange = false) => {
         let checkEmail = validateEmail(email);
         setEmail(email.trim())
-        validateFields(isImplicitChange, "email", !checkEmail, setValidate, validate, !checkEmail ? email ? `Vui lòng nhập đúng định dạng email` : `Vui lòng nhập email` : "");
+        validateFields(isImplicitChange, "email", !checkEmail, setValidate, validate, !checkEmail ? email ? `${translate("correctFormat")} ${translate("email")}` : `${translate("pleaseEnter")} ${translate("email")}` : "");
     }
 
     const onBlurPassword = (isImplicitChange = false) => {
         let checkPassword = validateInputPassword(password);
         setPassword(password.trim())
-        validateFields(isImplicitChange, "password", !checkPassword, setValidate, validate, !checkPassword ? password ? `Vui lòng nhập đúng định dạng mật khẩu` : `Vui lòng nhập mật khẩu` : "");
+        validateFields(isImplicitChange, "password", !checkPassword, setValidate, validate, !checkPassword ? password ? `${translate("correctFormat")} ${translate("password")}` : `${translate("pleaseEnter")} ${translate("password")}` : "");
     };
 
     const onSubmit = async (e) => {
@@ -80,7 +80,7 @@ const LoginPopup = (props) => {
             return false;
         }
         else {
-            WarningMessage("Nhập thiếu thông tin", "Vui lòng nhập đầy đủ thông tin")
+            WarningMessage(translate("enterMissingInformation"), translate("pleaseEnterCompleteInformation"))
         };
     }
     return (
@@ -105,10 +105,10 @@ const LoginPopup = (props) => {
                     <div className="d-flex flex-column text-center">
                         <form>
                             <div className="form-group">
-                                <input value={email} onChange={onChangeEmail} onBlur={onBlurEmail} type="email" className="form-control" id="email1" placeholder="Nhập Email..." />
+                                <input value={email} onChange={onChangeEmail} onBlur={onBlurEmail} type="email" className="form-control" id="email1" placeholder={`${translate("enterEmail")}...`} />
                             </div>
                             <div className="form-group">
-                                <input value={password} onChange={onChangePassword} onBlur={onBlurPassword} type="password" className="form-control" id="password1" placeholder="Nhập Mật khẩu..." />
+                                <input value={password} onChange={onChangePassword} onBlur={onBlurPassword} type="password" className="form-control" id="password1" placeholder={`${translate("enterPassword")}...`} />
                             </div>
                             <button onClick={onSubmit} type="button" className="btn btn-info btn-block btn-round">{translate("signIn")}</button>
                         </form>
@@ -116,7 +116,7 @@ const LoginPopup = (props) => {
                 </div>
             </div>
             <div className="modal-footer d-flex justify-content-center">
-                <div className="signup-section">Bạn chưa có tài khoản? <a onClick={onOpenRegister} className="text-info"> Đăng kí</a>.</div>
+                <div className="signup-section">{translate("alreadyAcount")}? <a onClick={onOpenRegister} className="text-info"> {translate("register")}</a>.</div>
             </div>
         </Modal>
     )

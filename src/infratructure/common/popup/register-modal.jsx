@@ -8,6 +8,7 @@ import Constants from '../../../core/common/constant';
 import { validateEmail, validateInputPassword } from '../../utils/validate';
 import { WarningMessage } from '../toast/toastMessage';
 import { validateFields } from '../../utils/helper';
+import useTranslate from '../../../core/common/hook/useTranslate';
 
 const RegisterPopup = (props) => {
     const {
@@ -19,18 +20,20 @@ const RegisterPopup = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userName, setUserName] = useState("");
-    const [sdt, setSdt] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
     const [validate, setValidate] = useState({})
     const [submittedTime, setSubmittedTime] = useState(null);
 
+    const { translate } = useTranslate();
+
     const isValidData = () => {
         onBlurEmail(true);
         onBlurPassword(true);
         // onBlurUserName(true);
-        onBlurSdt(true);
+        onBlurPhoneNumber(true);
         onBlurFirstName(true);
         onBlurLastName(true);
         onBlurAddress(true);
@@ -38,7 +41,7 @@ const RegisterPopup = (props) => {
         let checkEmail = !!email;
         let checkPassword = !!password;
         // let checkUserName = !!userName;
-        let checkSdt = !!sdt;
+        let checkphoneNumber = !!phoneNumber;
         let checkFirstName = !!firstName;
         let checkLastName = !!lastName;
         let checkAddress = !!address;
@@ -46,7 +49,7 @@ const RegisterPopup = (props) => {
         return !(!checkEmail ||
             !checkPassword ||
             // !checkUserName ||
-            !checkSdt ||
+            !checkphoneNumber ||
             !checkFirstName ||
             !checkAddress ||
             !checkLastName
@@ -57,13 +60,13 @@ const RegisterPopup = (props) => {
     const onBlurEmail = (isImplicitChange = false) => {
         let checkEmail = validateEmail(email);
         setEmail(email.trim())
-        validateFields(isImplicitChange, "email", !checkEmail, setValidate, validate, !checkEmail ? email ? `Vui lòng nhập đúng định dạng email` : `Vui lòng nhập email` : "");
+        validateFields(isImplicitChange, "email", !checkEmail, setValidate, validate, !checkEmail ? email ? `${translate("correctFormat")} ${translate("email")}` : `${translate("pleaseEnter")} ${translate("email")}` : "");
     }
 
     const onBlurPassword = (isImplicitChange = false) => {
         let checkPassword = validateInputPassword(password);
         setPassword(password.trim())
-        validateFields(isImplicitChange, "password", !checkPassword, setValidate, validate, !checkPassword ? password ? `Vui lòng nhập đúng định dạng mật khẩu` : `Vui lòng nhập mật khẩu` : "");
+        validateFields(isImplicitChange, "password", !checkPassword, setValidate, validate, !checkPassword ? password ? `${translate("correctFormat")} ${translate("password")}` : `${translate("pleaseEnter")} ${translate("password")}` : "");
     };
 
     // const onBlurUserName = (isImplicitChange = false) => {
@@ -73,31 +76,31 @@ const RegisterPopup = (props) => {
     // };
 
 
-    const onBlurSdt = (isImplicitChange = false) => {
-        let checkSdt = !!sdt;
-        setSdt(sdt.trim())
-        validateFields(isImplicitChange, "sdt", !checkSdt, setValidate, validate, !sdt ? "Vui lòng nhập số điện thoại" : "");
+    const onBlurPhoneNumber = (isImplicitChange = false) => {
+        let checkphoneNumber = !!phoneNumber;
+        setPhoneNumber(phoneNumber.trim())
+        validateFields(isImplicitChange, "phoneNumber", !checkphoneNumber, setValidate, validate, !phoneNumber ? `${translate("pleaseEnter")} ${translate("phoneNumber")}` : "");
     };
 
 
     const onBlurFirstName = (isImplicitChange = false) => {
         let checkFirstName = !!firstName;
         setFirstName(firstName.trim())
-        validateFields(isImplicitChange, "firstName", !checkFirstName, setValidate, validate, !firstName ? "Vui lòng nhập tên" : "");
+        validateFields(isImplicitChange, "firstName", !checkFirstName, setValidate, validate, !firstName ? `${translate("pleaseEnter")} ${translate("firstName")}` : "");
     };
 
 
     const onBlurLastName = (isImplicitChange = false) => {
         let checkLastName = !!lastName;
         setLastName(lastName.trim())
-        validateFields(isImplicitChange, "lastName", !checkLastName, setValidate, validate, !lastName ? "Vui lòng nhập họ" : "");
+        validateFields(isImplicitChange, "lastName", !checkLastName, setValidate, validate, !lastName ? `${translate("pleaseEnter")} ${translate("lastName")}` : "");
     };
 
 
     const onBlurAddress = (isImplicitChange = false) => {
         let checkAddress = !!address;
         setAddress(address.trim())
-        validateFields(isImplicitChange, "address", !checkAddress, setValidate, validate, !address ? "Vui lòng nhập địa chỉ" : "");
+        validateFields(isImplicitChange, "address", !checkAddress, setValidate, validate, !address ? `${translate("pleaseEnter")} ${translate("address")}` : "");
     };
 
     const onChangeEmail = (e) => {
@@ -112,8 +115,8 @@ const RegisterPopup = (props) => {
     //     setUserName(e.target.value);
     // };
 
-    const onChangeSdt = (e) => {
-        setSdt(e.target.value);
+    const onChangephoneNumber = (e) => {
+        setPhoneNumber(e.target.value);
     };
 
     const onChangeFirstName = (e) => {
@@ -136,7 +139,7 @@ const RegisterPopup = (props) => {
                 password: password,
                 // userName: userName,
                 address: address,
-                sdt: sdt,
+                phoneNumber: phoneNumber,
                 firstName: firstName,
                 lastName: lastName
             },
@@ -147,7 +150,7 @@ const RegisterPopup = (props) => {
 
         }
         else {
-            WarningMessage("Nhập thiếu thông tin", "Vui lòng nhập đầy đủ thông tin")
+            WarningMessage(translate("enterMissingInformation"), translate("pleaseEnterCompleteInformation"))
         };
     }
 
@@ -172,30 +175,30 @@ const RegisterPopup = (props) => {
                     <div className="d-flex flex-column text-center">
                         <form>
                             <div className="form-group">
-                                <input value={email} onChange={onChangeEmail} onBlur={onBlurEmail} type="email" className="form-control" id="email1" placeholder="Nhập Email.." />
+                                <input value={email} onChange={onChangeEmail} onBlur={onBlurEmail} type="email" className="form-control" id="email1" placeholder={`${translate("enterEmail")}...`} />
                             </div>
                             <div className="form-group">
-                                <input value={password} onChange={onChangePassword} onBlur={onBlurPassword} type="password" className="form-control" id="password1" placeholder="Nhập Mật khẩu..." />
+                                <input value={password} onChange={onChangePassword} onBlur={onBlurPassword} type="password" className="form-control" id="password1" placeholder={`${translate("enterPassword")}...`} />
                             </div>
                             <div className="form-group">
-                                <input value={firstName} onChange={onChangeFirstName} onBlur={onBlurFirstName} type="text" className="form-control" id="firstName1" placeholder="Nhập Tên..." />
+                                <input value={firstName} onChange={onChangeFirstName} onBlur={onBlurFirstName} type="text" className="form-control" id="firstName1" placeholder={`${translate("enterFirstName")}...`} />
                             </div>
                             <div className="form-group">
-                                <input value={lastName} onChange={onChangeLastName} onBlur={onBlurLastName} type="text" className="form-control" id="lastName1" placeholder="Nhập Họ..." />
+                                <input value={lastName} onChange={onChangeLastName} onBlur={onBlurLastName} type="text" className="form-control" id="lastName1" placeholder={`${translate("enterLastName")}...`} />
                             </div>
                             <div className="form-group">
-                                <input value={sdt} onChange={onChangeSdt} onBlur={onBlurSdt} type="text" className="form-control" id="sdt1" placeholder="Nhập SĐT..." />
+                                <input value={phoneNumber} onChange={onChangephoneNumber} onBlur={onBlurPhoneNumber} type="text" className="form-control" id="phoneNumber1" placeholder={`${translate("enterPhoneNumber")}...`} />
                             </div>
                             <div className="form-group">
-                                <input value={address} onChange={onChangeAddress} onBlur={onBlurAddress} type="text" className="form-control" id="address1" placeholder="Nhập Địa chỉ..." />
+                                <input value={address} onChange={onChangeAddress} onBlur={onBlurAddress} type="text" className="form-control" id="address1" placeholder={`${translate("enterAddress")}...`} />
                             </div>
-                            <button onClick={onRegister} type="button" className="btn btn-info btn-block btn-round">Đăng nhập</button>
+                            <button onClick={onRegister} type="button" className="btn btn-info btn-block btn-round">{`${translate("register")}`}</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div className="modal-footer d-flex justify-content-center">
-                <div className="signup-section">Bạn đã có tài khoản? <a onClick={onCancel} className="text-info"> Đăng nhập</a>.</div>
+                <div className="signup-section">{`${translate("alreadyAcount")}`}? <a onClick={onCancel} className="text-info"> {`${translate("signIn")}`}</a>.</div>
             </div>
         </Modal>
     )

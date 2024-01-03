@@ -75,10 +75,10 @@ const SpecialtyPage = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={"Lựa chọn những lịch trình tốt nhất"}
+                title={"chooseSchedule"}
                 redirect={ROUTE_PATH.HOME_PAGE}
-                redirectPage={"Trang chủ"}
-                currentPage={"Tour"}
+                redirectPage={"homePage"}
+                currentPage={"specialty"}
             />
             <SearchSpecialty
                 dsQuanHuyen={dsQuanHuyen}

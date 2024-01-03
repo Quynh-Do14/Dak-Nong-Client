@@ -1,4 +1,5 @@
 import React from 'react'
+import useTranslate from '../../core/common/hook/useTranslate';
 
 const SearchTour = (props) => {
     const {
@@ -8,7 +9,8 @@ const SearchTour = (props) => {
         dsDanhMucDiaDiem = [],
         onSelectDanhMuc,
         onSelectQuanHuyen
-    } = props
+    } = props;
+    const { translate } = useTranslate();
     return (
         <div className='container'>
             <div className="col-lg-12">
@@ -22,8 +24,8 @@ const SearchTour = (props) => {
                         </div>
                         <div className="service-form">
                             <form className="service-form-option">
-                                <label>Tên Tour</label><br />
-                                <input value={searchText} onChange={onChangeSearchText} placeholder='Nhập tên...' />
+                                <label>{translate("nameTour")} </label><br />
+                                <input value={searchText} onChange={onChangeSearchText} placeholder={translate("enterName")} />
                             </form>
                         </div>
                     </div>
@@ -44,9 +46,9 @@ const SearchTour = (props) => {
                         </div>
                         <div className="service-form">
                             <form className="service-form-option">
-                                <label className="common-label">Loại hình du lịch <i className="fa fa-angle-down"></i></label><br />
+                                <label className="common-label">{translate("type")} <i className="fa fa-angle-down"></i></label><br />
                                 <select onChange={onSelectDanhMuc}>
-                                    <option data-display="" value={""}>Loại hình du lịch</option>
+                                    <option data-display="" value={""}>{translate("type")}</option>
                                     {dsDanhMucDiaDiem?.map((it, index) => (
                                         <option key={index} value={it.idDanhMucDiaDiem}>{it.tenDanhMuc} </option>
                                     ))}
@@ -71,9 +73,9 @@ const SearchTour = (props) => {
                         </div>
                         <div className="service-form">
                             <form className="service-form-option">
-                                <label className="common-label">Quận huyện <i className="fa fa-angle-down"></i></label><br />
+                                <label className="common-label">{translate("district")} <i className="fa fa-angle-down"></i></label><br />
                                 <select onChange={onSelectQuanHuyen}>
-                                    <option data-display="" value={""}>Quận huyện</option>
+                                    <option data-display="" value={""}>{translate("district")}</option>
                                     {dsQuanHuyen?.map((it, index) => (
                                         <option key={index} value={it.idQuanHuyen}>{it.tenQuanHuyen} </option>
                                     ))}

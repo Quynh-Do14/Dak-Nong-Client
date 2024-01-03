@@ -8,6 +8,7 @@ import { convertDateOnly, showImageCommon } from '../../infratructure/utils/help
 import SearchArticle from './search';
 import LoadingFullPage from '../../infratructure/common/controls/loading';
 import PaginationCommon from '../../infratructure/common/controls/pagination';
+import useTranslate from '../../core/common/hook/useTranslate';
 let timeout
 const ArticlePage = () => {
     const [listTinTuc, setListTinTuc] = useState([]);
@@ -18,7 +19,7 @@ const ArticlePage = () => {
     const [pageSize, setPageSize] = useState(Constants.PaginationConfigs.Size);
     const [changePage, setChangePage] = useState(1);
 
-
+    const { translate } = useTranslate();
     const onGetListTinTucAsync = async ({ searchText = "", limit = pageSize, page = 1 }) => {
         const response = await api.getAllTinTuc(
             `loaitin?type=1${searchText ? searchText != "" ? `&search=${searchText}` : `` : ``}&limit=${limit}&page=${page}`,
@@ -55,10 +56,10 @@ const ArticlePage = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={"Bài viết hôm nay"}
+                title={"todayArticle"}
                 redirect={ROUTE_PATH.HOME_PAGE}
-                redirectPage={"Trang chủ"}
-                currentPage={"Bài viết"}
+                redirectPage={"homePage"}
+                currentPage={"article"}
             />
             <SearchArticle
                 searchText={searchText}
@@ -88,7 +89,7 @@ const ArticlePage = () => {
                                                 </ul>
                                                 <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title">{it.tieuDe} </a>
                                                 <p className='text-truncate-description'>{it.tieuDeCon} </p>
-                                                <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} >Xem thêm </a>
+                                                <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} >{translate("viewMore")} </a>
                                             </div>
                                         </div>
                                     </div>

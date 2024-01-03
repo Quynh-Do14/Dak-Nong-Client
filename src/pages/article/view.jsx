@@ -6,14 +6,16 @@ import BannerCommon from '../../infratructure/common/controls/banner';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper';
 import RelationArticle from '../../infratructure/common/controls/relation-article';
+import useTranslate from '../../core/common/hook/useTranslate';
 
 const ArticleDetail = () => {
     const [loading, setLoading] = useState(false);
     const [detailArticle, setDetailArticle] = useState({});
     const [listTinTucLienQuan, setListTinTucLienQuan] = useState([]);
 
-    const location = useLocation()
-    const search = location.search.replace("?", "")
+    const location = useLocation();
+    const search = location.search.replace("?", "");
+    const { translate } = useTranslate();
     const onGetDetailTinTucAsync = async () => {
         const response = await api.getAllTinTuc(
             `loaitin/${search}?type=1`,
@@ -39,8 +41,8 @@ const ArticleDetail = () => {
             <BannerCommon
                 title={detailArticle.tieuDe}
                 redirect={ROUTE_PATH.ARTICLE}
-                redirectPage={"Bài viết"}
-                currentPage={"Thông tin chi tiết"}
+                redirectPage={"artical"}
+                currentPage={"detail"}
             />
             <section className="destination-details">
                 <div className="container">
@@ -84,7 +86,7 @@ const ArticleDetail = () => {
                             </div>
                         </div>
                         <RelationArticle
-                            title={"Bài viết liên quan"}
+                            title={translate("relatedArticles")}
                             data={listTinTucLienQuan}
                         />
                     </div>

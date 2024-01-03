@@ -1,5 +1,6 @@
 import { Modal } from 'antd'
 import React from 'react'
+import useTranslate from '../../../core/common/hook/useTranslate';
 
 const ConfirmModal = (props) => {
     const {
@@ -9,6 +10,7 @@ const ConfirmModal = (props) => {
         onOk,
         onCancel,
     } = props;
+    const { translate } = useTranslate();
     return (
         <Modal
             visible={visible}
@@ -33,8 +35,8 @@ const ConfirmModal = (props) => {
                     </h6>
                 </div>
                 <div className="modal-footer d-flex justify-content-center">
-                    <button onClick={onCancel} type="button" className="btn btn-confirm btn-info btn-round">Hủy</button>
-                    <button onClick={onOk} type="button" className="btn btn-confirm btn-info btn-round">Đăng xuất</button>
+                    <button onClick={onCancel} type="button" className="btn btn-confirm btn-info btn-round">{translate("cancel")}</button>
+                    <button onClick={onOk} type="button" className="btn btn-confirm btn-info btn-round">{translate("logOut")}</button>
                 </div>
             </div>
         </Modal>

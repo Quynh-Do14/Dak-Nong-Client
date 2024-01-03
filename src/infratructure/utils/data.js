@@ -36,8 +36,67 @@ export const translations = {
         map: "Map",
         contactInfo: "Contact Information",
         address: "Address",
-        phone:"Phone Number",
+        phone: "Phone Number",
+        chooseSchedule: "Choose the best schedules",
+        detail: "Information Detail",
+        relatedArticles: "Related articles",
         ////
+        ////
+        info: "Info",
+        gallery: "Gallery",
+        policy: "Policy",
+        type: "Type of tourism",
+        price: "Price",
+        openTime: "Opening times",
+        view: "Views",
+        serviceAttentive: "Services for attentive asistance",
+        transportation: "Transportation services",
+        makeReservation: "Make a reservation",
+        relatedSchedule: "Related schedule",
+        ////
+
+        ////
+        specialtyName: "Specialty Name",
+        festivalName: "Festival Name",
+
+        ////
+
+        ////
+        enterEmail: "Enter Email",
+        enterPassword: "Enter Password",
+        enterFirstName: "Enter FirstName",
+        enterLastName: "Enter LastName",
+        enterPhoneNumber: "Enter PhoneNumber",
+        enterAddress: "Enter Address",
+        notAccount: "You have not created an account",
+        alreadyAcount: "You already have an account",
+        logOutConfirm: "Do you want to log out of the system",
+        cancel: "Cancel",
+        correctFormat: "Please enter the correct format",
+        pleaseEnter: "Please enter",
+
+        email: "Email",
+        password: "Password",
+        firstName: "FirstName",
+        lastName: "LastName",
+        phoneNumber: "PhoneNumber",
+        address: "Address",
+
+        enterMissingInformation: "Enter missing information",
+        pleaseEnterCompleteInformation: "Please enter complete information",
+        ////
+        ////
+        nameTour: "Name Tour",
+        enterName: "Enter Name",
+        district: "District",
+        nameFestival: "Name Festival",
+        startDate: "Start date",
+        endDate: "End Date",
+        nameSpecialty: "Name Specialty",
+        nameArtical: "Name Artical",
+        postingDate: "Posting Date",
+        ////
+
 
     },
     vi: {
@@ -77,9 +136,64 @@ export const translations = {
         map: "Bản đồ",
         contactInfo: "Thông tin liên hệ",
         address: "Địa chỉ",
-        phone:"SĐT Liên hệ",
+        phone: "SĐT Liên hệ",
+        chooseSchedule: "Lựa chọn những lịch trình tốt nhất",
+        detail: "Thông tin chi tiết",
+        relatedArticles: "Bài viết liên quan",
+        ////
+        ////
+        info: "Thông tin",
+        gallery: "Ảnh",
+        policy: "Điều khoản",
+        type: "Loại Tour",
+        price: "Giá vé",
+        openTime: "Giờ mở cửa",
+        view: "Lượt xem",
+        serviceAttentive: "Dịch vụ hỗ trợ tận tình",
+        transportation: "Dịch vụ di chuyển",
+        makeReservation: "Đặt lịch trình",
+        relatedSchedule: "Lịch trình liên quan",
         ////
 
+        ////
+        specialtyName: "Tên đặc sản",
+        festivalName: "Tên lễ hội",
+        ////
+
+        ////
+        enterEmail: "Nhập Email",
+        enterPassword: "Nhập Mật khẩu",
+        enterFirstName: "Nhập Tên",
+        enterLastName: "Nhập Họ",
+        enterPhoneNumber: "Nhập SĐT",
+        enterAddress: "Nhập Địa chỉ",
+        notAccount: "Bạn chưa có tài khoản",
+        alreadyAcount: "Bạn đã có tài khoản",
+        logOutConfirm: "Bạn có muốn đăng xuất khỏi hệ thống",
+        cancel: "Hủy",
+        correctFormat: "Vui lòng nhập đúng định dạng",
+        pleaseEnter: "Vui lòng nhập",
+
+        email: "Email",
+        password: "Mật khẩu",
+        firstName: "Tên",
+        lastName: "Họ",
+        phoneNumber: "SĐT",
+
+        enterMissingInformation: "Nhập thiếu thông tin",
+        pleaseEnterCompleteInformation: "Vui lòng nhập đầy đủ thông tin",
+        ////
+        ////
+        nameTour: "Tên Tour",
+        enterName: "Nhập tên",
+        district: "Quận huyện",
+        nameFestival: "Tên Lễ hội",
+        startDate: "Ngày bắt đầu",
+        endDate: "Ngày kết thúc",
+        nameSpecialty: "Tên đặc sản",
+        nameArtical: "Tên bài viết",
+        postingDate: "Ngày đăng bài",
+        ////
     },
     // Thêm các ngôn ngữ khác nếu cần
 };

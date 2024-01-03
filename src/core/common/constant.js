@@ -227,15 +227,15 @@ export default class Constants {
     static TabDetailTour = class {
         static list = [
             {
-                name: "Thông tin",
+                name: "info",
                 icon: "fa fa-circle-info"
             },
             {
-                name: "Ảnh",
+                name: "gallery",
                 icon: "fa fa-file-image"
             },
             {
-                name: "Điều khoản",
+                name: "policy",
                 icon: "fa fa-file-lines"
             },
         ]

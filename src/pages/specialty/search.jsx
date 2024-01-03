@@ -1,4 +1,5 @@
 import React from 'react'
+import useTranslate from '../../core/common/hook/useTranslate';
 
 const SearchSpecialty = (props) => {
     const {
@@ -6,7 +7,9 @@ const SearchSpecialty = (props) => {
         onChangeQH,
         onChangeSearchText,
         searchText
-    } = props
+    } = props;
+    const { translate } = useTranslate();
+
     return (
         <div className='container'>
             <div className="col-lg-12">
@@ -20,8 +23,8 @@ const SearchSpecialty = (props) => {
                         </div>
                         <div className="service-form">
                             <form className="service-form-option">
-                                <label>Tên Tour</label><br />
-                                <input value={searchText} onChange={onChangeSearchText} placeholder='Nhập tên...' />
+                                <label>{translate("nameSpecialty")}</label><br />
+                                <input value={searchText} onChange={onChangeSearchText} placeholder={translate("enterName")} />
                             </form>
                         </div>
                     </div>
@@ -42,9 +45,9 @@ const SearchSpecialty = (props) => {
                         </div>
                         <div className="service-form">
                             <form className="service-form-option">
-                                <label className="common-label">Quận huyện <i className="fa fa-angle-down"></i></label><br />
+                                <label className="common-label">{translate("district")} <i className="fa fa-angle-down"></i></label><br />
                                 <select onChange={onChangeQH}>
-                                    <option data-display="" value={""}>Quận huyện</option>
+                                    <option data-display="" value={""}>{translate("district")}</option>
                                     {dsQuanHuyen?.map((it, index) => (
                                         <option key={index} value={it.idQuanHuyen}>{it.tenQuanHuyen} </option>
                                     ))}

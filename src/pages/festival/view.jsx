@@ -8,6 +8,7 @@ import api from '../../infratructure/api'
 import Constants from '../../core/common/constant'
 import RelationDestination from '../../infratructure/common/controls/relation-destination'
 import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper'
+import useTranslate from '../../core/common/hook/useTranslate'
 
 const FestivalDetail = () => {
     const [loading, setLoading] = useState(false);
@@ -17,6 +18,7 @@ const FestivalDetail = () => {
 
     const location = useLocation();
     const search = location.search.replace("?", "");
+    const { translate } = useTranslate();
     const onGetDetailDiemDenAsync = async () => {
         const response = await api.getDiaDiemById(
             `dichvu/top/${search}?idDanhMuc=${Constants.CategoryConfig.Festival.value}`,
@@ -34,8 +36,8 @@ const FestivalDetail = () => {
             <BannerCommon
                 title={detailFestival.tenDiaDiem}
                 redirect={ROUTE_PATH.FESTIVAL}
-                redirectPage={"Lễ hội"}
-                currentPage={"Thông tin chi tiết"}
+                redirectPage={"festival"}
+                currentPage={"detail"}
             />
             <section className="package-details">
                 <div className="container">
@@ -46,7 +48,7 @@ const FestivalDetail = () => {
                                     <nav>
                                         <div className="nav nav-tabs" id="nav-tab" role="tablist">
                                             {Constants.TabDetailTour.list.map((it, index) => (
-                                                <button key={index} onClick={() => setTabSelect(index)} className={`nav-link ${tabSelect == index ? "active" : ""}`} id="nav-home-tab" type="button" role="tab"><i className={`${it.icon} mr-10`}></i>{it.name} </button>
+                                                <button key={index} onClick={() => setTabSelect(index)} className={`nav-link ${tabSelect == index ? "active" : ""}`} id="nav-home-tab" type="button" role="tab"><i className={`${it.icon} mr-10`}></i>{translate(it.name)} </button>
                                             ))}
                                         </div>
                                     </nav>
@@ -86,23 +88,23 @@ const FestivalDetail = () => {
 
                                 <div className="pkg-list-info">
                                     <ul>
-                                        <li><h6>Địa điểm :</h6> <span>{detailFestival.tenDiaDiem} </span></li>
-                                        <li><h6>Địa chỉ :</h6> <span>{detailFestival.diaChi} </span></li>
-                                        <li><h6>SĐT :</h6> <span>{detailFestival.sdtLienHe}</span></li>
-                                        <li><h6>Email :</h6> <span>{detailFestival.emailLienHe}</span></li>
-                                        <li><h6>Giá vé :</h6> <span>{detailFestival.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailFestival.giaVe}`}</span></li>
-                                        <li><h6>Thời gian :</h6> <span>{convertDateOnly(detailFestival.gioMoCua)} - {convertDateOnly(detailFestival.gioDongCua)}</span></li>
+                                        <li><h6>{translate("festivalName")} :</h6> <span>{detailFestival.tenDiaDiem} </span></li>
+                                        <li><h6>{translate("address")} :</h6> <span>{detailFestival.diaChi} </span></li>
+                                        <li><h6>{translate("phoneNumber")} :</h6> <span>{detailFestival.sdtLienHe}</span></li>
+                                        <li><h6>{translate("email")} :</h6> <span>{detailFestival.emailLienHe}</span></li>
+                                        <li><h6>{translate("price")} :</h6> <span>{detailFestival.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailFestival.giaVe}`}</span></li>
+                                        <li><h6>{translate("openTime")} :</h6> <span>{convertDateOnly(detailFestival.gioMoCua)} - {convertDateOnly(detailFestival.gioDongCua)}</span></li>
                                     </ul>
                                 </div>
                                 <div className="pkg-info-container">
                                     <ul>
                                         <li><i className="fa fa-star"></i>{detailFestival.soSaoTrungBinh} </li>
-                                        <li><i className="fa fa-eye"></i> {detailFestival.luotXem} Lượt xem</li>
+                                        <li><i className="fa fa-eye"></i> {detailFestival.luotXem} {translate("view")}</li>
                                         <li><i className="fa fa-wifi"></i> Wi-fi</li>
                                     </ul>
                                     <ul>
-                                        <li><i className="fa fa-gear"></i> Dịch vụ hỗ trợ tận tình</li>
-                                        <li><i className="fa fa-car"></i> Dịch vụ di chuyển </li>
+                                        <li><i className="fa fa-gear"></i> {translate("serviceAttentive")}</li>
+                                        <li><i className="fa fa-car"></i> {translate("transportation")} </li>
                                     </ul>
                                 </div>
                                 <p className='text-align-justify'>{detailFestival.moTa} </p>

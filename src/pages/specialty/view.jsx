@@ -8,13 +8,16 @@ import api from '../../infratructure/api'
 import Constants from '../../core/common/constant'
 import RelationDestination from '../../infratructure/common/controls/relation-destination'
 import { convertTimeOnly, showImageCommon } from '../../infratructure/utils/helper'
+import useTranslate from '../../core/common/hook/useTranslate'
 
 const SpecialtyDetail = () => {
     const [loading, setLoading] = useState(false);
     const [detailSpecialty, setDetailSpecialty] = useState({});
     const [tabSelect, setTabSelect] = useState(0);
     const location = useLocation()
-    const search = location.search.replace("?", "")
+    const search = location.search.replace("?", "");
+    const { translate } = useTranslate();
+
     const onGetDetailDacSanAsync = async () => {
         const response = await api.getDiaDiemById(
             `dichvu/top/${search}?idDanhMuc=${Constants.CategoryConfig.Specialty.value}`,
@@ -32,8 +35,8 @@ const SpecialtyDetail = () => {
             <BannerCommon
                 title={detailSpecialty.tenDiaDiem}
                 redirect={ROUTE_PATH.SPECIALTY}
-                redirectPage={"Lễ hội"}
-                currentPage={"Thông tin chi tiết"}
+                redirectPage={"specialty"}
+                currentPage={"detail"}
             />
             <section className="package-details">
                 <div className="container">
@@ -44,7 +47,7 @@ const SpecialtyDetail = () => {
                                     <nav>
                                         <div className="nav nav-tabs" id="nav-tab" role="tablist">
                                             {Constants.TabDetailTour.list.map((it, index) => (
-                                                <button key={index} onClick={() => setTabSelect(index)} className={`nav-link ${tabSelect == index ? "active" : ""}`} id="nav-home-tab" type="button" role="tab"><i className={`${it.icon} mr-10`}></i>{it.name} </button>
+                                                <button key={index} onClick={() => setTabSelect(index)} className={`nav-link ${tabSelect == index ? "active" : ""}`} id="nav-home-tab" type="button" role="tab"><i className={`${it.icon} mr-10`}></i>{translate(it.name)} </button>
                                             ))}
                                         </div>
                                     </nav>
@@ -78,28 +81,28 @@ const SpecialtyDetail = () => {
                                 </div>
 
                                 <div className="pkg-common-title">
-                                    <h4>Mô tả chi tiết</h4>
+                                    <h4>{translate("detail")} </h4>
                                 </div>
                                 <p className='text-align-justify'>{detailSpecialty.moTa} </p>
 
                                 <div className="pkg-list-info">
                                     <ul>
-                                        <li><h6>Địa điểm :</h6> <span>{detailSpecialty.tenDiaDiem} </span></li>
-                                        <li><h6>Địa chỉ :</h6> <span>{detailSpecialty.diaChi} </span></li>
-                                        <li><h6>SĐT :</h6> <span>{detailSpecialty.sdtLienHe}</span></li>
-                                        <li><h6>Email :</h6> <span>{detailSpecialty.emailLienHe}</span></li>
-                                        <li><h6>Giá vé :</h6> <span>{detailSpecialty.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailSpecialty.giaVe}`}</span></li>
-                                        <li><h6>Thời gian :</h6> <span>{convertTimeOnly(detailSpecialty.gioMoCua)} - {convertTimeOnly(detailSpecialty.gioDongCua)}</span></li>
+                                        <li><h6>{translate("specialtyName")} :</h6> <span>{detailSpecialty.tenDiaDiem} </span></li>
+                                        <li><h6>{translate("address")} :</h6> <span>{detailSpecialty.diaChi} </span></li>
+                                        <li><h6>{translate("phoneNumber")} :</h6> <span>{detailSpecialty.sdtLienHe}</span></li>
+                                        <li><h6>{translate("email")} :</h6> <span>{detailSpecialty.emailLienHe}</span></li>
+                                        <li><h6>{translate("price")} :</h6> <span>{detailSpecialty.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailSpecialty.giaVe}`}</span></li>
+                                        <li><h6>{translate("openTime")} :</h6> <span>{convertTimeOnly(detailSpecialty.gioMoCua)} - {convertTimeOnly(detailSpecialty.gioDongCua)}</span></li>
                                     </ul>
                                 </div>
                                 <div className="pkg-info-container">
                                     <ul>
                                         <li><i className="fa fa-star"></i>{detailSpecialty.soSaoTrungBinh} </li>
-                                        <li><i className="fa fa-eye"></i> {detailSpecialty.luotXem} Lượt xem</li>
+                                        <li><i className="fa fa-eye"></i> {detailSpecialty.luotXem} {translate("view")}</li>
                                     </ul>
                                     <ul>
-                                        <li><i className="fa fa-gear"></i> Dịch vụ hỗ trợ tận tình</li>
-                                        <li><i className="fa fa-car"></i> Di chuyển thuận tiện </li>
+                                        <li><i className="fa fa-gear"></i> {translate("serviceAttentive")}</li>
+                                        <li><i className="fa fa-car"></i> {translate("transportation")} </li>
                                     </ul>
                                 </div>
                                 <p className='text-align-justify'>{detailSpecialty.moTa} </p>

@@ -3,10 +3,10 @@ import { LanguageState } from '../atoms/language/languageState';
 import { useRecoilValue } from 'recoil';
 import { translations } from '../../../infratructure/utils/data';
 const useTranslate = () => {
-    // const translation = useRecoilValue(LanguageState);
-    const translation = sessionStorage.getItem("language")
+    const translation = useRecoilValue(LanguageState);
+    const storegrage = sessionStorage.getItem("language")
     const translate = (key) => {
-        const data = translations?.["vi"]
+        const data = storegrage ? translations?.[storegrage] : translations?.["vi"];
         const filteredKeys = Object.keys(data).filter(it => {
             return it
         }
@@ -17,7 +17,12 @@ const useTranslate = () => {
             return key
         }
         if (typeof (translation) === "object") {
-            return translations?.["vi"]?.[key];
+            if (storegrage) {
+                return translations?.[storegrage]?.[key];
+            }
+            else {
+                return translations?.["vi"]?.[key];
+            }
         }
         if (translation) {
             return translations?.[translation]?.[key];

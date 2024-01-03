@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Constants from '../../../core/common/constant';
 import LoginPopup from '../popup/login-popup';
 import LoadingFullPage from '../controls/loading';
@@ -19,6 +19,7 @@ const HeaderPage = () => {
     const [isOpenModalLogout, setIsOpenModalLogout] = useState(false);
 
     const [loading, setLoading] = useState(false);
+    const [isEnglish, setIsEnglish] = useState(false);
 
     const [isOpenShowDrawer, setIsOpenShowDrawer] = useState(false)
     const [swicthLanguage, setSwicthLanguage] = useState(false);
@@ -46,10 +47,11 @@ const HeaderPage = () => {
     let storage = sessionStorage.getItem(Constants.TOKEN);
 
     const onLogout = () => {
+        setLoading(true);
         sessionStorage.clear();
         onCloseModalLogout();
         navigate(ROUTE_PATH.HOME_PAGE);
-        window.location.reload();
+        setTimeout(() => setLoading(false), 2000)
         SuccessMessage("Đăng  xuất thành công", "Bạn đã đăng xuất khỏi hệ thống")
     };
 
@@ -76,14 +78,21 @@ const HeaderPage = () => {
             sessionStorage.setItem("language", "en");
         }
         if (value == false) {
-            setDataLanguage("vi")
+            setDataLanguage("vi");
             sessionStorage.setItem("language", "vi");
         }
         setLoading(true);
         setTimeout(() => setLoading(false), 2000)
     }
     // Ngôn ngữ
-
+    useEffect(() => {
+        if (sessionStorage.getItem("language") == "en") {
+            setIsEnglish(true)
+        }
+        else {
+            setIsEnglish(false)
+        }
+    }, [sessionStorage.getItem("language")])
     // Drawer
     const onOpenShowDrawer = () => {
         setIsOpenShowDrawer(true);
@@ -101,7 +110,7 @@ const HeaderPage = () => {
                         <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                             <ul className=" navigation clearfix">
 
-                                <li className="menu-drop-item dropdown"><a>{translate("english")} <Switch value={swicthLanguage} defaultChecked onChange={onChangeLanguage} /></a></li>
+                                <li className="menu-drop-item dropdown"><a>{translate("english")} <Switch value={swicthLanguage} checked={isEnglish} onChange={onChangeLanguage} /></a></li>
 
                             </ul>
                         </div>
@@ -258,7 +267,7 @@ const HeaderPage = () => {
             />
             <ConfirmModal
                 title={translate("logOut")}
-                message={"Bạn có muốn đăng xuất khỏi hệ thống"}
+                message={translate("logOutConfirm")}
                 visible={isOpenModalLogout}
                 onOk={onLogout}
                 onCancel={onCloseModalLogout}

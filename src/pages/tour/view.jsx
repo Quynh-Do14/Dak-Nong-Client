@@ -8,6 +8,7 @@ import api from '../../infratructure/api'
 import Constants from '../../core/common/constant'
 import RelationDestination from '../../infratructure/common/controls/relation-destination'
 import { showImageCommon } from '../../infratructure/utils/helper'
+import useTranslate from '../../core/common/hook/useTranslate'
 
 const TourDetail = () => {
     const [loading, setLoading] = useState(false);
@@ -17,6 +18,7 @@ const TourDetail = () => {
     const location = useLocation();
 
     const param = location.search.replace("?", "");
+    const { translate } = useTranslate();
 
     const onGetDetailDiemDenAsync = async () => {
         const response = await api.getDiaDiemById(
@@ -42,7 +44,7 @@ const TourDetail = () => {
                 title={detailTour.tenDiaDiem}
                 redirect={ROUTE_PATH.TOUR}
                 redirectPage={"Tour"}
-                currentPage={"Thông tin chi tiết"}
+                currentPage={"detail"}
             />
             <section className="package-details">
                 <div className="container">
@@ -53,7 +55,7 @@ const TourDetail = () => {
                                     <nav>
                                         <div className="nav nav-tabs" id="nav-tab" role="tablist">
                                             {Constants.TabDetailTour.list.map((it, index) => (
-                                                <button key={index} onClick={() => setTabSelect(index)} className={`nav-link ${tabSelect == index ? "active" : ""}`} id="nav-home-tab" type="button" role="tab"><i className={`${it.icon} mr-10`}></i>{it.name} </button>
+                                                <button key={index} onClick={() => setTabSelect(index)} className={`nav-link ${tabSelect == index ? "active" : ""}`} id="nav-home-tab" type="button" role="tab"><i className={`${it.icon} mr-10`}></i>{translate(it.name)} </button>
                                             ))}
                                         </div>
                                     </nav>
@@ -66,7 +68,7 @@ const TourDetail = () => {
                                                         showImageCommon(detailTour.hinhAnh)
                                                         :
                                                         detailTour.hinhAnh
-                                                } alt="img" className='mb-20'/>
+                                                } alt="img" className='mb-20' />
                                             </div>
                                         </div>
                                         <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
@@ -87,28 +89,28 @@ const TourDetail = () => {
                                 </div>
 
                                 <div className="pkg-common-title">
-                                    <h4>Mô tả chi tiết</h4>
+                                    <h4>{translate("detail")} </h4>
                                 </div>
                                 <p className='text-align-justify'>{detailTour.moTa} </p>
 
                                 <div className="pkg-list-info">
                                     <ul>
-                                        <li><h6>Địa điểm :</h6> <span>{detailTour.tenDiaDiem} </span></li>
-                                        <li><h6>Loại Tour :</h6> <span>{detailTour.tenDanhMuc}</span></li>
-                                        <li><h6>Địa chỉ :</h6> <span>{detailTour.diaChi} </span></li>
-                                        <li><h6>Giá vé :</h6> <span>{detailTour.giaVe} </span></li>
-                                        <li><h6>Mở cửa :</h6> <span>{detailTour.gioMoCua} - {detailTour.gioDongCua}</span></li>
+                                        <li><h6>{translate("destination")} :</h6> <span>{detailTour.tenDiaDiem} </span></li>
+                                        <li><h6>{translate("type")} :</h6> <span>{detailTour.tenDanhMuc}</span></li>
+                                        <li><h6>{translate("address")} :</h6> <span>{detailTour.diaChi} </span></li>
+                                        <li><h6>{translate("price")} :</h6> <span>{detailTour.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailTour.giaVe}`}</span></li>
+                                        <li><h6>{translate("openTime")} :</h6> <span>{detailTour.gioMoCua} - {detailTour.gioDongCua}</span></li>
                                     </ul>
                                 </div>
                                 <div className="pkg-info-container">
                                     <ul>
                                         <li><i className="fa fa-star"></i>{detailTour.soSaoTrungBinh} </li>
-                                        <li><i className="fa fa-eye"></i> {detailTour.luotXem} Lượt xem</li>
+                                        <li><i className="fa fa-eye"></i> {detailTour.luotXem} {translate("view")} </li>
                                         <li><i className="fa fa-wifi"></i> Wi-fi</li>
                                     </ul>
                                     <ul>
-                                        <li><i className="fa fa-gear"></i> Dịch vụ hỗ trợ tận tình</li>
-                                        <li><i className="fa fa-car"></i> Dịch vụ di chuyển </li>
+                                        <li><i className="fa fa-gear"></i> {translate("serviceAttentive")}</li>
+                                        <li><i className="fa fa-car"></i> {translate("transportation")} </li>
                                     </ul>
                                 </div>
                                 <p className='text-align-justify'>{detailTour.moTa} </p>
@@ -157,7 +159,7 @@ const TourDetail = () => {
                                 </div> */}
 
                                 <RelationDestination
-                                    title={"Lịch trình liên quan"}
+                                    title={translate("relatedSchedule")}
                                     data={dsDiaDiemLienQuan}
                                 />
                             </div>
@@ -166,7 +168,7 @@ const TourDetail = () => {
                         <div className="col-lg-4">
                             <div className="package-details-right-container">
                                 <div className="destination-common-title">
-                                    <h4>Đặt lịch trình</h4>
+                                    <h4>{translate("makeReservation")}</h4>
                                 </div>
 
                                 <div className="package-details-right-form">

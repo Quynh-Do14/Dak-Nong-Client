@@ -1,4 +1,5 @@
 import React from 'react'
+import useTranslate from '../../core/common/hook/useTranslate';
 
 const SearchFestival = (props) => {
     const {
@@ -8,7 +9,8 @@ const SearchFestival = (props) => {
         onChangeStartDate,
         endDate,
         onChangeEndDate
-    } = props
+    } = props;
+    const { translate } = useTranslate();
     return (
         <div className='container'>
             <div className="col-lg-12">
@@ -22,8 +24,8 @@ const SearchFestival = (props) => {
                         </div>
                         <div className="service-form">
                             <form className="service-form-option">
-                                <label>Tên Tour</label><br />
-                                <input value={searchText} onChange={onChangeSearchText} placeholder='Nhập tên...' />
+                                <label>{translate("nameFestival")} </label><br />
+                                <input value={searchText} onChange={onChangeSearchText} placeholder={translate("enterName")} />
                             </form>
                         </div>
                     </div>
@@ -32,7 +34,7 @@ const SearchFestival = (props) => {
 
                         <div className="service-form">
                             <form className="service-form-option">
-                                <label className="common-label">Ngày bắt đầu<i className="fa fa-calendar ml-10"></i></label><br />
+                                <label className="common-label">{translate("startDate")}<i className="fa fa-calendar ml-10"></i></label><br />
                                 <input onChange={onChangeStartDate} value={startDate} type="date" placeholder="" required />
                             </form>
                         </div>
@@ -41,7 +43,7 @@ const SearchFestival = (props) => {
                     <div className="service-content service-last-child">
                         <div className="service-form">
                             <form className="service-form-option">
-                                <label className="common-label">Ngày kết thúc<i className="fa fa-calendar ml-10"></i></label><br />
+                                <label className="common-label">{translate("endDate")}<i className="fa fa-calendar ml-10"></i></label><br />
                                 <input value={endDate} onChange={onChangeEndDate} type='date' />
                             </form>
                         </div>
