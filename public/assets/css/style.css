@@ -1641,6 +1641,7 @@ Home-Page-One-Starts
  .deals-info ul {
    display: flex;
    justify-content: space-between;
+   align-items: center;
  }
 
  .deals-info ul li .svg-inline--fa {

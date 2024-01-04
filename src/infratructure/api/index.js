@@ -36,8 +36,7 @@ const api = {
   //   ),
   getDanhMucConCuaDanhMuc: (params, setLoading) =>
     request.get(
-      `${apiLinks.API}${Endpoint.Module.DiaDiem}/getDanhMucConCuaDanhMuc?${params}`,
-      setLoading
+      `${apiLinks.API}${Endpoint.Module.DiaDiem}/getDanhMucConCuaDanhMuc?${params}`, setLoading
     ),
   //////
   getAllDiaDiem: (params, setLoading) =>
@@ -45,11 +44,11 @@ const api = {
       `${apiLinks.API}${Endpoint.Module.DiaDiem}/${params}`,
       setLoading
     ),
-  getAllDiaDiemByHuyenBanDo: (params, setLoading) =>
+  getAllDiaDiemBanDo: (params, setLoading) =>
     request.get(
-      `${apiLinks.API}${Endpoint.Module.DiaDiem}/getAllDiaDiemByHuyenBanDo?${params}`,
-      setLoading
+      `${apiLinks.API}${Endpoint.Module.DiaDiem}/getAllDiaDiemBanDo?${params}`, setLoading
     ),
+
   getDiaDiemById: (params, setLoading) =>
     request.get(
       `${apiLinks.API}${Endpoint.Module.DiaDiem}/${params}`,
