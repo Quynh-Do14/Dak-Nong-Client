@@ -143,7 +143,7 @@ export const translations = {
         ////
         ////
         info: "Thông tin",
-        gallery: "Ảnh",
+        gallery: "Video",
         policy: "Điều khoản",
         type: "Loại Tour",
         price: "Giá vé",

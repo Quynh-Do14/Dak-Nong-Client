@@ -60,31 +60,38 @@ const TourDetail = () => {
                                         </div>
                                     </nav>
                                     <div className="tab-content" id="nav-tabContent">
-                                        <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                                            <div className="pkg-nav-contant">
-                                                <img src={
-                                                    detailTour.hinhAnh?.indexOf("http") == -1
-                                                        ?
-                                                        showImageCommon(detailTour.hinhAnh)
-                                                        :
-                                                        detailTour.hinhAnh
-                                                } alt="img" className='mb-20' />
-                                            </div>
-                                        </div>
-                                        <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                                            <div className="pkg-nav-contant">
-                                                {/* <div className="nav-list">
-                                                    <ul>
-                                                        <li>
-                                                            <img src="assets/images/gallery/footer-recent-01.png" alt="img" />
-                                                        </li>
-                                                        <li>
-                                                            <img src="assets/images/gallery/footer-recent-02.png" alt="img" />
-                                                        </li>
-                                                    </ul>
-                                                </div> */}
-                                            </div>
-                                        </div>
+                                        {
+                                            tabSelect === 0
+                                                ?
+                                                <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                                    <div className="pkg-nav-contant">
+                                                        <img src={
+                                                            detailTour.hinhAnh?.indexOf("http") == -1
+                                                                ?
+                                                                showImageCommon(detailTour.hinhAnh)
+                                                                :
+                                                                detailTour.hinhAnh
+                                                        } alt="img" className='mb-20' />
+                                                    </div>
+                                                </div>
+                                                :
+                                                tabSelect === 1
+                                                    ?
+                                                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                                        <div className="pkg-nav-contant">
+                                                            <div className="nav-list">
+
+                                                                <video style={{ width: "100%" }} controls>
+                                                                    <source src={detailTour.uriVideo} type="video/mp4" />
+                                                                </video>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    :
+                                                    null
+                                        }
+
+
                                     </div>
                                 </div>
 
