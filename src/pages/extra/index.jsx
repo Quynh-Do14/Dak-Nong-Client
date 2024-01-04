@@ -5,6 +5,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
 import api from "../../infratructure/api";
 import { removeAccents, removeDiacriticsAndSpaces } from "./common";
+import { DATALICHTRINH } from "./common/datalichtrinh";
+import * as turf from "@turf/turf";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
@@ -31,6 +33,12 @@ function convertToGeoJSON(data) {
   return geoJSON;
 }
 
+const myArray = ["primary", "success", "danger", "warning", "info"];
+function getRandomValueFromArray(arr) {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+
 const ExtraComponent = () => {
   const location = useLocation();
   const receivedProps = location.state;
@@ -43,13 +51,15 @@ const ExtraComponent = () => {
   const [dsDanhMucDiaDiemDuLich, setDsDanhMucDiaDiemDuLich] = useState([]);
   const [textSearch, setTextSearch] = useState("");
   const [dsDiaDiemSearch, setDsDiaDiemSearch] = useState([]);
+  const [dsDiaDiemTuLichTrinh, setDsDiaDiemTuLichTrinh] = useState([]);
+  const [lichTrinh, setLichTrinh] = useState({});
 
   const fecthData = async () => {
     // document.getElementById("map").scrollIntoView()
 
     let map = new mapboxgl.Map({
       container: mapContainer.current,
-      zoom: 8.5,
+      zoom: 9,
       center: [107.701881, 12.210116],
       style: "mapbox://styles/mapbox/streets-v12",
     });
@@ -407,19 +417,67 @@ const ExtraComponent = () => {
       .addTo(map);
   };
 
+  const openLichTrinh = (lichTrinh) => {
+    setLichTrinh(lichTrinh);
+    setDsDiaDiemTuLichTrinh(lichTrinh.danhSachDiaDiem);
+    map.setZoom(11);
+    if (map.getLayer("lichTrinh")) {
+      // Layer tồn tại, có thể xoá nó ở đây
+      map.removeLayer("lichTrinh");
+    }
+    if (map.getSource("lichTrinh")) {
+      // Source tồn tại, có thể xoá nó ở đây
+      map.removeSource("lichTrinh");
+    }
+
+    map.addSource("lichTrinh", {
+      type: "geojson",
+      data: {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            properties: {},
+            geometry: lichTrinh.geometry,
+          },
+        ],
+      },
+    });
+
+    map.addLayer({
+      id: "lichTrinh",
+      type: "line",
+      source: "lichTrinh",
+      layout: {},
+      paint: {
+        "line-color": "#3e97ff",
+        "line-width": 9,
+      },
+    });
+
+    var features = turf.points(lichTrinh.geometry.coordinates);
+    var center = turf.center(features);
+
+    map.flyTo({
+      center: center.geometry.coordinates,
+      essential: true,
+      duration: 1000,
+    });
+  };
+
   return (
     <MainLayout className="bg-white">
       <div
         style={{
           width: "100%",
-          height: 121,
+          height: 104,
         }}
       ></div>
       <section
         style={{
           position: "relative",
           width: "100%",
-          height: "calc(100vh - 121px)",
+          height: "calc(100vh - 104px)",
           // backgroundColor: "#000",
         }}
       >
@@ -438,7 +496,7 @@ const ExtraComponent = () => {
             <p
               style={{
                 fontSize: 15,
-                fontWeight: 500,
+                fontWeight: "bold",
                 padding: 8,
                 color: "#333",
                 textAlign: "center",
@@ -604,6 +662,295 @@ const ExtraComponent = () => {
             </div>
           )}
         </div>
+        <div
+          style={{
+            position: "absolute",
+            bottom: 12,
+            left: 12,
+            right: 70,
+            maxHeight: 250,
+            boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
+            backgroundColor: "#fff",
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              fontSize: 14,
+              fontWeight: "bold",
+              paddingLeft: 16,
+              paddingTop: 8,
+              color: "#071437",
+            }}
+          >
+            Gợi ý lịch trình
+          </p>
+          <div
+            id="style-6"
+            className="d-flex flex-row"
+            style={{
+              overflow: "hidden",
+              overflowX: "auto",
+              paddingTop: 12,
+              paddingBottom: 12,
+              marginLeft: 12,
+              marginRight: 12,
+            }}
+          >
+            {DATALICHTRINH.danhSachLichTrinh.map((v, k) => (
+              <div
+                className="detailLichTrinh"
+                onClick={() => openLichTrinh(v)}
+                key={k}
+                style={{
+                  padding: 12,
+                  border: "1px solid #3e97ff",
+                  borderRadius: 10,
+                  borderStyle: "dashed",
+                  marginRight: 12,
+                  minWidth: 380,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  display: "flex",
+                }}
+              >
+                <div
+                  className="d-flex align-items-center justify-content-center"
+                  style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: 5,
+                    backgroundColor: "#f1faff",
+                    marginRight: 16,
+                  }}
+                >
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/7291/7291475.png"
+                    alt=""
+                    style={{
+                      maxHeight: 30,
+                    }}
+                  />
+                </div>
+                <div className="d-flex flex-column">
+                  <p
+                    style={{
+                      fontSize: 14,
+                      fontWeight: "bold",
+                      color: "#071437",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      width: 192,
+                    }}
+                  >
+                    {v.ten}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 300,
+                      color: "#99a1b7",
+                      margin: 0,
+                    }}
+                  >
+                    Số địa điểm: {v.soDiaDiem}
+                  </p>
+                </div>
+                <div className="d-flex flex-row align-items-center ml-4">
+                  <i
+                    className="fa fa-clock-o mr-1"
+                    style={{
+                      color: "#3e97ff",
+                    }}
+                  ></i>
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: 12,
+                      color: "#3e97ff",
+                    }}
+                  >
+                    {v.thoiGian}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {dsDiaDiemTuLichTrinh.length > 0 && (
+          <div
+            style={{
+              backgroundColor: "#fff",
+              padding: 20,
+              position: "absolute",
+              top: 79,
+              right: 70,
+              boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
+              width: 310,
+            }}
+          >
+            <div className="d-flex flex-row justify-content-between mb-2">
+              <div className="d-flex flex-column">
+                <p
+                  style={{
+                    fontSize: 14,
+                    color: "#071437",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    width: 192,
+                  }}
+                >
+                  {lichTrinh.ten}
+                </p>
+                <p
+                  style={{
+                    fontSize: 13,
+                    color: "#99a1b7",
+                  }}
+                >
+                  Số địa điểm : {lichTrinh.soDiaDiem}
+                </p>
+              </div>
+              <button
+                type="button"
+                class="close"
+                aria-label="Close"
+                onClick={() => {
+                  setDsDiaDiemTuLichTrinh([]);
+                  setLichTrinh({});
+                  if (map.getLayer("lichTrinh")) {
+                    // Layer tồn tại, có thể xoá nó ở đây
+                    map.removeLayer("lichTrinh");
+                  }
+                  if (map.getSource("lichTrinh")) {
+                    // Source tồn tại, có thể xoá nó ở đây
+                    map.removeSource("lichTrinh");
+                  }
+                }}
+                style={{
+                  padding: 20,
+                }}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="timeline-label">
+              {/*begin::Item*/}
+              {dsDiaDiemTuLichTrinh.length > 0 &&
+                dsDiaDiemTuLichTrinh.map((v, k) => (
+                  <div
+                    className="timeline-item"
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      marginBottom: 12,
+                    }}
+                    key={k}
+                  >
+                    {/*begin::Label*/}
+                    <div
+                      className="timeline-label"
+                      style={{
+                        fontSize: 13,
+                        fontWeight: "bold",
+                        marginRight: 11,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      Điểm {k + 1}
+                    </div>
+                    {/*end::Label*/}
+                    {/*begin::Badge*/}
+                    <div className="timeline-badge">
+                      <i
+                        className={`fa fa-genderless text-${getRandomValueFromArray(
+                          myArray
+                        )}`}
+                        style={{ fontSize: "1.75rem", marginTop: -5 }}
+                      />
+                    </div>
+                    {/*end::Badge*/}
+                    {/*begin::Text*/}
+                    <div
+                      className="timeline-content"
+                      style={{
+                        fontSize: 14,
+                        fontWeight: "bold",
+                        marginLeft: 12,
+                        color: "#252f4a",
+                      }}
+                    >
+                      {v.tenDiaDiem}
+                      <br />
+                      <div
+                        style={{
+                          fontSize: 13,
+                          fontWeight: 300,
+                          color: "#99a1b7",
+                          marginTop: 8,
+                        }}
+                      >
+                        Giờ mở cửa : {v.gioMoCua}
+                        <br />
+                        Giờ đóng cửa : {v.gioDongCua}
+                        <br />
+                        Giá vé : {v.giaVe}
+                      </div>
+                    </div>
+                    {/*end::Text*/}
+                  </div>
+                ))}
+              <div
+                className="timeline-item"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginBottom: 12,
+                }}
+              >
+                {/*begin::Label*/}
+                <div
+                  className="timeline-label"
+                  style={{
+                    fontSize: 13,
+                    fontWeight: "bold",
+                    marginRight: 11,
+                    whiteSpace: "nowrap",
+                    color: "#fff",
+                  }}
+                >
+                  Điểm c
+                </div>
+                {/*end::Label*/}
+                {/*begin::Badge*/}
+                <div className="timeline-badge">
+                  <i
+                    className={`fa fa-genderless text-${getRandomValueFromArray(
+                      myArray
+                    )}`}
+                    style={{ fontSize: "1.75rem", marginTop: -5 }}
+                  />
+                </div>
+                {/*end::Badge*/}
+                {/*begin::Text*/}
+                <div
+                  className="timeline-content"
+                  style={{
+                    fontSize: 14,
+                    fontWeight: "bold",
+                    marginLeft: 12,
+                    color: "#252f4a",
+                  }}
+                >
+                  Kết thúc lịch trình
+                </div>
+                {/*end::Text*/}
+              </div>
+            </div>
+          </div>
+        )}
       </section>
     </MainLayout>
   );
