@@ -17,10 +17,10 @@ const request = {
     }).catch((e) => {
     });
     if (result.ok) {
-      setTimeout(() => setLoading(false), 2000)
+      setLoading(false)
       return result.json();
     } else {
-      setTimeout(() => setLoading(false), 2000)
+      setLoading(false)
       return {
         status: false,
         data: {},

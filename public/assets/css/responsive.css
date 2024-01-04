@@ -558,7 +558,7 @@
     /* popular */
     .popular-ture-content {
       height: 247px;
-      width: 100%;
+      width: 247px;
     }
 
     .place-content {
@@ -1203,6 +1203,8 @@
     /* popular */
     .popular-ture-content {
       height: 204px;
+      width: 204px;
+
     }
 
     .place-content {
@@ -1885,6 +1887,7 @@
     .popular-ture-content {
       margin-bottom: 20px;
       height: 315px;
+      width: 315px;
     }
 
     /* popular */
@@ -2396,6 +2399,7 @@
     /* popular */
     .popular-ture-content {
       height: 315px;
+      width: 315px;
     }
 
     /* popular */

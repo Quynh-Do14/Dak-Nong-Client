@@ -2691,8 +2691,8 @@ Home-Page-Two-Starts
 
  .popular-ture-content {
    position: relative;
-   width: 100%;
-   height: 288px;
+   width: 262px;
+   height: 262px;
    border-radius: 20px;
    overflow: hidden;
  }
@@ -4169,6 +4169,8 @@ Tour page
 
  .package-tab .nav {
    display: flex;
+   justify-content: center;
+   align-items: center;
    gap: 145px;
  }
 

@@ -22,7 +22,7 @@ const HeaderPage = () => {
     const [isEnglish, setIsEnglish] = useState(false);
 
     const [isOpenShowDrawer, setIsOpenShowDrawer] = useState(false)
-    const [swicthLanguage, setSwicthLanguage] = useState(false);
+    const [swicthLanguage, setSwicthLanguage] = useState(sessionStorage.getItem('language') ? sessionStorage.getItem('language') : "vi");
     const [dataLanguage, setDataLanguage] = useRecoilState(LanguageState);
     const navigate = useNavigate();
     const location = useLocation();
@@ -71,19 +71,42 @@ const HeaderPage = () => {
         setIsOpenModalRegister(false);
     }
     // Ngôn ngữ
+    // const onChangeLanguage = (value) => {
+    //     setSwicthLanguage(value)
+    //     if (value == true) {
+    //         setDataLanguage("en");
+    //         sessionStorage.setItem("language", "en");
+    //     }
+    //     if (value == false) {
+    //         setDataLanguage("vi");
+    //         sessionStorage.setItem("language", "vi");
+    //     }
+    //     setLoading(true);
+    //     setTimeout(() => setLoading(false), 2000)
+
     const onChangeLanguage = (value) => {
         setSwicthLanguage(value)
-        if (value == true) {
-            setDataLanguage("en");
+        // if (value == true) {
+        //     setDataLanguage("en");
+        //     sessionStorage.setItem("language", "en");
+        // }
+        // if (value == false) {
+        //     setDataLanguage("vi");
+        //     sessionStorage.setItem("language", "vi");
+        // }
+        setDataLanguage(value);
+
+        if (value == "en") {
             sessionStorage.setItem("language", "en");
         }
-        if (value == false) {
-            setDataLanguage("vi");
+        if (value == "vi") {
             sessionStorage.setItem("language", "vi");
         }
+
         setLoading(true);
-        setTimeout(() => setLoading(false), 2000)
+        setTimeout(() => setLoading(false), 1000)
     }
+
     // Ngôn ngữ
     useEffect(() => {
         if (sessionStorage.getItem("language") == "en") {
@@ -186,8 +209,9 @@ const HeaderPage = () => {
                                     </nav>
                                 </div>
                                 <div className="menu-area dropdown-action">
-                                    {/* <div className="header-right-option">
+                                    <div className="header-right-option">
                                         <Select
+                                            value={swicthLanguage}
                                             style={{ width: "100%", height: "100%" }}
                                             defaultValue="Tiếng Việt"
                                             onChange={onChangeLanguage}
@@ -195,15 +219,15 @@ const HeaderPage = () => {
                                             <Select.Option value="en">{translate("english")} </Select.Option>
                                             <Select.Option value="vi">{translate("vietnamese")} </Select.Option>
                                         </Select>
-                                    </div> */}
-                                    <Dropdown overlay={listAction()} trigger={['click']}>
+                                    </div>
+                                    {/* <Dropdown overlay={listAction()} trigger={['click']}>
                                         <a onClick={(e) => e.preventDefault()}>
                                             <Space>
                                                 <button className="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style={{ fontSize: 30 }} className="flaticon-menu-1"></i></button>
                                             </Space>
                                         </a>
-                                    </Dropdown>
-                                    {/* <nav className="main-menu navbar-expand-md navbar-light ml-20">
+                                    </Dropdown> */}
+                                    <nav className="main-menu navbar-expand-md navbar-light ml-20">
                                         <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                             <ul className="navigation clearfix">
                                                 {
@@ -217,7 +241,7 @@ const HeaderPage = () => {
                                                 }
                                             </ul>
                                         </div>
-                                    </nav> */}
+                                    </nav>
                                 </div>
                             </div>
                         </div>

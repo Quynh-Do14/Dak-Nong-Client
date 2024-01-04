@@ -21,7 +21,7 @@ export default class Constants {
       //     link: ROUTE_PATH.DESTINATION,
       // },
       {
-        label: "Tour",
+        label: "schedule",
         link: ROUTE_PATH.TOUR,
       },
       {

@@ -55,9 +55,9 @@ const SearchSpecialty = (props) => {
                             </form>
                         </div>
                     </div>
-                    <div className="service-button">
+                    {/* <div className="service-button">
                         <a><i className="fa fa-angle-right"></i></a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

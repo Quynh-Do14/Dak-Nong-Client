@@ -49,7 +49,7 @@ const TourDetail = () => {
             <section className="package-details">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-12">
                             <div className="package-details-left-container">
                                 <div className="package-tab">
                                     <nav>
@@ -59,7 +59,7 @@ const TourDetail = () => {
                                             ))}
                                         </div>
                                     </nav>
-                                    <div className="tab-content" id="nav-tabContent">
+                                    <div className="tab-content mb-20" id="nav-tabContent">
                                         {
                                             tabSelect === 0
                                                 ?
@@ -71,7 +71,7 @@ const TourDetail = () => {
                                                                 showImageCommon(detailTour.hinhAnh)
                                                                 :
                                                                 detailTour.hinhAnh
-                                                        } alt="img" className='mb-20' />
+                                                        } alt="img" className='' />
                                                     </div>
                                                 </div>
                                                 :
@@ -120,7 +120,6 @@ const TourDetail = () => {
                                         <li><i className="fa fa-car"></i> {translate("transportation")} </li>
                                     </ul>
                                 </div>
-                                <p className='text-align-justify'>{detailTour.moTa} </p>
 
                                 {/* <div className="faq-accordion ">
                                     <div className="accordion" id="accordionExample">
@@ -172,7 +171,7 @@ const TourDetail = () => {
                             </div>
                         </div>
 
-                        <div className="col-lg-4">
+                        {/* <div className="col-lg-4">
                             <div className="package-details-right-container">
                                 <div className="destination-common-title">
                                     <h4>{translate("makeReservation")}</h4>
@@ -216,7 +215,7 @@ const TourDetail = () => {
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section >

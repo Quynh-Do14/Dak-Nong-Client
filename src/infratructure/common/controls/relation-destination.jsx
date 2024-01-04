@@ -14,7 +14,7 @@ const RelationDestination = (props) => {
 
             <div className="row">
                 {data.map((it, index) => (
-                    <div key={index} className="col-lg-6 col-md-6">
+                    <div key={index} className="col-lg-4 col-md-6">
                         <div className="tour-package-container">
                             <div className="activities-image">
                                 <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}><img src={

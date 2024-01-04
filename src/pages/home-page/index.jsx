@@ -95,6 +95,39 @@ const HomePage = () => {
         <MainLayout>
             <SlideBanner />
             {/* //////////////// */}
+            <section className="popular-ture home3-popular-ture">
+                <div className="sail-image">
+                    <img src="assets/images/shape/sail.png" alt="shape" />
+                </div>
+                <div className="spring-arrow-r">
+                    <img src="assets/images/shape/spring-arrow-r.png" alt="arrow" />
+                </div>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="align-title">
+                                <h3>{translate("exploreTravel")}</h3>
+                            </div>
+                        </div>
+                        {Constants.DataHomePage.list.map((it, index) => (
+                            <div key={index} className="col-lg-3 col-md-6">
+                                <div className="popular-ture-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                    <div className="popular-ture-image">
+                                        <img src={it.img} alt="image" />
+                                    </div>
+                                    <div className="popular-ture-overlay">
+                                        <div className="popular-ture-text">
+                                            <a href={it.link}>{translate(it.name)} </a>
+                                            <h6> {translate(it.description)} </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            {/* //////////////// */}
             {/* //////////////// */}
             <section className="category home3-category bg-white">
                 <div className="sail-image">
@@ -133,39 +166,7 @@ const HomePage = () => {
                 </div>
             </section>
             {/* //////////////// */}
-            <section className="popular-ture home3-popular-ture">
-                <div className="sail-image">
-                    <img src="assets/images/shape/sail.png" alt="shape" />
-                </div>
-                <div className="spring-arrow-r">
-                    <img src="assets/images/shape/spring-arrow-r.png" alt="arrow" />
-                </div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="align-title">
-                                <h3>{translate("exploreTravel")}</h3>
-                            </div>
-                        </div>
-                        {Constants.DataHomePage.list.map((it, index) => (
-                            <div key={index} className="col-lg-3 col-md-6">
-                                <div className="popular-ture-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                    <div className="popular-ture-image">
-                                        <img src={it.img} alt="image" />
-                                    </div>
-                                    <div className="popular-ture-overlay">
-                                        <div className="popular-ture-text">
-                                            <a href={it.link}>{translate(it.name)} </a>
-                                            <h6> {translate(it.description)} </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-            {/* //////////////// */}
+
             <Destination
                 data={listDiaDiem}
             />

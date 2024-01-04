@@ -67,14 +67,14 @@ const ArticleDetail = () => {
                                 <p className='text-align-justify'>{detailArticle.tieuDeCon} </p>
                                 <p className='text-align-justify'>{detailArticle.moTaNgan} </p>
                                 <p className='text-align-justify'>{detailArticle.chiTiet} </p>
-                                <div className="dd-image-container">
+                                {/* <div className="dd-image-container">
                                     <div className="blog-details-bottom-image">
                                         <a href="blog.html"><img src="assets/images/gallery/blog-details-01.png" alt="image" /></a>
                                     </div>
                                     <div className="blog-details-bottom-image">
                                         <a href="blog.html"><img src="assets/images/gallery/blog-details-02.png" alt="image" /></a>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div className="blog-details-cms">
                                     <div className="quotetion">
