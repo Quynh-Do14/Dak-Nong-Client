@@ -16,7 +16,9 @@
     "react-snap-carousel": "^0.3.1",
     "recoil": "^0.7.7",
     "rxjs": "^7.8.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@turf/turf": "^6.5.0",
+    "mapbox-gl": "^2.15.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,7 +36,11 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "not safari < 10",
+      "not chrome < 51",
+      "not android < 5",
+      "not ie < 12"
     ],
     "development": [
       "last 1 chrome version",

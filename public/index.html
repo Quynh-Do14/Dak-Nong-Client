@@ -78,6 +78,33 @@
   <!-- Font Awesome CSS -->
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
 </head>
+<style>
+  #map {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* padding-bottom: 65px; */
+    transition: padding .5s;
+    position: relative;
+  }
+
+  .mapboxgl-popup-content {
+    width: 280px !important;
+    padding: 0 !important;
+  }
+
+  .mapboxgl-popup-close-button {
+    margin-top: 8px !important;
+    margin-right: 8px !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 25px !important;
+    background: '#fff' !important;
+    border: none !important;
+  }
+</style>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>

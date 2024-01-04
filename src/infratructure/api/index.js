@@ -45,6 +45,11 @@ const api = {
       `${apiLinks.API}${Endpoint.Module.DiaDiem}/${params}`,
       setLoading
     ),
+  getAllDiaDiemByHuyenBanDo: (params, setLoading) =>
+    request.get(
+      `${apiLinks.API}${Endpoint.Module.DiaDiem}/getAllDiaDiemByHuyenBanDo?${params}`,
+      setLoading
+    ),
   getDiaDiemById: (params, setLoading) =>
     request.get(
       `${apiLinks.API}${Endpoint.Module.DiaDiem}/${params}`,
@@ -52,7 +57,12 @@ const api = {
     ),
 
   danhGiaDiaDiem: (data, callBack, setLoading) => {
-    request.post(`${apiLinks.API}${Endpoint.Module.Evaluate}/diadiem`, data, callBack, setLoading)
+    request.post(
+      `${apiLinks.API}${Endpoint.Module.Evaluate}/diadiem`,
+      data,
+      callBack,
+      setLoading
+    );
   },
   getAllDanhGiaDiaDiem: (params, setLoading) =>
     request.get(
@@ -74,9 +84,7 @@ const api = {
     ),
   ///////
   getAllQuanHuyen: (params, setLoading) =>
-    request.get(`${apiLinks.API}${Endpoint.Module.District}`,
-      setLoading
-    ),
+    request.get(`${apiLinks.API}${Endpoint.Module.District}`, setLoading),
 
   getHinhAnhByIdDiaDiem: (params, setLoading) =>
     request.get(
