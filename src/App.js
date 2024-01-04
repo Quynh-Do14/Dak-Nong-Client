@@ -33,7 +33,7 @@ const RouteRoot = () => {
         <Route path={ROUTE_PATH.SPECIALTY} element={<SpecialtyPage />} />
         <Route path={ROUTE_PATH.VIEW_SPECIALTY} element={<SpecialtyDetail />} />
 
-        <Route path={"/quanHuyen"} element={<ExtraComponent />} />
+        <Route path={ROUTE_PATH.LAYOUT_MAP} element={<ExtraComponent />} />
 
         {/* <Route path={ROUTE_PATH.DESTINATION} element={<DestinationPage />} />
     <Route path={ROUTE_PATH.VIEW_DESTINATION} element={<DestinationDetail />} />

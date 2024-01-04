@@ -22,6 +22,7 @@ export const ROUTE_PATH = {
     LAYOUT_MAP: `/${PREFIX}map`,
 
     HOME_PAGE: `/`,
+
 };
 export class Endpoint {
     static Auth = class {

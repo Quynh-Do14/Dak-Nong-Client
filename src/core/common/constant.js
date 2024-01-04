@@ -33,8 +33,8 @@ export default class Constants {
         link: ROUTE_PATH.SPECIALTY,
       },
       {
-        label: "Bản đồ",
-        link: "",
+        label: "map",
+        link: ROUTE_PATH.LAYOUT_MAP,
         children: [
           {
             id: 1,
@@ -181,7 +181,7 @@ export default class Constants {
       static Position = "top-right";
       static Duration = 6000;
     };
-    static Confirmation = class {};
+    static Confirmation = class { };
   };
   static DataTemplate = class {
     static list = [
@@ -282,4 +282,25 @@ export default class Constants {
       },
     ];
   };
+
+  static TypeTourism = class {
+    static list = [
+      {
+        name: "travelDiscover",
+        icon: "assets/images/icons/c-1.png",
+      },
+      {
+        name: "ecoTourism",
+        icon: "assets/images/icons/c-2.png",
+      },
+      {
+        name: "commerceCuisine",
+        icon: "assets/images/icons/c-3.png",
+      },
+      {
+        name: "travelEntertain",
+        icon: "assets/images/icons/c-4.png",
+      },
+    ]
+  }
 }

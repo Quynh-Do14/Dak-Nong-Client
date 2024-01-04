@@ -107,67 +107,28 @@ const HomePage = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="align-title">
-                                <h5>Loại hình du lịch</h5>
-                                <h3>Những loại hình du lịch nổi bật nhất</h3>
+                                <h5>{translate("type")} </h5>
+                                <h3>{translate("mostProminent")} </h3>
                             </div>
                         </div>
-
-                        <div className="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
-                            <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1000ms">
-                                <div className="category-content-inner">
-                                    <div className="category-image-container">
-                                        <div className="category-image">
-                                            <img src="assets/images/icons/c-1.png" alt="icon" />
+                        {
+                            Constants.TypeTourism.list.map((it, index) => (
+                                <div key={index} className="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
+                                    <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1000ms">
+                                        <div className="category-content-inner">
+                                            <div className="category-image-container">
+                                                <div className="category-image">
+                                                    <img src={it.icon} alt="icon" />
+                                                </div>
+                                            </div>
+                                            <h5>{translate(it.name)} </h5>
+                                            {/* <span>30 Địa Điểm</span> */}
+                                            <a href="" className="category-btn"><i className="fa fa-angle-right"></i></a>
                                         </div>
                                     </div>
-                                    <h5>Du lịch thành phố</h5>
-                                    <span>30 Địa Điểm</span>
-                                    <a href="destination-details.html" className="category-btn"><i className="fa fa-angle-right"></i></a>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6 justify-content-center">
-                            <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1200ms">
-                                <div className="category-content-inner">
-                                    <div className="category-image-container">
-                                        <div className="category-image">
-                                            <img src="assets/images/icons/choose-bottom-03.png" alt="icon" />
-                                        </div>
-                                    </div>
-                                    <h5>Thiên nhiên</h5>
-                                    <span>30 Địa Điểm</span>
-                                    <a href="destination-details.html" className="category-btn"><i className="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6 justify-content-center">
-                            <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1600ms">
-                                <div className="category-content-inner">
-                                    <div className="category-image-container">
-                                        <div className="category-image">
-                                            <img src="assets/images/icons/c-4.png" alt="icon" />
-                                        </div>
-                                    </div>
-                                    <h5>Du lịch tâm linh</h5>
-                                    <span>30 Địa Điểm</span>
-                                    <a href="destination-details.html" className="category-btn"><i className="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-6 justify-content-center">
-                            <div className="category-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1800ms">
-                                <div className="category-content-inner">
-                                    <div className="category-image-container">
-                                        <div className="category-image">
-                                            <img src="assets/images/icons/c-5.png" alt="icon" />
-                                        </div>
-                                    </div>
-                                    <h5>Lịch sử văn hóa</h5>
-                                    <span>30 Địa Điểm</span>
-                                    <a href="destination-details.html" className="category-btn"><i className="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                            ))
+                        }
                     </div>
                 </div>
             </section>
@@ -215,7 +176,7 @@ const HomePage = () => {
                         <div className="col-lg-12">
                             <div className="divider-content">
                                 <h5>{translate("readyFor")}</h5>
-                                <h2> 
+                                <h2>
                                     <span> {translate("experienceTravel")}
                                         <svg className="banner-text-shape" width="247" height="38" viewBox="0 0 247 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path id="signature3" d="M3.18577 22.2125C3.18577 22.2125 155.675 -3.21963 241.039 14.2277" stroke="#FE7524" stroke-width="5" stroke-linecap="round" />

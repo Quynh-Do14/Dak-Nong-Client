@@ -323,7 +323,7 @@ const ExtraComponent = () => {
 
   useEffect(() => {
     fecthData();
-  }, [receivedProps.it]);
+  }, []);
 
   const btDiaDiemDuLich = (e) => {
     document.getElementById(e.target.value).checked = e.target.checked;

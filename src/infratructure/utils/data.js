@@ -15,7 +15,14 @@ export const translations = {
         exploreNow: "Explore Now",
         viewMore: "View More",
         exploreTravel: "Explore Dak Nong Tourism",
+        mostProminent: "The most prominent types of tourism",
         //////
+
+        //////
+        cityTravel: "City travel",
+        nature: "Nature",
+        //////
+
         destination: "Destination",
         todayArticle: `Today's Article`,
         exploreCuisine: "Explore Cuisine",
@@ -97,6 +104,14 @@ export const translations = {
         postingDate: "Posting Date",
         ////
 
+        ////
+        travelDiscover: "Travel discover",
+        ecoTourism: "Ecotourism",
+        commerceCuisine: "Commerce-Cuisine",
+        travelEntertain: "Travel Entertain",
+        ////
+
+
 
     },
     vi: {
@@ -115,6 +130,8 @@ export const translations = {
         exploreNow: "Khám phá ngay",
         viewMore: "Xem thêm",
         exploreTravel: "Khám phá du lịch Đắk Nông",
+        mostProminent: "Những loại hình du lịch nổi bật nhất",
+
         //////
         destination: "Địa điểm du lịch",
         todayArticle: `Bài viết hôm nay`,
@@ -193,6 +210,13 @@ export const translations = {
         nameSpecialty: "Tên đặc sản",
         nameArtical: "Tên bài viết",
         postingDate: "Ngày đăng bài",
+        ////
+
+        ////
+        travelDiscover: "Du lịch khám phá",
+        ecoTourism: "Du lịch sinh thái",
+        commerceCuisine: "Thương mại - ẩm thực",
+        travelEntertain: "Du lịch giải trí",
         ////
     },
     // Thêm các ngôn ngữ khác nếu cần

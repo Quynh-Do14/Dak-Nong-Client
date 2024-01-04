@@ -117,7 +117,7 @@ const HeaderPage = () => {
                     <nav className="main-menu navbar-expand-md navbar-light">
                         <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                             <ul className=" navigation clearfix">
-                                <li className="menu-drop-item dropdown"><a>{translate("english")} </a> <Switch value={swicthLanguage} checked={isEnglish} onChange={onChangeLanguage} /></li>
+                                <li className="menu-drop-item dropdown d-flex"><a>{translate("english")} </a> <Switch value={swicthLanguage} checked={isEnglish} onChange={onChangeLanguage} /></li>
                             </ul>
                         </div>
                     </nav>
@@ -166,7 +166,7 @@ const HeaderPage = () => {
                                             <ul className="navigation clearfix">
                                                 {Constants.Menu.List.map((it, index) => (
                                                     <li key={index} className="dropdown"><a href={it.link} className={`${pathname == it.link ? "active" : ""}`}>{translate(it.label)}</a>
-                                                        {it.children
+                                                        {/* {it.children
                                                             ?
                                                             <ul>
                                                                 {
@@ -177,7 +177,7 @@ const HeaderPage = () => {
                                                             </ul>
                                                             :
                                                             null
-                                                        }
+                                                        } */}
 
                                                     </li>
                                                 ))}
