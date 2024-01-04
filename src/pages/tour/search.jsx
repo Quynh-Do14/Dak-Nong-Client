@@ -46,9 +46,9 @@ const SearchTour = (props) => {
                         </div>
                         <div className="service-form">
                             <form className="service-form-option">
-                                <label className="common-label">{translate("type")} <i className="fa fa-angle-down"></i></label><br />
+                                <label className="common-label">{translate("category")} <i className="fa fa-angle-down"></i></label><br />
                                 <select onChange={onSelectDanhMuc}>
-                                    <option data-display="" value={""}>{translate("type")}</option>
+                                    <option data-display="" value={""}>{translate("category")}</option>
                                     {dsDanhMucDiaDiem?.map((it, index) => (
                                         <option key={index} value={it.idDanhMucDiaDiem}>{it.tenDanhMuc} </option>
                                     ))}

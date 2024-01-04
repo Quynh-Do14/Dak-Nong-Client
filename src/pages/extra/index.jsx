@@ -419,7 +419,7 @@ const ExtraComponent = () => {
         style={{
           position: "relative",
           width: "100%",
-          height: 822,
+          height: "calc(100vh - 121px)",
           // backgroundColor: "#000",
         }}
       >

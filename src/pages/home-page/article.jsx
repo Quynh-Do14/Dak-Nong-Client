@@ -32,7 +32,7 @@ const Article = ({ data = [] }) => {
                                 <div className="blog-info">
                                     <div className="blog-info">
                                         <div className="footer-info">
-                                            <ul className='flex justify-center mb-10'>
+                                            <ul className='flex justify-content-start mb-10'>
                                                 <li><i className="color-orange mr-10 fa fa-user"></i>Duong Nguyen </li>
                                                 <li><i className="color-orange mr-10 fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
                                             </ul>
