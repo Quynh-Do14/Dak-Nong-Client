@@ -101,6 +101,14 @@ const HeaderPage = () => {
     const onCloseShowDrawer = () => {
         setIsOpenShowDrawer(false);
     }
+
+    const onNavigateQuanHuyen = (it) => {
+        navigate("/quanHuyen", {
+            state: {
+                it
+            }
+        })
+    }
     // Drawer
     const listAction = () => {
         return (
@@ -165,7 +173,7 @@ const HeaderPage = () => {
                                                             <ul>
                                                                 {
                                                                     it.children.map((it, index) => (
-                                                                        <li key={index}><a href="" class="">{it.tenHuyen} </a></li>
+                                                                        <li key={index}><a onClick={() => onNavigateQuanHuyen(it)} class="">{it.tenHuyen} </a></li>
                                                                     ))
                                                                 }
                                                             </ul>

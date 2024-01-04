@@ -34,7 +34,7 @@ export default class Constants {
             },
             {
                 label: "Bản đồ",
-                link: ROUTE_PATH.LAYOUT_MAP,
+                link: "",
                 children:
                     [
                         {
