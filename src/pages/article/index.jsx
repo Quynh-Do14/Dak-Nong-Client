@@ -135,7 +135,7 @@ const ArticlePage = () => {
                         </ul>
                         <a
                           href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}
-                          className="blog-title text-truncate-title"
+                          className="blog-title text-truncate-title-article"
                         >
                           {it.tieuDe}{" "}
                         </a>
