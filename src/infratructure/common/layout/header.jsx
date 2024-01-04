@@ -117,9 +117,7 @@ const HeaderPage = () => {
                     <nav className="main-menu navbar-expand-md navbar-light">
                         <div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                             <ul className=" navigation clearfix">
-
-                                <li className="menu-drop-item dropdown"><a>{translate("english")} <Switch value={swicthLanguage} checked={isEnglish} onChange={onChangeLanguage} /></a></li>
-
+                                <li className="menu-drop-item dropdown"><a>{translate("english")} </a> <Switch value={swicthLanguage} checked={isEnglish} onChange={onChangeLanguage} /></li>
                             </ul>
                         </div>
                     </nav>

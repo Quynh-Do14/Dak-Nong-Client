@@ -40,7 +40,7 @@ const Destination = ({ data = [] }) => {
                                         <li><i className="fa fa-star"></i>{it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </li>
                                         <li><span> {it.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${it.giaVe}`} </span></li>
                                     </ul>
-                                    <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`} className="deals-info-link text-truncate">{it.tenDiaDiem} </a>
+                                    <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`} className="deals-info-link text-truncate-origin">{it.tenDiaDiem} </a>
                                     <p><i className="flaticon-map"></i>{it.diaChi} </p>
                                 </div>
                             </div>
