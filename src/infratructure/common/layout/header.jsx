@@ -160,6 +160,18 @@ const HeaderPage = () => {
                                             <ul className="navigation clearfix">
                                                 {Constants.Menu.List.map((it, index) => (
                                                     <li key={index} className="dropdown"><a href={it.link} className={`${pathname == it.link ? "active" : ""}`}>{translate(it.label)}</a>
+                                                        {it.children
+                                                            ?
+                                                            <ul>
+                                                                {
+                                                                    it.children.map((it, index) => (
+                                                                        <li key={index}><a href="" class="">{it.tenHuyen} </a></li>
+                                                                    ))
+                                                                }
+                                                            </ul>
+                                                            :
+                                                            null
+                                                        }
 
                                                     </li>
                                                 ))}

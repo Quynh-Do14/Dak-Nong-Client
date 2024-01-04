@@ -32,10 +32,41 @@ export default class Constants {
                 label: "specialty",
                 link: ROUTE_PATH.SPECIALTY,
             },
-            // {
-            //     label: "Bản đồ",
-            //     link: ROUTE_PATH.LAYOUT_MAP,
-            // },
+            {
+                label: "Bản đồ",
+                link: ROUTE_PATH.LAYOUT_MAP,
+                children:
+                    [
+                        {
+                            id: 1,
+                            tenHuyen: "Cư Jút"
+                        },
+                        {
+                            id: 2,
+                            tenHuyen: "Đắk Mil"
+                        },
+                        {
+                            id: 3,
+                            tenHuyen: "Krông Nô"
+                        },
+                        {
+                            id: 4,
+                            tenHuyen: "Đắk Song"
+                        },
+                        {
+                            id: 5,
+                            tenHuyen: "Đắk R'Lấp"
+                        },
+                        {
+                            id: 6,
+                            tenHuyen: "Đắk Glong"
+                        },
+                        {
+                            id: 7,
+                            tenHuyen: "Tuy Đức"
+                        },
+                    ]
+            },
 
         ]
     };
