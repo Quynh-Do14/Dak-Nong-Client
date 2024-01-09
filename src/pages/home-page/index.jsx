@@ -28,7 +28,7 @@ const HomePage = () => {
 
   const onGetListDiemDenAsync = async () => {
     const response = await api.getAllDiaDiem(
-      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Location.value}&${Constants.Params.limit}=3`,
+      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Location.value}&${Constants.Params.limit}=4`,
       setLoading
     );
     setListDiaDiem(response.data.diaDiems);
@@ -38,8 +38,7 @@ const HomePage = () => {
 
   const onGetTop2DiaDiemDuLich = async () => {
     const response = await api.getAllDiaDiem(
-      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Location.value}&${
-        Constants.Params.limit
+      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Location.value}&${Constants.Params.limit
       }=${2}&${Constants.Params.page}=2`,
       setLoading
     );
@@ -49,8 +48,7 @@ const HomePage = () => {
   };
   const onGetTop4TuTop2DiaDiemDuLich = async () => {
     const response = await api.getAllDiaDiem(
-      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Location.value}&${
-        Constants.Params.limit
+      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Location.value}&${Constants.Params.limit
       }=${4}&page=2`,
       setLoading
     );
@@ -81,7 +79,7 @@ const HomePage = () => {
 
   const onGetListTinTucAsync = async () => {
     const response = await api.getAllTinTuc(
-      `loaitin?type=1&limit=3`,
+      `loaitin?type=1&limit=4`,
       setLoading
     );
     setListTinTuc(response.data.tinTucs);
@@ -89,12 +87,12 @@ const HomePage = () => {
     // setTotalItem(response.data.totalItems);
   };
   useEffect(() => {
-    onGetListDiemDenAsync().then((_) => {});
-    onGetListTinTucAsync().then((_) => {});
-    onGetListDacSanAsync().then((_) => {});
-    onGetListLeHoiAsync().then((_) => {});
-    onGetTop2DiaDiemDuLich().then((_) => {});
-    onGetTop4TuTop2DiaDiemDuLich().then((_) => {});
+    onGetListDiemDenAsync().then((_) => { });
+    onGetListTinTucAsync().then((_) => { });
+    onGetListDacSanAsync().then((_) => { });
+    onGetListLeHoiAsync().then((_) => { });
+    onGetTop2DiaDiemDuLich().then((_) => { });
+    onGetTop4TuTop2DiaDiemDuLich().then((_) => { });
   }, []);
   useEffect(() => {
     setLoading1(true);
@@ -112,7 +110,7 @@ const HomePage = () => {
         <div className="add-spring">
           <img src={sail} alt="shape" />
         </div>
-        <div className="container">
+        <div className="container-fluid padding-common">
           <div className="row">
             <div className="col-lg-12">
               <div className="align-title">
@@ -123,7 +121,7 @@ const HomePage = () => {
             {Constants.TypeTourism.list.map((it, index) => (
               <div
                 key={index}
-                className="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center"
+                className="col-xl-2 col-lg-4 col-md-6 col-sm-6 d-flex justify-content-center"
               >
                 <div
                   className="category-content wow fadeInUp"
@@ -170,7 +168,7 @@ const HomePage = () => {
           <img src="assets/images/shape/spring-arrow-r.png" alt="arrow" />
         </div>
         <div
-          className="container"
+          className="container-fluid padding-common"
           style={{
             paddingTop: 12,
           }}
@@ -187,13 +185,13 @@ const HomePage = () => {
               </div>
             </div>
             {Constants.DataHomePage.list.map((it, index) => (
-              <div key={index} className="col-lg-3 col-md-6">
+              <div key={index} className="col-lg-3 col-md-6 d-flex justify-content-center">
                 <div
                   className="popular-ture-content wow fadeInUp"
                   data-wow-delay="00ms"
                   data-wow-duration="1500ms"
                 >
-                  <div className="popular-ture-image">
+                  <div className="popular-ture-image ">
                     <img src={it.img} alt="image" />
                   </div>
                   <div className="popular-ture-overlay">
@@ -373,7 +371,7 @@ const HomePage = () => {
                 </div>
             </section> */}
       <section className="portfolio">
-        <div className="container">
+        <div className="container-fluid padding-common">
           <div className="row">
             <div className="col-lg-12">
               <div className="align-title">
@@ -381,7 +379,7 @@ const HomePage = () => {
               </div>
             </div>
             {listDiaDiem.map((it, index) => (
-              <div key={index} className="col-lg-4">
+              <div key={index} className="mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                 <div className="portfolio-content">
                   <div className="portfolio-info">
                     <img
@@ -429,10 +427,10 @@ const HomePage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section >
       {/* //////////////// */}
-      <LoadingFullPage loading={loading1} />
-    </MainLayout>
+      < LoadingFullPage loading={loading1} />
+    </MainLayout >
   );
 };
 

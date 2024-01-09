@@ -28,7 +28,7 @@ const RelationDestination = (props) => {
                             <div className="activities-content">
                                 <div className="tour-package-info">
                                     <div className="rating">
-                                        <p><i className="fa fa-star"></i> {it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </p>
+                                        <p><i className="fa fa-star pr-2"></i> {it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </p>
                                     </div>
                                     <div className="doller">
                                         <span> {it.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${it.giaVe}`} </span>

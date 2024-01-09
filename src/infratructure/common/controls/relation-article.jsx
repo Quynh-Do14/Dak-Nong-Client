@@ -28,7 +28,7 @@ const RelationArticle = (props) => {
                                 } alt="img" className='img-page-detail' />
                             </div>
                             <div className="destination-right-list-info">
-                                <a className='text-truncate-title' href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>{it.tieuDe} </a>
+                                <a className='text-truncate-title-relation' href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>{it.tieuDe} </a>
                                 {/* <ul>
                                     <li><i className="fa-solid fa-star"></i>4.45 (313 Reviews) </li>
                                     <li><span>From</span><h5> $500.00</h5> </li>

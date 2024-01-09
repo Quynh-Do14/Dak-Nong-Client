@@ -9,6 +9,7 @@ import { validateEmail, validateInputPassword } from '../../utils/validate';
 import { WarningMessage } from '../toast/toastMessage';
 import { validateFields } from '../../utils/helper';
 import useTranslate from '../../../core/common/hook/useTranslate';
+import { MessageError } from '../controls/MessageError';
 
 const LoginPopup = (props) => {
     const {
@@ -61,8 +62,8 @@ const LoginPopup = (props) => {
 
     const onSubmit = async (e) => {
         await setSubmittedTime(Date.now());
-        onCancel();
         if (isValidData()) {
+            onCancel();
             const login = await api.login({
                 email: email,
                 password: password,
@@ -105,10 +106,14 @@ const LoginPopup = (props) => {
                     <div className="d-flex flex-column text-center">
                         <form>
                             <div className="form-group">
-                                <input value={email} onChange={onChangeEmail} onBlur={onBlurEmail} type="email" className="form-control" id="email1" placeholder={`${translate("enterEmail")}...`} />
+                                <input value={email} onChange={onChangeEmail} onBlur={() => onBlurEmail(false)} type="email" className="form-control" id="email1" placeholder={`${translate("enterEmail")}...`} />
+                                <MessageError isError={validate.email?.isError || false}
+                                    message={validate.email?.message || ""} />
                             </div>
                             <div className="form-group">
-                                <input value={password} onChange={onChangePassword} onBlur={onBlurPassword} type="password" className="form-control" id="password1" placeholder={`${translate("enterPassword")}...`} />
+                                <input value={password} onChange={onChangePassword} onBlur={() => onBlurPassword(false)} type="password" className="form-control" id="password1" placeholder={`${translate("enterPassword")}...`} />
+                                <MessageError isError={validate.password?.isError || false}
+                                    message={validate.password?.message || ""} />
                             </div>
                             <button onClick={onSubmit} type="button" className="btn btn-info btn-block btn-round">{translate("signIn")}</button>
                         </form>

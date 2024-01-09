@@ -897,6 +897,7 @@
 
     .mobile-menu .navigation li>a {
       color: black;
+      font-weight: 700;
     }
 
     .auto_container {
@@ -1463,6 +1464,20 @@
 
     /* menu */
 
+    /* icon-deco */
+    .deals .common-title .deal-icon {
+      display: none;
+    }
+
+    /* icon-deco */
+
+    .padding-common {
+      padding: 0 15px !important;
+    }
+
+    .common-banner {
+      margin-top: 80px;
+    }
   }
 
   @media only screen and (max-width: 820px) {
@@ -2119,7 +2134,14 @@
 
 
 
-  @media only screen and (max-width: 991px) {}
+  @media only screen and (max-width: 991px) {
+    .popular-ture-content {
+      height: 304px;
+      width: 304px;
+
+    }
+
+  }
 
   @media only screen and (min-width: 821px) and (max-width: 993px) {}
 
@@ -3170,4 +3192,17 @@
 
 
 
+  }
+
+  /* reponsive font-size menu */
+  @media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .main-menu .navigation>li>a {
+      font-size: 14px !important;
+    }
+
+    .main-menu .navigation>li {
+      margin: 0 5px;
+    }
+
+    /* reponsive font-size menu */
   }

@@ -10,7 +10,7 @@ const Article = ({ data = [] }) => {
             <div className="blog-icon">
                 <img src="assets/images/icons/blog-icon.png" alt="icon" />
             </div>
-            <div className="container">
+            <div className="container-fluid padding-common">
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="align-title">
@@ -18,8 +18,8 @@ const Article = ({ data = [] }) => {
                         </div>
                     </div>
                     {data.map((it, index) => (
-                        <div key={index} className="col-lg-4">
-                            <div className="blog-content">
+                        <div key={index} className="mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
+                            < div className="blog-content" >
                                 <div className="blog-image">
                                     <a href="blog-details.html"><img src={
                                         it.hinhAnh?.indexOf("http") == -1
@@ -36,7 +36,7 @@ const Article = ({ data = [] }) => {
                                                 <li><i className="color-orange mr-10 fa fa-user"></i>Duong Nguyen </li>
                                                 <li><i className="color-orange mr-10 fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
                                             </ul>
-                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title">{it.tieuDe} </a>
+                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title-relation">{it.tieuDe} </a>
                                             <p className='text-truncate-description'>{it.tieuDeCon} </p>
                                             <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>{translate("viewMore")} </a>
                                         </div>
@@ -46,8 +46,8 @@ const Article = ({ data = [] }) => {
                         </div>
                     ))}
                 </div>
-            </div>
-        </section>
+            </div >
+        </section >
     )
 }
 

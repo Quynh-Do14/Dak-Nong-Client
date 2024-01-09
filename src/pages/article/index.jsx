@@ -17,6 +17,7 @@ const ArticlePage = () => {
   const [listTinTuc, setListTinTuc] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [postDate, setPostDate] = useState("");
   const [pagination, setPagination] = useState({});
   const [totalItem, setTotalItem] = useState();
   const [pageSize, setPageSize] = useState(Constants.PaginationConfigs.Size);
@@ -29,8 +30,7 @@ const ArticlePage = () => {
     page = 1,
   }) => {
     const response = await api.getAllTinTuc(
-      `loaitin?type=1${
-        searchText ? (searchText != "" ? `&search=${searchText}` : ``) : ``
+      `loaitin?type=1${searchText ? (searchText != "" ? `&search=${searchText}` : ``) : ``
       }&limit=${limit}&page=${page}`,
       setLoading
     );
@@ -42,25 +42,28 @@ const ArticlePage = () => {
     onGetListTinTucAsync({ searchText: searchText, limit: limit, page: page });
   };
   useEffect(() => {
-    onSearch().then((_) => {});
+    onSearch().then((_) => { });
   }, []);
 
   const onChangeSearchText = (e) => {
     setSearchText(e.target.value);
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      onSearch(e.target.value, pageSize, changePage).then((_) => {});
+      onSearch(e.target.value, pageSize, changePage).then((_) => { });
     }, Constants.DEBOUNCE_SEARCH);
   };
 
+  const onChangePostDate = (value) => {
+    setPostDate(value)
+  }
   const onPreviousPage = () => {
     setChangePage(changePage - 1);
-    onSearch(searchText, pageSize, changePage - 1).then((_) => {});
+    onSearch(searchText, pageSize, changePage - 1).then((_) => { });
   };
 
   const onNextPage = () => {
     setChangePage(changePage + 1);
-    onSearch(searchText, pageSize, changePage + 1).then((_) => {});
+    onSearch(searchText, pageSize, changePage + 1).then((_) => { });
   };
   return (
     <MainLayout className={"bg-white"}>
@@ -73,21 +76,11 @@ const ArticlePage = () => {
       <SearchArticle
         searchText={searchText}
         onChangeSearchText={onChangeSearchText}
+        postDate={postDate}
+        onChangePostDate={onChangePostDate}
       />
-      <section
-        className="deals"
-        style={{
-          position: "relative",
-        }}
-      >
-        <div
-          className="container"
-          style={{
-            position: "absolute",
-            top: -65,
-            left: 174,
-          }}
-        >
+      <section className="deals position-relative">
+        <div className="container position-absolute">
           <div className="row">
             <div className="col-lg-12">
               <div className="common-title">
@@ -102,10 +95,10 @@ const ArticlePage = () => {
           </div>
         </div>
 
-        <div className="container">
+        <div className="container-fluid padding-common">
           <div className="row">
             {listTinTuc.map((it, index) => (
-              <div key={index} className="col-lg-4 col-md-6">
+              <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-xs-12">
                 <div className="blog-content">
                   <div className="blog-image">
                     <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>

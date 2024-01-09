@@ -88,7 +88,7 @@ export default class Constants {
   };
 
   static PaginationConfigs = class {
-    static Size = 9;
+    static Size = 8;
     static SizeSearchPage = 8;
     static LimitSize = 60;
     static AllSize = 9000;
@@ -273,16 +273,16 @@ export default class Constants {
         icon: "fa fa-circle-info",
       },
       {
+        name: "Video",
+        icon: "fa fa-video",
+      },
+      {
         name: "gallery",
         icon: "fa fa-file-image",
       },
-      {
-        name: "policy",
-        icon: "fa fa-file-lines",
-      },
+
     ];
   };
-
   static TypeTourism = class {
     static list = [
       {
@@ -298,8 +298,16 @@ export default class Constants {
         icon: "assets/images/icons/c-3.png",
       },
       {
-        name: "travelEntertain",
+        name: "leisureTravel",
         icon: "assets/images/icons/c-4.png",
+      },
+      {
+        name: "structures",
+        icon: "assets/images/icons/c-5.png",
+      },
+      {
+        name: "spiritualTourism",
+        icon: "assets/images/icons/c-6.png",
       },
     ]
   }

@@ -79,7 +79,7 @@ const TourPage = () => {
         changePage,
         searchDanhMuc,
         searchQuanHuyen
-      ).then((_) => {});
+      ).then((_) => { });
     }, Constants.DEBOUNCE_SEARCH);
   };
 
@@ -91,7 +91,7 @@ const TourPage = () => {
       changePage - 1,
       searchDanhMuc,
       searchQuanHuyen
-    ).then((_) => {});
+    ).then((_) => { });
   };
 
   const onNextPage = () => {
@@ -102,33 +102,33 @@ const TourPage = () => {
       changePage + 1,
       searchDanhMuc,
       searchQuanHuyen
-    ).then((_) => {});
+    ).then((_) => { });
   };
   useEffect(() => {
-    onSearch().then((_) => {});
-    onGetQuanHuyenAsync().then((_) => {});
+    onSearch().then((_) => { });
+    onGetQuanHuyenAsync().then((_) => { });
   }, []);
 
   const onSelectDanhMuc = (e) => {
-    setSearchDanhMuc(e.target.value);
+    setSearchDanhMuc(e);
     onSearch(
       searchText,
       pageSize,
       changePage,
-      e.target.value,
+      e,
       searchQuanHuyen
-    ).then((_) => {});
+    ).then((_) => { });
   };
 
   const onSelectQuanHuyen = (e) => {
-    setSearchQuanHuyen(e.target.value);
+    setSearchQuanHuyen(e);
     onSearch(
       searchText,
       pageSize,
       changePage,
       searchDanhMuc,
-      e.target.value
-    ).then((_) => {});
+      e
+    ).then((_) => { });
   };
 
   return (
@@ -147,35 +147,25 @@ const TourPage = () => {
         onSelectDanhMuc={onSelectDanhMuc}
         onSelectQuanHuyen={onSelectQuanHuyen}
       />
-      <section
-        className="deals"
-        style={{
-          position: "relative",
-        }}
-      >
-        <div
-          className="container"
-          style={{
-            position: "absolute",
-            top: -65,
-            left: 174,
-          }}
-        >
+      <section className="deals position-relative">
+        <div className="container position-absolute">
           <div className="row">
             <div className="col-lg-12">
               <div className="common-title">
                 <div className="deal-icon">
-                  <img src="assets/images/icons/doler.png" alt="doler" />
+                  <img
+                    src="assets/images/icons/doler.png"
+                    alt="doler"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="container deals-slider-wrapper">
-          <div className="deals-slider owl-carousel owl-theme row">
+        <div className="container-fluid padding-common">
+          <div className="row">
             {listDiaDiem.map((it, index) => (
-              <div key={index} className="pl-10 mb-30 pr-10 col-lg-4 col-xs-12">
+              <div key={index} className="pl-10 mb-30 pr-10 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                 <div className="deals-content ">
                   <div className="deals-image custom-image">
                     <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
@@ -193,14 +183,14 @@ const TourPage = () => {
                   <div className="deals-info">
                     <ul>
                       <li>
-                        <i className="fa fa-star pr-5"></i>
+                        <i className="fa fa-star pr-2"></i>
                         {it.soSaoTrungBinh} ({it.luotXem} Lượt xem){" "}
                       </li>
                       <li>
                         <span>
                           {" "}
                           {it.giaVe === Constants.FreePrice ||
-                          Constants.Undefined
+                            Constants.Undefined
                             ? Constants.FreePrice
                             : `Chỉ từ: ${it.giaVe}`}{" "}
                         </span>
@@ -220,11 +210,17 @@ const TourPage = () => {
                 </div>
               </div>
             ))}
+            <PaginationCommon
+              changePage={changePage}
+              onPreviousPage={onPreviousPage}
+              onNextPage={onNextPage}
+              pagination={pagination}
+            />
           </div>
         </div>
-      </section>
+      </section >
       <LoadingFullPage loading={loading} />
-    </MainLayout>
+    </MainLayout >
   );
 };
 

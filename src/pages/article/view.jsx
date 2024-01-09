@@ -36,6 +36,13 @@ const ArticleDetail = () => {
         onGetDetailTinTucAsync().then(_ => { });
         onGetListTinTucAsync().then(_ => { });
     }, []);
+    let arrChiTiet = [];
+    let arrChiTietFirst = [];
+    let arrChiTietLast = [];
+    arrChiTiet = detailArticle.chiTiet?.split("\n");
+    arrChiTietFirst = arrChiTiet?.splice(0, 2)
+    arrChiTietLast = arrChiTiet?.slice(0, 0).concat(arrChiTiet?.slice(2));
+
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
@@ -64,24 +71,55 @@ const ArticleDetail = () => {
                                         <li><i className="fa fa-calendar"></i> <span> {convertDateOnly(detailArticle.ngayDang)}</span></li>
                                     </ul>
                                 </div>
-                                <p className='text-align-justify'>{detailArticle.tieuDeCon} </p>
-                                <p className='text-align-justify'>{detailArticle.moTaNgan} </p>
-                                <p className='text-align-justify'>{detailArticle.chiTiet} </p>
-                                {/* <div className="dd-image-container">
-                                    <div className="blog-details-bottom-image">
-                                        <a href="blog.html"><img src="assets/images/gallery/blog-details-01.png" alt="image" /></a>
-                                    </div>
-                                    <div className="blog-details-bottom-image">
-                                        <a href="blog.html"><img src="assets/images/gallery/blog-details-02.png" alt="image" /></a>
-                                    </div>
-                                </div> */}
 
-                                <div className="blog-details-cms">
+                                <div className="blog-details-cms mb-20">
                                     <div className="quotetion">
                                         <img src="assets/images/icons/quotetion.png" alt="mark" />
                                     </div>
                                     <h4></h4>
-                                    <p className='text-align-justify'>{detailArticle.moTaNgan} </p>
+                                    <p className='text-align-justify'> {detailArticle.tieuDeCon} </p>
+                                    <div className="quotetion-end">
+                                        <img src="assets/images/icons/quotetion.png" alt="mark" />
+                                    </div>
+                                </div>
+
+                                <p className='text-align-justify'> {detailArticle.moTaNgan}</p>
+
+                                <div className="blog-details-image">
+                                    <a href="blog.html"><img src={
+                                        detailArticle.hinhAnh?.indexOf("http") == -1
+                                            ?
+                                            showImageCommon(detailArticle.hinhAnh)
+                                            :
+                                            detailArticle.hinhAnh
+                                    } alt="image" /></a>
+                                </div>
+                                <div className='mt-20'>
+                                    <p className='text-align-justify'> {
+                                        arrChiTietFirst?.map((it, index) => (
+                                            <div key={index}>
+                                                <div>{it}</div>
+                                            </div>
+                                        ))
+                                    } </p>
+                                    <div className="blog-details-image">
+                                        <a href="blog.html"><img src={
+                                            detailArticle.hinhAnh?.indexOf("http") == -1
+                                                ?
+                                                showImageCommon(detailArticle.hinhAnh)
+                                                :
+                                                detailArticle.hinhAnh
+                                        } alt="image" /></a>
+                                    </div>
+                                    <div className='mt-20'>
+                                        <p className='text-align-justify'> {
+                                            arrChiTietLast?.map((it, index) => (
+                                                <div key={index}>
+                                                    <div>{it}</div>
+                                                </div>
+                                            ))
+                                        } </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

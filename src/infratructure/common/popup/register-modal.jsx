@@ -9,6 +9,7 @@ import { validateEmail, validateInputPassword } from '../../utils/validate';
 import { WarningMessage } from '../toast/toastMessage';
 import { validateFields } from '../../utils/helper';
 import useTranslate from '../../../core/common/hook/useTranslate';
+import { MessageError } from '../controls/MessageError';
 
 const RegisterPopup = (props) => {
     const {
@@ -134,6 +135,7 @@ const RegisterPopup = (props) => {
     const onRegister = async () => {
         await setSubmittedTime(Date.now());
         if (isValidData()) {
+            onCancel();
             await api.register({
                 email: email,
                 password: password,
@@ -175,22 +177,34 @@ const RegisterPopup = (props) => {
                     <div className="d-flex flex-column text-center">
                         <form>
                             <div className="form-group">
-                                <input value={email} onChange={onChangeEmail} onBlur={onBlurEmail} type="email" className="form-control" id="email1" placeholder={`${translate("enterEmail")}...`} />
+                                <input value={email} onChange={onChangeEmail} onBlur={() => onBlurEmail(false)} type="email" className="form-control" id="email1" placeholder={`${translate("enterEmail")}...`} />
+                                <MessageError isError={validate.email?.isError || false}
+                                    message={validate.email?.message || ""} />
                             </div>
                             <div className="form-group">
-                                <input value={password} onChange={onChangePassword} onBlur={onBlurPassword} type="password" className="form-control" id="password1" placeholder={`${translate("enterPassword")}...`} />
+                                <input value={password} onChange={onChangePassword} onBlur={() => onBlurPassword(false)} type="password" className="form-control" id="password1" placeholder={`${translate("enterPassword")}...`} />
+                                <MessageError isError={validate.password?.isError || false}
+                                    message={validate.password?.message || ""} />
                             </div>
                             <div className="form-group">
-                                <input value={firstName} onChange={onChangeFirstName} onBlur={onBlurFirstName} type="text" className="form-control" id="firstName1" placeholder={`${translate("enterFirstName")}...`} />
+                                <input value={firstName} onChange={onChangeFirstName} onBlur={() => onBlurFirstName(false)} type="text" className="form-control" id="firstName1" placeholder={`${translate("enterFirstName")}...`} />
+                                <MessageError isError={validate.firstName?.isError || false}
+                                    message={validate.firstName?.message || ""} />
                             </div>
                             <div className="form-group">
-                                <input value={lastName} onChange={onChangeLastName} onBlur={onBlurLastName} type="text" className="form-control" id="lastName1" placeholder={`${translate("enterLastName")}...`} />
+                                <input value={lastName} onChange={onChangeLastName} onBlur={() => onBlurLastName(false)} type="text" className="form-control" id="lastName1" placeholder={`${translate("enterLastName")}...`} />
+                                <MessageError isError={validate.lastName?.isError || false}
+                                    message={validate.lastName?.message || ""} />
                             </div>
                             <div className="form-group">
-                                <input value={phoneNumber} onChange={onChangephoneNumber} onBlur={onBlurPhoneNumber} type="text" className="form-control" id="phoneNumber1" placeholder={`${translate("enterPhoneNumber")}...`} />
+                                <input value={phoneNumber} onChange={onChangephoneNumber} onBlur={() => onBlurPhoneNumber(false)} type="text" className="form-control" id="phoneNumber1" placeholder={`${translate("enterPhoneNumber")}...`} />
+                                <MessageError isError={validate.phoneNumber?.isError || false}
+                                    message={validate.phoneNumber?.message || ""} />
                             </div>
                             <div className="form-group">
-                                <input value={address} onChange={onChangeAddress} onBlur={onBlurAddress} type="text" className="form-control" id="address1" placeholder={`${translate("enterAddress")}...`} />
+                                <input value={address} onChange={onChangeAddress} onBlur={() => onBlurAddress(false)} type="text" className="form-control" id="address1" placeholder={`${translate("enterAddress")}...`} />
+                                <MessageError isError={validate.address?.isError || false}
+                                    message={validate.address?.message || ""} />
                             </div>
                             <button onClick={onRegister} type="button" className="btn btn-info btn-block btn-round">{`${translate("register")}`}</button>
                         </form>

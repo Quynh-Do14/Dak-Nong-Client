@@ -84,11 +84,11 @@ const FestivalPage = () => {
                 endDate={endDate}
                 onChangeEndDate={onChangeEndDate}
             />
-            <div className="tour-package">
-                <div className="container">
+            <section className="deals position-relative">
+                <div className="container container-fluid padding-common">
                     <div className="row">
                         {listLeHoi.map((it, index) => (
-                            <div key={index} className="col-lg-4 col-md-6">
+                            <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-xs-12">
                                 <div className="tour-package-container">
                                     <div className="activities-image">
                                         <a href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}><img src={
@@ -126,7 +126,7 @@ const FestivalPage = () => {
                         />
                     </div>
                 </div>
-            </div>
+            </section>
             <LoadingFullPage loading={loading} />
         </MainLayout>
     )

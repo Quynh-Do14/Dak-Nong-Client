@@ -58,8 +58,8 @@ const SpecialtyPage = () => {
     };
 
     const onChangeQH = (e) => {
-        setQH(e.target.value);
-        onSearch(searchText, pageSize, changePage, e.target.value).then((_) => { });
+        setQH(e);
+        onSearch(searchText, pageSize, changePage, e).then((_) => { });
     }
 
     const onPreviousPage = () => {
@@ -86,11 +86,11 @@ const SpecialtyPage = () => {
                 onChangeSearchText={onChangeSearchText}
                 searchText={searchText}
             />
-            <div className="tour-package">
-                <div className="container">
+            <section className="deals position-relative">
+                <div className="container-fluid padding-common">
                     <div className="row">
                         {listDacSan.map((it, index) => (
-                            <div key={index} className="col-lg-4 col-md-6">
+                            <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-xs-12">
                                 <div className="tour-package-container">
                                     <div className="activities-image">
                                         <a href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}><img src={
@@ -128,7 +128,7 @@ const SpecialtyPage = () => {
                         />
                     </div>
                 </div>
-            </div>
+            </section>
             <LoadingFullPage loading={loading} />
         </MainLayout>
     )

@@ -75,7 +75,7 @@ const TourDetail = () => {
                                                     </div>
                                                 </div>
                                                 :
-                                                tabSelect === 1
+                                                tabSelect === 1 && detailTour.uriVideo
                                                     ?
                                                     <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                                         <div className="pkg-nav-contant">
@@ -88,7 +88,17 @@ const TourDetail = () => {
                                                         </div>
                                                     </div>
                                                     :
-                                                    null
+                                                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                                        <div className="pkg-nav-contant">
+                                                            <img src={
+                                                                detailTour.hinhAnh?.indexOf("http") == -1
+                                                                    ?
+                                                                    showImageCommon(detailTour.hinhAnh)
+                                                                    :
+                                                                    detailTour.hinhAnh
+                                                            } alt="img" className='' />
+                                                        </div>
+                                                    </div>
                                         }
 
 

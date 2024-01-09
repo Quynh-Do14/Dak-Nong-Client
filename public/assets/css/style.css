@@ -697,7 +697,7 @@ header.main-header.style-three .sticky-header .logo-box .logo img {
 .mobile-menu .navigation li {
   position: relative;
   display: block;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .mobile-menu .navigation:last-child {
@@ -1392,17 +1392,13 @@ a.hv-popup-link .svg-inline--fa {
   padding: 40px 60px;
   display: flex;
   justify-content: space-between;
-  position: absolute;
-  left: 200px;
-  right: 200px;
-  top: 441px;
 }
 
 .service-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  /* width: 100%; */
   position: relative;
 }
 
@@ -1417,13 +1413,29 @@ a.hv-popup-link .svg-inline--fa {
   transform: translateY(-50%);
 }
 
+.service-container-2 {
+  background: #ffffff;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 83.5px;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .service-last-child::after {
   display: none;
+}
+
+.service-content-2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .service-icon {
   color: #fe7524;
   font-size: 26px;
+  width: 26px;
 }
 
 .service-form {
@@ -1431,6 +1443,8 @@ a.hv-popup-link .svg-inline--fa {
 }
 
 .service-form-option {
+  display: flex !important;
+  flex-direction: column;
   position: relative;
   z-index: 1;
   display: block;
@@ -1610,8 +1624,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .deals .common-title .deal-icon {
   position: absolute;
-  top: 0;
-  left: 450px;
+  top: -140px;
+  left: 560px;
 }
 
 .deals-slider-wrapper {
@@ -1649,7 +1663,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .deals-info ul li span {
   display: inline-block;
   color: #fe7524;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -2689,8 +2703,8 @@ Home-Page-Two-Starts
 
 .popular-ture-content {
   position: relative;
-  width: 262px;
-  height: 262px;
+  width: 310px;
+  height: 310px;
   border-radius: 20px;
   overflow: hidden;
 }
@@ -3586,10 +3600,9 @@ Destination page
   height: 500px;
   max-width: 1740px;
   margin: 0 auto;
-  padding: 0 12px;
+  padding: 20px 12px;
   border-radius: 20px;
-  margin-top: 102px;
-  padding-top: 24px;
+  margin-top: 120px;
 }
 
 .common-banner-image {
@@ -3967,7 +3980,7 @@ Destination page
 }
 
 .destination-right-title h4 {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   font-weight: 700;
   font-size: 28px;
   line-height: 38px;
@@ -3988,7 +4001,7 @@ Destination page
 }
 
 .destination-right-list-info {
-  margin-top: 10px;
+  margin-left: 20px;
 }
 
 .destination-right-list-info a {
@@ -4502,8 +4515,8 @@ blog + blog details
 .blog-details-cms {
   text-align: center;
   position: relative;
-  padding: 76px 41px;
-  background: #e9f6f6;
+  padding: 50px 20px;
+  background: #d5dbff;
   border-radius: 30px;
 }
 
@@ -4525,8 +4538,16 @@ blog + blog details
   width: 53px;
   height: 46px;
   position: absolute;
-  right: 80px;
-  top: 65px;
+  left: 20px;
+  top: 16px;
+}
+
+.quotetion-end {
+  width: 53px;
+  height: 46px;
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
 }
 
 .blog-details-network {
@@ -4816,6 +4837,16 @@ img.img-page-detail {
   height: 6vh;
 }
 
+.text-truncate-title-relation {
+  white-space: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  height: 7vh;
+}
+
 .text-truncate-origin {
   white-space: initial;
   overflow: hidden;
@@ -4850,12 +4881,24 @@ img.img-page-detail {
   position: relative;
 }
 
+.position-absolute {
+  position: absolute;
+}
+
 .bg-white {
   background: #fff !important;
 }
 
 .bg-grey {
   background: #fbfbfb !important;
+}
+
+.bg-orange-opacity {
+  background: rgb(254 117 36 / 10%) !important;
+}
+
+.bg-orange-opacity-2 {
+  background-image: repeating-linear-gradient(rgb(254 117 36 / 30%), rgb(254 117 36 / 5%)) !important;
 }
 
 .position-fixed {
@@ -4929,3 +4972,20 @@ span.anticon.anticon-close.ant-modal-close-icon {
 }
 
 /* layout */
+
+/* icon */
+/* icon */
+
+.absolute-icon-page {
+  position: absolute;
+  top: -100px !important;
+  left: 100px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.padding-common {
+  padding: 0 50px !important;
+}

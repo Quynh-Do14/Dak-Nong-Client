@@ -112,7 +112,9 @@ export const translations = {
     travelDiscover: "Travel discover",
     ecoTourism: "Ecotourism",
     commerceCuisine: "Commerce-Cuisine",
-    travelEntertain: "Travel Entertain",
+    leisureTravel: "Leisure Travel",
+    structures: "Structures",
+    spiritualTourism: "Spiritual Tourism",
     ////
   },
   vi: {
@@ -221,7 +223,9 @@ export const translations = {
     travelDiscover: "Du lịch khám phá",
     ecoTourism: "Du lịch sinh thái",
     commerceCuisine: "Thương mại - ẩm thực",
-    travelEntertain: "Du lịch giải trí",
+    leisureTravel: "Du lịch giải trí",
+    structures: "Công trình-Kiến trúc",
+    spiritualTourism: "Du lịch tâm linh",
     ////
   },
   // Thêm các ngôn ngữ khác nếu cần

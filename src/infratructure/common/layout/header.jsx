@@ -13,7 +13,6 @@ import { LanguageState } from "../../../core/common/atoms/language/languageState
 import useTranslate from "../../../core/common/hook/useTranslate";
 
 const HeaderPage = () => {
-  const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
   const [isOpenPopupLogin, setIsOpenPopupLogin] = useState(false);
   const [isOpenModalRegister, setIsOpenModalRegister] = useState(false);
   const [isOpenModalLogout, setIsOpenModalLogout] = useState(false);
@@ -23,6 +22,11 @@ const HeaderPage = () => {
 
   const [isOpenShowDrawer, setIsOpenShowDrawer] = useState(false);
   const [swicthLanguage, setSwicthLanguage] = useState(
+    sessionStorage.getItem("language") == "en"
+      ? true
+      : false
+  );
+  const [selectLanguage, setSelectLanguage] = useState(
     sessionStorage.getItem("language")
       ? sessionStorage.getItem("language")
       : "vi"
@@ -32,14 +36,6 @@ const HeaderPage = () => {
   const location = useLocation();
   let pathname = location.pathname;
   const { translate } = useTranslate();
-
-  const onOpenMobileMenu = () => {
-    setIsOpenMobileMenu(true);
-  };
-
-  const onCloseMobileMenu = () => {
-    setIsOpenMobileMenu(false);
-  };
 
   const onOpenPopupLogin = () => {
     setIsOpenPopupLogin(true);
@@ -75,43 +71,39 @@ const HeaderPage = () => {
     setIsOpenModalRegister(false);
   };
   // Ngôn ngữ
-  // const onChangeLanguage = (value) => {
-  //     setSwicthLanguage(value)
-  //     if (value == true) {
-  //         setDataLanguage("en");
-  //         sessionStorage.setItem("language", "en");
-  //     }
-  //     if (value == false) {
-  //         setDataLanguage("vi");
-  //         sessionStorage.setItem("language", "vi");
-  //     }
-  //     setLoading(true);
-  //     setTimeout(() => setLoading(false), 2000)
 
   const onChangeLanguage = (value) => {
-    setSwicthLanguage(value);
-    // if (value == true) {
-    //     setDataLanguage("en");
-    //     sessionStorage.setItem("language", "en");
-    // }
-    // if (value == false) {
-    //     setDataLanguage("vi");
-    //     sessionStorage.setItem("language", "vi");
-    // }
+    setSelectLanguage(value);
     setDataLanguage(value);
 
     if (value == "en") {
       sessionStorage.setItem("language", "en");
+      setSwicthLanguage(true);
     }
     if (value == "vi") {
       sessionStorage.setItem("language", "vi");
+      setSwicthLanguage(false);
     }
 
     setLoading(true);
     setTimeout(() => setLoading(false), 1000);
   };
 
+  const onSwitchLanguage = (value) => {
+    setSwicthLanguage(value);
+    if (value == true) {
+      setSelectLanguage("en");
+      sessionStorage.setItem("language", "en");
+    }
+    if (value == false) {
+      setSelectLanguage("vi");
+      sessionStorage.setItem("language", "vi");
+    }
+    setLoading(true);
+    setTimeout(() => setLoading(false), 1000);
+  }
   // Ngôn ngữ
+
   useEffect(() => {
     if (sessionStorage.getItem("language") == "en") {
       setIsEnglish(true);
@@ -149,7 +141,7 @@ const HeaderPage = () => {
                 <li className="menu-drop-item dropdown d-flex">
                   <a>{translate("english")} </a>{" "}
                   <Switch
-                    value={swicthLanguage}
+                    value={selectLanguage}
                     checked={isEnglish}
                     onChange={onChangeLanguage}
                   />
@@ -230,9 +222,8 @@ const HeaderPage = () => {
                           <li key={index} className="dropdown">
                             <a
                               href={it.link}
-                              className={`${
-                                pathname == it.link ? "active" : ""
-                              }`}
+                              className={`${pathname == it.link ? "active" : ""
+                                }`}
                             >
                               {translate(it.label)}
                             </a>
@@ -257,10 +248,11 @@ const HeaderPage = () => {
                 <div className="menu-area dropdown-action">
                   <div className="header-right-option">
                     <Select
-                      value={swicthLanguage}
+                      value={selectLanguage}
                       style={{ width: "100%", height: "100%" }}
                       defaultValue="Tiếng Việt"
                       onChange={onChangeLanguage}
+                      getPopupContainer={(trigger) => trigger.parentNode}
                     >
                       <Select.Option value="vi">VIE </Select.Option>
                       <Select.Option value="en">ENG </Select.Option>
@@ -347,7 +339,7 @@ const HeaderPage = () => {
                         className="ml-10"
                         value={swicthLanguage}
                         defaultChecked
-                        onChange={onChangeLanguage}
+                        onChange={onSwitchLanguage}
                       />
                     </a>
                   </li>
@@ -365,7 +357,7 @@ const HeaderPage = () => {
                   ) : (
                     <li
                       onClick={onOpenPopupLogin}
-                      className="menu-drop-item dropdown"
+                      className="menu-drop-item dropdown pointer"
                     >
                       {" "}
                       <a>
