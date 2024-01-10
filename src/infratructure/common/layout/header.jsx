@@ -52,7 +52,7 @@ const HeaderPage = () => {
     onCloseModalLogout();
     navigate(ROUTE_PATH.HOME_PAGE);
     setTimeout(() => setLoading(false), 2000);
-    SuccessMessage("Đăng  xuất thành công", "Bạn đã đăng xuất khỏi hệ thống");
+    SuccessMessage(translate("logOutSuccess"), translate("logOutMessage"));
   };
 
   const onOpenModalLogout = () => {

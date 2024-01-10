@@ -20,7 +20,7 @@ const SlideBanner = () => {
 
 
     return (
-        <section className="banner bg-white">
+        <section className="banner bg-orange-opacity">
             <div className="banner-icon1">
                 <img src="assets/images/icons/banner-icon-01.png" alt="icon" />
             </div>

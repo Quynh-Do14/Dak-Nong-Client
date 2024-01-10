@@ -115,6 +115,8 @@ export const translations = {
     leisureTravel: "Leisure Travel",
     structures: "Structures",
     spiritualTourism: "Spiritual Tourism",
+    logOutSuccess: "Signed Out Successfully",
+    logOutMessage: "You have logged out of the system",
     ////
   },
   vi: {
@@ -226,6 +228,8 @@ export const translations = {
     leisureTravel: "Du lịch giải trí",
     structures: "Công trình-Kiến trúc",
     spiritualTourism: "Du lịch tâm linh",
+    logOutSuccess: "Đăng xuất thành công",
+    logOutMessage: "Bạn đã đăng xuất khỏi hệ thống",
     ////
   },
   // Thêm các ngôn ngữ khác nếu cần
