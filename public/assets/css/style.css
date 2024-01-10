@@ -1186,10 +1186,10 @@ div#offcanvasTop {
 
 .banner-vedio-image-2 {
   position: relative;
-  left: -30px;
+  left: -28px;
   top: -20px;
-  width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
   border-radius: 30px;
 }
 
@@ -2626,8 +2626,8 @@ Home-Page-Two-Starts
 }
 
 .add-spring {
-  width: 186px;
-  height: 130px;
+  width: 100px;
+  height: auto;
   position: absolute;
   top: 140px;
   right: 50px;
@@ -3413,8 +3413,7 @@ Home-Page-Three-Starts
 
 /* home three category */
 .home3-category {
-  padding-top: 40px;
-  padding-bottom: 140px;
+  padding: 100px 0;
   position: relative;
 }
 
@@ -3425,8 +3424,8 @@ Home-Page-Three-Starts
 }
 
 .home3-category .add-spring {
-  right: 50px;
-  top: 50%;
+  right: 200px;
+  top: 70%;
 }
 
 /* home three category */
