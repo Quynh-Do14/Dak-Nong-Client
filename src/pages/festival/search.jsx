@@ -38,7 +38,7 @@ const SearchFestival = (props) => {
                         <div className="service-form col-10">
                             <form className="service-form-option">
                                 <label className="common-label">{translate("startDate")}</label><br />
-                                <DatePicker onChange={onChangeStartDate} value={startDate} type="date" placeholder="" required />
+                                <DatePicker onChange={onChangeStartDate} value={startDate} type="date" placeholder={translate("startDate")} required />
                             </form>
                         </div>
                     </div>
@@ -50,7 +50,7 @@ const SearchFestival = (props) => {
                         <div className="service-form col-10">
                             <form className="service-form-option">
                                 <label className="common-label">{translate("endDate")}</label><br />
-                                <DatePicker value={endDate} onChange={onChangeEndDate} type='date' />
+                                <DatePicker value={endDate} onChange={onChangeEndDate} placeholder={translate("endDate")} type='date' />
                             </form>
                         </div>
                     </div>

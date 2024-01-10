@@ -12,7 +12,7 @@ const SearchArticle = (props) => {
     const { translate } = useTranslate();
     return (
         <div className='container d-flex justify-content-center relative-search'>
-            <div className="col-lg-10">
+            <div className="col-xl-12 col-lg-10">
                 <div className="service-container-2 row">
                     <div className="service-content-2 col-lg-6 col-md-12">
                         <div className="service-icon">

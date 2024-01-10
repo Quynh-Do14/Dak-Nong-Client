@@ -13,6 +13,7 @@ import LoadingFullPage from "../../infratructure/common/controls/loading";
 import { ROUTE_PATH } from "../../core/common/appRouter";
 import sail from "../../asset/img/shape/sail.png";
 import useTranslate from "../../core/common/hook/useTranslate";
+import ViewVideoModal from "../../infratructure/common/popup/view-video-modal";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(false);
@@ -24,6 +25,9 @@ const HomePage = () => {
   const [listDiaDiemTop4TuTop2, setListDiaDiemTop4TuTop2] = useState([]);
   const [listDacSan, setListDacSan] = useState([]);
   const [listLeHoi, setListLeHoi] = useState([]);
+
+  const [isOpenModalVideo, setIsOpenModalVideo] = useState(false);
+  const [sourceVideo, setSourceVideo] = useState("");
 
   const { translate } = useTranslate();
 
@@ -99,7 +103,15 @@ const HomePage = () => {
     setLoading1(true);
     setTimeout(() => setLoading1(false), 1000);
   }, []);
-  let newArr = listDiaDiemTop2.filter((it, index) => index !== 0);
+
+  const onOpenModalVideo = (it) => {
+    setIsOpenModalVideo(true);
+    setSourceVideo(it?.link);
+  };
+  const onCloseModalVideo = () => {
+    setIsOpenModalVideo(false);
+    setSourceVideo("");
+  };
   return (
     <MainLayout>
       <SlideBanner />
@@ -136,14 +148,14 @@ const HomePage = () => {
                         <div className="banner-vedio-image-2">
                           <img src={it.img} alt="" className="border-radius-ellipse" />
                           <div className="missiom-video-btn">
-                            <a href={it.link} target="_blank" className="hv-popup-link"><i className="fas fa-play"></i></a>
+                            <a onClick={() => onOpenModalVideo(it)} className="hv-popup-link"><i className="fas fa-play"></i></a>
                           </div>
                         </div>
                       </div>
                     </div>
                     <h5>{translate(it.name)} </h5>
                     {/* <span>30 Địa Điểm</span> */}
-                    <a href={it.link} target="_blank" className="category-btn">
+                    <a onClick={() => onOpenModalVideo(it)} className="category-btn">
                       <i className="fa fa-angle-right"></i>
                     </a>
                   </div>
@@ -155,7 +167,7 @@ const HomePage = () => {
       </section>
       {/* //////////////// */}
       {/* //////////////// */}
-      <section
+      {/* <section
         className="popular-ture home3-popular-ture"
         style={{
           backgroundColor: "#eeeeee",
@@ -199,7 +211,7 @@ const HomePage = () => {
                   data-wow-duration="1500ms"
                 >
                   <div className="popular-ture-image ">
-                    <img src={it.img} alt="image" className="object-fit"/>
+                    <img src={it.img} alt="image" className="object-fit" />
                   </div>
                   <div className="popular-ture-overlay">
                     <div className="popular-ture-text">
@@ -213,6 +225,49 @@ const HomePage = () => {
                       </h6>
                     </div>
                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section> */}
+      <section
+        className="popular-ture home3-popular-ture"
+        style={{
+          backgroundColor: "#eeeeee",
+          paddingTop: 0,
+        }}
+      >
+        <div
+          className="home-two-pattern-layer"
+          style={{
+            backgroundImage: "url(assets/images/shape/destination-map.png)",
+          }}
+        ></div>
+        <div className="container-fluid padding-common">
+          <div className="row">
+            <div
+              style={{
+                height: 48,
+              }}
+            ></div>
+            <div className="col-lg-12">
+              <div className="align-title">
+                <h3>{translate("exploreTravel")}</h3>
+              </div>
+            </div>
+            {Constants.DataHomePage.list.map((it, index) => (
+              <div key={index} className="col-xl-3 col-lg-3 col-md-6 mb-20">
+                <div className="choose-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1000ms">
+                  <div className="">
+                    <img src={it.img} alt="icon" />
+                  </div>
+                  <div className="choose-bottom-icon">
+                    <img src={it.iconBot} alt="icon" />
+                  </div>
+                  <span>{translate(it.name)} </span>
+                  <a href={it.link}>{translate(it.name)}</a>
+                  <p>{translate(it.description)}</p>
                 </div>
               </div>
             ))}
@@ -436,7 +491,12 @@ const HomePage = () => {
         </div>
       </section >
       {/* //////////////// */}
-      < LoadingFullPage loading={loading1} />
+      <LoadingFullPage loading={loading1} />
+      <ViewVideoModal
+        source={sourceVideo}
+        visible={isOpenModalVideo}
+        onCancel={onCloseModalVideo}
+      />
     </MainLayout >
   );
 };

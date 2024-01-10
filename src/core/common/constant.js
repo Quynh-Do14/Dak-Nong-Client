@@ -254,24 +254,28 @@ export default class Constants {
         img: homePageImg1,
         link: ROUTE_PATH.TOUR,
         description: "destinationDes",
+        iconBot: "assets/images/icons/choose-bottom-01.png",
       },
       {
         name: "todayArticle",
         img: homePageImg2,
         link: ROUTE_PATH.ARTICLE,
         description: "todayArticleDes",
+        iconBot: "assets/images/icons/choose-bottom-02.png",
       },
       {
         name: "exploreCuisine",
         img: homePageImg3,
         link: ROUTE_PATH.SPECIALTY,
         description: "exploreCuisineDes",
+        iconBot: "assets/images/icons/choose-bottom-03.png",
       },
       {
         name: "traditionalFestival",
         img: homePageImg4,
         link: ROUTE_PATH.FESTIVAL,
         description: "traditionalFestivalDes",
+        iconBot: "assets/images/icons/choose-bottom-04.png",
       },
     ];
   };
@@ -298,37 +302,37 @@ export default class Constants {
       {
         name: "travelDiscover",
         icon: "assets/images/icons/c-1.png",
-        link: "https://www.youtube.com/watch?v=AITILCLleGA",
+        link: "https://www.youtube.com/embed/AITILCLleGA?si=srWvnIBNZCYiAcfG&amp;start=1",
         img: slide2
       },
       {
         name: "ecoTourism",
         icon: "assets/images/icons/c-2.png",
-        link: "https://www.youtube.com/watch?v=IFQWmS5Cl2w&t=1s",
+        link: "https://www.youtube.com/embed/IFQWmS5Cl2w?si=R78pi-K8i9AmhStJ",
         img: slide1
       },
       {
         name: "commerceCuisine",
         icon: "assets/images/icons/c-3.png",
-        link: "https://www.youtube.com/watch?v=rrFAN_cIZ4g",
+        link: "https://www.youtube.com/embed/rrFAN_cIZ4g?si=xB9nef5JpYC4ctmD",
         img: amThuc
       },
       {
         name: "leisureTravel",
         icon: "assets/images/icons/c-4.png",
-        link: "https://www.youtube.com/watch?v=02R0TPZv3fY",
+        link: "https://www.youtube.com/embed/rrFAN_cIZ4g?si=MNFRnOHdyY_QyeAX",
         img: giaiTri
       },
       {
         name: "structures",
         icon: "assets/images/icons/c-5.png",
-        link: "https://www.youtube.com/watch?v=RcYERGLymdY",
+        link: "https://www.youtube.com/embed/RcYERGLymdY?si=vYHeffN12fiWVT9s",
         img: kienTruc
       },
       {
         name: "spiritualTourism",
         icon: "assets/images/icons/c-6.png",
-        link: "https://www.youtube.com/watch?v=Ji4SJHSyXU4",
+        link: "https://www.youtube.com/embed/Ji4SJHSyXU4?si=HEDTlfp3mxD3xAky",
         img: tamLinh
       },
     ]

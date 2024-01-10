@@ -751,9 +751,17 @@
 
   @media only screen and (max-width: 1215px) {}
 
-  @media only screen and (min-width: 1200px) {}
+  @media only screen and (min-width: 1200px) {
+    .service-form-option label {
+      margin-bottom: -10px;
+    }
+  }
 
   @media only screen and (max-width: 1200px) {
+    .service-form-option label {
+      margin-bottom: 0;
+    }
+
     .main-menu {
       display: none !important;
     }
@@ -1638,6 +1646,10 @@
 
 
   @media only screen and (min-width: 768px) {
+    .view-video {
+      width: 800px;
+      height: 500px;
+    }
 
     .main-menu .navigation>li>ul,
     .main-menu .navigation>li>ul>li>ul,
@@ -1658,6 +1670,10 @@
 
 
   @media only screen and (max-width: 768px) {
+    .view-video {
+      width: 560px;
+      height: 315px;
+    }
 
     /* header */
     .header_top_left {

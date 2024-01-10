@@ -1430,7 +1430,7 @@ a.hv-popup-link .svg-inline--fa {
   background: #ffffff;
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.05);
   border-radius: 83.5px;
-  padding: 40px 20px;
+  padding: 20px 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -1591,6 +1591,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 18px;
   color: #094174;
   margin: 5px 0;
+  white-space: nowrap;
 }
 
 .category-btn {
@@ -3451,7 +3452,7 @@ Home-Page-Three-Starts
 
 .choose-content {
   position: relative;
-  padding: 140px 34px 60px 34px;
+  padding: 20px 34px 60px 34px;
   width: 100%;
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(141, 139, 139, 0.1);

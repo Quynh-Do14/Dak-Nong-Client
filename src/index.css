@@ -23,13 +23,26 @@ code {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 3px solid #a8a4a4;
+  border-top: none;
+  border-left: none;
+  border-right: none;
   border-radius: 0.25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 .service-form-option .ant-select.css-dev-only-do-not-override-2rgkd4.ant-select-single.ant-select-show-arrow {
   height: 40px;
+  border: 3px solid #a8a4a4;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.service-form-option .ant-select-selector {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
 }
 
 .message-error {
