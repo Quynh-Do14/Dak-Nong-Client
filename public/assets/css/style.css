@@ -1184,6 +1184,19 @@ div#offcanvasTop {
   border-radius: 30px;
 }
 
+.banner-vedio-image-2 {
+  position: relative;
+  left: -30px;
+  top: -20px;
+  width: 130px;
+  height: 130px;
+  border-radius: 30px;
+}
+
+.border-radius-ellipse {
+  border-radius: 50%;
+}
+
 /* banner video button */
 .missiom-video-btn {
   position: absolute;
@@ -4814,6 +4827,10 @@ img.img-page {
 img.img-page-detail {
   max-height: 100px !important;
   min-width: 160px !important;
+  object-fit: cover;
+}
+
+.object-fit {
   object-fit: cover;
 }
 

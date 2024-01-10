@@ -5,6 +5,16 @@ import homePageImg3 from "../../asset/img/extra/home3.jpg";
 import homePageImg4 from "../../asset/img/extra/home4.jpg";
 import useTranslate from "./hook/useTranslate";
 
+import slide1 from "../../asset/img/extra/slide-banner.jpg";
+import slide2 from "../../asset/img/extra/slide-banner2.jpg";
+import amThuc from "../../asset/img/extra/am-thuc.jpg";
+import kienTruc from "../../asset/img/extra/kien-truc.jpg";
+import giaiTri from "../../asset/img/extra/giai-tri.jpg";
+import tp from "../../asset/img/extra/tpGiaNghia.jpg";
+import tamLinh from "../../asset/img/extra/du-lich-tam-linh.jpg";
+
+
+
 export default class Constants {
   static Menu = class {
     static List = [
@@ -288,26 +298,38 @@ export default class Constants {
       {
         name: "travelDiscover",
         icon: "assets/images/icons/c-1.png",
+        link: "https://www.youtube.com/watch?v=AITILCLleGA",
+        img: slide2
       },
       {
         name: "ecoTourism",
         icon: "assets/images/icons/c-2.png",
+        link: "https://www.youtube.com/watch?v=IFQWmS5Cl2w&t=1s",
+        img: slide1
       },
       {
         name: "commerceCuisine",
         icon: "assets/images/icons/c-3.png",
+        link: "https://www.youtube.com/watch?v=rrFAN_cIZ4g",
+        img: amThuc
       },
       {
         name: "leisureTravel",
         icon: "assets/images/icons/c-4.png",
+        link: "https://www.youtube.com/watch?v=02R0TPZv3fY",
+        img: giaiTri
       },
       {
         name: "structures",
         icon: "assets/images/icons/c-5.png",
+        link: "https://www.youtube.com/watch?v=RcYERGLymdY",
+        img: kienTruc
       },
       {
         name: "spiritualTourism",
         icon: "assets/images/icons/c-6.png",
+        link: "https://www.youtube.com/watch?v=Ji4SJHSyXU4",
+        img: tamLinh
       },
     ]
   }

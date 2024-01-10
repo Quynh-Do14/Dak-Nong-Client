@@ -13,6 +13,7 @@ import LoadingFullPage from "../../infratructure/common/controls/loading";
 import { ROUTE_PATH } from "../../core/common/appRouter";
 import sail from "../../asset/img/shape/sail.png";
 import useTranslate from "../../core/common/hook/useTranslate";
+
 const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
@@ -131,12 +132,18 @@ const HomePage = () => {
                   <div className="category-content-inner">
                     <div className="category-image-container">
                       <div className="category-image">
-                        <img src={it.icon} alt="icon" />
+                        {/* <img src={it.icon} alt="icon" /> */}
+                        <div className="banner-vedio-image-2">
+                          <img src={it.img} alt="" className="border-radius-ellipse" />
+                          <div className="missiom-video-btn">
+                            <a href={it.link} target="_blank" className="hv-popup-link"><i className="fas fa-play"></i></a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <h5>{translate(it.name)} </h5>
                     {/* <span>30 Địa Điểm</span> */}
-                    <a href="https://www.youtube.com/watch?v=AITILCLleGA" target="_blank" className="category-btn">
+                    <a href={it.link} target="_blank" className="category-btn">
                       <i className="fa fa-angle-right"></i>
                     </a>
                   </div>
@@ -192,7 +199,7 @@ const HomePage = () => {
                   data-wow-duration="1500ms"
                 >
                   <div className="popular-ture-image ">
-                    <img src={it.img} alt="image" />
+                    <img src={it.img} alt="image" className="object-fit"/>
                   </div>
                   <div className="popular-ture-overlay">
                     <div className="popular-ture-text">
