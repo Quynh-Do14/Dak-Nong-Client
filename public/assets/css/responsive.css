@@ -1646,10 +1646,6 @@
 
 
   @media only screen and (min-width: 768px) {
-    .view-video {
-      width: 800px;
-      height: 500px;
-    }
 
     .main-menu .navigation>li>ul,
     .main-menu .navigation>li>ul>li>ul,
@@ -1670,10 +1666,6 @@
 
 
   @media only screen and (max-width: 768px) {
-    .view-video {
-      width: 560px;
-      height: 315px;
-    }
 
     /* header */
     .header_top_left {

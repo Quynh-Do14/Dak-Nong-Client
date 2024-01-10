@@ -12,15 +12,18 @@ const ViewVideoModal = (props) => {
             visible={visible}
             centered
             footer={false}
-            onCancel={onCancel}
-            className='bg-white'
-            width={800}
+            // onCancel={onCancel}
+            className='bg-white '
+            width={"65%"}
+            style={{
+                height: "70%",
+            }}
         // maskClosable={false}
         >
+            <div onClick={onCancel} className="modal-video-close">x</div>
             <div className='d-flex justify-content-center align-items-center'>
                 <iframe className='view-video' src={source} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-
         </Modal >
     )
 }

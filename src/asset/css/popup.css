@@ -271,12 +271,12 @@ code {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
-  color: #000;
+  color: #FE7524;
   text-shadow: 0 1px 0 #fff;
   opacity: .5;
   background: #fff;
-  position: relative;
-  left: 268px;
+  position: absolute;
+  right: 20px;
 }
 
 .form-title {
@@ -288,7 +288,7 @@ code {
   font-family: inherit;
   font-weight: 500;
   line-height: 1.2;
-  color: inherit;
+  color: #FE7524;
   font-size: 24px;
 }
 
@@ -303,8 +303,8 @@ code {
 
 .btn-info {
   color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: #FE7524;
+  border-color: #FE7524;
 }
 
 .delimiter {

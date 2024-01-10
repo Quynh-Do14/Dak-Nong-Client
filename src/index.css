@@ -50,3 +50,11 @@ code {
   text-align: left;
   color: rgb(246, 26, 26);
 }
+
+.ant-modal-mask {
+  background-color: rgb(0 0 0 / 80%) !important;
+}
+
+.ant-modal-content {
+  padding: 0 !important;
+}
