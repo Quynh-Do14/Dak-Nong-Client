@@ -136,7 +136,7 @@ const HomePage = () => {
                     </div>
                     <h5>{translate(it.name)} </h5>
                     {/* <span>30 Địa Điểm</span> */}
-                    <a href="" className="category-btn">
+                    <a href="https://www.youtube.com/watch?v=AITILCLleGA" target="_blank" className="category-btn">
                       <i className="fa fa-angle-right"></i>
                     </a>
                   </div>
