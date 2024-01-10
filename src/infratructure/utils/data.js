@@ -170,7 +170,7 @@ export const translations = {
     info: "Thông tin",
     gallery: "Video",
     policy: "Điều khoản",
-    type: "Loại Tour",
+    type: "Loại hình du lịch",
     price: "Giá vé",
     openTime: "Giờ mở cửa",
     view: "Lượt xem",

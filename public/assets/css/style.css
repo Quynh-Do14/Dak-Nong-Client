@@ -3413,7 +3413,7 @@ Home-Page-Three-Starts
 
 /* home three category */
 .home3-category {
-  padding-top: 0;
+  padding-top: 40px;
   padding-bottom: 140px;
   position: relative;
 }
