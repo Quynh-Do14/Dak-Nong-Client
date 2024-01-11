@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useTranslate from '../../core/common/hook/useTranslate';
 import { DatePicker, Input } from 'antd';
+import InputSearch from '../../infratructure/common/input/input-search';
+import InputDate from '../../infratructure/common/input/input-date';
 
 const SearchArticle = (props) => {
     const {
@@ -10,6 +12,15 @@ const SearchArticle = (props) => {
         onChangePostDate,
     } = props
     const { translate } = useTranslate();
+    const [isFocused, setIsFocused] = useState(false);
+
+    const handleFocus = () => {
+        setIsFocused(true);
+    };
+
+    const handleBlur = () => {
+        setIsFocused(false);
+    };
     return (
         <div className='container d-flex justify-content-center relative-search'>
             <div className="col-xl-12 col-lg-10">
@@ -22,10 +33,15 @@ const SearchArticle = (props) => {
                             </svg>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label>{translate("nameArtical")} </label><br />
-                                <Input value={searchText} onChange={onChangeSearchText} placeholder={translate("enterName")} />
-                            </form>
+                            {/* <form className={`service-form-option input-container ${isFocused ? 'focused' : ''}`}>
+                                <label className='label-custom'>{translate("nameArtical")} </label>
+                                <Input onFocus={handleFocus} onBlur={handleBlur} value={searchText} onChange={onChangeSearchText} />
+                            </form> */}
+                            <InputSearch
+                                label={"nameArtical"}
+                                value={searchText}
+                                onChange={onChangeSearchText}
+                            />
                         </div>
                     </div>
 
@@ -34,25 +50,13 @@ const SearchArticle = (props) => {
                             <i className="fa fa-calendar ml-10"></i>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label>{translate("nameArtical")} </label><br />
-                                <DatePicker value={postDate} onChange={onChangePostDate} placeholder={translate("postingDate")} />
-                            </form>
+                            <InputDate
+                                label={"postingDate"}
+                                value={postDate}
+                                onChange={onChangePostDate}
+                            />
                         </div>
                     </div>
-
-                    {/* <div className="service-content">
-
-                        <div className="service-form">
-                            <form className="service-form-option">
-                                <label className="common-label">{translate("postingDate")}<i className="fa fa-calendar ml-10"></i></label><br />
-                                <input type="date" placeholder="" required />
-                            </form>
-                        </div>
-                    </div> */}
-                    {/* <div className="service-button">
-                        <a><i className="fa fa-angle-right"></i></a>
-                    </div> */}
                 </div>
             </div>
         </div>

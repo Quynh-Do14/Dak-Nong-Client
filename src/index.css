@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
+/* input */
 .service-form-option input.ant-input.css-dev-only-do-not-override-2rgkd4.css-dev-only-do-not-override-2rgkd4,
 .service-form-option .ant-select-selector,
 .service-form-option .ant-picker.css-dev-only-do-not-override-2rgkd4 {
@@ -23,30 +24,50 @@ code {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 3px solid #a8a4a4;
-  border-top: none;
+  border: 1px solid #fe74247d;
+  /* border-top: none;
   border-left: none;
-  border-right: none;
-  border-radius: 0.25rem;
+  border-right: none; */
+  border-radius: 5px;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  position: relative;
 }
 
+.service-form-option.focused input.ant-input.css-dev-only-do-not-override-2rgkd4.css-dev-only-do-not-override-2rgkd4,
+.service-form-option.focused .ant-picker.css-dev-only-do-not-override-2rgkd4 {
+  /* border-top: 1px solid #72b6f6;
+  border-left: 1px solid #1890ff;
+  border-right: 1px solid #1890ff; */
+  border: 2px solid #1890ff;
+}
+
+/* input */
+
+/* select */
 .service-form-option .ant-select.css-dev-only-do-not-override-2rgkd4.ant-select-single.ant-select-show-arrow {
   height: 40px;
-  border: 3px solid #a8a4a4;
-  border-top: none;
+  border: 1px solid #fe74247d;
+  /* border-top: none;
   border-left: none;
-  border-right: none;
+  border-right: none; */
+  position: relative;
+  border-radius: 5px;
 }
 
-.service-form-option .ant-select-selector {
-  border-top: none !important;
-  border-left: none !important;
-  border-right: none !important;
+.service-form-option.focused .ant-select.css-dev-only-do-not-override-2rgkd4.ant-select-single.ant-select-show-arrow {
+  border: 2px solid #1890ff !important;
 }
+
+.service-form-option.focused .ant-select-selector {
+  border: none;
+}
+
+/* select */
+
 
 .message-error {
-  font-weight: 600;
+  margin-top: 5px;
+  font-weight: 500;
   text-align: left;
   color: rgb(246, 26, 26);
 }
@@ -57,4 +78,29 @@ code {
 
 .ant-modal-content {
   padding: 0 !important;
+}
+
+
+.service-form-option .label-custom {
+  position: absolute;
+  top: 6px;
+  left: 20px;
+  z-index: 99;
+  background: #fff;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  color: #094174;
+  font-weight: 500;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container.focused .label-custom {
+  top: -16px;
+  left: 10px;
+  font-size: 16px;
+  padding: 0 5px;
+  color: #FE7524;
 }

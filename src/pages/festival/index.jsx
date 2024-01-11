@@ -46,16 +46,16 @@ const FestivalPage = () => {
         }, Constants.DEBOUNCE_SEARCH);
     };
     const onChangeStartDate = async (e) => {
-        setStartDate(e.target.value);
+        setStartDate(e  );
         if (endDate != "") {
-            await onSearch(searchText, pageSize, changePage, e.target.value, endDate).then((_) => { });
+            await onSearch(searchText, pageSize, changePage, e  , endDate).then((_) => { });
         }
     }
 
     const onChangeEndDate = async (e) => {
-        setEndDate(e.target.value);
+        setEndDate(e);
         if (startDate != "") {
-            await onSearch(searchText, pageSize, changePage, startDate, e.target.value).then((_) => { });
+            await onSearch(searchText, pageSize, changePage, startDate, e).then((_) => { });
         }
     }
     const onPreviousPage = () => {

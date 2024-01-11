@@ -7,15 +7,6 @@ import api from "../../infratructure/api";
 import { removeAccents, removeDiacriticsAndSpaces } from "./common";
 import { DATALICHTRINH } from "./common/datalichtrinh";
 import * as turf from "@turf/turf";
-import MapboxDark from "../../asset/img/extra-map/Mapbox-Dark.png";
-import MapboxLight from "../../asset/img/extra-map/Mapbox-Light.png";
-import MapboxNavigationDay from "../../asset/img/extra-map/Mapbox-Navigation-Day.png";
-import MapboxNavigationNight from "../../asset/img/extra-map/Mapbox-Navigation-Night.png";
-import MaxboxOutdoors from "../../asset/img/extra-map/Mapbox-Outdoors.png";
-import MapboxSatelliteStreets from "../../asset/img/extra-map/Mapbox-Satellite-Streets.png";
-import MapboxSatellite from "../../asset/img/extra-map/Mapbox-Satellite.png";
-import MapboxStreets from "../../asset/img/extra-map/Mapbox-Streets.png";
-
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";

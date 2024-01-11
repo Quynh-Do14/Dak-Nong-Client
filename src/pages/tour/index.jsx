@@ -143,8 +143,10 @@ const TourPage = () => {
         searchText={searchText}
         onChangeSearchText={onChangeSearchText}
         dsQuanHuyen={dsQuanHuyen}
+        searchDanhMuc={searchDanhMuc}
         dsDanhMucDiaDiem={dsDanhMucDiaDiem}
         onSelectDanhMuc={onSelectDanhMuc}
+        searchQuanHuyen={searchQuanHuyen}
         onSelectQuanHuyen={onSelectQuanHuyen}
       />
       <section className="deals position-relative">

@@ -164,7 +164,7 @@ export default class Constants {
       static label = "Tour";
     };
     static Festival = class {
-      static value = 7;
+      static value = 23;
       static label = "Lễ hội";
     };
     static News = class {

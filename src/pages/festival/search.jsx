@@ -1,6 +1,8 @@
 import React from 'react'
 import useTranslate from '../../core/common/hook/useTranslate';
 import { DatePicker, Input } from 'antd';
+import InputDate from '../../infratructure/common/input/input-date';
+import InputSearch from '../../infratructure/common/input/input-search';
 
 const SearchFestival = (props) => {
     const {
@@ -24,10 +26,11 @@ const SearchFestival = (props) => {
                             </svg>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label>{translate("nameFestival")} </label><br />
-                                <Input value={searchText} onChange={onChangeSearchText} placeholder={translate("enterName")} />
-                            </form>
+                            <InputSearch
+                                label={"nameFestival"}
+                                value={searchText}
+                                onChange={onChangeSearchText}
+                            />
                         </div>
                     </div>
 
@@ -36,10 +39,11 @@ const SearchFestival = (props) => {
                             <i className="fa fa-calendar ml-10"></i>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label className="common-label">{translate("startDate")}</label><br />
-                                <DatePicker onChange={onChangeStartDate} value={startDate} type="date" placeholder={translate("startDate")} required />
-                            </form>
+                            <InputDate
+                                label={"startDate"}
+                                value={startDate}
+                                onChange={onChangeStartDate}
+                            />
                         </div>
                     </div>
 
@@ -48,10 +52,11 @@ const SearchFestival = (props) => {
                             <i className="fa fa-calendar ml-10"></i>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label className="common-label">{translate("endDate")}</label><br />
-                                <DatePicker value={endDate} onChange={onChangeEndDate} placeholder={translate("endDate")} type='date' />
-                            </form>
+                            <InputDate
+                                label={"endDate"}
+                                value={endDate}
+                                onChange={onChangeEndDate}
+                            />
                         </div>
                     </div>
                     {/* <div className="service-button">

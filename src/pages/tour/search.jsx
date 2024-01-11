@@ -1,6 +1,9 @@
 import React from 'react'
 import useTranslate from '../../core/common/hook/useTranslate';
 import { Input, Select } from 'antd';
+import InputSearch from '../../infratructure/common/input/input-search';
+import SelectSearchCategory from '../../infratructure/common/input/select-search-category';
+import SelectSearchProvince from '../../infratructure/common/input/select-search-province';
 
 const SearchTour = (props) => {
     const {
@@ -8,7 +11,9 @@ const SearchTour = (props) => {
         onChangeSearchText,
         dsQuanHuyen = [],
         dsDanhMucDiaDiem = [],
+        searchDanhMuc,
         onSelectDanhMuc,
+        searchQuanHuyen,
         onSelectQuanHuyen
     } = props;
     const { translate } = useTranslate();
@@ -24,10 +29,11 @@ const SearchTour = (props) => {
                             </svg>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label>{translate("nameTour")} </label><br />
-                                <Input value={searchText} onChange={onChangeSearchText} placeholder={translate("enterName")} />
-                            </form>
+                            <InputSearch
+                                label={"nameTour"}
+                                value={searchText}
+                                onChange={onChangeSearchText}
+                            />
                         </div>
                     </div>
 
@@ -46,16 +52,12 @@ const SearchTour = (props) => {
                             </svg>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label className="common-label">{translate("category")} <i className="fa fa-angle-down"></i></label><br />
-                                <Select
-                                    onChange={onSelectDanhMuc}>
-                                    <Select.Option data-display="" value={""}>{translate("category")}</Select.Option>
-                                    {dsDanhMucDiaDiem?.map((it, index) => (
-                                        <Select.Option key={index} value={it.idDanhMucDiaDiem}>{it.tenDanhMuc} </Select.Option>
-                                    ))}
-                                </Select>
-                            </form>
+                            <SelectSearchCategory
+                                label={"category"}
+                                searchDanhMuc={searchDanhMuc}
+                                onChange={onSelectDanhMuc}
+                                list={dsDanhMucDiaDiem}
+                            />
                         </div>
                     </div>
 
@@ -74,15 +76,12 @@ const SearchTour = (props) => {
                             </svg>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label className="common-label">{translate("district")} <i className="fa fa-angle-down"></i></label><br />
-                                <Select onChange={onSelectQuanHuyen}>
-                                    <Select.Option data-display="" value={""}>{translate("district")}</Select.Option>
-                                    {dsQuanHuyen?.map((it, index) => (
-                                        <Select.Option key={index} value={it.idQuanHuyen}>{it.tenQuanHuyen} </Select.Option>
-                                    ))}
-                                </Select>
-                            </form>
+                            <SelectSearchProvince
+                                label={"district"}
+                                searchQuanHuyen={searchQuanHuyen}
+                                onChange={onSelectQuanHuyen}
+                                list={dsQuanHuyen}
+                            />
                         </div>
                     </div>
                     {/* <div className="service-button">

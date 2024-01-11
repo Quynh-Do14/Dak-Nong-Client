@@ -82,6 +82,7 @@ const SpecialtyPage = () => {
             />
             <SearchSpecialty
                 dsQuanHuyen={dsQuanHuyen}
+                searchQuanHuyen={qH}
                 onChangeQH={onChangeQH}
                 onChangeSearchText={onChangeSearchText}
                 searchText={searchText}

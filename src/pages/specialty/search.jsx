@@ -1,10 +1,13 @@
 import React from 'react'
 import useTranslate from '../../core/common/hook/useTranslate';
 import { Input, Select } from 'antd';
+import InputSearch from '../../infratructure/common/input/input-search';
+import SelectSearchProvince from '../../infratructure/common/input/select-search-province';
 
 const SearchSpecialty = (props) => {
     const {
         dsQuanHuyen,
+        searchQuanHuyen,
         onChangeQH,
         onChangeSearchText,
         searchText
@@ -23,10 +26,11 @@ const SearchSpecialty = (props) => {
                             </svg>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label>{translate("nameSpecialty")}</label><br />
-                                <Input value={searchText} onChange={onChangeSearchText} placeholder={translate("enterName")} />
-                            </form>
+                            <InputSearch
+                                label={"nameSpecialty"}
+                                value={searchText}
+                                onChange={onChangeSearchText}
+                            />
                         </div>
                     </div>
 
@@ -45,15 +49,12 @@ const SearchSpecialty = (props) => {
                             </svg>
                         </div>
                         <div className="service-form col-10">
-                            <form className="service-form-option">
-                                <label className="common-label">{translate("district")} <i className="fa fa-angle-down"></i></label><br />
-                                <Select onChange={onChangeQH}>
-                                    <Select.Option data-display="" value={""}>{translate("district")}</Select.Option>
-                                    {dsQuanHuyen?.map((it, index) => (
-                                        <Select.Option key={index} value={it.idQuanHuyen}>{it.tenQuanHuyen} </Select.Option>
-                                    ))}
-                                </Select>
-                            </form>
+                            <SelectSearchProvince
+                                label={"district"}
+                                searchQuanHuyen={searchQuanHuyen}
+                                onChange={onChangeQH}
+                                list={dsQuanHuyen}
+                            />
                         </div>
                     </div>
                     {/* <div className="service-button">
