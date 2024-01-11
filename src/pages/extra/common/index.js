@@ -75,3 +75,32 @@ export const DSSTYLEBANDO = [
     select: false,
   },
 ];
+
+export function formatDate(date) {
+  // Lấy thông tin năm, tháng và ngày từ đối tượng Date
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Thêm '0' ở đầu nếu tháng chỉ có một chữ số
+  const day = String(date.getDate()).padStart(2, '0'); // Thêm '0' ở đầu nếu ngày chỉ có một chữ số
+
+  // Tạo chuỗi ngày dạng "YYYY-MM-DD"
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+}
+
+export function getPreviousDay(date) {
+  // Tạo một bản sao của đối tượng Date để tránh thay đổi giá trị của đối tượng gốc
+  const previousDay = new Date(date);
+
+  // Giảm giá trị ngày của đối tượng Date
+  previousDay.setDate(date.getDate() - 10);
+
+  // Kiểm tra nếu giá trị ngày là 0, chuyển đến ngày cuối cùng của tháng trước đó
+  if (previousDay.getDate() <= 0) {
+      previousDay.setMonth(previousDay.getMonth() - 1);
+      previousDay.setDate(new Date(previousDay.getFullYear(), previousDay.getMonth() + 1, 0).getDate());
+  }
+
+  return previousDay;
+}
+

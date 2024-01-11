@@ -6,6 +6,8 @@ import mapboxgl from "mapbox-gl";
 import api from "../../infratructure/api";
 import {
   DSSTYLEBANDO,
+  formatDate,
+  getPreviousDay,
   removeAccents,
   removeDiacriticsAndSpaces,
 } from "./common";
@@ -36,6 +38,7 @@ const ExtraComponent = () => {
   const [dsDiaDiemSearch, setDsDiaDiemSearch] = useState([]);
   const [dsDiaDiemTuLichTrinh, setDsDiaDiemTuLichTrinh] = useState([]);
   const [lichTrinh, setLichTrinh] = useState({});
+  const [anhVeTinh, setAnhVeTinh] = useState({});
 
   const [visibleXemAnhVeTinh, setVisibleXemAnhVeTinh] = useState(false);
   const [isGoiYLichTrinh, setIsGoiYLichTrinh] = useState(false);
@@ -461,6 +464,78 @@ const ExtraComponent = () => {
       essential: true,
       duration: 1000,
     });
+  };
+
+  const xemAnhVeTinh = async () => {
+    var thoiGianBatDau =
+      document.getElementById("thoiGianBatDau").value == ""
+        ? formatDate(getPreviousDay(new Date()))
+        : document.getElementById("thoiGianBatDau").value;
+    var thoiGianKetThuc =
+      document.getElementById("thoiGianKetThuc").value == ""
+        ? formatDate(new Date())
+        : document.getElementById("thoiGianKetThuc").value;
+    var loaiAnh = document.getElementById("loaiAnh").value;
+    var doPhuMay =
+      document.getElementById("doPhuMay").value == ""
+        ? 100
+        : document.getElementById("doPhuMay").value;
+    const resXemAnhVeTinh = await api.xemAnhVeTinh(
+      `thoiGianBatDau=${thoiGianBatDau}&thoiGianKetThuc=${thoiGianKetThuc}&doPhuMay=${doPhuMay}&loaiAnh=${loaiAnh}`,
+      setLoading
+    );
+    if (resXemAnhVeTinh.success && resXemAnhVeTinh.result.anhVeTinh != "") {
+      setAnhVeTinh(resXemAnhVeTinh.result);
+      if (map.getLayer("anhVeTinh")) {
+        map.removeLayer("anhVeTinh");
+      }
+      if (map.getSource("anhVeTinh")) {
+        map.removeSource("anhVeTinh");
+      }
+      if (map.getLayer("anhChiSo")) {
+        map.removeLayer("anhChiSo");
+      }
+      if (map.getSource("anhChiSo")) {
+        map.removeSource("anhChiSo");
+      }
+      try {
+        map.addSource("anhVeTinh", {
+          type: "raster",
+          tiles: [resXemAnhVeTinh.result.anhVeTinh],
+        });
+        map.addLayer(
+          {
+            id: "anhVeTinh",
+            type: "raster",
+            source: "anhVeTinh",
+            minzoom: 0,
+            maxzoom: 22,
+          },
+          "ranhGioiTinh"
+        );
+
+        if (resXemAnhVeTinh.result.anhChiSo) {
+          map.addSource("anhChiSo", {
+            type: "raster",
+            tiles: [resXemAnhVeTinh.result.anhChiSo],
+          });
+          map.addLayer(
+            {
+              id: "anhChiSo",
+              type: "raster",
+              source: "anhChiSo",
+              minzoom: 0,
+              maxzoom: 22,
+            },
+            "ranhGioiTinh"
+          );
+        }
+
+        // });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -1253,11 +1328,11 @@ const ExtraComponent = () => {
               >
                 <div className="row d-flex flex-row col-12">
                   <div className="col-6">
-                    <label for="loaiAnh" class="form-label">
+                    <label for="loaiAnhLabel" class="form-label">
                       Loại ảnh
                     </label>
                     <div className="input-group mb-3">
-                      <span className="input-group-text" id="loaiAnh">
+                      <span className="input-group-text" id="loaiAnhLabel">
                         <i class="fa-solid fa-images"></i>
                       </span>
                       <input
@@ -1267,22 +1342,24 @@ const ExtraComponent = () => {
                         value={"Sentinel 2"}
                         aria-describedby="loaiAnh"
                         disabled
+                        id="loaiAnh"
                       />
                     </div>
                   </div>
                   <div className="col-6">
-                    <label for="doPhuMay" class="form-label">
+                    <label for="doPhuMayLabel" class="form-label">
                       Độ phủ mây
                     </label>
                     <div className="input-group mb-3">
-                      <span className="input-group-text" id="doPhuMay">
+                      <span className="input-group-text" id="doPhuMayLabel">
                         <i class="fa-brands fa-cloudversify"></i>
                       </span>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         placeholder="Nhập độ phủ mây"
                         aria-describedby="doPhuMay"
+                        id="doPhuMay"
                       />
                     </div>
                   </div>
@@ -1296,32 +1373,40 @@ const ExtraComponent = () => {
               >
                 <div className="row d-flex flex-row col-12">
                   <div className="col-6">
-                    <label for="loaiAnh" class="form-label">
+                    <label for="thoiGianBatDauLabel" class="form-label">
                       Thời gian bắt đầu
                     </label>
                     <div className="input-group mb-3">
-                      <span className="input-group-text" id="loaiAnh">
+                      <span
+                        className="input-group-text"
+                        id="thoiGianBatDauLabel"
+                      >
                         <i class="fa-regular fa-calendar-days"></i>
                       </span>
                       <input
                         type="date"
                         className="form-control"
                         placeholder="Chọn ngày bắt đầu"
+                        id="thoiGianBatDau"
                       />
                     </div>
                   </div>
                   <div className="col-6">
-                    <label for="doPhuMay" class="form-label">
+                    <label for="thoiGianKetThucLabel" class="form-label">
                       Thời gian kết thúc
                     </label>
                     <div className="input-group mb-3">
-                      <span className="input-group-text" id="doPhuMay">
+                      <span
+                        className="input-group-text"
+                        id="thoiGianKetThucLabel"
+                      >
                         <i class="fa-solid fa-calendar-week"></i>
                       </span>
                       <input
                         type="date"
                         className="form-control"
                         placeholder="Chọn ngày kết thúc"
+                        id="thoiGianKetThuc"
                       />
                     </div>
                   </div>
@@ -1345,6 +1430,9 @@ const ExtraComponent = () => {
               Hủy
             </button>
             <button
+              onClick={() => {
+                xemAnhVeTinh();
+              }}
               type="button"
               style={{
                 padding: "12px 24px",
