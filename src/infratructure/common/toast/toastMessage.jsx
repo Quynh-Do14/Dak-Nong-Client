@@ -8,7 +8,8 @@ export const SuccessMessage = (message, description) => {
   notification.success({
     message: <div className="color-success color-title">{message}</div>,
     description: <div className="color-success color-des">{description}</div>,
-    icon: <CheckCircleOutlined className="color-success font-size-icon" />
+    icon: <CheckCircleOutlined className="color-success font-size-icon" />,
+    duration: 20000
   });
 }
 
@@ -18,6 +19,7 @@ export const FailMessage = (message, description) => {
     description: <div className="color-fail color-des">{description}</div>,
     icon: <InfoCircleOutlined className="color-fail font-size-icon" />,
     className: "fail-message",
+    duration: 20000
   });
 }
 export const WarningMessage = (message, description) => {
@@ -26,5 +28,6 @@ export const WarningMessage = (message, description) => {
     description: <div className="color-warning color-des">{description}</div>,
     icon: <InfoCircleOutlined className="color-warning font-size-icon" />,
     className: "warning-message",
+    duration: 20000
   });
 }

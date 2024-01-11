@@ -206,7 +206,7 @@ const RegisterPopup = (props) => {
                                 <MessageError isError={validate.address?.isError || false}
                                     message={validate.address?.message || ""} />
                             </div>
-                            <button onClick={onRegister} type="button" className="btn-login btn-info btn-block btn-round">{`${translate("register")}`}</button>
+                            <button onClick={onRegister} type="button" className="btn-login btn-block btn-round">{`${translate("register")}`}</button>
                         </form>
                     </div>
                 </div>
