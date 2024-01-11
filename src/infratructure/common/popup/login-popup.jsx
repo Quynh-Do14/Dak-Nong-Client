@@ -105,17 +105,17 @@ const LoginPopup = (props) => {
                     </div>
                     <div className="d-flex flex-column text-center">
                         <form>
-                            <div className="input-group mb-3">
+                            <div className="form-input mb-3">
                                 <input value={email} onChange={onChangeEmail} onBlur={() => onBlurEmail(false)} type="email" className="form-control" id="email1" placeholder={`${translate("enterEmail")}...`} />
                                 <MessageError isError={validate.email?.isError || false}
                                     message={validate.email?.message || ""} />
                             </div>
-                            <div className="input-group mb-3">
+                            <div className="form-input mb-3">
                                 <input value={password} onChange={onChangePassword} onBlur={() => onBlurPassword(false)} type="password" className="form-control" id="password1" placeholder={`${translate("enterPassword")}...`} />
                                 <MessageError isError={validate.password?.isError || false}
                                     message={validate.password?.message || ""} />
                             </div>
-                            <button onClick={onSubmit} type="button" className="btn btn-info btn-block btn-round">{translate("signIn")}</button>
+                            <button onClick={onSubmit} type="button" className="btn-login btn-info btn-block btn-round">{translate("signIn")}</button>
                         </form>
                     </div>
                 </div>

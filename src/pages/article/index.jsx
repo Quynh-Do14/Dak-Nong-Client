@@ -116,12 +116,12 @@ const ArticlePage = () => {
                   <div className="blog-info">
                     <div className="blog-info">
                       <div className="footer-info">
-                        <ul className="flex justify-content-start mb-10">
-                          <li>
+                        <ul className="flex justify-content-between flex-wrap mb-10">
+                          <li className='white-space-nowrap'>
                             <i className="color-orange mr-10 fa fa-user"></i>
                             Duong Nguyen{" "}
                           </li>
-                          <li>
+                          <li className='white-space-nowrap'>
                             <i className="color-orange mr-10 fa fa-calendar"></i>{" "}
                             <span>{convertDateOnly(it.ngayDang)} </span>
                           </li>

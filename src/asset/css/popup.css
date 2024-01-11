@@ -72,6 +72,10 @@ a.btn:hover {
   margin-right: 10px;
 }
 
+.btn-login {
+  padding: 8px 0;
+}
+
 .github:before {
   content: "\f09b"
 }
@@ -277,6 +281,7 @@ code {
   background: #fff;
   position: absolute;
   right: 20px;
+  top: 30px;
 }
 
 .form-title {
@@ -322,4 +327,8 @@ code {
 .modal-video {
   width: 100%;
   height: 100%
+}
+
+.text-info {
+  color: #FE7524 !important;
 }

@@ -266,8 +266,8 @@ const HomePage = () => {
                     <img src={it.iconBot} alt="icon" />
                   </div>
                   <span>{translate(it.name)} </span>
-                  <a href={it.link}>{translate(it.name)}</a>
-                  <p>{translate(it.description)}</p>
+                  <a className="text-truncate-title-explore" href={it.link}>{translate(it.name)}</a>
+                  <p className="text-truncate-description-explore">{translate(it.description)}</p>
                 </div>
               </div>
             ))}
@@ -443,40 +443,42 @@ const HomePage = () => {
             {listDiaDiem.map((it, index) => (
               <div key={index} className="mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                 <div className="portfolio-content">
-                  <div className="portfolio-info">
-                    <img
-                      src={
-                        it?.hinhAnh?.indexOf("http") == -1
-                          ? showImageCommon(it?.hinhAnh)
-                          : it?.hinhAnh
-                      }
-                      alt="img"
-                    />
-                    <div className="personal-info">
-                      <ul>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <span>5.0</span>
-                        </li>
-                      </ul>
-                      <h6 className="text-truncate-title">{it.tenDiaDiem}</h6>
-                      <span>{it.tenQuanHuyen}</span>
+                  <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
+                    <div className="portfolio-info">
+                      <img
+                        src={
+                          it?.hinhAnh?.indexOf("http") == -1
+                            ? showImageCommon(it?.hinhAnh)
+                            : it?.hinhAnh
+                        }
+                        alt="img"
+                      />
+                      <div className="personal-info">
+                        <ul>
+                          <li>
+                            <i className="fa fa-star"></i>
+                          </li>
+                          <li>
+                            <i className="fa fa-star"></i>
+                          </li>
+                          <li>
+                            <i className="fa fa-star"></i>
+                          </li>
+                          <li>
+                            <i className="fa fa-star"></i>
+                          </li>
+                          <li>
+                            <i className="fa fa-star"></i>
+                          </li>
+                          <li>
+                            <span>5.0</span>
+                          </li>
+                        </ul>
+                        <h6 className="text-truncate-title-destination-2">{it.tenDiaDiem}</h6>
+                        <span>{it.tenQuanHuyen}</span>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                   <p className="text-truncate-description">{it.moTa} </p>
                   <div className="qutetion">
                     <img

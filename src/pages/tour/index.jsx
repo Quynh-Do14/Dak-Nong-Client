@@ -202,7 +202,7 @@ const TourPage = () => {
                     >
                       {it.tenDiaDiem}{" "}
                     </a>
-                    <p>
+                    <p className="text-truncate-address-destination">
                       <i className="flaticon-map"></i>
                       {it.diaChi}{" "}
                     </p>

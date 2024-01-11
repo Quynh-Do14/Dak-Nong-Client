@@ -32,9 +32,9 @@ const Article = ({ data = [] }) => {
                                 <div className="blog-info">
                                     <div className="blog-info">
                                         <div className="footer-info">
-                                            <ul className='flex justify-content-start mb-10'>
-                                                <li><i className="color-orange mr-10 fa fa-user"></i>Duong Nguyen </li>
-                                                <li><i className="color-orange mr-10 fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
+                                            <ul className='flex justify-content-between flex-wrap mb-10'>
+                                                <li className='white-space-nowrap'><i className="color-orange mr-10 fa fa-user"></i>Duong Nguyen </li>
+                                                <li className='white-space-nowrap'><i className="color-orange mr-10 fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
                                             </ul>
                                             <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title-relation">{it.tieuDe} </a>
                                             <p className='text-truncate-description'>{it.tieuDeCon} </p>

@@ -1329,7 +1329,7 @@ a.hv-popup-link .svg-inline--fa {
 .banner-car {
   position: absolute;
   top: 140px;
-  right: -160px;
+  right: -70px;
   opacity: 0;
   transform: translateX(50px);
   transition: all 1000ms ease;
@@ -2341,11 +2341,11 @@ footer.main__footer.p_relative {
 
 .footer-info ul {
   display: flex;
-  gap: 20px;
+  gap: 10px;
 }
 
 .footer-info ul li {
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 .footer-info ul li .svg-inline--fa {
@@ -3452,7 +3452,7 @@ Home-Page-Three-Starts
 
 .choose-content {
   position: relative;
-  padding: 20px 34px 60px 34px;
+  padding: 20px 15px 60px 15px;
   width: 100%;
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(141, 139, 139, 0.1);
@@ -3484,6 +3484,7 @@ Home-Page-Three-Starts
   font-size: 14px;
   line-height: 20px;
   color: #fe7524;
+  margin-top: 10px;
 }
 
 .choose-content a {
@@ -3509,7 +3510,7 @@ Home-Page-Three-Starts
 }
 
 .portfolio-content {
-  padding: 65px 42px 75px 42px;
+  padding: 40px 30px 60px 30px;
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
@@ -3615,7 +3616,7 @@ Destination page
   margin: 0 auto;
   padding: 20px 12px;
   border-radius: 20px;
-  margin-top: 120px;
+  margin-top: 100px;
 }
 
 .common-banner-image {
@@ -4844,6 +4845,26 @@ img.img-page-detail {
   height: 8vh;
 }
 
+.text-truncate-title-explore {
+  white-space: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  height: 3.3vh;
+}
+
+.text-truncate-description-explore {
+  white-space: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  height: 6vh;
+}
+
 .text-truncate-title-article {
   white-space: initial;
   overflow: hidden;
@@ -4862,6 +4883,26 @@ img.img-page-detail {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   height: 7vh;
+}
+
+.text-truncate-title-destination-2 {
+  white-space: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  height: 6.5vh;
+}
+
+.text-truncate-address-destination {
+  white-space: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  height: 5.6vh;
 }
 
 .text-truncate-origin {
@@ -5029,4 +5070,13 @@ a {
   right: 20px;
   top: 20px;
   border-radius: 50%;
+}
+
+ol,
+ul {
+  padding-left: 0 !important;
+}
+
+.white-space-nowrap {
+  white-space: nowrap;
 }

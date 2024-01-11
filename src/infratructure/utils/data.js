@@ -148,7 +148,7 @@ export const translations = {
     //////
     destinationDes: "Khám phá những địa điểm du lịch mới",
     todayArticleDes: "Đọc những bài viết, tin tức mới nhất",
-    exploreCuisineDes: "Khám phá ẩm thực phong phú tại vùng đất này",
+    exploreCuisineDes: "Khám phá ẩm thực phong phú tại đây",
     traditionalFestivalDes: "Tìm hiểu các lễ hội truyền thống",
     //////
     readyFor: "Sẵn sáng cho những",
