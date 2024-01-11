@@ -8,7 +8,7 @@ export const SuccessMessage = (message, description) => {
   notification.success({
     message: <div className="color-success color-title">{message}</div>,
     description: <div className="color-success color-des">{description}</div>,
-    icon: <CheckCircleOutlined className="color-success font-size-icon" />
+    icon: <CheckCircleOutlined className="color-success font-size-icon" />,
   });
 }
 

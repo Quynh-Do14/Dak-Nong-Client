@@ -104,3 +104,61 @@ code {
   padding: 0 5px;
   color: #FE7524;
 }
+
+
+
+/* ///////////// */
+
+.color-warning.color-title {
+  font-family: 'Source Serif 4', serif !important;
+  font-size: 20px;
+  color: #FE7524 !important;
+}
+
+.color-warning.color-des {
+  font-family: 'Source Serif 4', serif !important;
+  font-size: 16px;
+  color: #FE7524 !important;
+}
+
+span.anticon.anticon-info-circle.color-warning.font-size-icon {
+  font-size: 30px;
+  color: #FE7524 !important;
+}
+
+/* ///////////// */
+.color-success.color-title {
+  font-family: 'Source Serif 4', serif !important;
+  font-size: 20px;
+  color: #094174 !important;
+}
+
+.color-success.color-des {
+  font-family: 'Source Serif 4', serif !important;
+  font-size: 16px;
+  color: #094174 !important;
+}
+
+span.anticon.anticon-check-circle.color-success.font-size-icon {
+  font-size: 30px;
+  color: #094174 !important;
+}
+
+/* ///////////// */
+
+.color-fail.color-title {
+  font-family: 'Source Serif 4', serif !important;
+  font-size: 20px;
+  color: #e50000 !important;
+}
+
+.color-fail.color-des {
+  font-family: 'Source Serif 4', serif !important;
+  font-size: 16px;
+  color: #e50000 !important;
+}
+
+span.anticon.anticon-info-circle.color-fail.font-size-icon {
+  font-size: 30px;
+  color: #e50000 !important;
+}

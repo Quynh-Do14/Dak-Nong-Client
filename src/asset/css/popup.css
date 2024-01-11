@@ -74,9 +74,21 @@ a.btn:hover {
 
 .btn-login {
   padding: 8px 0;
+  color: #fff;
+  background-color: #FE7524;
+  border-color: #FE7524;
+  transition: .5s;
+  -webkit-transition: .5s;
+}
+
+.btn-login:hover {
+  color: #fff;
+  background-color: #094174;
+  border-color: #094174;
 }
 
 .btn-cancel {
+  color: #fff;
   background-color: #221c38 !important;
   background-color: #221c38 !important;
   padding: 8px 40px;

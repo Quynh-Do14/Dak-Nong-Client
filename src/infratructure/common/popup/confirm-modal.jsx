@@ -35,8 +35,8 @@ const ConfirmModal = (props) => {
                     </h6>
                 </div>
                 <div className="modal-footer d-flex justify-content-center">
-                    <button onClick={onCancel} type="button" className="btn-cancel btn-info btn-round">{translate("cancel")}</button>
-                    <button onClick={onOk} type="button" className="btn-confirm btn-info btn-round">{translate("logOut")}</button>
+                    <button onClick={onCancel} type="button" className="btn-cancel btn-round">{translate("cancel")}</button>
+                    <button onClick={onOk} type="button" className="btn-confirm btn-round">{translate("logOut")}</button>
                 </div>
             </div>
         </Modal>

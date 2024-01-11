@@ -115,7 +115,7 @@ const LoginPopup = (props) => {
                                 <MessageError isError={validate.password?.isError || false}
                                     message={validate.password?.message || ""} />
                             </div>
-                            <button onClick={onSubmit} type="button" className="btn-login btn-info btn-block btn-round">{translate("signIn")}</button>
+                            <button onClick={onSubmit} type="button" className="btn-login btn-block btn-round">{translate("signIn")}</button>
                         </form>
                     </div>
                 </div>
