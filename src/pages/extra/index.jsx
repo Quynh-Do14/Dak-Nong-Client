@@ -1289,7 +1289,13 @@ const ExtraComponent = () => {
           footer={false}
           onCancel={() => setVisibleXemAnhVeTinh(false)}
         >
-          <div className="modal-content">
+          <div
+            className="modal-content"
+            style={{
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
+            }}
+          >
             <div className="modal-header border-bottom-0">
               <button
                 onClick={() => setVisibleXemAnhVeTinh(false)}
@@ -1388,6 +1394,11 @@ const ExtraComponent = () => {
                         className="form-control"
                         placeholder="Chọn ngày bắt đầu"
                         id="thoiGianBatDau"
+                        style={{
+                          fontSize: 12,
+                          paddingTop: 0,
+                          paddingBottom: 0,
+                        }}
                       />
                     </div>
                   </div>
@@ -1407,6 +1418,11 @@ const ExtraComponent = () => {
                         className="form-control"
                         placeholder="Chọn ngày kết thúc"
                         id="thoiGianKetThuc"
+                        style={{
+                          fontSize: 12,
+                          paddingTop: 0,
+                          paddingBottom: 0,
+                        }}
                       />
                     </div>
                   </div>
