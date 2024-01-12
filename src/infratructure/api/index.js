@@ -50,6 +50,21 @@ const api = {
       `${apiLinks.API}${Endpoint.Module.DiaDiem}/getAllDiaDiemBanDo?${params}`,
       setLoading
     ),
+  getAllDiemLuuTruBanDo: (params, setLoading) =>
+    request.get(
+      `${apiLinks.API}${Endpoint.Module.DiaDiem}/getAllDiemLuuTruBanDo?${params}`,
+      setLoading
+    ),
+  getAllDiemAmThucBanDo: (params, setLoading) =>
+    request.get(
+      `${apiLinks.API}${Endpoint.Module.DiaDiem}/getAllDiemAmThucBanDo?${params}`,
+      setLoading
+    ),
+  getAllDiemPhuongTienBanDo: (params, setLoading) =>
+    request.get(
+      `${apiLinks.API}${Endpoint.Module.DiaDiem}/getAllDiemPhuongTienBanDo?${params}`,
+      setLoading
+    ),
 
   getDiaDiemById: (params, setLoading) =>
     request.get(
@@ -93,9 +108,6 @@ const api = {
       setLoading
     ),
   xemAnhVeTinh: (params, setLoading) =>
-    request.get(
-      `${apiLinks.API}/gee/xemAnhVeTinh?${params}`,
-      setLoading
-    ),
+    request.get(`${apiLinks.API}/gee/xemAnhVeTinh?${params}`, setLoading),
 };
 export default api;

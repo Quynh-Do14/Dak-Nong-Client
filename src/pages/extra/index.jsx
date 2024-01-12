@@ -34,7 +34,15 @@ const ExtraComponent = () => {
   const [map, setMap] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [dsDiemDuLich, setDsDiemDuLich] = useState([]);
+  const [dsLuuTru, setDsLuuTru] = useState([]);
+  const [dsAmThuc, setDsAmThuc] = useState([]);
+  const [dsPhuongTien, setDsPhuongTien] = useState([]);
+
   const [dsDanhMucDiaDiemDuLich, setDsDanhMucDiaDiemDuLich] = useState([]);
+  const [dsDanhMucLuuTru, setDsDanhMucLuuTru] = useState([]);
+  const [dsDanhMucAmThuc, setDsDanhMucAmThuc] = useState([]);
+  const [dsDanhMucPhuongTien, setDsDanhMucPhuongTien] = useState([]);
+
   const [textSearch, setTextSearch] = useState("");
   const [dsDiaDiemSearch, setDsDiaDiemSearch] = useState([]);
   const [dsDiaDiemTuLichTrinh, setDsDiaDiemTuLichTrinh] = useState([]);
@@ -47,8 +55,8 @@ const ExtraComponent = () => {
   const [isDanhSachBanDo, setIsDanhSachBanDo] = useState(false);
   const [dsStyleBanDo, setDsStyleBanDo] = useState(DSSTYLEBANDO);
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const fecthData = async (style = dsStyleBanDo[0]) => {
     // document.getElementById("map").scrollIntoView()
@@ -76,15 +84,58 @@ const ExtraComponent = () => {
     map.addControl(new mapboxgl.NavigationControl());
 
     const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, setLoading);
-    const resGetDanhMucConCuaDanhMuc = await api.getDanhMucConCuaDanhMuc(
-      `idDanhMuc=${1}`,
+    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(
+      ``,
+      setLoading
+    );
+    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(
+      ``,
+      setLoading
+    );
+    const resGetPhuongTienGeometry = await api.getAllDiemPhuongTienBanDo(
+      ``,
       setLoading
     );
 
+    const resGetDanhMucConCuaDanhMucDiaDiem = await api.getDanhMucConCuaDanhMuc(
+      `idDanhMuc=${1}`,
+      setLoading
+    );
+    const resGetDanhMucConCuaDanhMucLuuTru = await api.getDanhMucConCuaDanhMuc(
+      `idDanhMuc=${2}`,
+      setLoading
+    );
+    const resGetDanhMucConCuaDanhMucAmThuc = await api.getDanhMucConCuaDanhMuc(
+      `idDanhMuc=${3}`,
+      setLoading
+    );
+    const resGetDanhMucConCuaDanhMucPhuongTien =
+      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, setLoading);
+
     var dataDsDiaDiemGeoJson = { ...resGetDiaDiemGeometry };
     setDsDiemDuLich(dataDsDiaDiemGeoJson);
-    setDsDanhMucDiaDiemDuLich(resGetDanhMucConCuaDanhMuc.result);
-    if (resGetDiaDiemGeometry.features && resGetDanhMucConCuaDanhMuc.success) {
+    var dataDsLuuTruGeoJson = { ...resGetLuuTruGeometry };
+    setDsLuuTru(dataDsLuuTruGeoJson);
+    var dataDsAmThucGeoJson = { ...resGetAmThucGeometry };
+    setDsAmThuc(dataDsAmThucGeoJson);
+    var dataDsPhuongTienGeoJson = { ...resGetPhuongTienGeometry };
+    setDsPhuongTien(dataDsPhuongTienGeoJson);
+
+    setDsDanhMucDiaDiemDuLich(resGetDanhMucConCuaDanhMucDiaDiem.result);
+    setDsDanhMucLuuTru(resGetDanhMucConCuaDanhMucLuuTru.result);
+    setDsDanhMucAmThuc(resGetDanhMucConCuaDanhMucAmThuc.result);
+    setDsDanhMucPhuongTien(resGetDanhMucConCuaDanhMucPhuongTien.result);
+
+    if (
+      resGetDiaDiemGeometry.features &&
+      resGetDanhMucConCuaDanhMucDiaDiem.success &&
+      resGetLuuTruGeometry.features &&
+      resGetDanhMucConCuaDanhMucLuuTru.success &&
+      resGetAmThucGeometry.features &&
+      resGetDanhMucConCuaDanhMucAmThuc.success &&
+      resGetPhuongTienGeometry.features &&
+      resGetDanhMucConCuaDanhMucPhuongTien.success
+    ) {
       map.on("load", () => {
         map.addSource("mapbox-dem", {
           type: "raster-dem",
@@ -96,9 +147,9 @@ const ExtraComponent = () => {
           source: "mapbox-dem",
           exaggeration: 1.5,
         });
-        resGetDanhMucConCuaDanhMuc.result.map((v) => {
-          var uriImg = "";
 
+        resGetDanhMucConCuaDanhMucDiaDiem.result.map((v) => {
+          var uriImg = "";
           if (
             v.tenDanhMuc == "Văn hóa - lịch sử" &&
             dataDsDiaDiemGeoJson.features.filter(
@@ -131,7 +182,7 @@ const ExtraComponent = () => {
             ).length > 0
           ) {
             uriImg =
-              "https://images.squarespace-cdn.com/content/v1/5b07c60a96e76f9f641cdad6/1626769467137-PUUVF03Q49KZMCVTQ1PC/Conservation.png";
+              "https://cdn-icons-png.flaticon.com/512/3104/3104941.png";
           }
           if (
             v.tenDanhMuc == "Du lịch nghỉ dưỡng" &&
@@ -174,6 +225,103 @@ const ExtraComponent = () => {
             ).length > 0
           ) {
             uriImg = "https://cdn-icons-png.flaticon.com/512/3937/3937245.png";
+          }
+          if (uriImg != "") {
+            map.loadImage(uriImg, (error, image) => {
+              if (error) throw error;
+              map.addImage(`img${v.idDanhMucDiaDiem}`, image);
+            });
+          }
+        });
+
+        resGetDanhMucConCuaDanhMucLuuTru.result.map((v) => {
+          var uriImg = "";
+          if (
+            v.tenDanhMuc == "Homestay" &&
+            dataDsLuuTruGeoJson.features.filter(
+              (v) => v.properties.tenDanhMuc == "Homestay"
+            ).length > 0
+          ) {
+            uriImg = "https://cdn-icons-png.flaticon.com/512/7059/7059852.png";
+          }
+          if (
+            v.tenDanhMuc == "Khách sạn" &&
+            dataDsLuuTruGeoJson.features.filter(
+              (v) => v.properties.tenDanhMuc == "Khách sạn"
+            ).length > 0
+          ) {
+            uriImg = "https://cdn-icons-png.flaticon.com/512/235/235889.png";
+          }
+          if (
+            v.tenDanhMuc == "Nhà nghỉ" &&
+            dataDsLuuTruGeoJson.features.filter(
+              (v) => v.properties.tenDanhMuc == "Nhà nghỉ"
+            ).length > 0
+          ) {
+            uriImg =
+              "https://cdn3.iconfinder.com/data/icons/flat-building-1/70/1-512.png";
+          }
+          if (uriImg != "") {
+            map.loadImage(uriImg, (error, image) => {
+              if (error) throw error;
+              map.addImage(`img${v.idDanhMucDiaDiem}`, image);
+            });
+          }
+        });
+
+        resGetDanhMucConCuaDanhMucAmThuc.result.map((v) => {
+          var uriImg = "";
+          if (
+            v.tenDanhMuc == "Nhà hàng" &&
+            dataDsAmThucGeoJson.features.filter(
+              (v) => v.properties.tenDanhMuc == "Nhà hàng"
+            ).length > 0
+          ) {
+            uriImg = "https://cdn-icons-png.flaticon.com/512/4287/4287725.png";
+          }
+          if (uriImg != "") {
+            map.loadImage(uriImg, (error, image) => {
+              if (error) throw error;
+              map.addImage(`img${v.idDanhMucDiaDiem}`, image);
+            });
+          }
+        });
+
+        resGetDanhMucConCuaDanhMucPhuongTien.result.map((v) => {
+          var uriImg = "";
+          if (
+            v.tenDanhMuc == "Xe máy" &&
+            dataDsPhuongTienGeoJson.features.filter(
+              (v) => v.properties.tenDanhMuc == "Xe máy"
+            ).length > 0
+          ) {
+            uriImg = "https://cdn-icons-png.flaticon.com/512/1986/1986937.png";
+          }
+          if (
+            v.tenDanhMuc == "Xe đạp" &&
+            dataDsPhuongTienGeoJson.features.filter(
+              (v) => v.properties.tenDanhMuc == "Xe đạp"
+            ).length > 0
+          ) {
+            uriImg = "https://cdn-icons-png.flaticon.com/512/2972/2972185.png";
+          }
+          if (
+            v.tenDanhMuc == "Ô tô" &&
+            dataDsPhuongTienGeoJson.features.filter(
+              (v) => v.properties.tenDanhMuc == "Ô tô"
+            ).length > 0
+          ) {
+            uriImg =
+              "https://cdn-icons-png.flaticon.com/512/2554/2554936.png";
+          }
+          if (
+            v.tenDanhMuc == "Xe điện" &&
+            dataDsPhuongTienGeoJson.features.filter(
+              (v) => v.properties.tenDanhMuc == "Xe điện"
+            ).length > 0
+          ) {
+            uriImg =
+              "https://cdn-icons-png.flaticon.com/512/1574/1574055.png";
           }
           if (uriImg != "") {
             map.loadImage(uriImg, (error, image) => {
@@ -265,10 +413,11 @@ const ExtraComponent = () => {
             map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
               const coordinates = e.features[0].geometry.coordinates.slice();
               const html = `<div>
-            <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-                }" alt="" style="min-width: 280px;min-height: 120px;">
+            <img src="${
+              e.features[0].properties.hinhAnh.indexOf("https") != -1
+                ? e.features[0].properties.hinhAnh
+                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+            }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
             ">
@@ -277,7 +426,8 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/destination-view?${e.features[0].properties.idDiaDiem
+                <a href="/destination-view?${
+                  e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
         font-size: 18px;
@@ -288,8 +438,309 @@ const ExtraComponent = () => {
         font-size: 11px;
         color: #333;
         font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
-                }</p>
+    ">${e.features[0].properties.gioMoCua} - ${
+                e.features[0].properties.gioDongCua
+              }</p>
+                <p style="
+        width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #333;
+    ">${e.features[0].properties.moTa}</p>
+            </div>
+        </div>`;
+
+              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              }
+
+              map.flyTo({
+                center: e.features[0].geometry.coordinates,
+                essential: true,
+                duration: 1000,
+              });
+
+              new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(html)
+                .addTo(map);
+            });
+
+            map.on("mouseenter", `poi-${feature.properties.idDanhMuc}`, () => {
+              map.getCanvas().style.cursor = "pointer";
+            });
+
+            map.on("mouseleave", `poi-${feature.properties.idDanhMuc}`, () => {
+              map.getCanvas().style.cursor = "";
+            });
+          }
+        }
+
+        map.addSource("luuTru", {
+          type: "geojson",
+          data: `http://14.248.94.155:46928/api/diaDiem/getAllDiemLuuTruBanDo`,
+        });
+
+        for (const feature of dataDsLuuTruGeoJson.features) {
+          // Add a layer for this symbol type if it hasn't been added already.
+          if (!map.getLayer(`poi-${feature.properties.idDanhMuc}`)) {
+            map.addLayer({
+              id: `poi-${feature.properties.idDanhMuc}`,
+              type: "symbol",
+              source: "luuTru",
+              layout: {
+                "icon-image": `img${feature.properties.idDanhMuc}`,
+                // "icon-allow-overlap": true,
+                "icon-size": 0.05,
+                "text-field": ["get", "tenDiaDiem"],
+                "text-size": 11,
+                "text-offset": [0, 2],
+                "icon-offset": [0, -17],
+              },
+              paint: {
+                "text-color": "#004eff",
+                "text-halo-color": "#fff",
+                "text-halo-width": 2,
+              },
+              filter: ["==", "idDanhMuc", feature.properties.idDanhMuc],
+            });
+
+            map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
+              const coordinates = e.features[0].geometry.coordinates.slice();
+              const html = `<div>
+            <img src="${
+              e.features[0].properties.hinhAnh.indexOf("https") != -1
+                ? e.features[0].properties.hinhAnh
+                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+            }" alt="" style="min-width: 280px;min-height: 120px;">
+            <div style="
+                padding: 20px;
+            ">
+                <p style="
+        color: #d32f2f;
+        font-size: 11px;
+        text-transform: uppercase;
+    ">${e.features[0].properties.tenDanhMuc}</p>
+                <a href="/destination-view?${
+                  e.features[0].properties.idDiaDiem
+                }" style="
+        color: #333;
+        font-size: 18px;
+        width: 240px;
+        font-weight: 500;
+    ">${e.features[0].properties.tenDiaDiem}</a>
+                <p style="
+        font-size: 11px;
+        color: #333;
+        font-weight: 400;
+    ">${e.features[0].properties.gioMoCua} - ${
+                e.features[0].properties.gioDongCua
+              }</p>
+                <p style="
+        width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #333;
+    ">${e.features[0].properties.moTa}</p>
+            </div>
+        </div>`;
+
+              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              }
+
+              map.flyTo({
+                center: e.features[0].geometry.coordinates,
+                essential: true,
+                duration: 1000,
+              });
+
+              new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(html)
+                .addTo(map);
+            });
+
+            map.on("mouseenter", `poi-${feature.properties.idDanhMuc}`, () => {
+              map.getCanvas().style.cursor = "pointer";
+            });
+
+            map.on("mouseleave", `poi-${feature.properties.idDanhMuc}`, () => {
+              map.getCanvas().style.cursor = "";
+            });
+          }
+        }
+
+        map.addSource("amThuc", {
+          type: "geojson",
+          data: `http://14.248.94.155:46928/api/diaDiem/getAllDiemAmThucBanDo`,
+        });
+
+        for (const feature of dataDsAmThucGeoJson.features) {
+          // Add a layer for this symbol type if it hasn't been added already.
+          if (!map.getLayer(`poi-${feature.properties.idDanhMuc}`)) {
+            map.addLayer({
+              id: `poi-${feature.properties.idDanhMuc}`,
+              type: "symbol",
+              source: "amThuc",
+              layout: {
+                "icon-image": `img${feature.properties.idDanhMuc}`,
+                // "icon-allow-overlap": true,
+                "icon-size": 0.05,
+                "text-field": ["get", "tenDiaDiem"],
+                "text-size": 11,
+                "text-offset": [0, 2],
+                "icon-offset": [0, -17],
+              },
+              paint: {
+                "text-color": "#004eff",
+                "text-halo-color": "#fff",
+                "text-halo-width": 2,
+              },
+              filter: ["==", "idDanhMuc", feature.properties.idDanhMuc],
+            });
+
+            map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
+              const coordinates = e.features[0].geometry.coordinates.slice();
+              const html = `<div>
+            <img src="${
+              e.features[0].properties.hinhAnh.indexOf("https") != -1
+                ? e.features[0].properties.hinhAnh
+                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+            }" alt="" style="min-width: 280px;min-height: 120px;">
+            <div style="
+                padding: 20px;
+            ">
+                <p style="
+        color: #d32f2f;
+        font-size: 11px;
+        text-transform: uppercase;
+    ">${e.features[0].properties.tenDanhMuc}</p>
+                <a href="/destination-view?${
+                  e.features[0].properties.idDiaDiem
+                }" style="
+        color: #333;
+        font-size: 18px;
+        width: 240px;
+        font-weight: 500;
+    ">${e.features[0].properties.tenDiaDiem}</a>
+                <p style="
+        font-size: 11px;
+        color: #333;
+        font-weight: 400;
+    ">${e.features[0].properties.gioMoCua} - ${
+                e.features[0].properties.gioDongCua
+              }</p>
+                <p style="
+        width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #333;
+    ">${e.features[0].properties.moTa}</p>
+            </div>
+        </div>`;
+
+              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              }
+
+              map.flyTo({
+                center: e.features[0].geometry.coordinates,
+                essential: true,
+                duration: 1000,
+              });
+
+              new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(html)
+                .addTo(map);
+            });
+
+            map.on("mouseenter", `poi-${feature.properties.idDanhMuc}`, () => {
+              map.getCanvas().style.cursor = "pointer";
+            });
+
+            map.on("mouseleave", `poi-${feature.properties.idDanhMuc}`, () => {
+              map.getCanvas().style.cursor = "";
+            });
+          }
+        }
+
+        map.addSource("phuongTien", {
+          type: "geojson",
+          data: `http://14.248.94.155:46928/api/diaDiem/getAllDiemPhuongTienBanDo`,
+        });
+
+        for (const feature of dataDsPhuongTienGeoJson.features) {
+          // Add a layer for this symbol type if it hasn't been added already.
+          if (!map.getLayer(`poi-${feature.properties.idDanhMuc}`)) {
+            map.addLayer({
+              id: `poi-${feature.properties.idDanhMuc}`,
+              type: "symbol",
+              source: "phuongTien",
+              layout: {
+                "icon-image": `img${feature.properties.idDanhMuc}`,
+                // "icon-allow-overlap": true,
+                "icon-size": 0.05,
+                "text-field": ["get", "tenDiaDiem"],
+                "text-size": 11,
+                "text-offset": [0, 2],
+                "icon-offset": [0, -17],
+              },
+              paint: {
+                "text-color": "#004eff",
+                "text-halo-color": "#fff",
+                "text-halo-width": 2,
+              },
+              filter: ["==", "idDanhMuc", feature.properties.idDanhMuc],
+            });
+
+            map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
+              const coordinates = e.features[0].geometry.coordinates.slice();
+              const html = `<div>
+            <img src="${
+              e.features[0].properties.hinhAnh.indexOf("https") != -1
+                ? e.features[0].properties.hinhAnh
+                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+            }" alt="" style="min-width: 280px;min-height: 120px;">
+            <div style="
+                padding: 20px;
+            ">
+                <p style="
+        color: #d32f2f;
+        font-size: 11px;
+        text-transform: uppercase;
+    ">${e.features[0].properties.tenDanhMuc}</p>
+                <a href="/destination-view?${
+                  e.features[0].properties.idDiaDiem
+                }" style="
+        color: #333;
+        font-size: 18px;
+        width: 240px;
+        font-weight: 500;
+    ">${e.features[0].properties.tenDiaDiem}</a>
+                <p style="
+        font-size: 11px;
+        color: #333;
+        font-weight: 400;
+    ">${e.features[0].properties.gioMoCua} - ${
+                e.features[0].properties.gioDongCua
+              }</p>
                 <p style="
         width: 240px;
         overflow: hidden;
@@ -370,10 +821,11 @@ const ExtraComponent = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${e.properties.hinhAnh.indexOf("https") != -1
-        ? e.properties.hinhAnh
-        : `http://14.248.94.155:9022/${e.properties.hinhAnh}`
-      }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.properties.hinhAnh.indexOf("https") != -1
+                  ? e.properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -467,14 +919,8 @@ const ExtraComponent = () => {
   };
 
   const xemAnhVeTinh = async () => {
-    var thoiGianBatDau =
-      document.getElementById("thoiGianBatDau").value == ""
-        ? formatDate(getPreviousDay(new Date()))
-        : document.getElementById("thoiGianBatDau").value;
-    var thoiGianKetThuc =
-      document.getElementById("thoiGianKetThuc").value == ""
-        ? formatDate(new Date())
-        : document.getElementById("thoiGianKetThuc").value;
+    var thoiGianBatDau = formatDate(new Date(startDate));
+    var thoiGianKetThuc = formatDate(new Date(endDate));
     var loaiAnh = document.getElementById("loaiAnh").value;
     var doPhuMay =
       document.getElementById("doPhuMay").value == ""
@@ -564,6 +1010,10 @@ const ExtraComponent = () => {
               top: 12,
               left: 52,
               boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
+              width: 300,
+              height: "calc(100vh - 104px - 100px)",
+              overflowY: "scroll",
+              paddingBottom: 12,
             }}
           >
             <div
@@ -599,72 +1049,296 @@ const ExtraComponent = () => {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-
-            {dsDanhMucDiaDiemDuLich.map(
-              (v, k) =>
-                dsDiemDuLich.features.filter(
-                  (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                ).length > 0 && (
-                  <div
-                    key={k}
-                    className="d-flex align-items-center"
-                    style={{ padding: "8px 12px" }}
-                  >
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        name={`poi-${v.idDanhMucDiaDiem}`}
-                        id={`poi-${v.idDanhMucDiaDiem}`}
-                        value={`poi-${v.idDanhMucDiaDiem}`}
-                        style={{
-                          marginRight: 8,
-                        }}
-                        onClick={btDiaDiemDuLich}
-                        defaultChecked={true}
-                      />
-                      <img
-                        style={{
-                          width: 25,
-                          height: 25,
-                          marginRight: 8,
-                        }}
-                        src={
-                          v.tenDanhMuc == "Văn hóa - lịch sử"
-                            ? "https://cdn-icons-png.flaticon.com/512/5778/5778440.png"
-                            : v.tenDanhMuc == "Địa điểm tâm linh"
+            <p
+              style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                padding: 8,
+                color: "#050505",
+                margin: "0px 12px",
+              }}
+            >
+              Địa điểm du lịch
+            </p>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              {dsDanhMucDiaDiemDuLich.map(
+                (v, k) =>
+                  dsDiemDuLich.features.filter(
+                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                  ).length > 0 && (
+                    <div
+                      key={k}
+                      className="d-flex align-items-center"
+                      style={{ padding: "8px 12px" }}
+                    >
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name={`poi-${v.idDanhMucDiaDiem}`}
+                          id={`poi-${v.idDanhMucDiaDiem}`}
+                          value={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            marginRight: 8,
+                          }}
+                          onClick={btDiaDiemDuLich}
+                          defaultChecked={true}
+                        />
+                        <img
+                          style={{
+                            width: 25,
+                            height: 25,
+                            marginRight: 8,
+                          }}
+                          src={
+                            v.tenDanhMuc == "Văn hóa - lịch sử"
+                              ? "https://cdn-icons-png.flaticon.com/512/5778/5778440.png"
+                              : v.tenDanhMuc == "Địa điểm tâm linh"
                               ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
                               : v.tenDanhMuc == "Du lịch khám phá"
-                                ? "https://iconape.com/wp-content/png_logo_vector/google-discover.png"
-                                : v.tenDanhMuc == "Du lịch sinh thái"
-                                  ? "https://images.squarespace-cdn.com/content/v1/5b07c60a96e76f9f641cdad6/1626769467137-PUUVF03Q49KZMCVTQ1PC/Conservation.png"
-                                  : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
-                                    ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
-                                    : v.tenDanhMuc == "Công trình kiến trúc"
-                                      ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
-                                      : v.tenDanhMuc == "Du lịch giải trí"
-                                        ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
-                                        : v.tenDanhMuc == "Thương mại - ẩm thực"
-                                          ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
-                                          : v.tenDanhMuc == "Khu bảo tồn"
-                                            ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
-                                            : ""
-                        }
-                        alt=""
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor={`poi-${v.idDanhMucDiaDiem}`}
-                        style={{
-                          margin: 0,
-                        }}
-                      >
-                        {v.tenDanhMuc}
-                      </label>
+                              ? "https://iconape.com/wp-content/png_logo_vector/google-discover.png"
+                              : v.tenDanhMuc == "Du lịch sinh thái"
+                              ? "https://cdn-icons-png.flaticon.com/512/3104/3104941.png"
+                              : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
+                              ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
+                              : v.tenDanhMuc == "Công trình kiến trúc"
+                              ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
+                              : v.tenDanhMuc == "Du lịch giải trí"
+                              ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
+                              : v.tenDanhMuc == "Thương mại - ẩm thực"
+                              ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
+                              : v.tenDanhMuc == "Khu bảo tồn"
+                              ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
+                              : ""
+                          }
+                          alt=""
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            margin: 0,
+                          }}
+                        >
+                          {v.tenDanhMuc}
+                        </label>
+                      </div>
                     </div>
-                  </div>
-                )
-            )}
+                  )
+              )}
+            </div>
+            <p
+              style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                padding: 8,
+                color: "#050505",
+                margin: "0px 12px",
+              }}
+            >
+              Lưu trú
+            </p>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              {dsDanhMucLuuTru.map(
+                (v, k) =>
+                  dsLuuTru.features.filter(
+                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                  ).length > 0 && (
+                    <div
+                      key={k}
+                      className="d-flex align-items-center"
+                      style={{ padding: "8px 12px" }}
+                    >
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name={`poi-${v.idDanhMucDiaDiem}`}
+                          id={`poi-${v.idDanhMucDiaDiem}`}
+                          value={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            marginRight: 8,
+                          }}
+                          onClick={btDiaDiemDuLich}
+                          defaultChecked={true}
+                        />
+                        <img
+                          style={{
+                            width: 25,
+                            height: 25,
+                            marginRight: 8,
+                          }}
+                          src={
+                            v.tenDanhMuc == "Homestay"
+                              ? "https://cdn-icons-png.flaticon.com/512/7059/7059852.png"
+                              : v.tenDanhMuc == "Khách sạn"
+                              ? "https://cdn-icons-png.flaticon.com/512/235/235889.png"
+                              : v.tenDanhMuc == "Nhà nghỉ"
+                              ? "https://cdn3.iconfinder.com/data/icons/flat-building-1/70/1-512.png"
+                              : ""
+                          }
+                          alt=""
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            margin: 0,
+                          }}
+                        >
+                          {v.tenDanhMuc}
+                        </label>
+                      </div>
+                    </div>
+                  )
+              )}
+            </div>
+            <p
+              style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                padding: 8,
+                color: "#050505",
+                margin: "0px 12px",
+              }}
+            >
+              Ẩm thực
+            </p>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              {dsDanhMucAmThuc.map(
+                (v, k) =>
+                  dsAmThuc.features.filter(
+                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                  ).length > 0 && (
+                    <div
+                      key={k}
+                      className="d-flex align-items-center"
+                      style={{ padding: "8px 12px" }}
+                    >
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name={`poi-${v.idDanhMucDiaDiem}`}
+                          id={`poi-${v.idDanhMucDiaDiem}`}
+                          value={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            marginRight: 8,
+                          }}
+                          onClick={btDiaDiemDuLich}
+                          defaultChecked={true}
+                        />
+                        <img
+                          style={{
+                            width: 25,
+                            height: 25,
+                            marginRight: 8,
+                          }}
+                          src={
+                            v.tenDanhMuc == "Nhà hàng"
+                              ? "https://cdn-icons-png.flaticon.com/512/4287/4287725.png"
+                              : ""
+                          }
+                          alt=""
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            margin: 0,
+                          }}
+                        >
+                          {v.tenDanhMuc}
+                        </label>
+                      </div>
+                    </div>
+                  )
+              )}
+            </div>
+            <p
+              style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                padding: 8,
+                color: "#050505",
+                margin: "0px 12px",
+              }}
+            >
+              Dịch vụ thuê xe
+            </p>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              {dsDanhMucPhuongTien.map(
+                (v, k) =>
+                  dsPhuongTien.features.filter(
+                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                  ).length > 0 && (
+                    <div
+                      key={k}
+                      className="d-flex align-items-center"
+                      style={{ padding: "8px 12px" }}
+                    >
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name={`poi-${v.idDanhMucDiaDiem}`}
+                          id={`poi-${v.idDanhMucDiaDiem}`}
+                          value={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            marginRight: 8,
+                          }}
+                          onClick={btDiaDiemDuLich}
+                          defaultChecked={true}
+                        />
+                        <img
+                          style={{
+                            width: 25,
+                            height: 25,
+                            marginRight: 8,
+                          }}
+                          src={
+                            v.tenDanhMuc == "Xe máy"
+                              ? "https://cdn-icons-png.flaticon.com/512/1986/1986937.png"
+                              : v.tenDanhMuc == "Xe đạp"
+                              ? "https://cdn-icons-png.flaticon.com/512/2972/2972185.png"
+                              : v.tenDanhMuc == "Ô tô"
+                              ? "https://cdn-icons-png.flaticon.com/512/2554/2554936.png"
+                              : v.tenDanhMuc == "Xe điện"
+                              ? "https://cdn-icons-png.flaticon.com/512/1574/1574055.png"
+                              : ""
+                          }
+                          alt=""
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            margin: 0,
+                          }}
+                        >
+                          {v.tenDanhMuc}
+                        </label>
+                      </div>
+                    </div>
+                  )
+              )}
+            </div>
           </div>
         )}
         {isDanhSachBanDo && (
@@ -1186,7 +1860,10 @@ const ExtraComponent = () => {
           }}
         >
           <button
-            onClick={() => setIsLopBanDo(true)}
+            onClick={() => {
+              setIsDanhSachBanDo(false);
+              setIsLopBanDo(true);
+            }}
             style={{
               width: 29,
               height: 29,
@@ -1212,7 +1889,10 @@ const ExtraComponent = () => {
           }}
         >
           <button
-            onClick={() => setIsDanhSachBanDo(true)}
+            onClick={() => {
+              setIsLopBanDo(false);
+              setIsDanhSachBanDo(true);
+            }}
             style={{
               width: 29,
               height: 29,
