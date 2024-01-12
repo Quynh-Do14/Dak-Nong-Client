@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { showImageCommon } from "../../infratructure/utils/helper";
+import { showImageCommon, translationData } from "../../infratructure/utils/helper";
 import Constants from "../../core/common/constant";
 import { ROUTE_PATH } from "../../core/common/appRouter";
 import useTranslate from "../../core/common/hook/useTranslate";
@@ -43,14 +43,19 @@ const Destination = ({ data = [] }) => {
                   <ul>
                     <li>
                       <i className="fa fa-star pr-2"></i>
-                      {it.soSaoTrungBinh} ({it.luotXem} Lượt xem){" "}
+                      {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}){" "}
                     </li>
                     <li>
                       <span>
                         {" "}
-                        {it.giaVe === Constants.FreePrice || Constants.Undefined
-                          ? Constants.FreePrice
-                          : `Chỉ từ: ${it.giaVe}`}{" "}
+                        {it.giaVe === Constants.FreePrice ?
+                          (translationData(it.giaVe, it.giaVeUS))
+                          :
+                          it.giaVe == null
+                            ? translate("free")
+                            : `Chỉ từ: ${it.giaVe}`
+                        }
+                        {" "}
                       </span>
                     </li>
                   </ul>
@@ -58,11 +63,13 @@ const Destination = ({ data = [] }) => {
                     href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}
                     className="deals-info-link text-truncate-origin"
                   >
-                    {it.tenDiaDiem}{" "}
+                    {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
+                    {" "}
                   </a>
                   <p className="text-truncate-address-destination">
                     <i className="flaticon-map"></i>
-                    {it.diaChi.replace(", tỉnh Đăk Nông", "")}{" "}
+                    {translationData(it.diaChi, it.diaChiUS)}
+                    {" "}
                   </p>
                 </div>
               </div>

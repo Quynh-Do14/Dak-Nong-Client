@@ -1,42 +1,76 @@
-import React from 'react'
-import { showImageCommon } from '../../infratructure/utils/helper'
-import { ROUTE_PATH } from '../../core/common/appRouter'
+import React, { useState } from "react";
+import { showImageCommon, translationData } from "../../infratructure/utils/helper";
+import Constants from "../../core/common/constant";
+import { ROUTE_PATH } from "../../core/common/appRouter";
+import useTranslate from "../../core/common/hook/useTranslate";
 
 const Specialty = ({ data = [] }) => {
+    const { translate } = useTranslate();
     return (
-        <section className="add bg-grey">
-            <div className="add-spring">
-                <img src="assets/images/shape/spring.png" alt="shape" />
-            </div>
-            <div className="container">
+        <section className="deals bg-white">
+            <div className="container-fluid padding-common">
                 <div className="row">
+                    <div className="col-lg-12">
+                        <div className="align-title">
+                            <h3>{translate("specialty")} </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="container-fluid padding-common">
+                <div className="deals-slider owl-carousel owl-theme row">
                     {data.map((it, index) => (
-                        <div key={index} className="col-lg-6 pointer">
-                            <a href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}>
-                                <div className="video-container" >
-                                    <div className="add-image">
-                                        <img src={
-                                            it.hinhAnh?.indexOf("http") == -1
-                                                ?
-                                                showImageCommon(it.hinhAnh)
-                                                :
-                                                it.hinhAnh
-                                        } className='img-page' alt="image" />
-                                    </div>
-                                    <div className={`add-content ${index == 1 ? "add-content2 wow fadeInUp" : "wow fadeInDown"}`} data-wow-delay="00ms" data-wow-duration="1500ms">
-                                        <p>{it.luotXem} Lượt xem  </p>
-                                        <h5>{it.tenDiaDiem} </h5>
-                                        <h6>{it.diaChi} </h6>
-                                        <p className='text-custom mt-10 text-truncate-description'>{it.moTa} </p>
-                                    </div>
+                        <div key={index} className="pl-10 pr-10 mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
+                            <div className="deals-content ">
+                                <div className="deals-image custom-image">
+                                    <a href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}>
+                                        <img
+                                            src={
+                                                it.hinhAnh?.indexOf("http") == -1
+                                                    ? showImageCommon(it.hinhAnh)
+                                                    : it.hinhAnh
+                                            }
+                                            alt="image"
+                                            className="img-page"
+                                        />
+                                    </a>
                                 </div>
-                            </a>
+                                <div className="deals-info">
+                                    <ul>
+                                        <li>
+                                            <i className="fa fa-star pr-2"></i>
+                                            {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}){" "}
+                                        </li>
+                                        <li>
+                                            {/* <span>
+                                                {" "}
+                                                {it.giaVe === Constants.FreePrice || Constants.Undefined
+                                                    ? Constants.FreePrice
+                                                    : `Chỉ từ: ${it.giaVe}`}{" "}
+                                            </span> */}
+                                        </li>
+                                    </ul>
+                                    <a
+                                        href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}
+                                        className="deals-info-link text-truncate-origin"
+                                    >
+                                        {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
+                                        {" "}
+                                    </a>
+                                    <p className="text-truncate-address-destination">
+                                        <i className="flaticon-map"></i>
+                                        {translationData(it.diaChi, it.diaChiUS)}
+                                        {" "}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Specialty
+export default Specialty;

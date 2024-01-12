@@ -75,8 +75,13 @@ export const convertNumber = (number) => {
 
     }
 }
-export const translation = (translation) => {
-    console.log('LanguageState',LanguageState);
-    console.log("translations", translations?.[LanguageState]?.[translation]);
-    return translations?.[LanguageState]?.homePage
+export const translationData = (vi, en) => {
+    const storegrage = sessionStorage.getItem("language");
+    if (storegrage === "vi") {
+        return vi;
+    };
+    if (storegrage === "en") {
+        return en;
+    };
+    return vi;
 }

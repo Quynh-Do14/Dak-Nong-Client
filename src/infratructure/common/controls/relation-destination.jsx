@@ -1,12 +1,16 @@
 import React from 'react'
 import Constants from '../../../core/common/constant'
 import { ViewStarCommon } from './view-star';
-import { convertNumber, showImageCommon } from '../../utils/helper';
+import { convertNumber, showImageCommon, translationData } from '../../utils/helper';
 import { ROUTE_PATH } from '../../../core/common/appRouter';
+import useTranslate from '../../../core/common/hook/useTranslate';
 
 const RelationDestination = (props) => {
     const { title, data = [] } = props;
+    const { translate } = useTranslate();
+
     return (
+
         <div>
             <div className="pkg-common-title mt-30">
                 <h4>{title}</h4>
@@ -28,15 +32,26 @@ const RelationDestination = (props) => {
                             <div className="activities-content">
                                 <div className="tour-package-info">
                                     <div className="rating">
-                                        <p><i className="fa fa-star pr-2"></i> {it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </p>
+                                        <p><i className="fa fa-star pr-2"></i> {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}) </p>
                                     </div>
                                     <div className="doller">
-                                        <span> {it.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${it.giaVe}`} </span>
+                                        <span>
+                                            {it.giaVe === Constants.FreePrice ?
+                                                (translationData(it.giaVe, it.giaVeUS))
+                                                :
+                                                it.giaVe == null
+                                                    ? translate("free")
+                                                    : `Chỉ từ: ${it.giaVe}`
+                                            } </span>
                                     </div>
                                 </div>
-                                <a className='text-truncate-origin' href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
+                                <a className='text-truncate-origin' href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
+                                    {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
+                                </a>
                                 <ul>
-                                    <h6 className='text-truncate-address'><i className="flaticon-placeholder"></i>{it.diaChi} </h6>
+                                    <h6 className='text-truncate-address'><i className="flaticon-placeholder"></i>
+                                        {translationData(it.diaChi, it.diaChiUS)}
+                                    </h6>
                                 </ul>
                             </div>
                         </div>

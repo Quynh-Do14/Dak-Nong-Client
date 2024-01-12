@@ -4,11 +4,12 @@ import { ROUTE_PATH } from '../../core/common/appRouter';
 import MainLayout from '../../infratructure/common/layout/main-layout';
 import api from '../../infratructure/api';
 import Constants from '../../core/common/constant';
-import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper';
+import { convertDateOnly, showImageCommon, translationData } from '../../infratructure/utils/helper';
 import PaginationCommon from '../../infratructure/common/controls/pagination';
 import LoadingFullPage from '../../infratructure/common/controls/loading';
 import SearchTour from './search';
 import SearchFestival from './search';
+import useTranslate from '../../core/common/hook/useTranslate';
 let timeout
 const FestivalPage = () => {
     const [listLeHoi, setListLeHoi] = useState([]);
@@ -21,6 +22,8 @@ const FestivalPage = () => {
 
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+
+    const { translate } = useTranslate();
 
     const onGetListLeHoiAsync = async ({ searchText = "", limit = pageSize, page = 1, startDate = "", endDate = "" }) => {
         const response = await api.getAllDiaDiem(
@@ -46,9 +49,9 @@ const FestivalPage = () => {
         }, Constants.DEBOUNCE_SEARCH);
     };
     const onChangeStartDate = async (e) => {
-        setStartDate(e  );
+        setStartDate(e);
         if (endDate != "") {
-            await onSearch(searchText, pageSize, changePage, e  , endDate).then((_) => { });
+            await onSearch(searchText, pageSize, changePage, e, endDate).then((_) => { });
         }
     }
 
@@ -85,35 +88,32 @@ const FestivalPage = () => {
                 onChangeEndDate={onChangeEndDate}
             />
             <section className="deals position-relative">
-                <div className="container container-fluid padding-common">
+                <div className="container-fluid padding-common">
                     <div className="row">
                         {listLeHoi.map((it, index) => (
-                            <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-xs-12">
-                                <div className="tour-package-container">
-                                    <div className="activities-image">
-                                        <a href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}><img src={
+                            <div key={index} className="pl-10 pr-10 mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
+                                <div className="activites-container">
+                                    <div className="activities-image position-relative">
+                                        <img src={
                                             it.hinhAnh?.indexOf("http") == -1
                                                 ?
                                                 showImageCommon(it.hinhAnh)
                                                 :
                                                 it.hinhAnh
-                                        } className='img-page' alt="photo" /></a>
+                                        } className='img-page' alt="photo" />
                                     </div>
                                     <div className="activities-content">
-                                        <div className="tour-package-info">
-                                            <div className="rating">
-                                                <p><i className="fa fa-star"></i> {it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </p>
-                                            </div>
-                                        </div>
+                                        <a className='text-truncate-title-festival position-relative' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>
+                                            {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
+                                        </a>
                                         <ul className='position-relative'>
-                                            <li><i className="fa fa-calendar mr-10"></i>{convertDateOnly(it.gioMoCua)} </li>
-                                            -
-                                            <li><i className="fa fa-calendar mr-10"></i>{convertDateOnly(it.gioDongCua)} </li>
+                                            <li className='d-flex align-items-center'><i className="fa fa-calendar mr-10"></i>{it.gioMoCua} </li>
+                                            {it.gioDongCua && "-"}
+                                            {it.gioDongCua && <li><i className="fa fa-calendar mr-10"></i>{it.gioDongCua} </li>}
                                         </ul>
-                                        <a className='text-truncate-origin' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
-                                        <ul>
-                                            <h6 className='text-truncate-address'><i className="flaticon-placeholder"></i>{it.diaChi} </h6>
-                                        </ul>
+                                        <p className='text-truncate-description'>
+                                            {translationData(it.moTa, it.moTaUS)}
+                                        </p>
                                     </div>
                                 </div>
                             </div>

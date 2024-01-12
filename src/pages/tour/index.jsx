@@ -4,10 +4,11 @@ import { ROUTE_PATH } from "../../core/common/appRouter";
 import MainLayout from "../../infratructure/common/layout/main-layout";
 import api from "../../infratructure/api";
 import Constants from "../../core/common/constant";
-import { showImageCommon } from "../../infratructure/utils/helper";
+import { showImageCommon, translationData } from "../../infratructure/utils/helper";
 import PaginationCommon from "../../infratructure/common/controls/pagination";
 import LoadingFullPage from "../../infratructure/common/controls/loading";
 import SearchTour from "./search";
+import useTranslate from "../../core/common/hook/useTranslate";
 let timeout;
 const TourPage = () => {
   const [listDiaDiem, setListDiaDiem] = useState([]);
@@ -26,6 +27,8 @@ const TourPage = () => {
   const [searchDanhMuc, setSearchDanhMuc] = useState(
     Constants.CategoryConfig.Location.value
   );
+
+  const { translate } = useTranslate();
 
   const onGetListDiemDenAsync = async ({
     searchText = "",
@@ -186,15 +189,19 @@ const TourPage = () => {
                     <ul>
                       <li>
                         <i className="fa fa-star pr-2"></i>
-                        {it.soSaoTrungBinh} ({it.luotXem} Lượt xem){" "}
+                        {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}){" "}
                       </li>
                       <li>
                         <span>
                           {" "}
-                          {it.giaVe === Constants.FreePrice ||
-                            Constants.Undefined
-                            ? Constants.FreePrice
-                            : `Chỉ từ: ${it.giaVe}`}{" "}
+                          {it.giaVe === Constants.FreePrice ?
+                            (translationData(it.giaVe, it.giaVeUS))
+                            :
+                            it.giaVe == null
+                              ? translate("free")
+                              : `Chỉ từ: ${it.giaVe}`
+                          }
+                          {" "}
                         </span>
                       </li>
                     </ul>
@@ -202,11 +209,13 @@ const TourPage = () => {
                       href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}
                       className="deals-info-link text-truncate-origin"
                     >
-                      {it.tenDiaDiem}{" "}
+                      {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
+                      {" "}
                     </a>
                     <p className="text-truncate-address-destination">
                       <i className="flaticon-map"></i>
-                      {it.diaChi}{" "}
+                      {translationData(it.diaChi, it.diaChiUS)}
+                      {" "}
                     </p>
                   </div>
                 </div>

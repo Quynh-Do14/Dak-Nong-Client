@@ -4,12 +4,13 @@ import { ROUTE_PATH } from '../../core/common/appRouter';
 import MainLayout from '../../infratructure/common/layout/main-layout';
 import api from '../../infratructure/api';
 import Constants from '../../core/common/constant';
-import { convertDateOnly, convertTimeOnly, showImageCommon } from '../../infratructure/utils/helper';
+import { convertDateOnly, convertTimeOnly, showImageCommon, translationData } from '../../infratructure/utils/helper';
 import PaginationCommon from '../../infratructure/common/controls/pagination';
 import LoadingFullPage from '../../infratructure/common/controls/loading';
 import SearchTour from './search';
 import SearchFestival from './search';
 import SearchSpecialty from './search';
+import useTranslate from '../../core/common/hook/useTranslate';
 let timeout
 const SpecialtyPage = () => {
     const [listDacSan, setListDacSan] = useState([]);
@@ -21,6 +22,7 @@ const SpecialtyPage = () => {
     const [qH, setQH] = useState("");
     const [searchText, setSearchText] = useState("");
     const [dsQuanHuyen, setDsQuanHuyen] = useState([])
+    const { translate } = useTranslate();
 
     const onGetListDacSanAsync = async ({ searchText = "", limit = pageSize, page = 1, qH = "" }) => {
         const response = await api.getAllDiaDiem(
@@ -89,44 +91,54 @@ const SpecialtyPage = () => {
             />
             <section className="deals position-relative">
                 <div className="container-fluid padding-common">
-                    <div className="row">
+                    <div className="deals-slider owl-carousel owl-theme row">
                         {listDacSan.map((it, index) => (
-                            <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-xs-12">
-                                <div className="tour-package-container">
-                                    <div className="activities-image">
-                                        <a href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}><img src={
-                                            it.hinhAnh?.indexOf("http") == -1
-                                                ?
-                                                showImageCommon(it.hinhAnh)
-                                                :
-                                                it.hinhAnh
-                                        } className='img-page' alt="photo" /></a>
+                            <div key={index} className="pl-10 pr-10 mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
+                                <div className="deals-content ">
+                                    <div className="deals-image custom-image">
+                                        <a href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}>
+                                            <img
+                                                src={
+                                                    it.hinhAnh?.indexOf("http") == -1
+                                                        ? showImageCommon(it.hinhAnh)
+                                                        : it.hinhAnh
+                                                }
+                                                alt="image"
+                                                className="img-page"
+                                            />
+                                        </a>
                                     </div>
-                                    <div className="activities-content">
-                                        <div className="tour-package-info">
-                                            <div className="rating">
-                                                <p><i className="fa fa-star"></i> {it.soSaoTrungBinh} ({it.luotXem} Lượt xem) </p>
-                                            </div>
-                                        </div>
-                                        <ul className='position-relative'>
-                                            <li><i className="fa fa-clock"></i>{convertTimeOnly(it.gioMoCua)} </li>
-                                            -
-                                            <li><i className="fa fa-clock"></i>{convertTimeOnly(it.gioDongCua)} </li>
-                                        </ul>
-                                        <a className='text-truncate-origin' href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}>{it.tenDiaDiem}</a>
+                                    <div className="deals-info">
                                         <ul>
-                                            <h6 className='text-truncate-address'><i className="flaticon-placeholder"></i>{it.diaChi} </h6>
+                                            <li>
+                                                <i className="fa fa-star pr-2"></i>
+                                                {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}){" "}
+                                            </li>
+                                            {/* <li>
+                                                <span>
+                                                    {" "}
+                                                    {it.giaVe === Constants.FreePrice || Constants.Undefined
+                                                        ? Constants.FreePrice
+                                                        : `Chỉ từ: ${it.giaVe}`}{" "}
+                                                </span>
+                                            </li> */}
                                         </ul>
+                                        <a
+                                            href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}
+                                            className="deals-info-link text-truncate-origin"
+                                        >
+                                            {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
+                                            {" "}
+                                        </a>
+                                        <p className="text-truncate-address-destination">
+                                            <i className="flaticon-map"></i>
+                                            {translationData(it.diaChi, it.diaChiUS)}
+                                            {" "}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         ))}
-                        <PaginationCommon
-                            changePage={changePage}
-                            onPreviousPage={onPreviousPage}
-                            onNextPage={onNextPage}
-                            pagination={pagination}
-                        />
                     </div>
                 </div>
             </section>

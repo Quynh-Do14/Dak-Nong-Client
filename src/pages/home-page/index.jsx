@@ -4,7 +4,7 @@ import Constants from "../../core/common/constant";
 import api from "../../infratructure/api";
 import Tour from "./tour";
 import Article from "./article";
-import { showImageCommon } from "../../infratructure/utils/helper";
+import { showImageCommon, translationData } from "../../infratructure/utils/helper";
 import Destination from "./destination";
 import Festival from "./festival";
 import SlideBanner from "../../infratructure/common/controls/slide-banner";
@@ -64,7 +64,7 @@ const HomePage = () => {
 
   const onGetListDacSanAsync = async () => {
     const response = await api.getAllDiaDiem(
-      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Specialty.value}&${Constants.Params.limit}=2`,
+      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Specialty.value}&${Constants.Params.limit}=4`,
       setLoading
     );
     setListDacSan(response.data.diaDiems);
@@ -74,7 +74,7 @@ const HomePage = () => {
 
   const onGetListLeHoiAsync = async () => {
     const response = await api.getAllDiaDiem(
-      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Festival.value}&${Constants.Params.limit}=3`,
+      `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Festival.value}&${Constants.Params.limit}=4`,
       setLoading
     );
     setListLeHoi(response.data.diaDiems);
@@ -443,43 +443,47 @@ const HomePage = () => {
             {listDiaDiem.map((it, index) => (
               <div key={index} className="mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                 <div className="portfolio-content">
-                  <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
-                    <div className="portfolio-info">
-                      <img
-                        src={
-                          it?.hinhAnh?.indexOf("http") == -1
-                            ? showImageCommon(it?.hinhAnh)
-                            : it?.hinhAnh
-                        }
-                        alt="img"
-                      />
-                      <div className="personal-info">
-                        <ul>
-                          <li>
-                            <i className="fa fa-star"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star"></i>
-                          </li>
-                          <li>
-                            <span>5.0</span>
-                          </li>
-                        </ul>
-                        <h6 className="text-truncate-title-destination-2">{it.tenDiaDiem}</h6>
-                        <span>{it.tenQuanHuyen}</span>
-                      </div>
+                  <div className="portfolio-info">
+                    <img
+                      src={
+                        it?.hinhAnh?.indexOf("http") == -1
+                          ? showImageCommon(it?.hinhAnh)
+                          : it?.hinhAnh
+                      }
+                      alt="img"
+                    />
+                    <div className="personal-info">
+                      <ul>
+                        <li>
+                          <i className="fa fa-star"></i>
+                        </li>
+                        <li>
+                          <i className="fa fa-star"></i>
+                        </li>
+                        <li>
+                          <i className="fa fa-star"></i>
+                        </li>
+                        <li>
+                          <i className="fa fa-star"></i>
+                        </li>
+                        <li>
+                          <i className="fa fa-star"></i>
+                        </li>
+                        <li>
+                          <span>5.0</span>
+                        </li>
+                      </ul>
+                      <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
+                        <h6 className="text-truncate-title-destination-2">
+                          {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
+                        </h6>
+                      </a>
+                      <span>{it.tenQuanHuyen}</span>
                     </div>
-                  </a>
-                  <p className="text-truncate-description">{it.moTa} </p>
+                  </div>
+                  <p className="text-truncate-description">
+                    {translationData(it.moTa, it.moTaUS)}
+                  </p>
                   <div className="qutetion">
                     <img
                       src="assets/images/icons/qutation.png"

@@ -24,7 +24,6 @@ const InputSearch = (props) => {
             setIsFocused(false);
         }
     };
-    console.log("value1", value);
     return (
         <form className={`service-form-option input-container ${isFocused ? 'focused' : ''}`}>
             <label className='label-custom'>{translate(label)} </label>
