@@ -162,3 +162,12 @@ span.anticon.anticon-info-circle.color-fail.font-size-icon {
   font-size: 30px;
   color: #e50000 !important;
 }
+
+.date-map-custom {
+  font-size: 12;
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 88%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}

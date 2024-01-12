@@ -6,9 +6,12 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@turf/turf": "^6.5.0",
     "antd": "^5.11.3",
+    "mapbox-gl": "^2.15.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
+    "react-datetime": "^3.2.0",
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.21.0",
@@ -16,9 +19,7 @@
     "react-snap-carousel": "^0.3.1",
     "recoil": "^0.7.7",
     "rxjs": "^7.8.1",
-    "web-vitals": "^2.1.4",
-    "@turf/turf": "^6.5.0",
-    "mapbox-gl": "^2.15.0"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

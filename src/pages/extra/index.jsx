@@ -14,6 +14,7 @@ import {
 import { DATALICHTRINH } from "./common/datalichtrinh";
 import * as turf from "@turf/turf";
 import { Modal } from "antd";
+import InputDateMap from "../../infratructure/common/input/input-date-map";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
@@ -45,6 +46,9 @@ const ExtraComponent = () => {
   const [isLopBanDo, setIsLopBanDo] = useState(false);
   const [isDanhSachBanDo, setIsDanhSachBanDo] = useState(false);
   const [dsStyleBanDo, setDsStyleBanDo] = useState(DSSTYLEBANDO);
+
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const fecthData = async (style = dsStyleBanDo[0]) => {
     // document.getElementById("map").scrollIntoView()
@@ -261,11 +265,10 @@ const ExtraComponent = () => {
             map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
               const coordinates = e.features[0].geometry.coordinates.slice();
               const html = `<div>
-            <img src="${
-              e.features[0].properties.hinhAnh.indexOf("https") != -1
-                ? e.features[0].properties.hinhAnh
-                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-            }" alt="" style="min-width: 280px;min-height: 120px;">
+            <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
             ">
@@ -274,8 +277,7 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/destination-view?${
-                  e.features[0].properties.idDiaDiem
+                <a href="/destination-view?${e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
         font-size: 18px;
@@ -286,9 +288,8 @@ const ExtraComponent = () => {
         font-size: 11px;
         color: #333;
         font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${
-                e.features[0].properties.gioDongCua
-              }</p>
+    ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                }</p>
                 <p style="
         width: 240px;
         overflow: hidden;
@@ -369,11 +370,10 @@ const ExtraComponent = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${
-                e.properties.hinhAnh.indexOf("https") != -1
-                  ? e.properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.properties.hinhAnh.indexOf("https") != -1
+        ? e.properties.hinhAnh
+        : `http://14.248.94.155:9022/${e.properties.hinhAnh}`
+      }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -633,22 +633,22 @@ const ExtraComponent = () => {
                           v.tenDanhMuc == "Văn hóa - lịch sử"
                             ? "https://cdn-icons-png.flaticon.com/512/5778/5778440.png"
                             : v.tenDanhMuc == "Địa điểm tâm linh"
-                            ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
-                            : v.tenDanhMuc == "Du lịch khám phá"
-                            ? "https://iconape.com/wp-content/png_logo_vector/google-discover.png"
-                            : v.tenDanhMuc == "Du lịch sinh thái"
-                            ? "https://images.squarespace-cdn.com/content/v1/5b07c60a96e76f9f641cdad6/1626769467137-PUUVF03Q49KZMCVTQ1PC/Conservation.png"
-                            : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
-                            ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
-                            : v.tenDanhMuc == "Công trình kiến trúc"
-                            ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
-                            : v.tenDanhMuc == "Du lịch giải trí"
-                            ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
-                            : v.tenDanhMuc == "Thương mại - ẩm thực"
-                            ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
-                            : v.tenDanhMuc == "Khu bảo tồn"
-                            ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
-                            : ""
+                              ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
+                              : v.tenDanhMuc == "Du lịch khám phá"
+                                ? "https://iconape.com/wp-content/png_logo_vector/google-discover.png"
+                                : v.tenDanhMuc == "Du lịch sinh thái"
+                                  ? "https://images.squarespace-cdn.com/content/v1/5b07c60a96e76f9f641cdad6/1626769467137-PUUVF03Q49KZMCVTQ1PC/Conservation.png"
+                                  : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
+                                    ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
+                                    : v.tenDanhMuc == "Công trình kiến trúc"
+                                      ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
+                                      : v.tenDanhMuc == "Du lịch giải trí"
+                                        ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
+                                        : v.tenDanhMuc == "Thương mại - ẩm thực"
+                                          ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
+                                          : v.tenDanhMuc == "Khu bảo tồn"
+                                            ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
+                                            : ""
                         }
                         alt=""
                       />
@@ -1379,52 +1379,16 @@ const ExtraComponent = () => {
               >
                 <div className="row d-flex flex-row col-12">
                   <div className="col-6">
-                    <label for="thoiGianBatDauLabel" class="form-label">
-                      Thời gian bắt đầu
-                    </label>
-                    <div className="input-group mb-3">
-                      <span
-                        className="input-group-text"
-                        id="thoiGianBatDauLabel"
-                      >
-                        <i class="fa-regular fa-calendar-days"></i>
-                      </span>
-                      <input
-                        type="date"
-                        className="form-control"
-                        placeholder="Chọn ngày bắt đầu"
-                        id="thoiGianBatDau"
-                        style={{
-                          fontSize: 12,
-                          paddingTop: 0,
-                          paddingBottom: 0,
-                        }}
-                      />
-                    </div>
+                    <InputDateMap
+                      title={"Thời gian bắt đầu"}
+                      setDate={setStartDate}
+                    />
                   </div>
                   <div className="col-6">
-                    <label for="thoiGianKetThucLabel" class="form-label">
-                      Thời gian kết thúc
-                    </label>
-                    <div className="input-group mb-3">
-                      <span
-                        className="input-group-text"
-                        id="thoiGianKetThucLabel"
-                      >
-                        <i class="fa-solid fa-calendar-week"></i>
-                      </span>
-                      <input
-                        type="date"
-                        className="form-control"
-                        placeholder="Chọn ngày kết thúc"
-                        id="thoiGianKetThuc"
-                        style={{
-                          fontSize: 12,
-                          paddingTop: 0,
-                          paddingBottom: 0,
-                        }}
-                      />
-                    </div>
+                    <InputDateMap
+                      title={"Thời gian kết thúc"}
+                      setDate={setEndDate}
+                    />
                   </div>
                 </div>
               </div>
