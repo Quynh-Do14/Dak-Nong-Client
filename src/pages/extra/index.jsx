@@ -15,6 +15,7 @@ import { DATALICHTRINH } from "./common/datalichtrinh";
 import * as turf from "@turf/turf";
 import { Modal } from "antd";
 import InputDateMap from "../../infratructure/common/input/input-date-map";
+import LoadingFullPageMap from "../../infratructure/common/controls/loadingMap";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
@@ -32,7 +33,7 @@ const ExtraComponent = () => {
   //   console.log("receivedProps", receivedProps.it);
   //// receivedProps.it là cái {id, quanHuyen}
   const [map, setMap] = useState({});
-  const [isLoading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [dsDiemDuLich, setDsDiemDuLich] = useState([]);
   const [dsLuuTru, setDsLuuTru] = useState([]);
   const [dsAmThuc, setDsAmThuc] = useState([]);
@@ -54,35 +55,90 @@ const ExtraComponent = () => {
   const [isLopBanDo, setIsLopBanDo] = useState(false);
   const [isDanhSachBanDo, setIsDanhSachBanDo] = useState(false);
   const [dsStyleBanDo, setDsStyleBanDo] = useState(DSSTYLEBANDO);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [selectSearch, setSelectSearch] = useState("DIEMDULICH");
+
+  const [gps, setGPS] = useState([0, 0]);
+
+  const [startDate, setStartDate] = useState(
+    new Date(getPreviousDay(new Date()))
+  );
   const [endDate, setEndDate] = useState(new Date());
+
+  const renderDropdownSearch = () => {
+    if (selectSearch == "DIEMDULICH") {
+      return (
+        <i
+          className="fa-brands fa-canadian-maple-leaf"
+          style={{
+            fontSize: 22,
+            color: "#FE7524",
+          }}
+        ></i>
+      );
+    }
+    if (selectSearch == "NHAHANG") {
+      return (
+        <i
+          className="fa-solid fa-utensils"
+          style={{
+            fontSize: 22,
+            color: "#FE7524",
+          }}
+        ></i>
+      );
+    }
+    if (selectSearch == "LUUTRU") {
+      return (
+        <i
+          className="fa-solid fa-hotel"
+          style={{
+            fontSize: 22,
+            color: "#FE7524",
+          }}
+        ></i>
+      );
+    }
+    if (selectSearch == "KHOANGCACH") {
+      return (
+        <i
+          className="fa-solid fa-street-view"
+          style={{
+            fontSize: 22,
+            color: "#FE7524",
+          }}
+        ></i>
+      );
+    }
+  };
+
+  const renderDropdownSearchItem = () => {
+    if (selectSearch == "DIEMDULICH") {
+      return <i className="fa-brands fa-canadian-maple-leaf"></i>;
+    }
+    if (selectSearch == "NHAHANG") {
+      return <i className="fa-solid fa-utensils"></i>;
+    }
+    if (selectSearch == "LUUTRU") {
+      return <i className="fa-solid fa-hotel"></i>;
+    }
+    if (selectSearch == "KHOANGCACH") {
+      return <i className="fa-solid fa-street-view"></i>;
+    }
+  };
 
   const fecthData = async (style = dsStyleBanDo[0]) => {
     // document.getElementById("map").scrollIntoView()
-
-    let map = new mapboxgl.Map({
-      container: mapContainer.current,
-      zoom: 9,
-      center: [107.701881, 12.210116],
-      style: style.uri,
-    });
-
-    setMap(map);
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        // When active the map will receive updates to the device's location as it changes.
-        trackUserLocation: true,
-        // Draw an arrow next to the location dot to indicate which direction the device is heading.
-        showUserHeading: true,
-      }),
-      "bottom-right"
+    navigator.geolocation.getCurrentPosition(
+      (e) => {
+        console.log([e.coords.longitude, e.coords.latitude]);
+        setGPS([e.coords.longitude, e.coords.latitude]);
+      },
+      (e) => {
+        console.log(e);
+      }
     );
-    map.addControl(new mapboxgl.NavigationControl());
-
     const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, setLoading);
     const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(
       ``,
@@ -136,6 +192,27 @@ const ExtraComponent = () => {
       resGetPhuongTienGeometry.features &&
       resGetDanhMucConCuaDanhMucPhuongTien.success
     ) {
+      let map = new mapboxgl.Map({
+        container: mapContainer.current,
+        zoom: 9,
+        center: [107.701881, 12.210116],
+        style: style.uri,
+      });
+
+      setMap(map);
+      map.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true,
+          },
+          // When active the map will receive updates to the device's location as it changes.
+          trackUserLocation: true,
+          // Draw an arrow next to the location dot to indicate which direction the device is heading.
+          showUserHeading: true,
+        }),
+        "bottom-right"
+      );
+      map.addControl(new mapboxgl.NavigationControl());
       map.on("load", () => {
         map.addSource("mapbox-dem", {
           type: "raster-dem",
@@ -181,8 +258,7 @@ const ExtraComponent = () => {
               (v) => v.properties.tenDanhMuc == "Du lịch sinh thái"
             ).length > 0
           ) {
-            uriImg =
-              "https://cdn-icons-png.flaticon.com/512/3104/3104941.png";
+            uriImg = "https://cdn-icons-png.flaticon.com/512/3104/3104941.png";
           }
           if (
             v.tenDanhMuc == "Du lịch nghỉ dưỡng" &&
@@ -311,8 +387,7 @@ const ExtraComponent = () => {
               (v) => v.properties.tenDanhMuc == "Ô tô"
             ).length > 0
           ) {
-            uriImg =
-              "https://cdn-icons-png.flaticon.com/512/2554/2554936.png";
+            uriImg = "https://cdn-icons-png.flaticon.com/512/2554/2554936.png";
           }
           if (
             v.tenDanhMuc == "Xe điện" &&
@@ -320,8 +395,7 @@ const ExtraComponent = () => {
               (v) => v.properties.tenDanhMuc == "Xe điện"
             ).length > 0
           ) {
-            uriImg =
-              "https://cdn-icons-png.flaticon.com/512/1574/1574055.png";
+            uriImg = "https://cdn-icons-png.flaticon.com/512/1574/1574055.png";
           }
           if (uriImg != "") {
             map.loadImage(uriImg, (error, image) => {
@@ -782,6 +856,7 @@ const ExtraComponent = () => {
         }
       });
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -797,16 +872,83 @@ const ExtraComponent = () => {
     );
   };
 
+  function haversine(lat1, lon1, lat2, lon2) {
+    // Chuyển đổi độ sang radian
+    lat1 = (lat1 * Math.PI) / 180;
+    lon1 = (lon1 * Math.PI) / 180;
+    lat2 = (lat2 * Math.PI) / 180;
+    lon2 = (lon2 * Math.PI) / 180;
+
+    // Tính chênh lệch giữa các tọa độ
+    const dlat = lat2 - lat1;
+    const dlon = lon2 - lon1;
+
+    // Áp dụng công thức haversine
+    const a =
+      Math.sin(dlat / 2) ** 2 +
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dlon / 2) ** 2;
+    const c = 2 * Math.asin(Math.sqrt(a));
+
+    // Đường kính trái đất (theo đơn vị radian)
+    const R = 6371;
+
+    // Tính khoảng cách
+    const distance = R * c;
+
+    return distance;
+  }
+
+  // Hàm lọc mảng dựa trên khoảng cách
+  function filterByDistance(array, myLat, myLon, maxDistance) {
+    return array.filter((obj) => {
+      const distance = haversine(
+        myLat,
+        myLon,
+        obj.geometry.coordinates[1],
+        obj.geometry.coordinates[0]
+      );
+      return distance <= maxDistance;
+    });
+  }
+
   const searchDiaDiem = (e) => {
     setTextSearch(e.target.value);
     if (e.target.value != "") {
-      var dsDiaDiem = [...dsDiemDuLich.features];
-      var dsDiaDiemSearch = dsDiaDiem.filter(
-        (v) =>
-          removeAccents(v.properties.tenDiaDiem.toLowerCase()).indexOf(
-            removeAccents(e.target.value)
-          ) != -1
-      );
+      var dsDiaDiem = [];
+      if (selectSearch == "DIEMDULICH") {
+        dsDiaDiem = [...dsDiemDuLich.features];
+      }
+      if (selectSearch == "NHAHANG") {
+        dsDiaDiem = [...dsAmThuc.features];
+      }
+      if (selectSearch == "LUUTRU") {
+        dsDiaDiem = [...dsLuuTru.features];
+      }
+      if (selectSearch == "KHOANGCACH") {
+        dsDiaDiem = [
+          ...dsDiemDuLich.features.concat(
+            ...dsAmThuc.features,
+            ...dsLuuTru.features
+          ),
+        ];
+      }
+      var dsDiaDiemSearch = [];
+      if (selectSearch == "KHOANGCACH") {
+        console.log("dsDiaDiem", dsDiaDiem);
+        dsDiaDiemSearch = filterByDistance(
+          dsDiaDiem,
+          gps[1],
+          gps[0],
+          parseInt(e.target.value)
+        );
+      } else {
+        dsDiaDiemSearch = dsDiaDiem.filter(
+          (v) =>
+            removeAccents(v.properties.tenDiaDiem.toLowerCase()).indexOf(
+              removeAccents(e.target.value)
+            ) != -1
+        );
+      }
       setDsDiaDiemSearch(dsDiaDiemSearch);
     } else {
       setDsDiaDiemSearch([]);
@@ -919,6 +1061,7 @@ const ExtraComponent = () => {
   };
 
   const xemAnhVeTinh = async () => {
+    setIsLoading(true);
     var thoiGianBatDau = formatDate(new Date(startDate));
     var thoiGianKetThuc = formatDate(new Date(endDate));
     var loaiAnh = document.getElementById("loaiAnh").value;
@@ -957,7 +1100,7 @@ const ExtraComponent = () => {
             minzoom: 0,
             maxzoom: 22,
           },
-          "ranhGioiTinh"
+          "ranhGioiHuyen"
         );
 
         if (resXemAnhVeTinh.result.anhChiSo) {
@@ -973,7 +1116,7 @@ const ExtraComponent = () => {
               minzoom: 0,
               maxzoom: 22,
             },
-            "ranhGioiTinh"
+            "ranhGioiHuyen"
           );
         }
 
@@ -982,6 +1125,8 @@ const ExtraComponent = () => {
         console.log(error);
       }
     }
+    setVisibleXemAnhVeTinh(false);
+    setIsLoading(false);
   };
 
   return (
@@ -1049,6 +1194,108 @@ const ExtraComponent = () => {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+            {JSON.stringify(anhVeTinh) != "{}" &&
+              anhVeTinh.anhVeTinh != "" &&
+              anhVeTinh.anhChiSo != "" && (
+                <>
+                  <p
+                    style={{
+                      fontSize: 15,
+                      fontWeight: "bold",
+                      padding: 8,
+                      color: "#050505",
+                      margin: "0px 12px",
+                    }}
+                  >
+                    AVT ({anhVeTinh.thoiGianBatDau} -{" "}
+                    {anhVeTinh.thoiGianKetThuc})
+                  </p>
+                  <div
+                    style={{
+                      paddingLeft: 20,
+                    }}
+                  >
+                    <div
+                      className="d-flex align-items-center"
+                      style={{ padding: "8px 12px" }}
+                    >
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name={`anhVeTinh`}
+                          id={`anhVeTinh`}
+                          value={`anhVeTinh`}
+                          style={{
+                            marginRight: 8,
+                          }}
+                          onClick={btDiaDiemDuLich}
+                          defaultChecked={true}
+                        />
+                        <img
+                          style={{
+                            width: 25,
+                            height: 25,
+                            marginRight: 8,
+                          }}
+                          src={
+                            "https://cdn-icons-png.flaticon.com/512/3419/3419993.png"
+                          }
+                          alt=""
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`anhVeTinh`}
+                          style={{
+                            margin: 0,
+                          }}
+                        >
+                          Sentinel 2
+                        </label>
+                      </div>
+                    </div>
+                    <div
+                      className="d-flex align-items-center"
+                      style={{ padding: "8px 12px" }}
+                    >
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name={`anhChiSo`}
+                          id={`anhChiSo`}
+                          value={`anhChiSo`}
+                          style={{
+                            marginRight: 8,
+                          }}
+                          onClick={btDiaDiemDuLich}
+                          defaultChecked={true}
+                        />
+                        <img
+                          style={{
+                            width: 25,
+                            height: 25,
+                            marginRight: 8,
+                          }}
+                          src={
+                            "https://thumb.tildacdn.com/tild3138-6438-4433-a266-383138636535/-/resize/592x/-/format/webp/RU_onesoil_12_NDVI_4.png"
+                          }
+                          alt=""
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`anhChiSo`}
+                          style={{
+                            margin: 0,
+                          }}
+                        >
+                          NDVI
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             <p
               style={{
                 fontSize: 15,
@@ -1058,7 +1305,7 @@ const ExtraComponent = () => {
                 margin: "0px 12px",
               }}
             >
-              Địa điểm du lịch
+              Địa điểm du lịch : {dsDiemDuLich.features.length} điểm
             </p>
             <div
               style={{
@@ -1124,7 +1371,13 @@ const ExtraComponent = () => {
                             margin: 0,
                           }}
                         >
-                          {v.tenDanhMuc}
+                          {v.tenDanhMuc} (
+                          {
+                            dsDiemDuLich.features.filter(
+                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                            ).length
+                          }{" "}
+                          điểm)
                         </label>
                       </div>
                     </div>
@@ -1140,7 +1393,7 @@ const ExtraComponent = () => {
                 margin: "0px 12px",
               }}
             >
-              Lưu trú
+              Lưu trú : {dsLuuTru.features.length} điểm
             </p>
             <div
               style={{
@@ -1194,7 +1447,13 @@ const ExtraComponent = () => {
                             margin: 0,
                           }}
                         >
-                          {v.tenDanhMuc}
+                          {v.tenDanhMuc} (
+                          {
+                            dsLuuTru.features.filter(
+                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                            ).length
+                          }{" "}
+                          điểm)
                         </label>
                       </div>
                     </div>
@@ -1210,7 +1469,7 @@ const ExtraComponent = () => {
                 margin: "0px 12px",
               }}
             >
-              Ẩm thực
+              Ẩm thực : {dsAmThuc.features.length} điểm
             </p>
             <div
               style={{
@@ -1260,7 +1519,13 @@ const ExtraComponent = () => {
                             margin: 0,
                           }}
                         >
-                          {v.tenDanhMuc}
+                          {v.tenDanhMuc} (
+                          {
+                            dsAmThuc.features.filter(
+                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                            ).length
+                          }{" "}
+                          điểm)
                         </label>
                       </div>
                     </div>
@@ -1276,7 +1541,7 @@ const ExtraComponent = () => {
                 margin: "0px 12px",
               }}
             >
-              Dịch vụ thuê xe
+              Dịch vụ thuê xe : {dsPhuongTien.features.length} điểm
             </p>
             <div
               style={{
@@ -1332,7 +1597,13 @@ const ExtraComponent = () => {
                             margin: 0,
                           }}
                         >
-                          {v.tenDanhMuc}
+                          {v.tenDanhMuc} (
+                          {
+                            dsPhuongTien.features.filter(
+                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                            ).length
+                          }{" "}
+                          điểm)
                         </label>
                       </div>
                     </div>
@@ -1398,6 +1669,7 @@ const ExtraComponent = () => {
               {dsStyleBanDo.map((v, k) => (
                 <div
                   onClick={() => {
+                    setAnhVeTinh({});
                     setDsStyleBanDo(
                       dsStyleBanDo.map((sd) => {
                         if (v.name == sd.name) {
@@ -1459,17 +1731,123 @@ const ExtraComponent = () => {
               boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
             }}
           >
-            <button className="onsearch">
-              <i
-                className="fa fa-map-marker"
-                style={{
-                  fontSize: 22,
-                  color: "#FE7524",
-                }}
-              ></i>
+            <button
+              className="dropdown-toggle onsearch"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {renderDropdownSearch()}
             </button>
+            <ul className="dropdown-menu">
+              {selectSearch != "DIEMDULICH" && (
+                <li onClick={() => setSelectSearch("DIEMDULICH")}>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    style={{
+                      alignItems: "center",
+                      display: "flex",
+                      fontSize: 14,
+                      marginBottom: 8,
+                      color: "#094174",
+                    }}
+                  >
+                    <i
+                      className="fa-brands fa-canadian-maple-leaf"
+                      style={{
+                        fontSize: 22,
+                        color: "#FE7524",
+                        marginRight: 12,
+                      }}
+                    ></i>
+                    Tìm kiếm địa điểm du lịch
+                  </a>
+                </li>
+              )}
+              {selectSearch != "NHAHANG" && (
+                <li onClick={() => setSelectSearch("NHAHANG")}>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    style={{
+                      alignItems: "center",
+                      display: "flex",
+                      fontSize: 14,
+                      marginBottom: 8,
+                      color: "#094174",
+                    }}
+                  >
+                    <i
+                      className="fa-solid fa-utensils"
+                      style={{
+                        fontSize: 22,
+                        color: "#FE7524",
+                        marginRight: 12,
+                      }}
+                    ></i>
+                    Tìm kiếm nhà hàng
+                  </a>
+                </li>
+              )}
+              {selectSearch != "LUUTRU" && (
+                <li onClick={() => setSelectSearch("LUUTRU")}>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    style={{
+                      alignItems: "center",
+                      display: "flex",
+                      fontSize: 14,
+                      marginBottom: 8,
+                      color: "#094174",
+                    }}
+                  >
+                    <i
+                      className="fa-solid fa-hotel"
+                      style={{
+                        fontSize: 22,
+                        color: "#FE7524",
+                        marginRight: 12,
+                      }}
+                    ></i>
+                    Tìm kiếm địa điểm lưu trú
+                  </a>
+                </li>
+              )}
+              {selectSearch != "KHOANGCACH" && (
+                <>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li onClick={() => setSelectSearch("KHOANGCACH")}>
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                      style={{
+                        alignItems: "center",
+                        display: "flex",
+                        fontSize: 14,
+                        marginBottom: 8,
+                        color: "#094174",
+                      }}
+                    >
+                      <i
+                        className="fa-solid fa-street-view"
+                        style={{
+                          fontSize: 22,
+                          color: "#FE7524",
+                          marginRight: 12,
+                        }}
+                      ></i>
+                      Tìm kiếm địa điểm theo khoảng cách
+                    </a>
+                  </li>
+                </>
+              )}
+            </ul>
             <input
-              type="text"
+              type={selectSearch == "KHOANGCACH" ? "number" : "text"}
               name=""
               id="searchToanVanMap"
               value={textSearch}
@@ -1487,7 +1865,11 @@ const ExtraComponent = () => {
                 marginBottom: 0,
                 padding: "10px 20px",
               }}
-              placeholder="Nhập từ khoá để tìm kiếm"
+              placeholder={
+                selectSearch != "KHOANGCACH"
+                  ? "Nhập từ khoá để tìm kiếm"
+                  : "Nhập khoảng cách muốn tìm kiếm"
+              }
             />
           </div>
           {dsDiaDiemSearch.length > 0 && (
@@ -1509,10 +1891,11 @@ const ExtraComponent = () => {
                   style={{
                     padding: "8px 22px",
                     textAlign: "left",
+                    borderBottom: "1px solid #fe752450",
                   }}
                   onClick={() => clickItemSearhDiaDiem(v)}
                 >
-                  <i className="fa fa-map-marker"></i>
+                  {renderDropdownSearchItem()}
                   <div
                     className="justify-content-center"
                     style={{
@@ -1963,7 +2346,7 @@ const ExtraComponent = () => {
           </button>
         </div>
         <Modal
-          visible={visibleXemAnhVeTinh}
+          open={visibleXemAnhVeTinh}
           centered
           width={800}
           footer={false}
@@ -2014,12 +2397,12 @@ const ExtraComponent = () => {
               >
                 <div className="row d-flex flex-row col-12">
                   <div className="col-6">
-                    <label for="loaiAnhLabel" class="form-label">
+                    <label for="loaiAnhLabel" className="form-label">
                       Loại ảnh
                     </label>
                     <div className="input-group mb-3">
                       <span className="input-group-text" id="loaiAnhLabel">
-                        <i class="fa-solid fa-images"></i>
+                        <i className="fa-solid fa-images"></i>
                       </span>
                       <input
                         type="text"
@@ -2033,17 +2416,17 @@ const ExtraComponent = () => {
                     </div>
                   </div>
                   <div className="col-6">
-                    <label for="doPhuMayLabel" class="form-label">
+                    <label for="doPhuMayLabel" className="form-label">
                       Độ phủ mây
                     </label>
                     <div className="input-group mb-3">
                       <span className="input-group-text" id="doPhuMayLabel">
-                        <i class="fa-brands fa-cloudversify"></i>
+                        <i className="fa-brands fa-cloudversify"></i>
                       </span>
                       <input
                         type="number"
                         className="form-control"
-                        placeholder="Nhập độ phủ mây"
+                        placeholder="Nhập độ phủ mây (Mặc định 100)"
                         aria-describedby="doPhuMay"
                         id="doPhuMay"
                       />
@@ -2061,12 +2444,14 @@ const ExtraComponent = () => {
                   <div className="col-6">
                     <InputDateMap
                       title={"Thời gian bắt đầu"}
+                      date={startDate}
                       setDate={setStartDate}
                     />
                   </div>
                   <div className="col-6">
                     <InputDateMap
                       title={"Thời gian kết thúc"}
+                      date={endDate}
                       setDate={setEndDate}
                     />
                   </div>
@@ -2107,6 +2492,7 @@ const ExtraComponent = () => {
           </div>
         </Modal>
       </section>
+      <LoadingFullPageMap loading={isLoading} />
     </MainLayout>
   );
 };

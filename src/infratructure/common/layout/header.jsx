@@ -232,7 +232,7 @@ const HeaderPage = () => {
                                                             <ul>
                                                                 {
                                                                     it.children.map((it, index) => (
-                                                                        <li key={index}><a onClick={() => onNavigateQuanHuyen(it)} class="">{it.tenHuyen} </a></li>
+                                                                        <li key={index}><a onClick={() => onNavigateQuanHuyen(it)} className="">{it.tenHuyen} </a></li>
                                                                     ))
                                                                 }
                                                             </ul>
