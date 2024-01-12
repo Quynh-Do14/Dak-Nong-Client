@@ -1685,7 +1685,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: inline-block;
   font-family: "Source Serif Pro";
   font-weight: 600;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 42px;
   color: #094174;
   margin: 10px 0;
@@ -4913,6 +4913,16 @@ img.img-page-detail {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   height: 9.5vh;
+}
+
+.text-truncate-title-festival {
+  white-space: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  height: 8.6vh;
 }
 
 .text-truncate-address {

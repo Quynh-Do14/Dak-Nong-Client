@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 import api from '../../infratructure/api'
 import Constants from '../../core/common/constant'
 import RelationDestination from '../../infratructure/common/controls/relation-destination'
-import { showImageCommon } from '../../infratructure/utils/helper'
+import { showImageCommon, translationData } from '../../infratructure/utils/helper'
 import useTranslate from '../../core/common/hook/useTranslate'
 
 const TourDetail = () => {
@@ -108,14 +108,23 @@ const TourDetail = () => {
                                 <div className="pkg-common-title">
                                     <h4>{translate("detail")} </h4>
                                 </div>
-                                <p className='text-align-justify'>{detailTour.moTa} </p>
+                                <p className='text-align-justify'>{translationData(detailTour.moTa, detailTour.moTaUS)} </p>
 
                                 <div className="pkg-list-info">
                                     <ul>
-                                        <li><h6>{translate("destination")} :</h6> <span>{detailTour.tenDiaDiem} </span></li>
-                                        <li><h6>{translate("type")} :</h6> <span>{detailTour.tenDanhMuc}</span></li>
-                                        <li><h6>{translate("address")} :</h6> <span>{detailTour.diaChi} </span></li>
-                                        <li><h6>{translate("price")} :</h6> <span>{detailTour.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailTour.giaVe}`}</span></li>
+                                        <li><h6>{translate("destination")} :</h6> <span>{translationData(detailTour.tenDiaDiem, detailTour.tenDiaDiemUS)}
+                                        </span></li>
+                                        <li><h6>{translate("type")} :</h6> <span>{translate(detailTour.tenDanhMuc)}</span></li>
+                                        <li><h6>{translate("address")} :</h6> <span>{translationData(detailTour.diaChi, detailTour.diaChiUS)}</span></li>
+                                        <li><h6>{translate("price")} :</h6> <span>
+                                            {detailTour.giaVe === Constants.FreePrice ?
+                                                (translationData(detailTour.giaVe, detailTour.giaVeUS))
+                                                :
+                                                detailTour.giaVe == null
+                                                    ? translate("free")
+                                                    : `Chỉ từ: ${detailTour.giaVe}`
+                                            }
+                                        </span></li>
                                         <li><h6>{translate("openTime")} :</h6> <span>{detailTour.gioMoCua} - {detailTour.gioDongCua}</span></li>
                                     </ul>
                                 </div>

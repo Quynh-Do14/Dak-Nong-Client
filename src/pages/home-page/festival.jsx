@@ -1,5 +1,5 @@
 import React from 'react'
-import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper'
+import { convertDateOnly, showImageCommon, translationData } from '../../infratructure/utils/helper'
 import { ROUTE_PATH } from '../../core/common/appRouter'
 import useTranslate from '../../core/common/hook/useTranslate';
 
@@ -11,7 +11,7 @@ const Festival = ({ data = [] }) => {
             <div className="plane-shape2">
                 <img src="assets/images/shape/plane-shape-2.png" alt="plane" />
             </div>
-            <div className="container">
+            <div className="container-fluid padding-common">
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="align-title">
@@ -19,7 +19,7 @@ const Festival = ({ data = [] }) => {
                         </div>
                     </div>
                     {data.map((it, index) => (
-                        <div key={index} className="col-lg-4">
+                        <div key={index} className="pl-10 pr-10 mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                             <div className="activites-container">
                                 <div className="activities-image position-relative">
                                     <img src={
@@ -31,13 +31,17 @@ const Festival = ({ data = [] }) => {
                                     } className='img-page' alt="photo" />
                                 </div>
                                 <div className="activities-content">
-                                    <a className='text-truncate-origin position-relative' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>{it.tenDiaDiem} </a>
+                                    <a className='text-truncate-title-festival position-relative' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>
+                                        {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
+                                    </a>
                                     <ul className='position-relative'>
-                                        <li><i className="fa fa-calendar mr-10"></i>{convertDateOnly(it.gioMoCua)} </li>
-                                        -
-                                        <li><i className="fa fa-calendar mr-10"></i>{convertDateOnly(it.gioDongCua)} </li>
+                                        <li className='d-flex align-items-center'><i className="fa fa-calendar mr-10"></i>{it.gioMoCua} </li>
+                                        {it.gioDongCua && "-"}
+                                        {it.gioDongCua && <li><i className="fa fa-calendar mr-10"></i>{it.gioDongCua} </li>}
                                     </ul>
-                                    <p className='text-truncate-description'>{it.moTa} </p>
+                                    <p className='text-truncate-description'>
+                                        {translationData(it.moTa, it.moTaUS)}
+                                    </p>
                                 </div>
                             </div>
                         </div>

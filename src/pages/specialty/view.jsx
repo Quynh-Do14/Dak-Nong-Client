@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 import api from '../../infratructure/api'
 import Constants from '../../core/common/constant'
 import RelationDestination from '../../infratructure/common/controls/relation-destination'
-import { convertTimeOnly, showImageCommon } from '../../infratructure/utils/helper'
+import { convertTimeOnly, showImageCommon, translationData } from '../../infratructure/utils/helper'
 import useTranslate from '../../core/common/hook/useTranslate'
 
 const SpecialtyDetail = () => {
@@ -15,12 +15,12 @@ const SpecialtyDetail = () => {
     const [detailSpecialty, setDetailSpecialty] = useState({});
     const [tabSelect, setTabSelect] = useState(0);
     const location = useLocation()
-    const search = location.search.replace("?", "");
+    const param = location.search.replace("?", "");
     const { translate } = useTranslate();
 
     const onGetDetailDacSanAsync = async () => {
         const response = await api.getDiaDiemById(
-            `dichvu/top/${search}?idDanhMuc=${Constants.CategoryConfig.Specialty.value}`,
+            `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Specialty.value}`,
             setLoading
         )
         setDetailSpecialty(response.diaDiem);
@@ -83,16 +83,15 @@ const SpecialtyDetail = () => {
                                 <div className="pkg-common-title">
                                     <h4>{translate("detail")} </h4>
                                 </div>
-                                <p className='text-align-justify'>{detailSpecialty.moTa} </p>
-
+                                <p className='text-align-justify'>{translationData(detailSpecialty.moTa, detailSpecialty.moTaUS)}</p>
                                 <div className="pkg-list-info">
                                     <ul>
-                                        <li><h6>{translate("specialtyName")} :</h6> <span>{detailSpecialty.tenDiaDiem} </span></li>
-                                        <li><h6>{translate("address")} :</h6> <span>{detailSpecialty.diaChi} </span></li>
+                                        <li><h6>{translate("specialtyName")} :</h6> <span>{translationData(detailSpecialty.tenDiaDiem, detailSpecialty.tenDiaDiemUS)} </span></li>
+                                        <li><h6>{translate("address")} :</h6> <span>{translationData(detailSpecialty.diaChi, detailSpecialty.diaChiUS)}</span></li>
                                         <li><h6>{translate("phoneNumber")} :</h6> <span>{detailSpecialty.sdtLienHe}</span></li>
                                         <li><h6>{translate("email")} :</h6> <span>{detailSpecialty.emailLienHe}</span></li>
-                                        <li><h6>{translate("price")} :</h6> <span>{detailSpecialty.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailSpecialty.giaVe}`}</span></li>
-                                        <li><h6>{translate("openTime")} :</h6> <span>{convertTimeOnly(detailSpecialty.gioMoCua)} - {convertTimeOnly(detailSpecialty.gioDongCua)}</span></li>
+                                        {/* <li><h6>{translate("price")} :</h6> <span>{detailSpecialty.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailSpecialty.giaVe}`}</span></li>
+                                        <li><h6>{translate("openTime")} :</h6> <span>{convertTimeOnly(detailSpecialty.gioMoCua)} - {convertTimeOnly(detailSpecialty.gioDongCua)}</span></li> */}
                                     </ul>
                                 </div>
                                 <div className="pkg-info-container">
@@ -105,7 +104,6 @@ const SpecialtyDetail = () => {
                                         <li><i className="fa fa-car"></i> {translate("transportation")} </li>
                                     </ul>
                                 </div>
-                                <p className='text-align-justify'>{detailSpecialty.moTa} </p>
 
                                 {/* <div className="faq-accordion ">
                                     <div className="accordion" id="accordionExample">

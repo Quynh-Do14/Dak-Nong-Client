@@ -33,4 +33,6 @@ const useTranslate = () => {
     return { translate };
 }
 
-export default useTranslate
+export default useTranslate;
+
+

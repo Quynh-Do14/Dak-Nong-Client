@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 import api from '../../infratructure/api'
 import Constants from '../../core/common/constant'
 import RelationDestination from '../../infratructure/common/controls/relation-destination'
-import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper'
+import { convertDateOnly, showImageCommon, translationData } from '../../infratructure/utils/helper'
 import useTranslate from '../../core/common/hook/useTranslate'
 
 const FestivalDetail = () => {
@@ -15,13 +15,12 @@ const FestivalDetail = () => {
     const [detailFestival, setDetailFestival] = useState({});
     const [isOpenListImage, setIsOpenListImage] = useState(false);
     const [tabSelect, setTabSelect] = useState(0);
-
     const location = useLocation();
-    const search = location.search.replace("?", "");
+    const param = location.search.replace("?", "");
     const { translate } = useTranslate();
     const onGetDetailDiemDenAsync = async () => {
         const response = await api.getDiaDiemById(
-            `dichvu/top/${search}?idDanhMuc=${Constants.CategoryConfig.Festival.value}`,
+            `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Festival.value}`,
             setLoading
         );
         setDetailFestival(response.diaDiem);
@@ -82,18 +81,26 @@ const FestivalDetail = () => {
                                 </div>
 
                                 <div className="pkg-common-title">
-                                    <h4>Mô tả chi tiết</h4>
+                                    <h4>{translate("detail")}</h4>
                                 </div>
-                                <p className='text-align-justify'>{detailFestival.moTa} </p>
+                                <p className='text-align-justify'>{translationData(detailFestival.moTa, detailFestival.moTaUS)}</p>
 
                                 <div className="pkg-list-info">
                                     <ul>
-                                        <li><h6>{translate("festivalName")} :</h6> <span>{detailFestival.tenDiaDiem} </span></li>
-                                        <li><h6>{translate("address")} :</h6> <span>{detailFestival.diaChi} </span></li>
+                                        <li><h6>{translate("festivalName")} :</h6> <span>{translationData(detailFestival.tenDiaDiem, detailFestival.tenDiaDiemUS)} </span></li>
+                                        <li><h6>{translate("address")} :</h6> <span>{translationData(detailFestival.diaChi, detailFestival.diaChiUS)}</span></li>
                                         <li><h6>{translate("phoneNumber")} :</h6> <span>{detailFestival.sdtLienHe}</span></li>
                                         <li><h6>{translate("email")} :</h6> <span>{detailFestival.emailLienHe}</span></li>
-                                        <li><h6>{translate("price")} :</h6> <span>{detailFestival.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailFestival.giaVe}`}</span></li>
-                                        <li><h6>{translate("openTime")} :</h6> <span>{convertDateOnly(detailFestival.gioMoCua)} - {convertDateOnly(detailFestival.gioDongCua)}</span></li>
+                                        <li><h6>{translate("price")} :</h6> <span>
+                                            {detailFestival.giaVe === Constants.FreePrice ?
+                                                (translationData(detailFestival.giaVe, detailFestival.giaVeUS))
+                                                :
+                                                detailFestival.giaVe == null
+                                                    ? translate("free")
+                                                    : `Chỉ từ: ${detailFestival.giaVe}`
+                                            }
+                                        </span></li>
+                                        <li><h6>{translate("openTime")} :</h6> <span>{detailFestival.gioMoCua} {detailFestival.gioDongCua && `- ${detailFestival.gioDongCua}`}</span></li>
                                     </ul>
                                 </div>
                                 <div className="pkg-info-container">
@@ -107,8 +114,6 @@ const FestivalDetail = () => {
                                         <li><i className="fa fa-car"></i> {translate("transportation")} </li>
                                     </ul>
                                 </div>
-                                <p className='text-align-justify'>{detailFestival.moTa} </p>
-
                                 {/* <div className="faq-accordion ">
                                     <div className="accordion" id="accordionExample">
                                         <div className="accordion-item">
