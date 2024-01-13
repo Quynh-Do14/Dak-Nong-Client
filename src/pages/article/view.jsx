@@ -93,9 +93,9 @@ const ArticleDetail = () => {
                                     <a href="blog.html"><img src={
                                         detailArticle.hinhAnh?.indexOf("http") == -1
                                             ?
-                                            showImageCommon(detailArticle.hinhAnh)
+                                            showImageCommon(detailArticle.hinhAnh2)
                                             :
-                                            detailArticle.hinhAnh
+                                            detailArticle.hinhAnh2
                                     } alt="image" /></a>
                                 </div>
                                 <div className='mt-20'>
@@ -110,9 +110,9 @@ const ArticleDetail = () => {
                                         <a href="blog.html"><img src={
                                             detailArticle.hinhAnh?.indexOf("http") == -1
                                                 ?
-                                                showImageCommon(detailArticle.hinhAnh)
+                                                showImageCommon(detailArticle.hinhAnh3)
                                                 :
-                                                detailArticle.hinhAnh
+                                                detailArticle.hinhAnh3
                                         } alt="image" /></a>
                                     </div>
                                     <div className='mt-20'>
