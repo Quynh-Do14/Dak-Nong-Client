@@ -41,7 +41,7 @@ const TourDetail = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={detailTour.tenDiaDiem}
+                title={translationData(detailTour.tenDiaDiem, detailTour.tenDiaDiemUS)}
                 redirect={ROUTE_PATH.TOUR}
                 redirectPage={"Tour"}
                 currentPage={"detail"}

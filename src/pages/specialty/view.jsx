@@ -33,7 +33,7 @@ const SpecialtyDetail = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={detailSpecialty.tenDiaDiem}
+                title={translationData(detailSpecialty.tenDiaDiem, detailSpecialty.tenDiaDiemUS)}
                 redirect={ROUTE_PATH.SPECIALTY}
                 redirectPage={"specialty"}
                 currentPage={"detail"}

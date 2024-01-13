@@ -38,9 +38,9 @@ const Festival = ({ data = [] }) => {
                                         {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
                                     </a>
                                     <ul className='position-relative'>
-                                        <li className='d-flex align-items-center'><i className="fa fa-calendar mr-10"></i>{it.gioMoCua} </li>
-                                        {it.gioDongCua && "-"}
-                                        {it.gioDongCua && <li><i className="fa fa-calendar mr-10"></i>{it.gioDongCua} </li>}
+                                        <li className='d-flex align-items-center text-truncate-date-festival'><i className="fa fa-calendar mr-10"></i>{it.gioDongCua ? it.gioMoCua : translationData(it.gioMoCua, it.thoiGianGhe)} </li>
+                                        {it.gioDongCua && <li className='d-flex align-items-center text-truncate-date-festival'>-</li>}
+                                        {it.gioDongCua && <li className='d-flex align-items-center text-truncate-date-festival'><i className="fa fa-calendar mr-10"></i>{it.gioDongCua} </li>}
                                     </ul>
                                     <p className='text-truncate-description'>
                                         {translationData(it.moTa, it.moTaUS)}

@@ -4,7 +4,7 @@ import api from '../../infratructure/api';
 import { useLocation } from 'react-router-dom';
 import BannerCommon from '../../infratructure/common/controls/banner';
 import { ROUTE_PATH } from '../../core/common/appRouter';
-import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper';
+import { convertDateOnly, showImageCommon, translationData } from '../../infratructure/utils/helper';
 import RelationArticle from '../../infratructure/common/controls/relation-article';
 import useTranslate from '../../core/common/hook/useTranslate';
 
@@ -39,19 +39,19 @@ const ArticleDetail = () => {
     let arrChiTiet = [];
     let arrChiTietFirst = [];
     let arrChiTietLast = [];
-    arrChiTiet = detailArticle.chiTiet?.split("\n");
+    arrChiTiet = translationData(detailArticle.chiTiet, detailArticle.chiTietUS)?.split("\n");
     arrChiTietFirst = arrChiTiet?.splice(0, 2)
     arrChiTietLast = arrChiTiet?.slice(0, 0).concat(arrChiTiet?.slice(2));
 
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={detailArticle.tieuDe}
+                title={translationData(detailArticle.tieuDe, detailArticle.tieuDeUS)}
                 redirect={ROUTE_PATH.ARTICLE}
                 redirectPage={"artical"}
                 currentPage={"detail"}
             />
-            <section className="destination-details">
+            <section className="package-details">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8">
@@ -77,13 +77,17 @@ const ArticleDetail = () => {
                                         <img src="assets/images/icons/quotetion.png" alt="mark" />
                                     </div>
                                     <h4></h4>
-                                    <p className='text-align-justify'> {detailArticle.tieuDeCon} </p>
+                                    <p className='text-align-justify'>
+                                        {translationData(detailArticle.tieuDeCon, detailArticle.tieuDeConUS)}
+                                    </p>
                                     <div className="quotetion-end">
                                         <img src="assets/images/icons/quotetion.png" alt="mark" />
                                     </div>
                                 </div>
 
-                                <p className='text-align-justify'> {detailArticle.moTaNgan}</p>
+                                <p className='text-align-justify'>
+                                    {translationData(detailArticle.moTaNgan, detailArticle.moTaNganUS)}
+                                </p>
 
                                 <div className="blog-details-image">
                                     <a href="blog.html"><img src={

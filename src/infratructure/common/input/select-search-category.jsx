@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import useTranslate from '../../../core/common/hook/useTranslate';
 import { Input, Select } from 'antd';
 import { useEffect } from 'react';
+import { translationData } from '../../utils/helper';
 
 const SelectSearchCategory = (props) => {
     const {
@@ -36,7 +37,7 @@ const SelectSearchCategory = (props) => {
             >
                 {/* <Select.Option data-display="" value={""}>{translate("category")}</Select.Option> */}
                 {list?.map((it, index) => (
-                    <Select.Option key={index} value={it.idDiaDiem}>{it.tenDanhMuc} </Select.Option>
+                    <Select.Option key={index} value={it.idDiaDiem}>{translationData(it.tenDanhMuc, it.tenDanhMucUS)} </Select.Option>
                 ))}
             </Select>
         </form>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { convertDateOnly, showImageCommon } from '../../infratructure/utils/helper'
+import { convertDateOnly, showImageCommon, translationData } from '../../infratructure/utils/helper'
 import { ROUTE_PATH } from '../../core/common/appRouter'
 import useTranslate from '../../core/common/hook/useTranslate';
 
@@ -36,8 +36,12 @@ const Article = ({ data = [] }) => {
                                                 <li className='white-space-nowrap'><i className="color-orange mr-10 fa fa-user"></i>Duong Nguyen </li>
                                                 <li className='white-space-nowrap'><i className="color-orange mr-10 fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
                                             </ul>
-                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title-relation">{it.tieuDe} </a>
-                                            <p className='text-truncate-description'>{it.tieuDeCon} </p>
+                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title-relation">
+                                                {translationData(it.tieuDe, it.tieuDeUS)}
+                                            </a>
+                                            <p className='text-truncate-description'>
+                                                {translationData(it.tieuDeCon, it.tieuDeConUS)}
+                                            </p>
                                             <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>{translate("viewMore")} </a>
                                         </div>
                                     </div>

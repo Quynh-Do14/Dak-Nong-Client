@@ -33,7 +33,7 @@ const FestivalDetail = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={detailFestival.tenDiaDiem}
+                title={translationData(detailFestival.tenDiaDiem, detailFestival.tenDiaDiemUS)}
                 redirect={ROUTE_PATH.FESTIVAL}
                 redirectPage={"festival"}
                 currentPage={"detail"}

@@ -1,6 +1,6 @@
 import React from 'react'
 import Constants from '../../../core/common/constant'
-import { convertDateOnly, showImageCommon } from '../../utils/helper';
+import { convertDateOnly, showImageCommon, translationData } from '../../utils/helper';
 import { ROUTE_PATH } from '../../../core/common/appRouter';
 
 const RelationArticle = (props) => {
@@ -28,7 +28,9 @@ const RelationArticle = (props) => {
                                 } alt="img" className='img-page-detail' />
                             </div>
                             <div className="destination-right-list-info">
-                                <a className='text-truncate-title-relation' href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>{it.tieuDe} </a>
+                                <a className='text-truncate-title-relation' href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>
+                                    {translationData(it.tieuDe, it.tieuDeUS)}
+                                </a>
                                 {/* <ul>
                                     <li><i className="fa-solid fa-star"></i>4.45 (313 Reviews) </li>
                                     <li><span>From</span><h5> $500.00</h5> </li>

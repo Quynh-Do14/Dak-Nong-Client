@@ -7,6 +7,7 @@ import BannerCommon from "../../infratructure/common/controls/banner";
 import {
   convertDateOnly,
   showImageCommon,
+  translationData,
 } from "../../infratructure/utils/helper";
 import SearchArticle from "./search";
 import LoadingFullPage from "../../infratructure/common/controls/loading";
@@ -144,10 +145,12 @@ const ArticlePage = () => {
                           href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}
                           className="blog-title text-truncate-title-article"
                         >
-                          {it.tieuDe}{" "}
+                          {translationData(it.tieuDe, it.tieuDeUS)}
+                          {" "}
                         </a>
                         <p className="text-truncate-description">
-                          {it.tieuDeCon}{" "}
+                          {translationData(it.tieuDeCon, it.tieuDeConUS)}
+                          {" "}
                         </p>
                         <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}>
                           {translate("viewMore")}{" "}
