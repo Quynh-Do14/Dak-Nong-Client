@@ -2899,7 +2899,7 @@ Home-Page-Two-Starts
 }
 
 .activites-container:hover {
-  transform: translateY(50px);
+  transform: translateY(-50px);
 }
 
 .activities-content {

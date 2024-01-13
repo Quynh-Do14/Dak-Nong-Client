@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import React from 'react'
+import React, { useRef } from 'react'
 
 const ViewVideoModal = (props) => {
     const {
@@ -7,6 +7,21 @@ const ViewVideoModal = (props) => {
         visible,
         onCancel,
     } = props;
+    const iframeRef = useRef(null);
+
+    const handleClose = () => {
+        // Gửi lệnh dừng video đến thẻ iframe khi đóng popup
+        if (iframeRef.current) {
+            const iframe = iframeRef.current;
+            const iframeSrc = iframe.src;
+
+            // Gửi lệnh dừng video
+            iframe.src = iframeSrc.replace('autoplay=1', 'autoplay=0');
+        }
+
+        // Gọi hàm đóng popup
+        onCancel();
+    };
     return (
         <Modal
             visible={visible}
@@ -20,9 +35,17 @@ const ViewVideoModal = (props) => {
             }}
         // maskClosable={false}
         >
-            <div onClick={onCancel} className="modal-video-close">x</div>
+            <div onClick={handleClose} className="modal-video-close">x</div>
             <div className='d-flex justify-content-center align-items-center'>
-                <iframe className='view-video' src={source} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe
+                    ref={iframeRef}
+                    className='view-video'
+                    src={source}
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
             </div>
         </Modal >
     )

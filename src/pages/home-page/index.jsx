@@ -112,6 +112,7 @@ const HomePage = () => {
     setIsOpenModalVideo(false);
     setSourceVideo("");
   };
+
   return (
     <MainLayout>
       <SlideBanner />
@@ -322,11 +323,13 @@ const HomePage = () => {
       <Festival data={listLeHoi} />
 
       <LoadingFullPage loading={loading1} />
+
       <ViewVideoModal
         source={sourceVideo}
         visible={isOpenModalVideo}
         onCancel={onCloseModalVideo}
       />
+
     </MainLayout >
   );
 };

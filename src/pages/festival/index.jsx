@@ -28,9 +28,9 @@ const FestivalPage = () => {
 
     const { translate } = useTranslate();
 
-    const onGetListLeHoiAsync = async ({ searchText = "", limit = pageSize, page = 1, startDate = "", endDate = "" }) => {
+    const onGetListLeHoiAsync = async ({ searchText = "", limit = pageSize, page = 1, qH = "", startDate = "", endDate = "" }) => {
         const response = await api.getAllDiaDiem(
-            `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Festival.value}&${Constants.Params.limit}=${limit}&${Constants.Params.page}=${page}&startDate=${startDate}&endDate=${endDate}&search=${searchText}`,
+            `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Festival.value}&${Constants.Params.limit}=${limit}&${Constants.Params.page}=${page}&idQuanHuyen=${qH}&startDate=${startDate}&endDate=${endDate}&search=${searchText}`,
             setLoading
         )
         setListLeHoi(response.data.diaDiems);
@@ -47,8 +47,8 @@ const FestivalPage = () => {
     };
 
 
-    const onSearch = async (searchText = "", limit = pageSize, page = 1, startDate = "", endDate = "") => {
-        onGetListLeHoiAsync({ searchText: searchText, limit: limit, page: page, startDate: startDate, endDate: endDate, })
+    const onSearch = async (searchText = "", limit = pageSize, page = 1, qH = "", startDate = "", endDate = "") => {
+        onGetListLeHoiAsync({ searchText: searchText, limit: limit, page: page, qH: qH, startDate: startDate, endDate: endDate, })
     }
     useEffect(() => {
         onSearch().then(_ => { })
@@ -60,36 +60,36 @@ const FestivalPage = () => {
         setSearchText(e.target.value);
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            onSearch(e.target.value, pageSize, changePage, startDate, endDate).then((_) => { });
+            onSearch(e.target.value, pageSize, changePage, qH, startDate, endDate).then((_) => { });
         }, Constants.DEBOUNCE_SEARCH);
     };
     const onChangeStartDate = async (e) => {
         setStartDate(e);
         if (endDate != "") {
-            await onSearch(searchText, pageSize, changePage, e, endDate).then((_) => { });
+            await onSearch(searchText, pageSize, changePage, qH, e, endDate).then((_) => { });
         }
     }
 
     const onChangeEndDate = async (e) => {
         setEndDate(e);
         if (startDate != "") {
-            await onSearch(searchText, pageSize, changePage, startDate, e).then((_) => { });
+            await onSearch(searchText, pageSize, changePage, qH, startDate, e).then((_) => { });
         }
     }
 
     const onChangeQH = (e) => {
         setQH(e);
-        onSearch(searchText, pageSize, changePage, e).then((_) => { });
+        onSearch(searchText, pageSize, changePage, e, startDate, endDate).then((_) => { });
     }
 
     const onPreviousPage = () => {
         setChangePage(changePage - 1);
-        onSearch(searchText, pageSize, changePage - 1, startDate, endDate).then((_) => { });
+        onSearch(searchText, pageSize, changePage - 1, qH, startDate, endDate).then((_) => { });
     }
 
     const onNextPage = () => {
         setChangePage(changePage + 1);
-        onSearch(searchText, pageSize, changePage + 1, startDate, endDate).then((_) => { });
+        onSearch(searchText, pageSize, changePage + 1, qH, startDate, endDate).then((_) => { });
     }
 
     return (
@@ -118,13 +118,15 @@ const FestivalPage = () => {
                             <div key={index} className="pl-10 pr-10 mb-60 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                                 <div className="activites-container">
                                     <div className="activities-image position-relative">
-                                        <img src={
-                                            it.hinhAnh?.indexOf("http") == -1
-                                                ?
-                                                showImageCommon(it.hinhAnh)
-                                                :
-                                                it.hinhAnh
-                                        } className='img-page' alt="photo" />
+                                        <a href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>
+                                            <img src={
+                                                it.hinhAnh?.indexOf("http") == -1
+                                                    ?
+                                                    showImageCommon(it.hinhAnh)
+                                                    :
+                                                    it.hinhAnh
+                                            } className='img-page' alt="photo" />
+                                        </a>
                                     </div>
                                     <div className="activities-content">
                                         <a className='text-truncate-title-festival position-relative' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>
