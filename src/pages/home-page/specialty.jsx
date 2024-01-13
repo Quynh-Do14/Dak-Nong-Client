@@ -38,9 +38,13 @@ const Specialty = ({ data = [] }) => {
                                 </div>
                                 <div className="deals-info">
                                     <ul>
-                                        <li>
-                                            <i className="fa fa-star pr-2"></i>
-                                            {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}){" "}
+                                        <li className="d-flex align-items-center">
+                                            <div className="mr-10">
+                                                <i className="fa fa-star"></i>
+                                            </div>
+                                            <div>
+                                                {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}){" "}
+                                            </div>
                                         </li>
                                         <li>
                                             {/* <span>
