@@ -1153,10 +1153,10 @@ const ExtraComponent = () => {
               padding: 4,
               position: "absolute",
               top: 12,
-              left: 52,
+              left: 10,
               boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
               width: 300,
-              height: "calc(100vh - 104px - 100px)",
+              height: "calc(100vh - 104px - 180px)",
               overflowY: "scroll",
               paddingBottom: 12,
             }}
@@ -1619,7 +1619,7 @@ const ExtraComponent = () => {
               padding: 4,
               position: "absolute",
               top: 12,
-              left: 52,
+              left: 10,
               boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
               width: 300,
             }}
@@ -2238,7 +2238,7 @@ const ExtraComponent = () => {
         <div
           style={{
             position: "absolute",
-            top: 10,
+            bottom: 10,
             left: 10,
           }}
         >
@@ -2267,7 +2267,7 @@ const ExtraComponent = () => {
         <div
           style={{
             position: "absolute",
-            top: 50,
+            bottom: 50,
             left: 10,
           }}
         >
@@ -2291,6 +2291,35 @@ const ExtraComponent = () => {
             }}
           >
             <i className="fa-regular fa-map"></i>
+          </button>
+        </div>
+         <div
+          style={{
+            position: "absolute",
+            bottom: 90,
+            left: 10,
+          }}
+        >
+          <button
+            onClick={() => {
+              setIsLopBanDo(false);
+              setIsDanhSachBanDo(true);
+            }}
+            style={{
+              width: 29,
+              height: 29,
+              display: "block",
+              padding: 0,
+              outline: "none",
+              border: 0,
+              boxSizing: "border-box",
+              backgroundColor: "#fff",
+              cursor: "pointer",
+              boxShadow: "0 0 0 2px rgba(0,0,0,.1)",
+              borderRadius: 4,
+            }}
+          >
+            <i class="fa-solid fa-diamond-turn-right"></i>
           </button>
         </div>
         <div
