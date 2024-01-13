@@ -143,6 +143,12 @@ const SpecialtyPage = () => {
                                 </div>
                             </div>
                         ))}
+                        <PaginationCommon
+                            changePage={changePage}
+                            onPreviousPage={onPreviousPage}
+                            onNextPage={onNextPage}
+                            pagination={pagination}
+                        />
                     </div>
                 </div>
             </section>

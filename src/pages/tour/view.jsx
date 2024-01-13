@@ -39,16 +39,15 @@ const TourDetail = () => {
   const onGetDetailDiemDenAsync = async () => {
     const response = await api.getDiaDiemById(
       `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      setLoading
+      () => { }
     );
     setDetailTour(response.diaDiem);
-    const responses = await api.getAllDiaDiem(
-      `dichvu/top?idDanhMuc=${response.diaDiem.idDanhMuc}&${
-        Constants.Params.limit
-      }=${3}&idQuanHuyen=${response.diaDiem.idQuanHuyen}`,
-      setLoading
-    );
-    setDiaDiemLienQuan(responses.data.diaDiems);
+    // const responses = await api.getAllDiaDiem(
+    //   `dichvu/top?idDanhMuc=${response.diaDiem.idDanhMuc}&${Constants.Params.limit
+    //   }=${3}&idQuanHuyen=${response.diaDiem.idQuanHuyen}`,
+    //   setLoading
+    // );
+    // setDiaDiemLienQuan(responses.data.diaDiems);
   };
 
   function haversine(lat1, lon1, lat2, lon2) {
@@ -93,34 +92,37 @@ const TourDetail = () => {
   const fecthData = async () => {
     var dsDiaDiem = [];
 
-    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, setLoading);
+    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(
+      ``,
+      () => { }
+    );
     const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(
       ``,
-      setLoading
+      () => { }
     );
     const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(
       ``,
-      setLoading
+      () => { }
     );
     const resGetPhuongTienGeometry = await api.getAllDiemPhuongTienBanDo(
       ``,
-      setLoading
+      () => { }
     );
 
     const resGetDanhMucConCuaDanhMucDiaDiem = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${1}`,
-      setLoading
+      () => { }
     );
     const resGetDanhMucConCuaDanhMucLuuTru = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${2}`,
-      setLoading
+      () => { }
     );
     const resGetDanhMucConCuaDanhMucAmThuc = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${3}`,
-      setLoading
+      () => { }
     );
     const resGetDanhMucConCuaDanhMucPhuongTien =
-      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, setLoading);
+      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, () => { });
 
     var dataDsDiaDiemGeoJson = { ...resGetDiaDiemGeometry };
     setDsDiemDuLich(dataDsDiaDiemGeoJson);
@@ -140,7 +142,7 @@ const TourDetail = () => {
 
     const response = await api.getDiaDiemById(
       `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      setLoading
+      () => { }
     );
 
     if (response) {
@@ -152,7 +154,6 @@ const TourDetail = () => {
         15
       );
 
-      console.log("dsDiaDiemSearch", dsDiaDiemSearch);
 
       setDsDiemDichVu(dsDiaDiemSearch);
 
@@ -485,11 +486,10 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -498,8 +498,7 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/destination-view?${
-                    e.features[0].properties.idDiaDiem
+                  <a href="/destination-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -510,9 +509,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -593,11 +591,10 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -606,8 +603,7 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/destination-view?${
-                    e.features[0].properties.idDiaDiem
+                  <a href="/destination-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -618,9 +614,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -701,11 +696,10 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -714,8 +708,7 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/destination-view?${
-                    e.features[0].properties.idDiaDiem
+                  <a href="/destination-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -726,9 +719,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -809,11 +801,10 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -822,8 +813,7 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/destination-view?${
-                    e.features[0].properties.idDiaDiem
+                  <a href="/destination-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -834,9 +824,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -890,10 +879,12 @@ const TourDetail = () => {
   };
 
   useEffect(() => {
-    onGetDetailDiemDenAsync().then((_) => {});
+    setLoading(true);
+    onGetDetailDiemDenAsync().then((_) => { });
     fecthData();
+    setTimeout(() => setLoading(false), 1000);
   }, []);
-
+  console.log('dsDiemDichVu', dsDiemDichVu);
   return (
     <MainLayout className={"bg-white"}>
       <BannerCommon
@@ -914,9 +905,8 @@ const TourDetail = () => {
                         <button
                           key={index}
                           onClick={() => setTabSelect(index)}
-                          className={`nav-link ${
-                            tabSelect == index ? "active" : ""
-                          }`}
+                          className={`nav-link ${tabSelect == index ? "active" : ""
+                            }`}
                           id="nav-home-tab"
                           type="button"
                           role="tab"
@@ -1027,12 +1017,12 @@ const TourDetail = () => {
                       <span>
                         {detailTour.giaVe === Constants.FreePrice
                           ? translationData(
-                              detailTour.giaVe,
-                              detailTour.giaVeUS
-                            )
+                            detailTour.giaVe,
+                            detailTour.giaVeUS
+                          )
                           : detailTour.giaVe == null
-                          ? translate("free")
-                          : `Chỉ từ: ${detailTour.giaVe}`}
+                            ? translate("free")
+                            : `Chỉ từ: ${detailTour.giaVe}`}
                       </span>
                     </li>
                     <li>
@@ -1081,49 +1071,6 @@ const TourDetail = () => {
                     </li>
                   </ul>
                 </div>
-
-                {/* <div className="faq-accordion ">
-                                    <div className="accordion" id="accordionExample">
-                                        <div className="accordion-item">
-                                            <h4 className="accordion-header" id="headingOne">
-                                                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    Why are your tours so expensive?
-                                                </button>
-                                            </h4>
-                                            <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                <div className="accordion-body">
-                                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some injected or words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="accordion-item">
-                                            <h4 className="accordion-header" id="headingTwo">
-                                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    How will contact with us?
-                                                </button>
-                                            </h4>
-                                            <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                                <div className="accordion-body">
-                                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some injected or words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="accordion-item">
-                                            <h4 className="accordion-header" id="headingThree">
-                                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                    How to book the new tour for 2 persons?
-                                                </button>
-                                            </h4>
-                                            <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                <div className="accordion-body">
-                                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some injected or words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> */}
                 <div
                   style={{
                     width: "100%",
@@ -1134,7 +1081,7 @@ const TourDetail = () => {
 
                 <RelationDestination
                   title={translate("relatedSchedule")}
-                  data={dsDiaDiemLienQuan}
+                  data={dsDiemDichVu}
                 />
               </div>
             </div>

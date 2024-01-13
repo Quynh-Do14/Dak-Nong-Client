@@ -4,7 +4,7 @@ import useTranslate from '../../../core/common/hook/useTranslate';
 const FooterPage = () => {
     const { translate } = useTranslate();
     return (
-        <footer className="common-footer p_relative">
+        <footer className="common-footer p_relative pt-20">
             <div className="footer__middle  p_relative d_block">
                 <div className="container-fluid padding-common">
                     <div className="footer__middle__content">

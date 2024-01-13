@@ -121,6 +121,8 @@ export const translations = {
     logOutSuccess: "Signed Out Successfully",
     logOutMessage: "You have logged out of the system",
     ////
+    free: "Free",
+    noDestination: "There has been no service recently",
   },
   vi: {
     homePage: "Trang chủ",
@@ -237,6 +239,8 @@ export const translations = {
     logOutSuccess: "Đăng xuất thành công",
     logOutMessage: "Bạn đã đăng xuất khỏi hệ thống",
     ////
+    free: "Miễn phí",
+    noDestination: "Không có dịch vụ nào gần đây",
   },
   // Thêm các ngôn ngữ khác nếu cần
 };
