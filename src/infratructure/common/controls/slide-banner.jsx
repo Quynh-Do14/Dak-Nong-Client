@@ -48,7 +48,7 @@ const SlideBanner = () => {
                                                 </h2>
                                                 <p>{translate("wellcomeText")}</p>
                                                 <div className="banner-btn-media">
-                                                    <div className="header-link-btn"><a href={ROUTE_PATH.DESTINATION} className="btn-1">{translate("exploreNow")} <span></span></a></div>
+                                                    <div className="header-link-btn"><a href={ROUTE_PATH.TOUR} className="btn-1">{translate("exploreNow")} <span></span></a></div>
                                                     <div className="banner-media">
                                                         <ul>
                                                             <li><a href="#">
