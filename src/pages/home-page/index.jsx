@@ -166,71 +166,7 @@ const HomePage = () => {
         </div>
       </section>
       {/* //////////////// */}
-      {/* //////////////// */}
-      {/* <section
-        className="popular-ture home3-popular-ture"
-        style={{
-          backgroundColor: "#eeeeee",
-          paddingTop: 0,
-        }}
-      >
-        <div
-          className="home-two-pattern-layer"
-          style={{
-            backgroundImage: "url(assets/images/shape/destination-map.png)",
-          }}
-        ></div>
-        <div className="sail-image">
-          <img src="assets/images/shape/sail.png" alt="shape" />
-        </div>
-        <div className="spring-arrow-r">
-          <img src="assets/images/shape/spring-arrow-r.png" alt="arrow" />
-        </div>
-        <div
-          className="container-fluid padding-common"
-          style={{
-            paddingTop: 12,
-          }}
-        >
-          <div className="row">
-            <div
-              style={{
-                height: 48,
-              }}
-            ></div>
-            <div className="col-lg-12">
-              <div className="align-title">
-                <h3>{translate("exploreTravel")}</h3>
-              </div>
-            </div>
-            {Constants.DataHomePage.list.map((it, index) => (
-              <div key={index} className="col-lg-3 col-md-6 d-flex justify-content-center">
-                <div
-                  className="popular-ture-content wow fadeInUp"
-                  data-wow-delay="00ms"
-                  data-wow-duration="1500ms"
-                >
-                  <div className="popular-ture-image ">
-                    <img src={it.img} alt="image" className="object-fit" />
-                  </div>
-                  <div className="popular-ture-overlay">
-                    <div className="popular-ture-text">
-                      <a href={it.link}>{translate(it.name)} </a>
-                      <h6
-                        style={{
-                          paddingRight: 20,
-                        }}
-                      >
-                        {translate(it.description)}{" "}
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
+
       <section
         className="popular-ture home3-popular-ture"
         style={{
@@ -259,9 +195,11 @@ const HomePage = () => {
             {Constants.DataHomePage.list.map((it, index) => (
               <div key={index} className="col-xl-3 col-lg-3 col-md-6 mb-20">
                 <div className="choose-content wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1000ms">
-                  <div className="">
-                    <img src={it.img} alt="icon" />
-                  </div>
+                  <a href={it.link} className="mt-0 mb-0">
+                    <div className="">
+                      <img src={it.img} alt="icon" />
+                    </div>
+                  </a>
                   <div className="choose-bottom-icon">
                     <img src={it.iconBot} alt="icon" />
                   </div>
@@ -327,8 +265,11 @@ const HomePage = () => {
       </section>
       {/* //////////////// */}
       <Article data={listTinTuc} />
+
+      {/* //////////////// */}
+      <Tour data={listDiaDiem} />
+      {/* //////////////// */}
       <Specialty data={listDacSan} />
-      <Festival data={listLeHoi} />
       {/* //////////////// */}
       <section className="divider">
         <div className="container">
@@ -378,125 +319,8 @@ const HomePage = () => {
         </div>
       </section>
       {/* //////////////// */}
+      <Festival data={listLeHoi} />
 
-      {/* //////////////// */}
-      {/* <section className="destination">
-                <div className="destination-icon"/>
-                    <img src="assets/images/icons/plan.png" alt="icon" />
-                </div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="align-title">
-                                <h3>Địa điểm du lịch</h3>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="destination-container">
-                                <div className="destination-image">
-                                    <a href="destination-details.html"><img src={
-                                        listDiaDiem[0]?.hinhAnh?.indexOf("http") == -1
-                                            ?
-                                            showImageCommon(listDiaDiem[0]?.hinhAnh)
-                                            :
-                                            listDiaDiem[0]?.hinhAnh
-                                    } alt="image" className='img-destination' /></a>
-                                </div>
-                                <div className="destination-content destination-content-1">
-                                    <h6>{listDiaDiem[0]?.tenDiaDiem}</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-6">
-                            {
-                                listDiaDiemTop2.map((it, index) => (
-                                    <div key={index} className="destination-container mb-24">
-                                        <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
-                                            <div className="destination-image">
-                                                <a href="destination-details.html"><img src={
-                                                    it?.hinhAnh?.indexOf("http") == -1
-                                                        ?
-                                                        showImageCommon(it?.hinhAnh)
-                                                        :
-                                                        it?.hinhAnh
-                                                } alt="image" className='img-destination-s' /></a>
-                                            </div>
-                                            <div className="destination-content destination-content-2">
-                                                <h6>{it?.tenDiaDiem}</h6>
-                                            </div>
-                                        </a>
-                                    </div>
-                                ))}
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-      <section className="portfolio">
-        <div className="container-fluid padding-common">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="align-title">
-                <h3>{translate("destination")} </h3>
-              </div>
-            </div>
-            {listDiaDiem.map((it, index) => (
-              <div key={index} className="mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
-                <div className="portfolio-content">
-                  <div className="portfolio-info">
-                    <img
-                      src={
-                        it?.hinhAnh?.indexOf("http") == -1
-                          ? showImageCommon(it?.hinhAnh)
-                          : it?.hinhAnh
-                      }
-                      alt="img"
-                    />
-                    <div className="personal-info">
-                      <ul>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star"></i>
-                        </li>
-                        <li>
-                          <span>5.0</span>
-                        </li>
-                      </ul>
-                      <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
-                        <h6 className="text-truncate-title-destination-2">
-                          {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
-                        </h6>
-                      </a>
-                      <span>{it.tenQuanHuyen}</span>
-                    </div>
-                  </div>
-                  <p className="text-truncate-description">
-                    {translationData(it.moTa, it.moTaUS)}
-                  </p>
-                  <div className="qutetion">
-                    <img
-                      src="assets/images/icons/qutation.png"
-                      alt="qutation"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section >
-      {/* //////////////// */}
       <LoadingFullPage loading={loading1} />
       <ViewVideoModal
         source={sourceVideo}

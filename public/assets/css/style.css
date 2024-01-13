@@ -4915,6 +4915,16 @@ img.img-page-detail {
   height: 9.5vh;
 }
 
+.text-truncate-date-festival {
+  white-space: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  height: 3.5vh;
+}
+
 .text-truncate-title-festival {
   white-space: initial;
   overflow: hidden;
@@ -4924,7 +4934,6 @@ img.img-page-detail {
   -webkit-box-orient: vertical;
   height: 8.6vh;
 }
-
 .text-truncate-address {
   white-space: initial;
   overflow: hidden;

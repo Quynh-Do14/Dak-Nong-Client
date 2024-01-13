@@ -11,7 +11,7 @@ import { Drawer, Dropdown, Menu, Select, Space, Switch } from "antd";
 import { useRecoilState } from "recoil";
 import { LanguageState } from "../../../core/common/atoms/language/languageState";
 import useTranslate from "../../../core/common/hook/useTranslate";
-
+import proFileIcon from '../../../asset/img/extra/profile.png'
 const HeaderPage = () => {
   const [isOpenPopupLogin, setIsOpenPopupLogin] = useState(false);
   const [isOpenModalRegister, setIsOpenModalRegister] = useState(false);
@@ -128,57 +128,84 @@ const HeaderPage = () => {
     });
   };
   // Drawer
+  // const listAction = () => {
+  //   return (
+  //     <Menu>
+  //       <Menu.Item key={"1"} className="title-action">
+  //         <nav className="main-menu navbar-expand-md navbar-light">
+  //           <div
+  //             className="collapse navbar-collapse show clearfix"
+  //             id="navbarSupportedContent"
+  //           >
+  //             <ul className=" navigation clearfix">
+  //               <li className="menu-drop-item dropdown d-flex">
+  //                 <a>{translate("english")} </a>{" "}
+  //                 <Switch
+  //                   value={selectLanguage}
+  //                   checked={isEnglish}
+  //                   onChange={onChangeLanguage}
+  //                 />
+  //               </li>
+  //             </ul>
+  //           </div>
+  //         </nav>
+  //       </Menu.Item>
+  //       <Menu.Item key={"2"} className="title-action">
+  //         <nav className="main-menu navbar-expand-md navbar-light">
+  //           <div
+  //             className="collapse navbar-collapse show clearfix"
+  //             id="navbarSupportedContent"
+  //           >
+  //             <ul className=" navigation clearfix">
+  //               {storage ? (
+  //                 <li
+  //                   onClick={onOpenModalLogout}
+  //                   className="menu-drop-item dropdown"
+  //                 >
+  //                   <a>
+  //                     <i className="fa fa-sign-out" aria-hidden="true"></i>{" "}
+  //                     {translate("logOut")}{" "}
+  //                   </a>
+  //                 </li>
+  //               ) : (
+  //                 <li
+  //                   onClick={onOpenPopupLogin}
+  //                   className="menu-drop-item dropdown"
+  //                 >
+  //                   {" "}
+  //                   <a>
+  //                     <i className="fa fa-sign-in" aria-hidden="true"></i>{" "}
+  //                     {translate("signIn")}
+  //                   </a>
+  //                 </li>
+  //               )}
+  //             </ul>
+  //           </div>
+  //         </nav>
+  //       </Menu.Item>
+  //     </Menu>
+  //   );
+  // };
+
   const listAction = () => {
     return (
-      <Menu>
-        <Menu.Item className="title-action">
+      <Menu className="mt-30">
+        <Menu.Item key={"2"} className="title-action">
           <nav className="main-menu navbar-expand-md navbar-light">
             <div
               className="collapse navbar-collapse show clearfix"
               id="navbarSupportedContent"
             >
               <ul className=" navigation clearfix">
-                <li className="menu-drop-item dropdown d-flex">
-                  <a>{translate("english")} </a>{" "}
-                  <Switch
-                    value={selectLanguage}
-                    checked={isEnglish}
-                    onChange={onChangeLanguage}
-                  />
+                <li
+                  onClick={onOpenModalLogout}
+                  className="menu-drop-item dropdown"
+                >
+                  <a>
+                    <i className="fa fa-sign-out" aria-hidden="true"></i>{" "}
+                    {translate("logOut")}{" "}
+                  </a>
                 </li>
-              </ul>
-            </div>
-          </nav>
-        </Menu.Item>
-        <Menu.Item className="title-action">
-          <nav className="main-menu navbar-expand-md navbar-light">
-            <div
-              className="collapse navbar-collapse show clearfix"
-              id="navbarSupportedContent"
-            >
-              <ul className=" navigation clearfix">
-                {storage ? (
-                  <li
-                    onClick={onOpenModalLogout}
-                    className="menu-drop-item dropdown"
-                  >
-                    <a>
-                      <i className="fa fa-sign-out" aria-hidden="true"></i>{" "}
-                      {translate("logOut")}{" "}
-                    </a>
-                  </li>
-                ) : (
-                  <li
-                    onClick={onOpenPopupLogin}
-                    className="menu-drop-item dropdown"
-                  >
-                    {" "}
-                    <a>
-                      <i className="fa fa-sign-in" aria-hidden="true"></i>{" "}
-                      {translate("signIn")}
-                    </a>
-                  </li>
-                )}
               </ul>
             </div>
           </nav>
@@ -186,6 +213,7 @@ const HeaderPage = () => {
       </Menu>
     );
   };
+
 
   return (
     <div>
@@ -259,12 +287,12 @@ const HeaderPage = () => {
                     </Select>
                   </div>
                   {/* <Dropdown overlay={listAction()} trigger={['click']}>
-                                        <a onClick={(e) => e.preventDefault()}>
-                                            <Space>
-                                                <button className="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style={{ fontSize: 30 }} className="flaticon-menu-1"></i></button>
-                                            </Space>
-                                        </a>
-                                    </Dropdown> */}
+                    <a onClick={(e) => e.preventDefault()}>
+                      <Space>
+                        <button className="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style={{ fontSize: 30 }} className="flaticon-menu-1"></i></button>
+                      </Space>
+                    </a>
+                  </Dropdown> */}
                   <nav className="main-menu navbar-expand-md navbar-light ml-20">
                     <div
                       className="collapse navbar-collapse show clearfix"
@@ -272,9 +300,25 @@ const HeaderPage = () => {
                     >
                       <ul className="navigation clearfix">
                         {storage ? (
-                          <li onClick={onOpenModalLogout} className="dropdown">
-                            <a>{translate("logOut")} </a>
-                          </li>
+                          // <li onClick={onOpenModalLogout} className="dropdown">
+                          //   <a>{translate("logOut")} </a>
+                          // </li>
+
+                          <Dropdown overlay={listAction()} trigger={['click']}>
+                            <a onClick={(e) => e.preventDefault()}>
+                              <Space>
+                                <div className="authentication d-flex align-items-center justify-content-start pointer">
+                                  <div>
+                                    <img src={proFileIcon} className="avatar-img" />
+                                  </div>
+                                  <div>
+                                    <div className="current-user">{sessionStorage.getItem("firstName")} {sessionStorage.getItem("lastName")} </div>
+                                    <div className="current-role">{sessionStorage.getItem("role")}</div>
+                                  </div>
+                                </div>
+                              </Space>
+                            </a>
+                          </Dropdown>
                         ) : (
                           <li onClick={onOpenPopupLogin} className="dropdown">
                             <a>{translate("signIn")} </a>
@@ -322,6 +366,15 @@ const HeaderPage = () => {
                 id="navbarSupportedContent"
               >
                 <ul className="navigation clearfix">
+                  <li className="dropdown authentication-mobile d-flex align-items-center justify-content-start pointer">
+                    <div>
+                      <img src={proFileIcon} className="avatar-img" />
+                    </div>
+                    <div>
+                      <div className="current-user">{sessionStorage.getItem("firstName")} {sessionStorage.getItem("lastName")} </div>
+                      <div className="current-role">{sessionStorage.getItem("role")}</div>
+                    </div>
+                  </li>
                   {Constants.Menu.List.map((it, index) => (
                     <li key={index} className="dropdown">
                       <a

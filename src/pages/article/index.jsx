@@ -12,6 +12,8 @@ import SearchArticle from "./search";
 import LoadingFullPage from "../../infratructure/common/controls/loading";
 import PaginationCommon from "../../infratructure/common/controls/pagination";
 import useTranslate from "../../core/common/hook/useTranslate";
+import moment from "moment";
+
 let timeout;
 const ArticlePage = () => {
   const [listTinTuc, setListTinTuc] = useState([]);
@@ -22,24 +24,27 @@ const ArticlePage = () => {
   const [totalItem, setTotalItem] = useState();
   const [pageSize, setPageSize] = useState(Constants.PaginationConfigs.Size);
   const [changePage, setChangePage] = useState(1);
+  const [sortBy, setSortby] = useState("DESC");
 
   const { translate } = useTranslate();
   const onGetListTinTucAsync = async ({
     searchText = "",
+    postDate = postDate,
+    sortBy = sortBy,
     limit = pageSize,
     page = 1,
   }) => {
     const response = await api.getAllTinTuc(
       `loaitin?type=1${searchText ? (searchText != "" ? `&search=${searchText}` : ``) : ``
-      }&limit=${limit}&page=${page}`,
+      }&ngayDang=${postDate}&sort=${sortBy}&limit=${limit}&page=${page}`,
       setLoading
     );
     setListTinTuc(response.data.tinTucs);
     setPagination(response.data.pagination);
     setTotalItem(response.data.totalItems);
   };
-  const onSearch = async (searchText = "", limit = pageSize, page = 1) => {
-    onGetListTinTucAsync({ searchText: searchText, limit: limit, page: page });
+  const onSearch = async (searchText = "", postDate = "", sortBy = "", limit = pageSize, page = 1) => {
+    onGetListTinTucAsync({ searchText: searchText, postDate: postDate, sortBy: sortBy, limit: limit, page: page });
   };
   useEffect(() => {
     onSearch().then((_) => { });
@@ -49,21 +54,28 @@ const ArticlePage = () => {
     setSearchText(e.target.value);
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      onSearch(e.target.value, pageSize, changePage).then((_) => { });
+      onSearch(e.target.value, postDate, sortBy, pageSize, changePage).then((_) => { });
     }, Constants.DEBOUNCE_SEARCH);
   };
 
-  const onChangePostDate = (value) => {
+  const onChangePostDate = (value, dateString) => {
     setPostDate(value)
+    onSearch(searchText, dateString, pageSize, changePage - 1).then((_) => { });
   }
+
+  const onSortBy = (value) => {
+    setSortby(value);
+    onSearch(searchText, postDate, value, pageSize, changePage - 1).then((_) => { });
+  };
+
   const onPreviousPage = () => {
     setChangePage(changePage - 1);
-    onSearch(searchText, pageSize, changePage - 1).then((_) => { });
+    onSearch(searchText, postDate, sortBy, pageSize, changePage - 1).then((_) => { });
   };
 
   const onNextPage = () => {
     setChangePage(changePage + 1);
-    onSearch(searchText, pageSize, changePage + 1).then((_) => { });
+    onSearch(searchText, postDate, sortBy, pageSize, changePage + 1).then((_) => { });
   };
   return (
     <MainLayout className={"bg-white"}>
@@ -78,6 +90,8 @@ const ArticlePage = () => {
         onChangeSearchText={onChangeSearchText}
         postDate={postDate}
         onChangePostDate={onChangePostDate}
+        sortBy={sortBy}
+        onSortBy={onSortBy}
       />
       <section className="deals position-relative">
         <div className="container position-absolute">

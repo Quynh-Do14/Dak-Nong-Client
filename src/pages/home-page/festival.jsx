@@ -22,13 +22,16 @@ const Festival = ({ data = [] }) => {
                         <div key={index} className="pl-10 pr-10 mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                             <div className="activites-container">
                                 <div className="activities-image position-relative">
-                                    <img src={
-                                        it.hinhAnh?.indexOf("http") == -1
-                                            ?
-                                            showImageCommon(it.hinhAnh)
-                                            :
-                                            it.hinhAnh
-                                    } className='img-page' alt="photo" />
+                                    <a href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>
+
+                                        <img src={
+                                            it.hinhAnh?.indexOf("http") == -1
+                                                ?
+                                                showImageCommon(it.hinhAnh)
+                                                :
+                                                it.hinhAnh
+                                        } className='img-page' alt="photo" />
+                                    </a>
                                 </div>
                                 <div className="activities-content">
                                     <a className='text-truncate-title-festival position-relative' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>

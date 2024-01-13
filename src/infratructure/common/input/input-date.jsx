@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import useTranslate from '../../../core/common/hook/useTranslate';
 import { DatePicker } from 'antd';
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 
 const InputDate = (props) => {
     const {
@@ -25,11 +27,10 @@ const InputDate = (props) => {
         if (value) {
             setIsFocused(true);
         }
-        if (value === null) {
+        if (value === null || value == "") {
             setIsFocused(false);
         }
     };
-    console.log("value", value);
     return (
         <form className={`service-form-option input-container ${isFocused ? 'focused' : ''}`}>
             <label className='label-custom'>{translate(label)} </label>

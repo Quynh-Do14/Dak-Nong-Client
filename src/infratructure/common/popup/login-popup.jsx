@@ -95,6 +95,9 @@ const LoginPopup = (props) => {
       );
       if (login.success == true) {
         sessionStorage.setItem(Constants.TOKEN, login.data.token);
+        sessionStorage.setItem("firstName", login.data.user.data.firstName);
+        sessionStorage.setItem("lastName", login.data.user.data.lastName);
+        sessionStorage.setItem("role", login.data.user.role);
         if (!isCurrentPage) {
           navigate(ROUTE_PATH.HOME_PAGE);
         }

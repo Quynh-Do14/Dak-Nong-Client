@@ -6,7 +6,7 @@ import useTranslate from '../../core/common/hook/useTranslate';
 const Article = ({ data = [] }) => {
     const { translate } = useTranslate();
     return (
-        <section className="deals home-three-blog">
+        <section className="deals bg-white home-three-blog">
             <div className="blog-icon">
                 <img src="assets/images/icons/blog-icon.png" alt="icon" />
             </div>
@@ -21,7 +21,7 @@ const Article = ({ data = [] }) => {
                         <div key={index} className="mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                             < div className="blog-content" >
                                 <div className="blog-image">
-                                    <a href="blog-details.html"><img src={
+                                    <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`}><img src={
                                         it.hinhAnh?.indexOf("http") == -1
                                             ?
                                             showImageCommon(it.hinhAnh)

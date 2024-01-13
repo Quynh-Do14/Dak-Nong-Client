@@ -23,6 +23,9 @@ const FestivalPage = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
+    const [dsQuanHuyen, setDsQuanHuyen] = useState([])
+    const [qH, setQH] = useState("");
+
     const { translate } = useTranslate();
 
     const onGetListLeHoiAsync = async ({ searchText = "", limit = pageSize, page = 1, startDate = "", endDate = "" }) => {
@@ -34,11 +37,23 @@ const FestivalPage = () => {
         setPagination(response.data.pagination);
         setTotalItem(response.data.totalItems);
     }
+
+    const onGetQuanHuyenAsync = async () => {
+        const response = await api.getAllQuanHuyen(
+            ``,
+            setLoading
+        );
+        setDsQuanHuyen(response.data.quanHuyens);
+    };
+
+
     const onSearch = async (searchText = "", limit = pageSize, page = 1, startDate = "", endDate = "") => {
         onGetListLeHoiAsync({ searchText: searchText, limit: limit, page: page, startDate: startDate, endDate: endDate, })
     }
     useEffect(() => {
         onSearch().then(_ => { })
+        onGetQuanHuyenAsync().then(_ => { })
+
     }, []);
 
     const onChangeSearchText = async (e) => {
@@ -61,6 +76,12 @@ const FestivalPage = () => {
             await onSearch(searchText, pageSize, changePage, startDate, e).then((_) => { });
         }
     }
+
+    const onChangeQH = (e) => {
+        setQH(e);
+        onSearch(searchText, pageSize, changePage, e).then((_) => { });
+    }
+
     const onPreviousPage = () => {
         setChangePage(changePage - 1);
         onSearch(searchText, pageSize, changePage - 1, startDate, endDate).then((_) => { });
@@ -86,12 +107,15 @@ const FestivalPage = () => {
                 onChangeStartDate={onChangeStartDate}
                 endDate={endDate}
                 onChangeEndDate={onChangeEndDate}
+                searchQuanHuyen={qH}
+                onChangeQH={onChangeQH}
+                dsQuanHuyen={dsQuanHuyen}
             />
             <section className="deals position-relative">
                 <div className="container-fluid padding-common">
                     <div className="row">
                         {listLeHoi.map((it, index) => (
-                            <div key={index} className="pl-10 pr-10 mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
+                            <div key={index} className="pl-10 pr-10 mb-60 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                                 <div className="activites-container">
                                     <div className="activities-image position-relative">
                                         <img src={
@@ -107,7 +131,7 @@ const FestivalPage = () => {
                                             {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
                                         </a>
                                         <ul className='position-relative'>
-                                            <li className='d-flex align-items-center'><i className="fa fa-calendar mr-10"></i>{it.gioMoCua} </li>
+                                            <li className='d-flex align-items-center text-truncate-date-festival'><i className="fa fa-calendar mr-10"></i>{it.gioMoCua} </li>
                                             {it.gioDongCua && "-"}
                                             {it.gioDongCua && <li><i className="fa fa-calendar mr-10"></i>{it.gioDongCua} </li>}
                                         </ul>

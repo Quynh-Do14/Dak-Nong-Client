@@ -106,6 +106,9 @@ export const translations = {
     nameArtical: "Name Artical",
     postingDate: "Posting Date",
     category: "Category",
+    sortBy: "Sort By",
+    latestPost: "Latest post",
+    longestPost: "Longest post",
     ////
 
     ////
@@ -219,6 +222,9 @@ export const translations = {
     nameArtical: "Tên bài viết",
     postingDate: "Ngày đăng bài",
     category: "Danh mục",
+    sortBy: "Sắp xếp",
+    latestPost: "Bài đăng mới nhất",
+    longestPost: "Bài đăng lâu nhất",
     ////
 
     ////

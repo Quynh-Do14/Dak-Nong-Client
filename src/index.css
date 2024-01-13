@@ -171,3 +171,66 @@ span.anticon.anticon-info-circle.color-fail.font-size-icon {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+.authentication {
+  margin-left: 30px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .authentication {
+    margin-left: 0;
+  }
+
+  .authentication .current-user {
+    font-size: 11px !important;
+  }
+
+  .authentication .current-role {
+    font-size: 12px !important;
+
+  }
+}
+
+.authentication .current-user {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 22px;
+  color: #094174;
+}
+
+.authentication .current-role {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  color: #FE7524;
+}
+
+.authentication .avatar-img {
+  width: 50px;
+  height: auto;
+  margin-right: 6px;
+}
+
+.authentication-mobile {
+  padding: 10px 25px;
+}
+
+.authentication-mobile .avatar-img {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.authentication-mobile .current-role {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  color: #FE7524;
+}
+
+.authentication-mobile .current-user {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #094174;
+}
