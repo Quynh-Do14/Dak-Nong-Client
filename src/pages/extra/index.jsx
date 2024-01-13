@@ -16,7 +16,7 @@ import * as turf from "@turf/turf";
 import { Modal } from "antd";
 import InputDateMap from "../../infratructure/common/input/input-date-map";
 import LoadingFullPageMap from "../../infratructure/common/controls/loadingMap";
-
+import * as MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
 
@@ -55,6 +55,8 @@ const ExtraComponent = () => {
   const [isLopBanDo, setIsLopBanDo] = useState(false);
   const [isDanhSachBanDo, setIsDanhSachBanDo] = useState(false);
   const [dsStyleBanDo, setDsStyleBanDo] = useState(DSSTYLEBANDO);
+  const [isTimDuong, setIsTimDuong] = useState("");
+
   const [isLoading, setIsLoading] = useState(true);
 
   const [selectSearch, setSelectSearch] = useState("DIEMDULICH");
@@ -2293,7 +2295,8 @@ const ExtraComponent = () => {
             <i className="fa-regular fa-map"></i>
           </button>
         </div>
-         <div
+
+        <div
           style={{
             position: "absolute",
             bottom: 90,
@@ -2302,8 +2305,19 @@ const ExtraComponent = () => {
         >
           <button
             onClick={() => {
-              setIsLopBanDo(false);
-              setIsDanhSachBanDo(true);
+              if (isTimDuong != "") {
+                setIsTimDuong("");
+                map.removeControl(isTimDuong);
+              } else {
+                const directions = new MapboxDirections({
+                  accessToken:
+                    "pk.eyJ1IjoiYXlhYW56YXZlcmkiLCJhIjoiY2ttZHVwazJvMm95YzJvcXM3ZTdta21rZSJ9.WMpQsXd5ur2gP8kFjpBo8g",
+                  unit: "metric",
+                  profile: "mapbox/driving",
+                });
+                setIsTimDuong(directions);
+                map.addControl(directions, "top-left");
+              }
             }}
             style={{
               width: 29,
@@ -2319,7 +2333,14 @@ const ExtraComponent = () => {
               borderRadius: 4,
             }}
           >
-            <i class="fa-solid fa-diamond-turn-right"></i>
+            {isTimDuong != "" ? (
+              <i
+                className="fa-regular fa-rectangle-xmark"
+                style={{ color: "#f8285a" }}
+              ></i>
+            ) : (
+              <i className="fa-solid fa-diamond-turn-right"></i>
+            )}
           </button>
         </div>
         <div
