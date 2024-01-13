@@ -62,7 +62,7 @@ export const translations = {
     serviceAttentive: "Services for attentive asistance",
     transportation: "Transportation services",
     makeReservation: "Make a reservation",
-    relatedSchedule: "Related schedule",
+    relatedSchedule: "Related destination",
     ////
 
     ////
@@ -180,7 +180,7 @@ export const translations = {
     serviceAttentive: "Dịch vụ hỗ trợ tận tình",
     transportation: "Dịch vụ di chuyển",
     makeReservation: "Đặt lịch trình",
-    relatedSchedule: "Lịch trình liên quan",
+    relatedSchedule: "Địa điểm liên quan",
     ////
 
     ////

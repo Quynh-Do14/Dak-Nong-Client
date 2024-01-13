@@ -234,3 +234,11 @@ span.anticon.anticon-info-circle.color-fail.font-size-icon {
   line-height: 22px;
   color: #094174;
 }
+
+.f-size-footer {
+  color: #094174;
+  /* padding-bottom: 47px; */
+  font-family: "Source Serif Pro";
+  font-weight: 700;
+  font-size: 16px;
+}

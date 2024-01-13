@@ -105,13 +105,48 @@ const FestivalDetail = () => {
                                 </div>
                                 <div className="pkg-info-container">
                                     <ul>
-                                        <li><i className="fa fa-star"></i>{detailFestival.soSaoTrungBinh} </li>
-                                        <li><i className="fa fa-eye"></i> {detailFestival.luotXem} {translate("view")}</li>
-                                        <li><i className="fa fa-wifi"></i> Wi-fi</li>
+                                        <li className="d-flex align-items-center">
+                                            <div className="mr-10">
+                                                <i className="fa fa-star"></i>
+                                            </div>
+                                            <div>
+                                                {detailFestival.soSaoTrungBinh}
+                                            </div>
+                                        </li>
+                                        <li className="d-flex align-items-center">
+                                            <div className="mr-10">
+                                                <i className="fa fa-eye"></i>
+                                            </div>
+                                            <div>
+                                                ({detailFestival.luotXem} {translate("view")}){" "}
+                                            </div>
+                                        </li>
+                                        <li className="d-flex align-items-center">
+                                            <div className="mr-10">
+                                                <i className="fa fa-wifi"></i>
+                                            </div>
+                                            <div>
+                                                Wi-fi
+                                            </div>
+                                        </li>
                                     </ul>
                                     <ul>
-                                        <li><i className="fa fa-gear"></i> {translate("serviceAttentive")}</li>
-                                        <li><i className="fa fa-car"></i> {translate("transportation")} </li>
+                                        <li className="d-flex align-items-center">
+                                            <div className="mr-10">
+                                                <i className="fa fa-gear"></i>
+                                            </div>
+                                            <div>
+                                                {translate("serviceAttentive")}{" "}
+                                            </div>
+                                        </li>
+                                        <li className="d-flex align-items-center">
+                                            <div className="mr-10">
+                                                <i className="fa fa-car"></i>
+                                            </div>
+                                            <div>
+                                                {translate("transportation")}{" "}
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                                 {/* <div className="faq-accordion ">

@@ -16,47 +16,65 @@ const RelationDestination = (props) => {
                 <h4>{title}</h4>
             </div>
 
-            <div className="row">
-                {data.map((it, index) => (
-                    <div key={index} className="col-lg-4 col-md-6">
-                        <div className="tour-package-container">
-                            <div className="activities-image">
-                                <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}><img src={
-                                    it.hinhAnh?.indexOf("http") == -1
-                                        ?
-                                        showImageCommon(it.hinhAnh)
-                                        :
-                                        it.hinhAnh
-                                } className='img-page' alt="photo" /></a>
-                            </div>
-                            <div className="activities-content">
-                                <div className="tour-package-info">
-                                    <div className="rating">
-                                        <p><i className="fa fa-star pr-2"></i> {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}) </p>
-                                    </div>
-                                    <div className="doller">
-                                        <span>
-                                            {it.giaVe === Constants.FreePrice ?
-                                                (translationData(it.giaVe, it.giaVeUS))
-                                                :
-                                                it.giaVe == null
-                                                    ? translate("free")
-                                                    : `Chỉ từ: ${it.giaVe}`
-                                            } </span>
-                                    </div>
+            <div className="container">
+                <div className="row">
+                    {data.map((it, index) => (
+                        <div key={index} className="pl-10 mb-30 pr-10 col-xl-4 col-lg-4 col-md-6 col-xs-12">
+                            <div className="deals-content ">
+                                <div className="deals-image custom-image">
+                                    <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
+                                        <img
+                                            src={
+                                                it.hinhAnh?.indexOf("http") == -1
+                                                    ? showImageCommon(it.hinhAnh)
+                                                    : it.hinhAnh
+                                            }
+                                            alt="image"
+                                            className="img-page"
+                                        />
+                                    </a>
                                 </div>
-                                <a className='text-truncate-origin' href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
-                                    {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
-                                </a>
-                                <ul>
-                                    <h6 className='text-truncate-address'><i className="flaticon-placeholder"></i>
+                                <div className="deals-info">
+                                    <ul>
+                                        <li className="d-flex align-items-center">
+                                            <div className="mr-10">
+                                                <i className="fa fa-star"></i>
+                                            </div>
+                                            <div>
+                                                {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}){" "}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                {" "}
+                                                {it.giaVe === Constants.FreePrice ?
+                                                    (translationData(it.giaVe, it.giaVeUS))
+                                                    :
+                                                    it.giaVe == null
+                                                        ? translate("free")
+                                                        : `Chỉ từ: ${it.giaVe}`
+                                                }
+                                                {" "}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <a
+                                        href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}
+                                        className="deals-info-link text-truncate-origin"
+                                    >
+                                        {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
+                                        {" "}
+                                    </a>
+                                    <p className="text-truncate-address-destination">
+                                        <i className="flaticon-map"></i>
                                         {translationData(it.diaChi, it.diaChiUS)}
-                                    </h6>
-                                </ul>
+                                        {" "}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
 

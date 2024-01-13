@@ -6,7 +6,7 @@ const FooterPage = () => {
     return (
         <footer className="common-footer p_relative">
             <div className="footer__middle  p_relative d_block">
-                <div className="container">
+                <div className="container-fluid padding-common">
                     <div className="footer__middle__content">
                         <div className="row clearfix">
                             <div className="col-lg-4 col-md-6 col-sm-12 footer_column">
@@ -41,9 +41,9 @@ const FooterPage = () => {
                                     </div>
                                     <div className="widget_content">
                                         <ul className="links_list clearfix text-align-justify ">
-                                            <li><a >{translate("address")}: Đường 23/3, TP. Gia Nghĩa, tỉnh Đắk Nông</a></li>
-                                            <li><a >{translate("phone")}: 02613.701166</a></li>
-                                            <li><a >Email: banbientap@daknong.gov.vn</a></li>
+                                            <li className=''><a >{translate("address")}: Đường 23/3, TP.Gia Nghĩa,Đắk Nông</a></li>
+                                            <li className=''><a >{translate("phone")}: 02613.701166</a></li>
+                                            <li className=''><a >{translate("Email")}: banbientap@daknong.gov.vn</a></li>
                                         </ul>
                                     </div>
                                 </div>
