@@ -123,6 +123,7 @@ export const translations = {
     ////
     free: "Free",
     noDestination: "There has been no service recently",
+    destinatioService: "Service location",
   },
   vi: {
     homePage: "Trang chủ",
@@ -241,6 +242,7 @@ export const translations = {
     ////
     free: "Miễn phí",
     noDestination: "Không có dịch vụ nào gần đây",
+    destinatioService: "Địa điểm cung cấp dịch vụ",
   },
   // Thêm các ngôn ngữ khác nếu cần
 };

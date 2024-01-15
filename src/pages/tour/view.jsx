@@ -92,18 +92,9 @@ const TourDetail = () => {
   const fecthData = async () => {
     var dsDiaDiem = [];
 
-    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(
-      ``,
-      () => { }
-    );
-    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(
-      ``,
-      () => { }
-    );
-    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(
-      ``,
-      () => { }
-    );
+    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, () => { });
+    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(``, () => { });
+    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => { });
     const resGetPhuongTienGeometry = await api.getAllDiemPhuongTienBanDo(
       ``,
       () => { }
@@ -151,9 +142,8 @@ const TourDetail = () => {
         dsDiaDiem,
         response.diaDiem.lat,
         response.diaDiem.long,
-        15
+        100
       );
-
 
       setDsDiemDichVu(dsDiaDiemSearch);
 
@@ -498,7 +488,7 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/destination-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -603,7 +593,7 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/destination-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -708,7 +698,7 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/destination-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -813,7 +803,7 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/destination-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -884,6 +874,7 @@ const TourDetail = () => {
     fecthData();
     setTimeout(() => setLoading(false), 1000);
   }, []);
+  console.log("dsDiemDichVu", dsDiemDichVu);
   return (
     <MainLayout className={"bg-white"}>
       <BannerCommon
@@ -1079,7 +1070,7 @@ const TourDetail = () => {
                 ></div>
 
                 <RelationDestination
-                  title={translate("relatedSchedule")}
+                  title={translate("destinatioService")}
                   data={dsDiemDichVu}
                 />
               </div>
