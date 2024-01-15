@@ -140,7 +140,7 @@ const TourPage = () => {
         title={"chooseSchedule"}
         redirect={ROUTE_PATH.HOME_PAGE}
         redirectPage={"homePage"}
-        currentPage={"Tour"}
+        currentPage={"destination"}
       />
       <SearchTour
         searchText={searchText}

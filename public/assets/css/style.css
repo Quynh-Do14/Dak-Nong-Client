@@ -3631,6 +3631,9 @@ Destination page
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  background: #5a59595e;
+  padding: 20px;
+  border-radius: 30px;
 }
 
 .common-banner-title a,

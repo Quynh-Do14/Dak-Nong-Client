@@ -10,9 +10,9 @@ import RelationDestination from '../../infratructure/common/controls/relation-de
 import { convertTimeOnly, showImageCommon, translationData } from '../../infratructure/utils/helper'
 import useTranslate from '../../core/common/hook/useTranslate'
 
-const SpecialtyDetail = () => {
+const HotelDetail = () => {
     const [loading, setLoading] = useState(false);
-    const [detailSpecialty, setDetailSpecialty] = useState({});
+    const [detailHotel, setDetailHotel] = useState({});
     const [tabSelect, setTabSelect] = useState(0);
     const location = useLocation()
     const param = location.search.replace("?", "");
@@ -20,10 +20,10 @@ const SpecialtyDetail = () => {
 
     const onGetDetailDacSanAsync = async () => {
         const response = await api.getDiaDiemById(
-            `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Specialty.value}`,
+            `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Hotel.value}`,
             setLoading
         )
-        setDetailSpecialty(response.diaDiem);
+        setDetailHotel(response.diaDiem);
     }
 
     useEffect(() => {
@@ -33,13 +33,13 @@ const SpecialtyDetail = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={"specialtySlogan"}
-                redirect={ROUTE_PATH.SPECIALTY}
-                redirectPage={"specialty"}
+                title={"hotelSlogan"}
+                redirect={ROUTE_PATH.HOTEL}
+                redirectPage={"hotel"}
                 currentPage={"detail"}
             />
             <section className="package-details">
-                <div className="title-name-view-page">{translationData(detailSpecialty.tenDiaDiem, detailSpecialty.tenDiaDiemUS)}</div>
+                <div className="title-name-view-page">{translationData(detailHotel.tenDiaDiem, detailHotel.tenDiaDiemUS)}</div>
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-10">
@@ -56,11 +56,11 @@ const SpecialtyDetail = () => {
                                         <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                             <div className="pkg-nav-contant">
                                                 <img src={
-                                                    detailSpecialty.hinhAnh?.indexOf("http") == -1
+                                                    detailHotel.hinhAnh?.indexOf("http") == -1
                                                         ?
-                                                        showImageCommon(detailSpecialty.hinhAnh)
+                                                        showImageCommon(detailHotel.hinhAnh)
                                                         :
-                                                        detailSpecialty.hinhAnh
+                                                        detailHotel.hinhAnh
                                                 } alt="img" className='mb-20' />
                                             </div>
                                         </div>
@@ -84,15 +84,23 @@ const SpecialtyDetail = () => {
                                 <div className="pkg-common-title">
                                     <h4>{translate("detail")} </h4>
                                 </div>
-                                <p className='text-align-justify'>{translationData(detailSpecialty.moTa, detailSpecialty.moTaUS)}</p>
+                                <p className='text-align-justify'>{translationData(detailHotel.moTa, detailHotel.moTaUS)}</p>
                                 <div className="pkg-list-info">
                                     <ul>
-                                        <li><h6>{translate("specialtyName")} :</h6> <span>{translationData(detailSpecialty.tenDiaDiem, detailSpecialty.tenDiaDiemUS)} </span></li>
-                                        <li><h6>{translate("address")} :</h6> <span>{translationData(detailSpecialty.diaChi, detailSpecialty.diaChiUS)}</span></li>
-                                        <li><h6>{translate("phoneNumber")} :</h6> <span>{detailSpecialty.sdtLienHe}</span></li>
-                                        <li><h6>{translate("email")} :</h6> <span>{detailSpecialty.emailLienHe}</span></li>
-                                        {/* <li><h6>{translate("price")} :</h6> <span>{detailSpecialty.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailSpecialty.giaVe}`}</span></li>
-                                        <li><h6>{translate("openTime")} :</h6> <span>{convertTimeOnly(detailSpecialty.gioMoCua)} - {convertTimeOnly(detailSpecialty.gioDongCua)}</span></li> */}
+                                        <li><h6>{translate("HotelName")} :</h6> <span>{translationData(detailHotel.tenDiaDiem, detailHotel.tenDiaDiemUS)} </span></li>
+                                        <li><h6>{translate("address")} :</h6> <span>{translationData(detailHotel.diaChi, detailHotel.diaChiUS)}</span></li>
+                                        <li><h6>{translate("phoneNumber")} :</h6> <span>{detailHotel.sdtLienHe}</span></li>
+                                        <li><h6>{translate("email")} :</h6> <span>{detailHotel.emailLienHe}</span></li>
+                                        <li><h6>{translate("price")} :</h6> <span>
+                                            {detailHotel.giaVe === Constants.FreePrice ?
+                                                (translationData(detailHotel.giaVe, detailHotel.giaVeUS))
+                                                :
+                                                detailHotel.giaVe == null
+                                                    ? translate("free")
+                                                    : `Chỉ từ: ${detailHotel.giaVe}`
+                                            }
+                                        </span></li>
+                                        <li><h6>{translate("openTime")} :</h6> <span>{detailHotel.gioMoCua} {detailHotel.gioDongCua && `- ${detailHotel.gioDongCua}`}</span></li>
                                     </ul>
                                 </div>
                                 <div className="pkg-info-container">
@@ -102,7 +110,7 @@ const SpecialtyDetail = () => {
                                                 <i className="fa fa-star"></i>
                                             </div>
                                             <div>
-                                                {detailSpecialty.soSaoTrungBinh}
+                                                {detailHotel.soSaoTrungBinh}
                                             </div>
                                         </li>
                                         <li className="d-flex align-items-center">
@@ -110,7 +118,7 @@ const SpecialtyDetail = () => {
                                                 <i className="fa fa-eye"></i>
                                             </div>
                                             <div>
-                                                ({detailSpecialty.luotXem} {translate("view")}){" "}
+                                                ({detailHotel.luotXem} {translate("view")}){" "}
                                             </div>
                                         </li>
                                     </ul>
@@ -191,4 +199,4 @@ const SpecialtyDetail = () => {
     )
 }
 
-export default SpecialtyDetail
+export default HotelDetail

@@ -7,39 +7,39 @@ import { useLocation } from 'react-router-dom'
 import api from '../../infratructure/api'
 import Constants from '../../core/common/constant'
 import RelationDestination from '../../infratructure/common/controls/relation-destination'
-import { convertTimeOnly, showImageCommon, translationData } from '../../infratructure/utils/helper'
+import { convertDateOnly, showImageCommon, translationData } from '../../infratructure/utils/helper'
 import useTranslate from '../../core/common/hook/useTranslate'
 
-const SpecialtyDetail = () => {
+const RestaurantDetail = () => {
     const [loading, setLoading] = useState(false);
-    const [detailSpecialty, setDetailSpecialty] = useState({});
+    const [detailRestaurant, setDetailRestaurant] = useState({});
+    const [isOpenListImage, setIsOpenListImage] = useState(false);
     const [tabSelect, setTabSelect] = useState(0);
-    const location = useLocation()
+    const location = useLocation();
     const param = location.search.replace("?", "");
     const { translate } = useTranslate();
-
-    const onGetDetailDacSanAsync = async () => {
+    const onGetDetailDiemDenAsync = async () => {
         const response = await api.getDiaDiemById(
-            `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Specialty.value}`,
+            `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Restaurant.value}`,
             setLoading
-        )
-        setDetailSpecialty(response.diaDiem);
-    }
+        );
+        setDetailRestaurant(response.diaDiem);
+    };
 
     useEffect(() => {
-        onGetDetailDacSanAsync().then(_ => { });
+        onGetDetailDiemDenAsync().then((_) => { });
     }, []);
 
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={"specialtySlogan"}
-                redirect={ROUTE_PATH.SPECIALTY}
-                redirectPage={"specialty"}
+                title={"restaurantSlogan"}
+                redirect={ROUTE_PATH.FESTIVAL}
+                redirectPage={"festival"}
                 currentPage={"detail"}
             />
             <section className="package-details">
-                <div className="title-name-view-page">{translationData(detailSpecialty.tenDiaDiem, detailSpecialty.tenDiaDiemUS)}</div>
+                <div className="title-name-view-page">{translationData(detailRestaurant.tenDiaDiem, detailRestaurant.tenDiaDiemUS)}</div>
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-10">
@@ -56,11 +56,11 @@ const SpecialtyDetail = () => {
                                         <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                             <div className="pkg-nav-contant">
                                                 <img src={
-                                                    detailSpecialty.hinhAnh?.indexOf("http") == -1
+                                                    detailRestaurant.hinhAnh?.indexOf("http") == -1
                                                         ?
-                                                        showImageCommon(detailSpecialty.hinhAnh)
+                                                        showImageCommon(detailRestaurant.hinhAnh)
                                                         :
-                                                        detailSpecialty.hinhAnh
+                                                        detailRestaurant.hinhAnh
                                                 } alt="img" className='mb-20' />
                                             </div>
                                         </div>
@@ -82,17 +82,26 @@ const SpecialtyDetail = () => {
                                 </div>
 
                                 <div className="pkg-common-title">
-                                    <h4>{translate("detail")} </h4>
+                                    <h4>{translate("detail")}</h4>
                                 </div>
-                                <p className='text-align-justify'>{translationData(detailSpecialty.moTa, detailSpecialty.moTaUS)}</p>
+                                <p className='text-align-justify'>{translationData(detailRestaurant.moTa, detailRestaurant.moTaUS)}</p>
+
                                 <div className="pkg-list-info">
                                     <ul>
-                                        <li><h6>{translate("specialtyName")} :</h6> <span>{translationData(detailSpecialty.tenDiaDiem, detailSpecialty.tenDiaDiemUS)} </span></li>
-                                        <li><h6>{translate("address")} :</h6> <span>{translationData(detailSpecialty.diaChi, detailSpecialty.diaChiUS)}</span></li>
-                                        <li><h6>{translate("phoneNumber")} :</h6> <span>{detailSpecialty.sdtLienHe}</span></li>
-                                        <li><h6>{translate("email")} :</h6> <span>{detailSpecialty.emailLienHe}</span></li>
-                                        {/* <li><h6>{translate("price")} :</h6> <span>{detailSpecialty.giaVe === Constants.FreePrice || Constants.Undefined ? Constants.FreePrice : `Chỉ từ: ${detailSpecialty.giaVe}`}</span></li>
-                                        <li><h6>{translate("openTime")} :</h6> <span>{convertTimeOnly(detailSpecialty.gioMoCua)} - {convertTimeOnly(detailSpecialty.gioDongCua)}</span></li> */}
+                                        <li><h6>{translate("festivalName")} :</h6> <span>{translationData(detailRestaurant.tenDiaDiem, detailRestaurant.tenDiaDiemUS)} </span></li>
+                                        <li><h6>{translate("address")} :</h6> <span>{translationData(detailRestaurant.diaChi, detailRestaurant.diaChiUS)}</span></li>
+                                        <li><h6>{translate("phoneNumber")} :</h6> <span>{detailRestaurant.sdtLienHe}</span></li>
+                                        <li><h6>{translate("email")} :</h6> <span>{detailRestaurant.emailLienHe}</span></li>
+                                        <li><h6>{translate("price")} :</h6> <span>
+                                            {detailRestaurant.giaVe === Constants.FreePrice ?
+                                                (translationData(detailRestaurant.giaVe, detailRestaurant.giaVeUS))
+                                                :
+                                                detailRestaurant.giaVe == null
+                                                    ? translate("free")
+                                                    : `Chỉ từ: ${detailRestaurant.giaVe}`
+                                            }
+                                        </span></li>
+                                        <li><h6>{translate("openTime")} :</h6> <span>{detailRestaurant.gioMoCua} {detailRestaurant.gioDongCua && `- ${detailRestaurant.gioDongCua}`}</span></li>
                                     </ul>
                                 </div>
                                 <div className="pkg-info-container">
@@ -102,7 +111,7 @@ const SpecialtyDetail = () => {
                                                 <i className="fa fa-star"></i>
                                             </div>
                                             <div>
-                                                {detailSpecialty.soSaoTrungBinh}
+                                                {detailRestaurant.soSaoTrungBinh}
                                             </div>
                                         </li>
                                         <li className="d-flex align-items-center">
@@ -110,7 +119,15 @@ const SpecialtyDetail = () => {
                                                 <i className="fa fa-eye"></i>
                                             </div>
                                             <div>
-                                                ({detailSpecialty.luotXem} {translate("view")}){" "}
+                                                ({detailRestaurant.luotXem} {translate("view")}){" "}
+                                            </div>
+                                        </li>
+                                        <li className="d-flex align-items-center">
+                                            <div className="mr-10">
+                                                <i className="fa fa-wifi"></i>
+                                            </div>
+                                            <div>
+                                                Wi-fi
                                             </div>
                                         </li>
                                     </ul>
@@ -133,7 +150,6 @@ const SpecialtyDetail = () => {
                                         </li>
                                     </ul>
                                 </div>
-
                                 {/* <div className="faq-accordion ">
                                     <div className="accordion" id="accordionExample">
                                         <div className="accordion-item">
@@ -191,4 +207,4 @@ const SpecialtyDetail = () => {
     )
 }
 
-export default SpecialtyDetail
+export default RestaurantDetail

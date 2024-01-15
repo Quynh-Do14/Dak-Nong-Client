@@ -19,6 +19,12 @@ export const ROUTE_PATH = {
     FESTIVAL: `/${PREFIX}festival`,
     VIEW_FESTIVAL: `/${PREFIX}festival-view`,
 
+    RESTAURANT: `/${PREFIX}restaurant`,
+    VIEW_RESTAURANT: `/${PREFIX}restaurant-view`,
+
+    HOTEL: `/${PREFIX}hotel`,
+    VIEW_HOTEL: `/${PREFIX}hotel-view`,
+
     LAYOUT_MAP: `/${PREFIX}map`,
 
     HOME_PAGE: `/`,

@@ -23,20 +23,23 @@ export default class Constants {
         link: ROUTE_PATH.HOME_PAGE,
       },
       {
-        label: "article",
+        label: "news",
         link: ROUTE_PATH.ARTICLE,
       },
       {
-        label: "schedule",
-        link: ROUTE_PATH.TOUR,
+        label: "location",
         children: [
           {
-            label: "restaurant",
+            label: "schedule",
             link: ROUTE_PATH.TOUR,
           },
           {
+            label: "restaurant",
+            link: ROUTE_PATH.RESTAURANT,
+          },
+          {
             label: "hotel",
-            link: ROUTE_PATH.TOUR,
+            link: ROUTE_PATH.HOTEL,
           },
         ]
       },
@@ -169,9 +172,18 @@ export default class Constants {
       static value = 6;
       static label = "Tour";
     };
+
     static Festival = class {
       static value = 23;
       static label = "Lễ hội";
+    };
+    static Restaurant = class {
+      static value = 24;
+      static label = "Nhà hàng";
+    };
+    static Hotel = class {
+      static value = 26;
+      static label = "Khách sạn";
     };
     static News = class {
       static value = 8;
@@ -266,7 +278,7 @@ export default class Constants {
         name: "todayArticle",
         img: homePageImg2,
         link: ROUTE_PATH.ARTICLE,
-        description: "todayArticleDes",
+        description: "todayNewsDes",
         iconBot: "assets/images/icons/choose-bottom-02.png",
       },
       {

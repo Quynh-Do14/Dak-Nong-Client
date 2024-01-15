@@ -13,6 +13,10 @@ import SpecialtyDetail from './pages/specialty/view';
 import RecoilOutsideComponent from './infratructure/recoil-outside/recoil.service';
 import { RecoilRoot } from 'recoil';
 import ExtraComponent from './pages/extra';
+import RestaurantPage from './pages/restaurant';
+import RestaurantDetail from './pages/restaurant/view';
+import HotelPage from './pages/hotel';
+import HotelDetail from './pages/hotel/view';
 
 const RouteRoot = () => {
   return (
@@ -32,6 +36,12 @@ const RouteRoot = () => {
 
         <Route path={ROUTE_PATH.SPECIALTY} element={<SpecialtyPage />} />
         <Route path={ROUTE_PATH.VIEW_SPECIALTY} element={<SpecialtyDetail />} />
+
+        <Route path={ROUTE_PATH.RESTAURANT} element={<RestaurantPage />} />
+        <Route path={ROUTE_PATH.VIEW_RESTAURANT} element={<RestaurantDetail />} />
+
+        <Route path={ROUTE_PATH.HOTEL} element={<HotelPage />} />
+        <Route path={ROUTE_PATH.VIEW_HOTEL} element={<HotelDetail />} />
 
         <Route path={ROUTE_PATH.LAYOUT_MAP} element={<ExtraComponent />} />
 

@@ -318,6 +318,12 @@ span.anticon.anticon-info-circle.color-fail.font-size-icon {
     margin-top: 120px;
 }
 
+.no-data-view {
+    text-align: center;
+    color: #FE7524;
+    font-size: 18px;
+    font-weight: 600;
+}
 
 /* scroll carousel */
 

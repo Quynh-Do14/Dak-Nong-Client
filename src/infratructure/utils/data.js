@@ -1,9 +1,10 @@
 export const translations = {
   en: {
-    homePage: "HomePage",
-    article: "Article",
+    homePage: "Home Page",
+    news: "News",
     festival: "Festival",
     specialty: "Specialty",
+    location: "Location",
     schedule: "Destination",
     restaurant: "Restaurant",
     hotel: "Hotel",
@@ -28,13 +29,13 @@ export const translations = {
     //////
 
     destination: "Destination",
-    todayArticle: `Today's Article`,
+    todayNews: `Update news every day`,
     exploreCuisine: "Explore Cuisine",
     traditionalFestival: "Traditional Festival",
     //////
     //////
     destinationDes: "Explore new tourist destinations",
-    todayArticleDes: "Read the latest articles and news",
+    todayNewsDes: "Read the latest articles and news",
     exploreCuisineDes: "Explore the rich cuisine in this land",
     traditionalFestivalDes: "Learn about traditional festivals",
     //////
@@ -49,9 +50,17 @@ export const translations = {
     contactInfo: "Contact Information",
     address: "Address",
     phone: "Phone Number",
-    chooseSchedule: "Choose the best schedules",
+    chooseSchedule: "Explore interesting tourist destinations",
+
+    restaurantSlogan: "Enjoy the culinary spaces",
+    hotelSlogan: "Luxurious resting space",
+    festivalSlogan: "Những nét đẹp văn hóa của vùng đất này",
+    specialtySlogan: "Experience culinary culture",
+
     detail: "Information Detail",
-    relatedArticles: "Related articles",
+    geographicalLocation: "Geographical location",
+    directions: "Directions",
+    relatedNews: "Related news",
     ////
     ////
     info: "Info",
@@ -126,12 +135,15 @@ export const translations = {
     free: "Free",
     noDestination: "There has been no service recently",
     destinatioService: "Service location",
+    noVideo: "No Video",
+    noGallery: "No Gallery"
   },
   vi: {
     homePage: "Trang chủ",
-    article: "Bài viết",
+    news: "Tin tức",
     festival: "Lễ hội",
     specialty: "Đặc sản",
+    location: "Địa điểm",
     schedule: "Điểm du lịch",
     restaurant: "Nhà hàng",
     hotel: "Khách sạn",
@@ -151,13 +163,13 @@ export const translations = {
 
     //////
     destination: "Địa điểm du lịch",
-    todayArticle: `Bài viết hôm nay`,
+    todayNews: `Cập nhật tin tức mỗi ngày`,
     exploreCuisine: "Khám phá ẩm thực",
     traditionalFestival: "Lễ hội truyền thống",
     //////
     //////
     destinationDes: "Khám phá những địa điểm du lịch mới",
-    todayArticleDes: "Đọc những bài viết, tin tức mới nhất",
+    todayNewsDes: "Đọc những bài viết, tin tức mới nhất",
     exploreCuisineDes: "Khám phá ẩm thực phong phú tại đây",
     traditionalFestivalDes: "Tìm hiểu các lễ hội truyền thống",
     //////
@@ -172,9 +184,16 @@ export const translations = {
     contactInfo: "Thông tin liên hệ",
     address: "Địa chỉ",
     phone: "SĐT Liên hệ",
-    chooseSchedule: "Lựa chọn những lịch trình tốt nhất",
+    chooseSchedule: "Khám phá những địa điểm du lịch thú vị",
+    restaurantSlogan: "Tận hưởng những không gian ẩm thực",
+    hotelSlogan: "Không gian nghỉ ngơi sang trọng",
+    festivalSlogan: "Những nét đẹp văn hóa của vùng đất này",
+    specialtySlogan: "Trải nghiệm văn hóa ẩm thực",
+
     detail: "Thông tin chi tiết",
-    relatedArticles: "Bài viết liên quan",
+    geographicalLocation: "Vị trí địa lý",
+    directions: "Chỉ dẫn đường đi",
+    relatedNews: "Tin tức liên quan",
     ////
     ////
     info: "Thông tin",
@@ -247,6 +266,8 @@ export const translations = {
     free: "Miễn phí",
     noDestination: "Không có dịch vụ nào gần đây",
     destinatioService: "Địa điểm cung cấp dịch vụ",
+    noVideo: "Chưa có video",
+    noGallery: "Chưa có danh sách ảnh",
   },
   // Thêm các ngôn ngữ khác nếu cần
 };

@@ -260,7 +260,7 @@ const HeaderPage = () => {
                               <ul>
                                 {
                                   it.children.map((it, index) => (
-                                    <li key={index}><a onClick={() => onNavigateQuanHuyen(it)} className="">{translate(it.label)} </a></li>
+                                    <li key={index}><a href={it.link} className="">{translate(it.label)} </a></li>
                                   ))
                                 }
                               </ul>

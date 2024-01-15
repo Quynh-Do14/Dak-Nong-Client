@@ -12,7 +12,7 @@ import SearchFestival from './search';
 import SearchSpecialty from './search';
 import useTranslate from '../../core/common/hook/useTranslate';
 let timeout
-const SpecialtyPage = () => {
+const HotelPage = () => {
     const [listDacSan, setListDacSan] = useState([]);
     const [pagination, setPagination] = useState({});
     const [totalItem, setTotalItem] = useState();
@@ -26,7 +26,7 @@ const SpecialtyPage = () => {
 
     const onGetListDacSanAsync = async ({ searchText = "", limit = pageSize, page = 1, qH = "" }) => {
         const response = await api.getAllDiaDiem(
-            `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Specialty.value}&${Constants.Params.limit}=${limit}&${Constants.Params.page}=${page}&search=${searchText}&idQuanHuyen=${qH}`,
+            `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Hotel.value}&${Constants.Params.limit}=${limit}&${Constants.Params.page}=${page}&search=${searchText}&idQuanHuyen=${qH}`,
             setLoading
         )
         setListDacSan(response.data.diaDiems);
@@ -77,10 +77,10 @@ const SpecialtyPage = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={"specialtySlogan"}
+                title={"hotelSlogan"}
                 redirect={ROUTE_PATH.HOME_PAGE}
                 redirectPage={"homePage"}
-                currentPage={"specialty"}
+                currentPage={"hotel"}
             />
             <SearchSpecialty
                 dsQuanHuyen={dsQuanHuyen}
@@ -96,7 +96,7 @@ const SpecialtyPage = () => {
                             <div key={index} className="pl-10 pr-10 mb-20 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                                 <div className="deals-content ">
                                     <div className="deals-image custom-image">
-                                        <a href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}>
+                                        <a href={`${ROUTE_PATH.VIEW_HOTEL}?${it.idDiaDiem}`}>
                                             <img
                                                 src={
                                                     it.hinhAnh?.indexOf("http") == -1
@@ -128,7 +128,7 @@ const SpecialtyPage = () => {
                                             </li> */}
                                         </ul>
                                         <a
-                                            href={`${ROUTE_PATH.VIEW_SPECIALTY}?${it.idDiaDiem}`}
+                                            href={`${ROUTE_PATH.VIEW_HOTEL}?${it.idDiaDiem}`}
                                             className="deals-info-link text-truncate-origin"
                                         >
                                             {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
@@ -157,4 +157,4 @@ const SpecialtyPage = () => {
     )
 }
 
-export default SpecialtyPage
+export default HotelPage

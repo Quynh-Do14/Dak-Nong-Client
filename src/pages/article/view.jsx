@@ -46,10 +46,10 @@ const ArticleDetail = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={"todayArticle"}
+                title={"todayNews"}
                 redirect={ROUTE_PATH.ARTICLE}
                 redirectPage={"artical"}
-                currentPage={"detail"}
+                currentPage={"news"}
             />
             <section className="package-details">
                 <div className="title-name-view-page">{translationData(detailArticle.tieuDe, detailArticle.tieuDeUS)}</div>
@@ -129,7 +129,7 @@ const ArticleDetail = () => {
                             </div>
                         </div>
                         <RelationArticle
-                            title={translate("relatedArticles")}
+                            title={translate("relatedNews")}
                             data={listTinTucLienQuan}
                         />
                     </div>

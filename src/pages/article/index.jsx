@@ -87,10 +87,10 @@ const ArticlePage = () => {
   return (
     <MainLayout className={"bg-white"}>
       <BannerCommon
-        title={"todayArticle"}
+        title={"todayNews"}
         redirect={ROUTE_PATH.HOME_PAGE}
         redirectPage={"homePage"}
-        currentPage={"article"}
+        currentPage={"news"}
       />
       <SearchArticle
         searchText={searchText}

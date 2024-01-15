@@ -11,7 +11,7 @@ import SearchTour from './search';
 import SearchFestival from './search';
 import useTranslate from '../../core/common/hook/useTranslate';
 let timeout
-const FestivalPage = () => {
+const RestaurantPage = () => {
     const [listLeHoi, setListLeHoi] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchText, setSearchText] = useState("");
@@ -30,7 +30,7 @@ const FestivalPage = () => {
 
     const onGetListLeHoiAsync = async ({ searchText = "", limit = pageSize, page = 1, qH = "", startDate = "", endDate = "" }) => {
         const response = await api.getAllDiaDiem(
-            `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Festival.value}&${Constants.Params.limit}=${limit}&${Constants.Params.page}=${page}&idQuanHuyen=${qH}&startDate=${startDate}&endDate=${endDate}&search=${searchText}`,
+            `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Restaurant.value}&${Constants.Params.limit}=${limit}&${Constants.Params.page}=${page}&idQuanHuyen=${qH}&startDate=${startDate}&endDate=${endDate}&search=${searchText}`,
             setLoading
         )
         setListLeHoi(response.data.diaDiems);
@@ -95,10 +95,10 @@ const FestivalPage = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={"festivalSlogan"}
+                title={"restaurantSlogan"}
                 redirect={ROUTE_PATH.HOME_PAGE}
                 redirectPage={"homePage"}
-                currentPage={"festival"}
+                currentPage={"restaurant"}
             />
             <SearchFestival
                 searchText={searchText}
@@ -118,7 +118,7 @@ const FestivalPage = () => {
                             <div key={index} className="pl-10 pr-10 mb-60 col-xl-3 col-lg-4 col-md-6 col-xs-12">
                                 <div className="activites-container">
                                     <div className="activities-image position-relative">
-                                        <a href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>
+                                        <a href={`${ROUTE_PATH.VIEW_RESTAURANT}?${it.idDiaDiem}`}>
                                             <img src={
                                                 it.hinhAnh?.indexOf("http") == -1
                                                     ?
@@ -129,7 +129,7 @@ const FestivalPage = () => {
                                         </a>
                                     </div>
                                     <div className="activities-content">
-                                        <a className='text-truncate-title-festival position-relative' href={`${ROUTE_PATH.VIEW_FESTIVAL}?${it.idDiaDiem}`}>
+                                        <a className='text-truncate-title-festival position-relative' href={`${ROUTE_PATH.VIEW_RESTAURANT}?${it.idDiaDiem}`}>
                                             {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
                                         </a>
                                         <ul className='position-relative'>
@@ -158,4 +158,4 @@ const FestivalPage = () => {
     )
 }
 
-export default FestivalPage
+export default RestaurantPage

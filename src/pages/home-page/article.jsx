@@ -14,7 +14,7 @@ const Article = ({ data = [] }) => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="align-title">
-                            <h3>{translate('todayArticle')}</h3>
+                            <h3>{translate('todayNews')}</h3>
                         </div>
                     </div>
                     {data.map((it, index) => (

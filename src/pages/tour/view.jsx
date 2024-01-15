@@ -14,6 +14,7 @@ import {
 import useTranslate from "../../core/common/hook/useTranslate";
 import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
+import ListImageDestination from "./list-image";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
@@ -31,6 +32,8 @@ const TourDetail = () => {
   const [dsAmThuc, setDsAmThuc] = useState([]);
   const [dsPhuongTien, setDsPhuongTien] = useState([]);
   const [dsDiemDichVu, setDsDiemDichVu] = useState([]);
+  const [listImage, setListImage] = useState([]);
+
   const [map, setMap] = useState({});
 
   const param = location.search.replace("?", "");
@@ -872,6 +875,20 @@ const TourDetail = () => {
       }
     }
   };
+  const getAllHinhAnh = async () => {
+    const response = await api.getHinhAnhByIdDiaDiem(
+      `${detailTour.idDiaDiem}`,
+      () => { }
+    );
+    setListImage(response.data);
+  };
+
+  useEffect(() => {
+    if (detailTour.idDiaDiem) {
+      getAllHinhAnh().then((_) => { });
+    }
+  }, [detailTour]);
+
 
   useEffect(() => {
     setLoading(true);
@@ -890,7 +907,7 @@ const TourDetail = () => {
       />
       <section className="package-details">
         {/* <div className="container"> */}
-          <div className="title-name-view-page">{translationData(detailTour.tenDiaDiem, detailTour.tenDiaDiemUS)}</div>
+        <div className="title-name-view-page">{translationData(detailTour.tenDiaDiem, detailTour.tenDiaDiemUS)}</div>
         {/* </div> */}
         <div className="container">
           <div className="row">
@@ -915,220 +932,217 @@ const TourDetail = () => {
                       ))}
                     </div>
                   </nav>
-                  <div className="tab-content mb-20" id="nav-tabContent">
-                    {tabSelect === 0 ? (
-                      <div
-                        className="tab-pane fade show active"
-                        id="nav-home"
-                        role="tabpanel"
-                        aria-labelledby="nav-home-tab"
-                        tabindex="0"
-                      >
-                        <div className="pkg-nav-contant">
-                          <img
-                            src={
-                              detailTour.hinhAnh?.indexOf("http") == -1
-                                ? showImageCommon(detailTour.hinhAnh)
-                                : detailTour.hinhAnh
-                            }
-                            alt="img"
-                            className=""
-                          />
-                        </div>
-                      </div>
-                    ) : tabSelect === 1 && detailTour.uriVideo ? (
-                      <div
-                        className="tab-pane fade show active"
-                        id="nav-home"
-                        role="tabpanel"
-                        aria-labelledby="nav-home-tab"
-                        tabindex="0"
-                      >
-                        <div className="pkg-nav-contant">
-                          <div className="nav-list">
-                            <video style={{ width: "100%" }} controls>
-                              <source
-                                src={detailTour.uriVideo}
-                                type="video/mp4"
+                  {
+                    tabSelect == 0
+                      ?
+                      <div>
+                        <div className="tab-content mb-20" id="nav-tabContent">
+                          <div
+                            className="tab-pane fade show active"
+                            id="nav-home"
+                            role="tabpanel"
+                            aria-labelledby="nav-home-tab"
+                            tabindex="0"
+                          >
+                            <div className="pkg-nav-contant">
+                              <img
+                                src={
+                                  detailTour.hinhAnh?.indexOf("http") == -1
+                                    ? showImageCommon(detailTour.hinhAnh)
+                                    : detailTour.hinhAnh
+                                }
+                                alt="img"
+                                className=""
                               />
-                            </video>
+                            </div>
+                          </div>
+
+
+                        </div>
+
+                        <div className="pkg-common-title">
+                          <h4>{translate("detail")} </h4>
+                        </div>
+                        <p className="text-align-justify">
+                          {translationData(detailTour.moTa, detailTour.moTaUS)}{" "}
+                        </p>
+
+                        <div className="pkg-common-title mt-20">
+                          <h4>{translate("geographicalLocation")} </h4>
+                        </div>
+                        <p className="text-align-justify">
+                          {translationData(detailTour?.viTriDiaLy, detailTour?.viTriDiaLyUS)}{" "}
+                        </p>
+
+                        <div className="pkg-list-info">
+                          <ul>
+                            <li>
+                              <h6>{translate("destination")} :</h6>{" "}
+                              <span>
+                                {translationData(
+                                  detailTour.tenDiaDiem,
+                                  detailTour.tenDiaDiemUS
+                                )}
+                              </span>
+                            </li>
+                            <li>
+                              <h6>{translate("type")} :</h6>{" "}
+                              <span>{translate(detailTour.tenDanhMuc)}</span>
+                            </li>
+                            <li>
+                              <h6>{translate("address")} :</h6>{" "}
+                              <span>
+                                {translationData(
+                                  detailTour.diaChi,
+                                  detailTour.diaChiUS
+                                )}
+                              </span>
+                            </li>
+                            <li>
+                              <h6>{translate("price")} :</h6>{" "}
+                              <span>
+                                {detailTour.giaVe === Constants.FreePrice
+                                  ? translationData(
+                                    detailTour.giaVe,
+                                    detailTour.giaVeUS
+                                  )
+                                  : detailTour.giaVe == null
+                                    ? translate("free")
+                                    : `Chỉ từ: ${detailTour.giaVe}`}
+                              </span>
+                            </li>
+                            <li>
+                              <h6>{translate("openTime")} :</h6>{" "}
+                              <span>
+                                {detailTour.gioMoCua} - {detailTour.gioDongCua}
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="pkg-info-container">
+                          <ul>
+                            <li className="d-flex align-items-center">
+                              <div className="mr-10">
+                                <i className="fa fa-star"></i>
+                              </div>
+                              <div>{detailTour.soSaoTrungBinh}</div>
+                            </li>
+                            <li className="d-flex align-items-center">
+                              <div className="mr-10">
+                                <i className="fa fa-eye"></i>
+                              </div>
+                              <div>
+                                ({detailTour.luotXem} {translate("view")}){" "}
+                              </div>
+                            </li>
+                            <li className="d-flex align-items-center">
+                              <div className="mr-10">
+                                <i className="fa fa-wifi"></i>
+                              </div>
+                              <div>Wi-fi</div>
+                            </li>
+                          </ul>
+                          <ul>
+                            <li className="d-flex align-items-center">
+                              <div className="mr-10">
+                                <i className="fa fa-gear"></i>
+                              </div>
+                              <div>{translate("serviceAttentive")} </div>
+                            </li>
+                            <li className="d-flex align-items-center">
+                              <div className="mr-10">
+                                <i className="fa fa-car"></i>
+                              </div>
+                              <div>{translate("transportation")} </div>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div className="faq-accordion ">
+                          <div className="accordion" id="accordionExample">
+                            <div className="accordion-item">
+                              <h4 className="accordion-header" id="headingOne">
+                                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  <div>{translate("directions")} </div>
+                                </button>
+                              </h4>
+                              <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div className="accordion-body">
+                                  {translationData(
+                                    detailTour?.chiDanDuongDi,
+                                    detailTour?.chiDanDuongDiUS
+                                  )}
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
+
+                        <div
+                          style={{
+                            width: "100%",
+                            height: 500,
+                          }}
+                          ref={mapContainer}
+                        ></div>
+
+                        <RelationDestination
+                          title={translate("destinatioService")}
+                          data={dsDiemDichVu}
+                        />
                       </div>
-                    ) : (
-                      <div
-                        className="tab-pane fade show active"
-                        id="nav-home"
-                        role="tabpanel"
-                        aria-labelledby="nav-home-tab"
-                        tabindex="0"
-                      >
-                        <div className="pkg-nav-contant">
-                          <img
-                            src={
-                              detailTour.hinhAnh?.indexOf("http") == -1
-                                ? showImageCommon(detailTour.hinhAnh)
-                                : detailTour.hinhAnh
-                            }
-                            alt="img"
-                            className=""
-                          />
+                      :
+                      tabSelect == 1
+                        ?
+                        <div>
+                          <div className="pkg-nav-contant">
+                            <div className="nav-list">
+                              {detailTour.uriVideo
+                                ?
+                                <video style={{ width: "100%" }} controls>
+                                  <source
+                                    src={detailTour.uriVideo}
+                                    type="video/mp4"
+                                  />
+                                </video>
+
+                                :
+                                <div className="no-data-view">
+                                  {translate("noVideo")}
+                                </div>
+                              }
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
+                        :
+                        tabSelect == 2
+                          ?
+                          <div>
+                            <div className="pkg-nav-contant">
+                              <div className="nav-list">
+                                {
+                                  listImage.length
+                                    ?
+                                    <ListImageDestination
+                                      data={listImage}
+                                    />
+                                    :
+                                    <div className="no-data-view">
+                                      {translate("noGallery")}
+                                    </div>
+                                }
+                              </div>
+                            </div>
+                          </div>
+                          :
+                          null
+                  }
+
                 </div>
 
-                <div className="pkg-common-title">
-                  <h4>{translate("detail")} </h4>
-                </div>
-                <p className="text-align-justify">
-                  {translationData(detailTour.moTa, detailTour.moTaUS)}{" "}
-                </p>
 
-                <div className="pkg-list-info">
-                  <ul>
-                    <li>
-                      <h6>{translate("destination")} :</h6>{" "}
-                      <span>
-                        {translationData(
-                          detailTour.tenDiaDiem,
-                          detailTour.tenDiaDiemUS
-                        )}
-                      </span>
-                    </li>
-                    <li>
-                      <h6>{translate("type")} :</h6>{" "}
-                      <span>{translate(detailTour.tenDanhMuc)}</span>
-                    </li>
-                    <li>
-                      <h6>{translate("address")} :</h6>{" "}
-                      <span>
-                        {translationData(
-                          detailTour.diaChi,
-                          detailTour.diaChiUS
-                        )}
-                      </span>
-                    </li>
-                    <li>
-                      <h6>{translate("price")} :</h6>{" "}
-                      <span>
-                        {detailTour.giaVe === Constants.FreePrice
-                          ? translationData(
-                            detailTour.giaVe,
-                            detailTour.giaVeUS
-                          )
-                          : detailTour.giaVe == null
-                            ? translate("free")
-                            : `Chỉ từ: ${detailTour.giaVe}`}
-                      </span>
-                    </li>
-                    <li>
-                      <h6>{translate("openTime")} :</h6>{" "}
-                      <span>
-                        {detailTour.gioMoCua} - {detailTour.gioDongCua}
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="pkg-info-container">
-                  <ul>
-                    <li className="d-flex align-items-center">
-                      <div className="mr-10">
-                        <i className="fa fa-star"></i>
-                      </div>
-                      <div>{detailTour.soSaoTrungBinh}</div>
-                    </li>
-                    <li className="d-flex align-items-center">
-                      <div className="mr-10">
-                        <i className="fa fa-eye"></i>
-                      </div>
-                      <div>
-                        ({detailTour.luotXem} {translate("view")}){" "}
-                      </div>
-                    </li>
-                    <li className="d-flex align-items-center">
-                      <div className="mr-10">
-                        <i className="fa fa-wifi"></i>
-                      </div>
-                      <div>Wi-fi</div>
-                    </li>
-                  </ul>
-                  <ul>
-                    <li className="d-flex align-items-center">
-                      <div className="mr-10">
-                        <i className="fa fa-gear"></i>
-                      </div>
-                      <div>{translate("serviceAttentive")} </div>
-                    </li>
-                    <li className="d-flex align-items-center">
-                      <div className="mr-10">
-                        <i className="fa fa-car"></i>
-                      </div>
-                      <div>{translate("transportation")} </div>
-                    </li>
-                  </ul>
-                </div>
-                <div
-                  style={{
-                    width: "100%",
-                    height: 500,
-                  }}
-                  ref={mapContainer}
-                ></div>
-
-                <RelationDestination
-                  title={translate("destinatioService")}
-                  data={dsDiemDichVu}
-                />
               </div>
             </div>
-
-            {/* <div className="col-lg-4">
-                            <div className="package-details-right-container">
-                                <div className="destination-common-title">
-                                    <h4>{translate("makeReservation")}</h4>
-                                </div>
-
-                                <div className="package-details-right-form">
-                                    <form>
-                                        <div className="form-label">
-                                            <label><i className="fa fa-pencil"></i></label>
-                                            <input type="text" placeholder="Họ và tên *" required />
-                                        </div>
-                                        <div className="form-label">
-                                            <label><i className="fa fa-envelope"></i></label>
-                                            <input type="email" placeholder="Email *" required />
-                                        </div>
-                                        <div className="form-label">
-                                            <label><i className="fa fa-phone"></i></label>
-                                            <input type="text" placeholder="SĐT" />
-                                        </div>
-                                        <div className="form-label">
-                                            <label><i className="fa fa-calendar"></i></label>
-                                            <input type="text" placeholder="Check - In" />
-                                        </div>
-                                        <div className="form-label">
-                                            <label><i className="fa fa-calendar"></i></label>
-                                            <input type="text" placeholder="Check - Out" />
-                                        </div>
-                                        <div className="form-label">
-                                            <label><i className="fa fa-user"></i></label>
-                                            <input type="text" placeholder="Số người" />
-                                        </div>
-                                        <div className="form-label">
-                                            <label><i className="fa fa-pencil"></i></label>
-                                            <input type="text" placeholder="Số vé *" required />
-                                        </div>
-                                        <div className="form-label">
-                                            <label><i className="fa fa-circle-question"></i></label>
-                                            <input type="text" placeholder="Ghi chú" />
-                                        </div>
-                                        <button type="submit">Đăng kí</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div> */}
           </div>
         </div>
       </section>
@@ -1138,3 +1152,4 @@ const TourDetail = () => {
 };
 
 export default TourDetail;
+

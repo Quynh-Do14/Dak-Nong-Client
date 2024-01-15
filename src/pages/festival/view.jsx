@@ -33,7 +33,7 @@ const FestivalDetail = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={"chooseSchedule"}
+                title={"festivalSlogan"}
                 redirect={ROUTE_PATH.FESTIVAL}
                 redirectPage={"festival"}
                 currentPage={"detail"}
