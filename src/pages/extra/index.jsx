@@ -30,6 +30,7 @@ const ExtraComponent = () => {
   const location = useLocation();
   const receivedProps = location.state;
   const mapContainer = useRef();
+  //   console.log("receivedProps", receivedProps.it);
   //// receivedProps.it là cái {id, quanHuyen}
   const [map, setMap] = useState({});
   const [loading, setLoading] = useState(false);
@@ -51,7 +52,7 @@ const ExtraComponent = () => {
 
   const [visibleXemAnhVeTinh, setVisibleXemAnhVeTinh] = useState(false);
   const [isGoiYLichTrinh, setIsGoiYLichTrinh] = useState(false);
-  const [isLopBanDo, setIsLopBanDo] = useState(false);
+  const [isLopBanDo, setIsLopBanDo] = useState(true);
   const [isDanhSachBanDo, setIsDanhSachBanDo] = useState(false);
   const [dsStyleBanDo, setDsStyleBanDo] = useState(DSSTYLEBANDO);
   const [isTimDuong, setIsTimDuong] = useState("");
@@ -198,6 +199,10 @@ const ExtraComponent = () => {
         zoom: 9,
         center: [107.701881, 12.210116],
         style: style.uri,
+        maxBounds: [
+          [105.28341561584125, 11.124216559717311],
+          [110.10349979292215, 13.31742184130907],
+        ],
       });
 
       setMap(map);

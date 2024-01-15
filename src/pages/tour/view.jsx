@@ -92,9 +92,10 @@ const TourDetail = () => {
   const fecthData = async () => {
     var dsDiaDiem = [];
 
-    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, () => {});
-    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(``, () => {});
-    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => {});
+
+    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, () => { });
+    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(``, () => { });
+    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => { });
     const resGetPhuongTienGeometry = await api.getAllDiemPhuongTienBanDo(
       ``,
       () => {}
@@ -489,8 +490,8 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/tour-view?${
-                    e.features[0].properties.idDiaDiem
+
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -597,8 +598,8 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/tour-view?${
-                    e.features[0].properties.idDiaDiem
+
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -705,8 +706,8 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/tour-view?${
-                    e.features[0].properties.idDiaDiem
+
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -813,8 +814,8 @@ const TourDetail = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
-                  <a href="/tour-view?${
-                    e.features[0].properties.idDiaDiem
+
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -887,6 +888,7 @@ const TourDetail = () => {
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
+  console.log("dsDiemDichVu", dsDiemDichVu);
   return (
     <MainLayout className={"bg-white"}>
       <BannerCommon
