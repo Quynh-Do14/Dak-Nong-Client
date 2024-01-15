@@ -502,7 +502,7 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/destination-view?${
+                <a href="/tour-view?${
                   e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
@@ -602,7 +602,7 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/destination-view?${
+                <a href="/tour-view?${
                   e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
@@ -702,7 +702,7 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/destination-view?${
+                <a href="/tour-view?${
                   e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
@@ -802,7 +802,7 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/destination-view?${
+                <a href="/tour-view?${
                   e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
@@ -978,7 +978,7 @@ const ExtraComponent = () => {
           font-size: 11px;
           text-transform: uppercase;
       ">${e.properties.tenDanhMuc}</p>
-      <a href="/destination-view?${e.properties.idDiaDiem}" style="
+      <a href="/tour-view?${e.properties.idDiaDiem}" style="
           color: #333;
           font-size: 18px;
           width: 240px;
