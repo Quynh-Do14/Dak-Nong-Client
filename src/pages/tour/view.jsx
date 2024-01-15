@@ -884,15 +884,9 @@ const TourDetail = () => {
   };
 
   useEffect(() => {
-    if (detailTour.idDiaDiem) {
-      getAllHinhAnh().then((_) => { });
-    }
-  }, [detailTour]);
-
-
-  useEffect(() => {
     setLoading(true);
     onGetDetailDiemDenAsync().then((_) => { });
+      getAllHinhAnh().then((_) => { });
     fecthData();
     setTimeout(() => setLoading(false), 1000);
   }, []);
