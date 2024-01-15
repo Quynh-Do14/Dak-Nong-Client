@@ -26,13 +26,19 @@ export default class Constants {
         label: "article",
         link: ROUTE_PATH.ARTICLE,
       },
-      // {
-      //     label: "Điểm du lịch",
-      //     link: ROUTE_PATH.DESTINATION,
-      // },
       {
         label: "schedule",
         link: ROUTE_PATH.TOUR,
+        children: [
+          {
+            label: "restaurant",
+            link: ROUTE_PATH.TOUR,
+          },
+          {
+            label: "hotel",
+            link: ROUTE_PATH.TOUR,
+          },
+        ]
       },
       {
         label: "festival",
@@ -45,43 +51,43 @@ export default class Constants {
       {
         label: "map",
         link: ROUTE_PATH.LAYOUT_MAP,
-        children: [
-          {
-            id: 1,
-            tenHuyen: "Cư Jút",
-            latlong: [107.770302, 12.697247],
-          },
-          {
-            id: 2,
-            tenHuyen: "Đắk Mil",
-            latlong: [107.663053, 12.519961],
-          },
-          {
-            id: 3,
-            tenHuyen: "Krông Nô",
-            latlong: [107.903063, 12.3805],
-          },
-          {
-            id: 4,
-            tenHuyen: "Đắk Song",
-            latlong: [107.627036, 12.241525],
-          },
-          {
-            id: 5,
-            tenHuyen: "Đắk R'Lấp",
-            latlong: [107.529488, 11.913797],
-          },
-          {
-            id: 6,
-            tenHuyen: "Đắk Glong",
-            latlong: [107.893787, 12.064807],
-          },
-          {
-            id: 7,
-            tenHuyen: "Tuy Đức",
-            latlong: [107.388466, 12.150121],
-          },
-        ],
+        // children: [
+        //   {
+        //     id: 1,
+        //     tenHuyen: "Cư Jút",
+        //     latlong: [107.770302, 12.697247],
+        //   },
+        //   {
+        //     id: 2,
+        //     tenHuyen: "Đắk Mil",
+        //     latlong: [107.663053, 12.519961],
+        //   },
+        //   {
+        //     id: 3,
+        //     tenHuyen: "Krông Nô",
+        //     latlong: [107.903063, 12.3805],
+        //   },
+        //   {
+        //     id: 4,
+        //     tenHuyen: "Đắk Song",
+        //     latlong: [107.627036, 12.241525],
+        //   },
+        //   {
+        //     id: 5,
+        //     tenHuyen: "Đắk R'Lấp",
+        //     latlong: [107.529488, 11.913797],
+        //   },
+        //   {
+        //     id: 6,
+        //     tenHuyen: "Đắk Glong",
+        //     latlong: [107.893787, 12.064807],
+        //   },
+        //   {
+        //     id: 7,
+        //     tenHuyen: "Tuy Đức",
+        //     latlong: [107.388466, 12.150121],
+        //   },
+        // ],
       },
     ];
   };

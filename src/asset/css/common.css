@@ -320,3 +320,17 @@ span.anticon.anticon-info-circle.color-fail.font-size-icon {
 
 
 /* scroll carousel */
+
+/* title-name-view-page */
+.title-name-view-page {
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 46px;
+    color: #fe7524;
+    text-align: center;
+    margin-top: -60px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+/* title-name-view-page */

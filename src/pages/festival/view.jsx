@@ -33,12 +33,13 @@ const FestivalDetail = () => {
     return (
         <MainLayout className={"bg-white"}>
             <BannerCommon
-                title={translationData(detailFestival.tenDiaDiem, detailFestival.tenDiaDiemUS)}
+                title={"chooseSchedule"}
                 redirect={ROUTE_PATH.FESTIVAL}
                 redirectPage={"festival"}
                 currentPage={"detail"}
             />
             <section className="package-details">
+                <div className="title-name-view-page">{translationData(detailFestival.tenDiaDiem, detailFestival.tenDiaDiemUS)}</div>
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-10">

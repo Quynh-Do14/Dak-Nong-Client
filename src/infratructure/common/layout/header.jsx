@@ -224,7 +224,7 @@ const HeaderPage = () => {
               <div className="outer-box">
                 <div className="logo-box">
                   <figure className="logo">
-                    <a href="index.html">
+                    <a href={ROUTE_PATH.HOME_PAGE}>
                       <img
                         src="assets/images/logo.png"
                         alt=""
@@ -255,18 +255,18 @@ const HeaderPage = () => {
                             >
                               {translate(it.label)}
                             </a>
-                            {/* {it.children
-                                                            ?
-                                                            <ul>
-                                                                {
-                                                                    it.children.map((it, index) => (
-                                                                        <li key={index}><a onClick={() => onNavigateQuanHuyen(it)} className="">{it.tenHuyen} </a></li>
-                                                                    ))
-                                                                }
-                                                            </ul>
-                                                            :
-                                                            null
-                                                        } */}
+                            {it.children
+                              ?
+                              <ul>
+                                {
+                                  it.children.map((it, index) => (
+                                    <li key={index}><a onClick={() => onNavigateQuanHuyen(it)} className="">{translate(it.label)} </a></li>
+                                  ))
+                                }
+                              </ul>
+                              :
+                              null
+                            }
                           </li>
                         ))}
                       </ul>
@@ -356,7 +356,7 @@ const HeaderPage = () => {
           </div>
           <nav className="menu-box">
             <div className="nav-logo">
-              <a href="index.html">
+              <a href={ROUTE_PATH.HOME_PAGE}>
                 <img src="assets/images/logo.png" alt="logo" />
               </a>
             </div>

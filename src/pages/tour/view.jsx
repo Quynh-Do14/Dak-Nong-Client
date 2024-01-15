@@ -39,7 +39,7 @@ const TourDetail = () => {
   const onGetDetailDiemDenAsync = async () => {
     const response = await api.getDiaDiemById(
       `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      () => {}
+      () => { }
     );
     setDetailTour(response.diaDiem);
     // const responses = await api.getAllDiaDiem(
@@ -98,23 +98,23 @@ const TourDetail = () => {
     const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => { });
     const resGetPhuongTienGeometry = await api.getAllDiemPhuongTienBanDo(
       ``,
-      () => {}
+      () => { }
     );
 
     const resGetDanhMucConCuaDanhMucDiaDiem = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${1}`,
-      () => {}
+      () => { }
     );
     const resGetDanhMucConCuaDanhMucLuuTru = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${2}`,
-      () => {}
+      () => { }
     );
     const resGetDanhMucConCuaDanhMucAmThuc = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${3}`,
-      () => {}
+      () => { }
     );
     const resGetDanhMucConCuaDanhMucPhuongTien =
-      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, () => {});
+      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, () => { });
 
     var dataDsDiaDiemGeoJson = { ...resGetDiaDiemGeometry };
     setDsDiemDuLich(dataDsDiaDiemGeoJson);
@@ -134,7 +134,7 @@ const TourDetail = () => {
 
     const response = await api.getDiaDiemById(
       `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      () => {}
+      () => { }
     );
 
     if (response) {
@@ -477,11 +477,10 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -502,9 +501,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -585,11 +583,10 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -610,9 +607,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -693,11 +689,10 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -718,9 +713,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -801,11 +795,10 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -826,9 +819,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -883,21 +875,23 @@ const TourDetail = () => {
 
   useEffect(() => {
     setLoading(true);
-    onGetDetailDiemDenAsync().then((_) => {});
+    onGetDetailDiemDenAsync().then((_) => { });
     fecthData();
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
-  console.log("dsDiemDichVu", dsDiemDichVu);
   return (
     <MainLayout className={"bg-white"}>
       <BannerCommon
-        title={translationData(detailTour.tenDiaDiem, detailTour.tenDiaDiemUS)}
+        title={"chooseSchedule"}
         redirect={ROUTE_PATH.TOUR}
         redirectPage={"Tour"}
         currentPage={"detail"}
       />
       <section className="package-details">
+        {/* <div className="container"> */}
+          <div className="title-name-view-page">{translationData(detailTour.tenDiaDiem, detailTour.tenDiaDiemUS)}</div>
+        {/* </div> */}
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -909,9 +903,8 @@ const TourDetail = () => {
                         <button
                           key={index}
                           onClick={() => setTabSelect(index)}
-                          className={`nav-link ${
-                            tabSelect == index ? "active" : ""
-                          }`}
+                          className={`nav-link ${tabSelect == index ? "active" : ""
+                            }`}
                           id="nav-home-tab"
                           type="button"
                           role="tab"
@@ -1022,12 +1015,12 @@ const TourDetail = () => {
                       <span>
                         {detailTour.giaVe === Constants.FreePrice
                           ? translationData(
-                              detailTour.giaVe,
-                              detailTour.giaVeUS
-                            )
+                            detailTour.giaVe,
+                            detailTour.giaVeUS
+                          )
                           : detailTour.giaVe == null
-                          ? translate("free")
-                          : `Chỉ từ: ${detailTour.giaVe}`}
+                            ? translate("free")
+                            : `Chỉ từ: ${detailTour.giaVe}`}
                       </span>
                     </li>
                     <li>
