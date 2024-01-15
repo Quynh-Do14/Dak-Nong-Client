@@ -37,7 +37,7 @@ const SelectSearchCategory = (props) => {
             >
                 {/* <Select.Option data-display="" value={""}>{translate("category")}</Select.Option> */}
                 {list?.map((it, index) => (
-                    <Select.Option key={index} value={it.idDiaDiem}>{translationData(it.tenDanhMuc, it.tenDanhMucUS)} </Select.Option>
+                    <Select.Option key={index} value={it.idDanhMucDiaDiem}>{translationData(it.tenDanhMuc, it.tenDanhMucUS)} </Select.Option>
                 ))}
             </Select>
         </form>

@@ -886,7 +886,7 @@ const TourDetail = () => {
     fecthData();
     setTimeout(() => setLoading(false), 1000);
   }, []);
-  console.log("dsDiemDichVu", dsDiemDichVu);
+
   return (
     <MainLayout className={"bg-white"}>
       <BannerCommon

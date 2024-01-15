@@ -26,7 +26,7 @@ const SpecialtyPage = () => {
 
     const onGetListDacSanAsync = async ({ searchText = "", limit = pageSize, page = 1, qH = "" }) => {
         const response = await api.getAllDiaDiem(
-            `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Specialty.value}&${Constants.Params.limit}=${limit}&${Constants.Params.page}=${page}&searchDiaChi=${searchText}&idQuanHuyen=${qH}`,
+            `dichvu/top?idDanhMuc=${Constants.CategoryConfig.Specialty.value}&${Constants.Params.limit}=${limit}&${Constants.Params.page}=${page}&search=${searchText}&idQuanHuyen=${qH}`,
             setLoading
         )
         setListDacSan(response.data.diaDiems);

@@ -30,7 +30,6 @@ const ExtraComponent = () => {
   const location = useLocation();
   const receivedProps = location.state;
   const mapContainer = useRef();
-  //   console.log("receivedProps", receivedProps.it);
   //// receivedProps.it là cái {id, quanHuyen}
   const [map, setMap] = useState({});
   const [loading, setLoading] = useState(false);
@@ -1157,7 +1156,7 @@ const ExtraComponent = () => {
               top: 12,
               left: 10,
               boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
-              width: 300,
+              width: 350,
               height: "calc(100vh - 104px - 180px)",
               overflowY: "scroll",
               paddingBottom: 12,
