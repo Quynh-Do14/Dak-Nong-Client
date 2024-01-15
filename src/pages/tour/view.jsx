@@ -42,9 +42,10 @@ const TourDetail = () => {
   const onGetDetailDiemDenAsync = async () => {
     const response = await api.getDiaDiemById(
       `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      () => { }
+      () => {}
     );
     setDetailTour(response.diaDiem);
+    getAllHinhAnh(response.diaDiem)
     // const responses = await api.getAllDiaDiem(
     //   `dichvu/top?idDanhMuc=${response.diaDiem.idDanhMuc}&${Constants.Params.limit
     //   }=${3}&idQuanHuyen=${response.diaDiem.idQuanHuyen}`,
@@ -95,29 +96,28 @@ const TourDetail = () => {
   const fecthData = async () => {
     var dsDiaDiem = [];
 
-
-    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, () => { });
-    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(``, () => { });
-    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => { });
+    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, () => {});
+    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(``, () => {});
+    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => {});
     const resGetPhuongTienGeometry = await api.getAllDiemPhuongTienBanDo(
       ``,
-      () => { }
+      () => {}
     );
 
     const resGetDanhMucConCuaDanhMucDiaDiem = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${1}`,
-      () => { }
+      () => {}
     );
     const resGetDanhMucConCuaDanhMucLuuTru = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${2}`,
-      () => { }
+      () => {}
     );
     const resGetDanhMucConCuaDanhMucAmThuc = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${3}`,
-      () => { }
+      () => {}
     );
     const resGetDanhMucConCuaDanhMucPhuongTien =
-      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, () => { });
+      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, () => {});
 
     var dataDsDiaDiemGeoJson = { ...resGetDiaDiemGeometry };
     setDsDiemDuLich(dataDsDiaDiemGeoJson);
@@ -137,7 +137,7 @@ const TourDetail = () => {
 
     const response = await api.getDiaDiemById(
       `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      () => { }
+      () => {}
     );
 
     if (response) {
@@ -480,10 +480,11 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
-                    ? e.features[0].properties.hinhAnh
-                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-                  }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -493,7 +494,8 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -504,8 +506,9 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
-                  }</p>
+      ">${e.features[0].properties.gioMoCua} - ${
+                  e.features[0].properties.gioDongCua
+                }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -586,10 +589,11 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
-                    ? e.features[0].properties.hinhAnh
-                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-                  }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -599,7 +603,8 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -610,8 +615,9 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
-                  }</p>
+      ">${e.features[0].properties.gioMoCua} - ${
+                  e.features[0].properties.gioDongCua
+                }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -692,10 +698,11 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
-                    ? e.features[0].properties.hinhAnh
-                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-                  }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -705,7 +712,8 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -716,8 +724,9 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
-                  }</p>
+      ">${e.features[0].properties.gioMoCua} - ${
+                  e.features[0].properties.gioDongCua
+                }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -798,10 +807,11 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
-                    ? e.features[0].properties.hinhAnh
-                    : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-                  }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -811,7 +821,8 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -822,8 +833,9 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
-                  }</p>
+      ">${e.features[0].properties.gioMoCua} - ${
+                  e.features[0].properties.gioDongCua
+                }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -875,18 +887,19 @@ const TourDetail = () => {
       }
     }
   };
-  const getAllHinhAnh = async () => {
-    const response = await api.getHinhAnhByIdDiaDiem(
-      `${detailTour.idDiaDiem}`,
-      () => { }
-    );
-    setListImage(response.data);
+  const getAllHinhAnh = async (idDiaDiem) => {
+    if (idDiaDiem.idDiaDiem) {
+      const response = await api.getHinhAnhByIdDiaDiem(
+        `${idDiaDiem.idDiaDiem}`,
+        () => {}
+      );
+      setListImage(response.data);
+    }
   };
 
   useEffect(() => {
     setLoading(true);
-    onGetDetailDiemDenAsync().then((_) => { });
-      getAllHinhAnh().then((_) => { });
+    onGetDetailDiemDenAsync().then((_) => {});
     fecthData();
     setTimeout(() => setLoading(false), 1000);
   }, []);
@@ -901,7 +914,9 @@ const TourDetail = () => {
       />
       <section className="package-details">
         {/* <div className="container"> */}
-        <div className="title-name-view-page">{translationData(detailTour.tenDiaDiem, detailTour.tenDiaDiemUS)}</div>
+        <div className="title-name-view-page">
+          {translationData(detailTour.tenDiaDiem, detailTour.tenDiaDiemUS)}
+        </div>
         {/* </div> */}
         <div className="container">
           <div className="row">
@@ -914,8 +929,9 @@ const TourDetail = () => {
                         <button
                           key={index}
                           onClick={() => setTabSelect(index)}
-                          className={`nav-link ${tabSelect == index ? "active" : ""
-                            }`}
+                          className={`nav-link ${
+                            tabSelect == index ? "active" : ""
+                          }`}
                           id="nav-home-tab"
                           type="button"
                           role="tab"
@@ -926,215 +942,211 @@ const TourDetail = () => {
                       ))}
                     </div>
                   </nav>
-                  {
-                    tabSelect == 0
-                      ?
-                      <div>
-                        <div className="tab-content mb-20" id="nav-tabContent">
-                          <div
-                            className="tab-pane fade show active"
-                            id="nav-home"
-                            role="tabpanel"
-                            aria-labelledby="nav-home-tab"
-                            tabindex="0"
-                          >
-                            <div className="pkg-nav-contant">
-                              <img
-                                src={
-                                  detailTour.hinhAnh?.indexOf("http") == -1
-                                    ? showImageCommon(detailTour.hinhAnh)
-                                    : detailTour.hinhAnh
-                                }
-                                alt="img"
-                                className=""
-                              />
-                            </div>
+                  {tabSelect == 0 ? (
+                    <div>
+                      <div className="tab-content mb-20" id="nav-tabContent">
+                        <div
+                          className="tab-pane fade show active"
+                          id="nav-home"
+                          role="tabpanel"
+                          aria-labelledby="nav-home-tab"
+                          tabindex="0"
+                        >
+                          <div className="pkg-nav-contant">
+                            <img
+                              src={
+                                detailTour.hinhAnh?.indexOf("http") == -1
+                                  ? showImageCommon(detailTour.hinhAnh)
+                                  : detailTour.hinhAnh
+                              }
+                              alt="img"
+                              className=""
+                            />
                           </div>
-
-
                         </div>
+                      </div>
 
-                        <div className="pkg-common-title">
-                          <h4>{translate("detail")} </h4>
-                        </div>
-                        <p className="text-align-justify">
-                          {translationData(detailTour.moTa, detailTour.moTaUS)}{" "}
-                        </p>
+                      <div className="pkg-common-title">
+                        <h4>{translate("detail")} </h4>
+                      </div>
+                      <p className="text-align-justify">
+                        {translationData(detailTour.moTa, detailTour.moTaUS)}{" "}
+                      </p>
 
-                        <div className="pkg-common-title mt-20">
-                          <h4>{translate("geographicalLocation")} </h4>
-                        </div>
-                        <p className="text-align-justify">
-                          {translationData(detailTour?.viTriDiaLy, detailTour?.viTriDiaLyUS)}{" "}
-                        </p>
+                      <div className="pkg-common-title mt-20">
+                        <h4>{translate("geographicalLocation")} </h4>
+                      </div>
+                      <p className="text-align-justify">
+                        {translationData(
+                          detailTour?.viTriDiaLy,
+                          detailTour?.viTriDiaLyUS
+                        )}{" "}
+                      </p>
 
-                        <div className="pkg-list-info">
-                          <ul>
-                            <li>
-                              <h6>{translate("destination")} :</h6>{" "}
-                              <span>
-                                {translationData(
-                                  detailTour.tenDiaDiem,
-                                  detailTour.tenDiaDiemUS
-                                )}
-                              </span>
-                            </li>
-                            <li>
-                              <h6>{translate("type")} :</h6>{" "}
-                              <span>{translate(detailTour.tenDanhMuc)}</span>
-                            </li>
-                            <li>
-                              <h6>{translate("address")} :</h6>{" "}
-                              <span>
-                                {translationData(
-                                  detailTour.diaChi,
-                                  detailTour.diaChiUS
-                                )}
-                              </span>
-                            </li>
-                            <li>
-                              <h6>{translate("price")} :</h6>{" "}
-                              <span>
-                                {detailTour.giaVe === Constants.FreePrice
-                                  ? translationData(
+                      <div className="pkg-list-info">
+                        <ul>
+                          <li>
+                            <h6>{translate("destination")} :</h6>{" "}
+                            <span>
+                              {translationData(
+                                detailTour.tenDiaDiem,
+                                detailTour.tenDiaDiemUS
+                              )}
+                            </span>
+                          </li>
+                          <li>
+                            <h6>{translate("type")} :</h6>{" "}
+                            <span>{translate(detailTour.tenDanhMuc)}</span>
+                          </li>
+                          <li>
+                            <h6>{translate("address")} :</h6>{" "}
+                            <span>
+                              {translationData(
+                                detailTour.diaChi,
+                                detailTour.diaChiUS
+                              )}
+                            </span>
+                          </li>
+                          <li>
+                            <h6>{translate("price")} :</h6>{" "}
+                            <span>
+                              {detailTour.giaVe === Constants.FreePrice
+                                ? translationData(
                                     detailTour.giaVe,
                                     detailTour.giaVeUS
                                   )
-                                  : detailTour.giaVe == null
-                                    ? translate("free")
-                                    : `Chỉ từ: ${detailTour.giaVe}`}
-                              </span>
-                            </li>
-                            <li>
-                              <h6>{translate("openTime")} :</h6>{" "}
-                              <span>
-                                {detailTour.gioMoCua} - {detailTour.gioDongCua}
-                              </span>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="pkg-info-container">
-                          <ul>
-                            <li className="d-flex align-items-center">
-                              <div className="mr-10">
-                                <i className="fa fa-star"></i>
-                              </div>
-                              <div>{detailTour.soSaoTrungBinh}</div>
-                            </li>
-                            <li className="d-flex align-items-center">
-                              <div className="mr-10">
-                                <i className="fa fa-eye"></i>
-                              </div>
-                              <div>
-                                ({detailTour.luotXem} {translate("view")}){" "}
-                              </div>
-                            </li>
-                            <li className="d-flex align-items-center">
-                              <div className="mr-10">
-                                <i className="fa fa-wifi"></i>
-                              </div>
-                              <div>Wi-fi</div>
-                            </li>
-                          </ul>
-                          <ul>
-                            <li className="d-flex align-items-center">
-                              <div className="mr-10">
-                                <i className="fa fa-gear"></i>
-                              </div>
-                              <div>{translate("serviceAttentive")} </div>
-                            </li>
-                            <li className="d-flex align-items-center">
-                              <div className="mr-10">
-                                <i className="fa fa-car"></i>
-                              </div>
-                              <div>{translate("transportation")} </div>
-                            </li>
-                          </ul>
-                        </div>
-
-                        <div className="faq-accordion ">
-                          <div className="accordion" id="accordionExample">
-                            <div className="accordion-item">
-                              <h4 className="accordion-header" id="headingOne">
-                                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                  <div>{translate("directions")} </div>
-                                </button>
-                              </h4>
-                              <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div className="accordion-body">
-                                  {translationData(
-                                    detailTour?.chiDanDuongDi,
-                                    detailTour?.chiDanDuongDiUS
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div
-                          style={{
-                            width: "100%",
-                            height: 500,
-                          }}
-                          ref={mapContainer}
-                        ></div>
-
-                        <RelationDestination
-                          title={translate("destinatioService")}
-                          data={dsDiemDichVu}
-                        />
+                                : detailTour.giaVe == null
+                                ? translate("free")
+                                : `Chỉ từ: ${detailTour.giaVe}`}
+                            </span>
+                          </li>
+                          <li>
+                            <h6>{translate("openTime")} :</h6>{" "}
+                            <span>
+                              {detailTour.gioMoCua} - {detailTour.gioDongCua}
+                            </span>
+                          </li>
+                        </ul>
                       </div>
-                      :
-                      tabSelect == 1
-                        ?
-                        <div>
-                          <div className="pkg-nav-contant">
-                            <div className="nav-list">
-                              {detailTour.uriVideo
-                                ?
-                                <video style={{ width: "100%" }} controls>
-                                  <source
-                                    src={detailTour.uriVideo}
-                                    type="video/mp4"
-                                  />
-                                </video>
-
-                                :
-                                <div className="no-data-view">
-                                  {translate("noVideo")}
-                                </div>
-                              }
+                      <div className="pkg-info-container">
+                        <ul>
+                          <li className="d-flex align-items-center">
+                            <div className="mr-10">
+                              <i className="fa fa-star"></i>
                             </div>
-                          </div>
-                        </div>
-                        :
-                        tabSelect == 2
-                          ?
-                          <div>
-                            <div className="pkg-nav-contant">
-                              <div className="nav-list">
-                                {
-                                  listImage.length
-                                    ?
-                                    <ListImageDestination
-                                      data={listImage}
-                                    />
-                                    :
-                                    <div className="no-data-view">
-                                      {translate("noGallery")}
-                                    </div>
-                                }
+                            <div>{detailTour.soSaoTrungBinh}</div>
+                          </li>
+                          <li className="d-flex align-items-center">
+                            <div className="mr-10">
+                              <i className="fa fa-eye"></i>
+                            </div>
+                            <div>
+                              ({detailTour.luotXem} {translate("view")}){" "}
+                            </div>
+                          </li>
+                          <li className="d-flex align-items-center">
+                            <div className="mr-10">
+                              <i className="fa fa-wifi"></i>
+                            </div>
+                            <div>Wi-fi</div>
+                          </li>
+                        </ul>
+                        <ul>
+                          <li className="d-flex align-items-center">
+                            <div className="mr-10">
+                              <i className="fa fa-gear"></i>
+                            </div>
+                            <div>{translate("serviceAttentive")} </div>
+                          </li>
+                          <li className="d-flex align-items-center">
+                            <div className="mr-10">
+                              <i className="fa fa-car"></i>
+                            </div>
+                            <div>{translate("transportation")} </div>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div className="faq-accordion ">
+                        <div className="accordion" id="accordionExample">
+                          <div className="accordion-item">
+                            <h4 className="accordion-header" id="headingOne">
+                              <button
+                                className="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne"
+                                aria-expanded="true"
+                                aria-controls="collapseOne"
+                              >
+                                <div>{translate("directions")} </div>
+                              </button>
+                            </h4>
+                            <div
+                              id="collapseOne"
+                              className="accordion-collapse collapse show"
+                              aria-labelledby="headingOne"
+                              data-bs-parent="#accordionExample"
+                            >
+                              <div className="accordion-body">
+                                {translationData(
+                                  detailTour?.chiDanDuongDi,
+                                  detailTour?.chiDanDuongDiUS
+                                )}
                               </div>
                             </div>
                           </div>
-                          :
-                          null
-                  }
+                        </div>
+                      </div>
 
+                      <div
+                        style={{
+                          width: "100%",
+                          height: 500,
+                        }}
+                        ref={mapContainer}
+                      ></div>
+
+                      <RelationDestination
+                        title={translate("destinatioService")}
+                        data={dsDiemDichVu}
+                      />
+                    </div>
+                  ) : tabSelect == 1 ? (
+                    <div>
+                      <div className="pkg-nav-contant">
+                        <div className="nav-list">
+                          {detailTour.uriVideo ? (
+                            <video style={{ width: "100%" }} controls>
+                              <source
+                                src={detailTour.uriVideo}
+                                type="video/mp4"
+                              />
+                            </video>
+                          ) : (
+                            <div className="no-data-view">
+                              {translate("noVideo")}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ) : tabSelect == 2 ? (
+                    <div>
+                      <div className="pkg-nav-contant">
+                        <div className="nav-list">
+                          {listImage.length ? (
+                            <ListImageDestination data={listImage} />
+                          ) : (
+                            <div className="no-data-view">
+                              {translate("noGallery")}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
-
-
               </div>
             </div>
           </div>
@@ -1146,4 +1158,3 @@ const TourDetail = () => {
 };
 
 export default TourDetail;
-
