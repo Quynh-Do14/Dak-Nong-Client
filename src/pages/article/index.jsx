@@ -59,9 +59,14 @@ const ArticlePage = () => {
     }, Constants.DEBOUNCE_SEARCH);
   };
 
+  useEffect(() => {
+    if (postDate == null) {
+      setPostDate("");
+    }
+  }, [postDate]);
   const onChangePostDate = (value, dateString) => {
     setPostDate(value)
-    onSearch(searchText, dateString, pageSize, changePage - 1).then((_) => { });
+    onSearch(searchText, dateString, sortBy, pageSize, changePage - 1).then((_) => { });
   }
 
   const onSortBy = (value) => {
@@ -78,6 +83,7 @@ const ArticlePage = () => {
     setChangePage(changePage + 1);
     onSearch(searchText, postDate, sortBy, pageSize, changePage + 1).then((_) => { });
   };
+
   return (
     <MainLayout className={"bg-white"}>
       <BannerCommon

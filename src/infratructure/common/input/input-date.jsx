@@ -3,6 +3,7 @@ import useTranslate from '../../../core/common/hook/useTranslate';
 import { DatePicker } from 'antd';
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
+import moment from 'moment';
 
 const InputDate = (props) => {
     const {
@@ -11,6 +12,11 @@ const InputDate = (props) => {
         onChange,
     } = props
     const { translate } = useTranslate();
+    const disabledDate = (current) => {
+        // Disable tất cả các ngày sau ngày hiện tại
+        return current && current > moment().endOf('day');
+    };
+
     const [isFocused, setIsFocused] = useState(false);
 
     const handleFocus = () => {
@@ -34,7 +40,14 @@ const InputDate = (props) => {
     return (
         <form className={`service-form-option input-container ${isFocused ? 'focused' : ''}`}>
             <label className='label-custom'>{translate(label)} </label>
-            <DatePicker onFocus={handleFocus} onBlur={handleBlur} value={value} onChange={onChange} placeholder={""} />
+            <DatePicker
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                value={value}
+                onChange={onChange}
+                placeholder={""}
+                disabledDate={disabledDate}
+            />
         </form>
     )
 }

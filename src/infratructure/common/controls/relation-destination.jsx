@@ -12,7 +12,6 @@ const RelationDestination = (props) => {
     const { title, data = [] } = props;
     const { translate } = useTranslate();
     const { scrollRef, pages, activePageIndex, next, prev, goTo } = useSnapCarousel();
-    console.log('data', data);
     return (
         <div>
             <div className="pkg-common-title mt-30">
