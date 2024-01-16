@@ -48,7 +48,7 @@ const ArticleDetail = () => {
             <BannerCommon
                 title={"todayNews"}
                 redirect={ROUTE_PATH.ARTICLE}
-                redirectPage={"artical"}
+                redirectPage={"homePage"}
                 currentPage={"news"}
             />
             <section className="package-details">

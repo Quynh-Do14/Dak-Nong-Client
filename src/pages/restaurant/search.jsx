@@ -31,7 +31,7 @@ const SearchFestival = (props) => {
                         </div>
                         <div className="service-form col-10">
                             <InputSearch
-                                label={"nameFestival"}
+                                label={"restaurantName"}
                                 value={searchText}
                                 onChange={onChangeSearchText}
                             />

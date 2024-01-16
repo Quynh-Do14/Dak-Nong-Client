@@ -79,6 +79,8 @@ export const translations = {
     ////
     specialtyName: "Specialty Name",
     festivalName: "Festival Name",
+    restaurantName: "Restaurant Name",
+    hotelName: "Hotel Name",
 
     ////
 
@@ -107,14 +109,14 @@ export const translations = {
     pleaseEnterCompleteInformation: "Please enter complete information",
     ////
     ////
-    nameTour: "Name Tour",
+    nameTour: "Name Destination",
     enterName: "Enter Name",
     district: "District",
     nameFestival: "Name Festival",
     startDate: "Start date",
     endDate: "End Date",
     nameSpecialty: "Name Specialty",
-    nameArtical: "Name Artical",
+    nameNews: "Name News",
     postingDate: "Posting Date",
     category: "Category",
     sortBy: "Sort By",
@@ -212,6 +214,8 @@ export const translations = {
     ////
     specialtyName: "Tên đặc sản",
     festivalName: "Tên lễ hội",
+    restaurantName: "Tên nhà hàng",
+    hotelName: "Tên khách sạn",
     ////
 
     ////
@@ -238,14 +242,14 @@ export const translations = {
     pleaseEnterCompleteInformation: "Vui lòng nhập đầy đủ thông tin",
     ////
     ////
-    nameTour: "Tên Tour",
+    nameTour: "Tên địa điểm",
     enterName: "Nhập tên",
     district: "Quận huyện",
     nameFestival: "Tên Lễ hội",
     startDate: "Ngày bắt đầu",
     endDate: "Ngày kết thúc",
     nameSpecialty: "Tên đặc sản",
-    nameArtical: "Tên bài viết",
+    nameNews: "Tên tin tức",
     postingDate: "Ngày đăng bài",
     category: "Danh mục",
     sortBy: "Sắp xếp",

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSnapCarousel } from "react-snap-carousel";
-import { Col, Row } from "antd";
+import { Col, Image, Row } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import useTranslate from "../../core/common/hook/useTranslate";
 import { showImageCommon } from "../../infratructure/utils/helper";
@@ -24,7 +24,7 @@ const ListImageDestination = (props) => {
                             gutter={[10, 10]}
                             justify={"space-between"}
                             align={"middle"}
-                            className="container-btn"
+                            className="container-btn-img"
                         >
                             <Col>
                                 <div className="btn-scroll left" onClick={() => prev()}>
@@ -52,7 +52,7 @@ const ListImageDestination = (props) => {
                                                 <a
                                                 // href={`${ROUTE_PATH.VIEW_TOUR}?${it.properties.idDiaDiem}`}
                                                 >
-                                                    <img
+                                                    <Image
                                                         src={it.uri}
                                                         alt="image"
                                                         className="img-page"

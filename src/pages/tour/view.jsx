@@ -909,7 +909,7 @@ const TourDetail = () => {
       <BannerCommon
         title={"chooseSchedule"}
         redirect={ROUTE_PATH.TOUR}
-        redirectPage={"Tour"}
+        redirectPage={"destination"}
         currentPage={"detail"}
       />
       <section className="package-details">

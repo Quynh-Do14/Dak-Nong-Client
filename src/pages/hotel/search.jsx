@@ -27,7 +27,7 @@ const SearchSpecialty = (props) => {
                         </div>
                         <div className="service-form col-10">
                             <InputSearch
-                                label={"nameSpecialty"}
+                                label={"hotelName"}
                                 value={searchText}
                                 onChange={onChangeSearchText}
                             />

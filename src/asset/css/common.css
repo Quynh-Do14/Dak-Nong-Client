@@ -308,6 +308,12 @@ span.anticon.anticon-info-circle.color-fail.font-size-icon {
     z-index: 99;
 }
 
+.container-btn-img {
+    position: relative;
+    top: 172px;
+    z-index: 99;
+}
+
 .no-destination {
     text-align: center;
     color: #FE7524;

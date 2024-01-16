@@ -30,7 +30,7 @@ const SearchArticle = (props) => {
                         </div>
                         <div className="service-form col-10">
                             <InputSearch
-                                label={"nameArtical"}
+                                label={"nameNews"}
                                 value={searchText}
                                 onChange={onChangeSearchText}
                             />
