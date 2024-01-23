@@ -1758,7 +1758,7 @@ const ExtraComponent = () => {
                         marginRight: 12,
                       }}
                     ></i>
-                    Tìm kiếm địa điểm du lịch
+                    {translate("searchDestination")}
                   </a>
                 </li>
               )}
@@ -1783,7 +1783,7 @@ const ExtraComponent = () => {
                         marginRight: 12,
                       }}
                     ></i>
-                    Tìm kiếm nhà hàng
+                    {translate("searchRestaurants")}
                   </a>
                 </li>
               )}
@@ -1808,7 +1808,7 @@ const ExtraComponent = () => {
                         marginRight: 12,
                       }}
                     ></i>
-                    Tìm kiếm địa điểm lưu trú
+                    {translate("searchAccommodationPoint")}
                   </a>
                 </li>
               )}
@@ -1837,7 +1837,7 @@ const ExtraComponent = () => {
                           marginRight: 12,
                         }}
                       ></i>
-                      Tìm kiếm địa điểm theo khoảng cách
+                      {translate("searchDistance")}
                     </a>
                   </li>
                 </>
@@ -1948,7 +1948,7 @@ const ExtraComponent = () => {
                   color: "#071437",
                 }}
               >
-                Gợi ý lịch trình
+                {translate("suggestedSchedule")}
               </p>
               <button
                 type="button"
@@ -2022,7 +2022,7 @@ const ExtraComponent = () => {
                         width: 192,
                       }}
                     >
-                      {v.ten}
+                      {translationData(v.ten, v.tenUS)}
                     </p>
                     <p
                       style={{
@@ -2032,7 +2032,7 @@ const ExtraComponent = () => {
                         margin: 0,
                       }}
                     >
-                      Số địa điểm: {v.soDiaDiem}
+                      {translate("numberDestination")}: {v.soDiaDiem}
                     </p>
                   </div>
                   <div className="d-flex flex-row align-items-center ml-4">
@@ -2049,9 +2049,10 @@ const ExtraComponent = () => {
                         margin: 0,
                         fontSize: 12,
                         color: "#FE7524",
+                        whiteSpace: "nowrap"
                       }}
                     >
-                      {v.thoiGian}
+                      {translationData(v.thoiGian, v.thoiGianUS)}
                     </p>
                   </div>
                 </div>
@@ -2083,7 +2084,7 @@ const ExtraComponent = () => {
                     width: 192,
                   }}
                 >
-                  {lichTrinh.ten}
+                  {translationData(lichTrinh.ten, lichTrinh.tenUS)}
                 </p>
                 <p
                   style={{
@@ -2091,7 +2092,7 @@ const ExtraComponent = () => {
                     color: "#99a1b7",
                   }}
                 >
-                  Số địa điểm : {lichTrinh.soDiaDiem}
+                  {translate("numberDestination")} : {lichTrinh.soDiaDiem}
                 </p>
               </div>
               <button
@@ -2140,7 +2141,7 @@ const ExtraComponent = () => {
                         whiteSpace: "nowrap",
                       }}
                     >
-                      Điểm {k + 1}
+                      {translate("dest")} {k + 1}
                     </div>
                     {/*end::Label*/}
                     {/*begin::Badge*/}
@@ -2163,7 +2164,7 @@ const ExtraComponent = () => {
                         color: "#252f4a",
                       }}
                     >
-                      {v.tenDiaDiem}
+                      {translationData(v.tenDiaDiem, v.tenDiaDiemUS)}
                       <br />
                       <div
                         style={{
@@ -2173,11 +2174,11 @@ const ExtraComponent = () => {
                           marginTop: 8,
                         }}
                       >
-                        Giờ mở cửa : {v.gioMoCua}
+                        {translate("openTime")} : {v.gioMoCua}
                         <br />
-                        Giờ đóng cửa : {v.gioDongCua}
+                        {translate("closeTime")} : {v.gioDongCua}
                         <br />
-                        Giá vé : {v.giaVe}
+                        {translate("price")} : {v.giaVe}
                       </div>
                     </div>
                     {/*end::Text*/}
@@ -2225,7 +2226,7 @@ const ExtraComponent = () => {
                     color: "#252f4a",
                   }}
                 >
-                  Kết thúc lịch trình
+                  {translate("endSchedule")}
                 </div>
                 {/*end::Text*/}
               </div>
@@ -2418,17 +2419,17 @@ const ExtraComponent = () => {
             <div className="modal-body">
               <div className="form-title text-center">
                 <h2 style={{ marginBottom: 8, color: "#094174" }}>
-                  Xem ảnh vệ tinh
+                  {translate("viewSatelliteImages")}
                 </h2>
                 <div className="text-muted fw-semibold fs-8">
-                  Bạn cần xem ảnh vệ tinh trong{" "}
+                  {translate("needSeeSatellite")}{" "}
                   <a
                     className="fw-bold"
                     style={{
                       color: "#fe7524",
                     }}
                   >
-                    1 khoảng thời gian
+                    {translate("aPeriodOfTime")}
                   </a>
                   .
                 </div>
@@ -2442,7 +2443,7 @@ const ExtraComponent = () => {
                 <div className="row d-flex flex-row col-12">
                   <div className="col-6">
                     <label for="loaiAnhLabel" className="form-label">
-                      Loại ảnh
+                      {translate("photoType")}
                     </label>
                     <div className="input-group mb-3">
                       <span className="input-group-text" id="loaiAnhLabel">
@@ -2461,7 +2462,7 @@ const ExtraComponent = () => {
                   </div>
                   <div className="col-6">
                     <label for="doPhuMayLabel" className="form-label">
-                      Độ phủ mây
+                      {translate("cloudCover")}
                     </label>
                     <div className="input-group mb-3">
                       <span className="input-group-text" id="doPhuMayLabel">
@@ -2470,7 +2471,7 @@ const ExtraComponent = () => {
                       <input
                         type="number"
                         className="form-control"
-                        placeholder="Nhập độ phủ mây (Mặc định 100)"
+                        placeholder={translate("enterCloudCover")}
                         aria-describedby="doPhuMay"
                         id="doPhuMay"
                       />
@@ -2487,14 +2488,14 @@ const ExtraComponent = () => {
                 <div className="row d-flex flex-row col-12">
                   <div className="col-6">
                     <InputDateMap
-                      title={"Thời gian bắt đầu"}
+                      title={translate("startDate")}
                       date={startDate}
                       setDate={setStartDate}
                     />
                   </div>
                   <div className="col-6">
                     <InputDateMap
-                      title={"Thời gian kết thúc"}
+                      title={translate("endDate")}
                       date={endDate}
                       setDate={setEndDate}
                     />
@@ -2516,7 +2517,7 @@ const ExtraComponent = () => {
                 fontWeight: "bold",
               }}
             >
-              Hủy
+              {translate("cancel")}
             </button>
             <button
               onClick={() => {
@@ -2531,7 +2532,7 @@ const ExtraComponent = () => {
                 color: "#fff",
               }}
             >
-              Xem ảnh
+              {translate("viewPhoto")}
             </button>
           </div>
         </Modal>

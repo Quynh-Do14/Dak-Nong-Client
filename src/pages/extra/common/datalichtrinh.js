@@ -2,7 +2,9 @@ export const DATALICHTRINH = {
   danhSachLichTrinh: [
     {
       ten: "Ngục Đắk Mil, Chợ Phiên H'Mông",
+      tenUS: "Dak Mil Prison, H'mông Fair Market",
       thoiGian: "Vài tiếng",
+      thoiGianUS: "Few hours",
       soDiaDiem: 2,
       geometry: {
         coordinates: [
@@ -32,21 +34,27 @@ export const DATALICHTRINH = {
       danhSachDiaDiem: [
         {
           tenDiaDiem: "Ngục Đắk Mil",
+          tenDiaDiemUS: "Dak Mil Prison",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
         {
           tenDiaDiem: "Chợ Phiên H'Mông",
+          tenDiaDiemUS: "H'mông Fair Market",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
       ],
     },
     {
       ten: "Tâm Thắng, Thác Trinh Nữ",
+      tenUS: "Tam Thang, Trinh Nu Waterfall",
       thoiGian: "Vài tiếng",
+      thoiGianUS: "Few hours",
       soDiaDiem: 2,
       geometry: {
         coordinates: [
@@ -82,21 +90,27 @@ export const DATALICHTRINH = {
       danhSachDiaDiem: [
         {
           tenDiaDiem: "Tâm Thắng",
+          tenDiaDiemUS: "Tam Thang",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
         {
           tenDiaDiem: "Thác Trinh Nữ",
+          tenDiaDiemUS: "Trinh Nu Waterfall",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
       ],
     },
     {
       ten: "Đồi 722, Hồ Trúc",
+      tenUS: "Hill 722, Truc Lake",
       thoiGian: "Vài tiếng",
+      thoiGianUS: "Few hours",
       soDiaDiem: 2,
       geometry: {
         coordinates: [
@@ -186,21 +200,27 @@ export const DATALICHTRINH = {
       danhSachDiaDiem: [
         {
           tenDiaDiem: "Đồi 722",
+          tenDiaDiemUS: "Hill 722",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
         {
           tenDiaDiem: "Hồ Trúc",
+          tenDiaDiemUS: "Truc Lake",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
       ],
     },
     {
       ten: "Hồ Tây Đắl Mil, Ngục Đắk Mil",
+      tenUS: "Dak Mil West Lake, Dak Mil Prison",
       thoiGian: "Vài tiếng",
+      thoiGianUS: "Few hours",
       soDiaDiem: 2,
       geometry: {
         coordinates: [
@@ -242,21 +262,27 @@ export const DATALICHTRINH = {
       danhSachDiaDiem: [
         {
           tenDiaDiem: "Hồ Tây Đắl Mil",
+          tenDiaDiemUS: "Dak Mil West Lake",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
         {
           tenDiaDiem: "Ngục Đắk Mil",
+          tenDiaDiemUS: "Dak Mil Prison",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
       ],
     },
     {
       ten: "Ngục Đắk Mil, Chợ Phiên H'Mông",
+      tenUS: "Dak Mil Prison, H'mông Fair Market",
       thoiGian: "Vài tiếng",
+      thoiGianUS: "Few hours",
       soDiaDiem: 2,
       geometry: {
         coordinates: [
@@ -286,21 +312,27 @@ export const DATALICHTRINH = {
       danhSachDiaDiem: [
         {
           tenDiaDiem: "Ngục Đắk Mil",
+          tenDiaDiemUS: "Dak Mil Prison",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
         {
           tenDiaDiem: "Chợ Phiên H'Mông",
+          tenDiaDiemUS: "H'mông Fair Market",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
       ],
     },
     {
       ten: "Tâm Thắng, Thác Trinh Nữ",
+      tenUS: "Tam Thang, Trinh Nu Waterfall",
       thoiGian: "Vài tiếng",
+      thoiGianUS: "Few hours",
       soDiaDiem: 2,
       geometry: {
         coordinates: [
@@ -336,21 +368,27 @@ export const DATALICHTRINH = {
       danhSachDiaDiem: [
         {
           tenDiaDiem: "Tâm Thắng",
+          tenDiaDiemUS: "Tam Thang",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
         {
           tenDiaDiem: "Thác Trinh Nữ",
+          tenDiaDiemUS: "Trinh Nu Waterfall",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
       ],
     },
     {
       ten: "Đồi 722, Hồ Trúc",
+      tenUS: "Hill 722, Truc Lake",
       thoiGian: "Vài tiếng",
+      thoiGianUS: "Few hours",
       soDiaDiem: 2,
       geometry: {
         coordinates: [
@@ -440,21 +478,27 @@ export const DATALICHTRINH = {
       danhSachDiaDiem: [
         {
           tenDiaDiem: "Đồi 722",
+          tenDiaDiemUS: "Hill 722",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
         {
           tenDiaDiem: "Hồ Trúc",
+          tenDiaDiemUS: "Truc Lake",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
       ],
     },
     {
       ten: "Hồ Tây Đắl Mil, Ngục Đắk Mil",
+      tenUS: "Dak Mil West Lake, Dak Mil Prison",
       thoiGian: "Vài tiếng",
+      thoiGianUS: "Few hours",
       soDiaDiem: 2,
       geometry: {
         coordinates: [
@@ -496,15 +540,19 @@ export const DATALICHTRINH = {
       danhSachDiaDiem: [
         {
           tenDiaDiem: "Hồ Tây Đắl Mil",
+          tenDiaDiemUS: "Dak Mil West Lake",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
         {
           tenDiaDiem: "Ngục Đắk Mil",
+          tenDiaDiemUS: "Dak Mil Prison",
           gioMoCua: "00:59",
           gioDongCua: "23:59",
           giaVe: "Miễn phí",
+          giaVeUs: "Free",
         },
       ],
     },
