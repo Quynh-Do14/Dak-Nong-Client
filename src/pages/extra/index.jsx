@@ -17,6 +17,8 @@ import { Modal } from "antd";
 import InputDateMap from "../../infratructure/common/input/input-date-map";
 import LoadingFullPageMap from "../../infratructure/common/controls/loadingMap";
 import * as MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
+import useTranslate from "../../core/common/hook/useTranslate";
+import { translationData } from "../../infratructure/utils/helper";
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
 
@@ -67,6 +69,8 @@ const ExtraComponent = () => {
     new Date(getPreviousDay(new Date()))
   );
   const [endDate, setEndDate] = useState(new Date());
+
+  const { translate } = useTranslate();
 
   const renderDropdownSearch = () => {
     if (selectSearch == "DIEMDULICH") {
@@ -493,11 +497,10 @@ const ExtraComponent = () => {
             map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
               const coordinates = e.features[0].geometry.coordinates.slice();
               const html = `<div>
-            <img src="${
-              e.features[0].properties.hinhAnh.indexOf("https") != -1
-                ? e.features[0].properties.hinhAnh
-                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-            }" alt="" style="min-width: 280px;min-height: 120px;">
+            <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
             ">
@@ -506,8 +509,7 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/tour-view?${
-                  e.features[0].properties.idDiaDiem
+                <a href="/tour-view?${e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
         font-size: 18px;
@@ -518,9 +520,8 @@ const ExtraComponent = () => {
         font-size: 11px;
         color: #333;
         font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${
-                e.features[0].properties.gioDongCua
-              }</p>
+    ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                }</p>
                 <p style="
         width: 240px;
         overflow: hidden;
@@ -593,11 +594,10 @@ const ExtraComponent = () => {
             map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
               const coordinates = e.features[0].geometry.coordinates.slice();
               const html = `<div>
-            <img src="${
-              e.features[0].properties.hinhAnh.indexOf("https") != -1
-                ? e.features[0].properties.hinhAnh
-                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-            }" alt="" style="min-width: 280px;min-height: 120px;">
+            <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
             ">
@@ -606,8 +606,7 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/tour-view?${
-                  e.features[0].properties.idDiaDiem
+                <a href="/tour-view?${e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
         font-size: 18px;
@@ -618,9 +617,8 @@ const ExtraComponent = () => {
         font-size: 11px;
         color: #333;
         font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${
-                e.features[0].properties.gioDongCua
-              }</p>
+    ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                }</p>
                 <p style="
         width: 240px;
         overflow: hidden;
@@ -693,11 +691,10 @@ const ExtraComponent = () => {
             map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
               const coordinates = e.features[0].geometry.coordinates.slice();
               const html = `<div>
-            <img src="${
-              e.features[0].properties.hinhAnh.indexOf("https") != -1
-                ? e.features[0].properties.hinhAnh
-                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-            }" alt="" style="min-width: 280px;min-height: 120px;">
+            <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
             ">
@@ -706,8 +703,7 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/tour-view?${
-                  e.features[0].properties.idDiaDiem
+                <a href="/tour-view?${e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
         font-size: 18px;
@@ -718,9 +714,8 @@ const ExtraComponent = () => {
         font-size: 11px;
         color: #333;
         font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${
-                e.features[0].properties.gioDongCua
-              }</p>
+    ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                }</p>
                 <p style="
         width: 240px;
         overflow: hidden;
@@ -793,11 +788,10 @@ const ExtraComponent = () => {
             map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
               const coordinates = e.features[0].geometry.coordinates.slice();
               const html = `<div>
-            <img src="${
-              e.features[0].properties.hinhAnh.indexOf("https") != -1
-                ? e.features[0].properties.hinhAnh
-                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
-            }" alt="" style="min-width: 280px;min-height: 120px;">
+            <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
             ">
@@ -806,8 +800,7 @@ const ExtraComponent = () => {
         font-size: 11px;
         text-transform: uppercase;
     ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/tour-view?${
-                  e.features[0].properties.idDiaDiem
+                <a href="/tour-view?${e.features[0].properties.idDiaDiem
                 }" style="
         color: #333;
         font-size: 18px;
@@ -818,9 +811,8 @@ const ExtraComponent = () => {
         font-size: 11px;
         color: #333;
         font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${
-                e.features[0].properties.gioDongCua
-              }</p>
+    ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                }</p>
                 <p style="
         width: 240px;
         overflow: hidden;
@@ -969,11 +961,10 @@ const ExtraComponent = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${
-                e.properties.hinhAnh.indexOf("https") != -1
-                  ? e.properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.properties.hinhAnh.indexOf("https") != -1
+        ? e.properties.hinhAnh
+        : `http://14.248.94.155:9022/${e.properties.hinhAnh}`
+      }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -1161,7 +1152,7 @@ const ExtraComponent = () => {
               top: 12,
               left: 10,
               boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
-              width: 350,
+              width: 380,
               height: "calc(100vh - 104px - 180px)",
               overflowY: "scroll",
               paddingBottom: 12,
@@ -1184,7 +1175,7 @@ const ExtraComponent = () => {
                   margin: "0px 12px",
                 }}
               >
-                Các loại hình du lịch
+                {translate("type")}
               </p>
               <button
                 type="button"
@@ -1311,7 +1302,7 @@ const ExtraComponent = () => {
                 margin: "0px 12px",
               }}
             >
-              Địa điểm du lịch : {dsDiemDuLich.features.length} điểm
+              {translate("touristAttraction")} : {dsDiemDuLich.features.length} {translate("destination")}
             </p>
             <div
               style={{
@@ -1351,22 +1342,22 @@ const ExtraComponent = () => {
                             v.tenDanhMuc == "Văn hóa - lịch sử"
                               ? "https://cdn-icons-png.flaticon.com/512/5778/5778440.png"
                               : v.tenDanhMuc == "Địa điểm tâm linh"
-                              ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
-                              : v.tenDanhMuc == "Du lịch khám phá"
-                              ? "https://iconape.com/wp-content/png_logo_vector/google-discover.png"
-                              : v.tenDanhMuc == "Du lịch sinh thái"
-                              ? "https://cdn-icons-png.flaticon.com/512/3104/3104941.png"
-                              : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
-                              ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
-                              : v.tenDanhMuc == "Công trình kiến trúc"
-                              ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
-                              : v.tenDanhMuc == "Du lịch giải trí"
-                              ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
-                              : v.tenDanhMuc == "Thương mại - ẩm thực"
-                              ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
-                              : v.tenDanhMuc == "Khu bảo tồn"
-                              ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
-                              : ""
+                                ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
+                                : v.tenDanhMuc == "Du lịch khám phá"
+                                  ? "https://iconape.com/wp-content/png_logo_vector/google-discover.png"
+                                  : v.tenDanhMuc == "Du lịch sinh thái"
+                                    ? "https://cdn-icons-png.flaticon.com/512/3104/3104941.png"
+                                    : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
+                                      ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
+                                      : v.tenDanhMuc == "Công trình kiến trúc"
+                                        ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
+                                        : v.tenDanhMuc == "Du lịch giải trí"
+                                          ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
+                                          : v.tenDanhMuc == "Thương mại - ẩm thực"
+                                            ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
+                                            : v.tenDanhMuc == "Khu bảo tồn"
+                                              ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
+                                              : ""
                           }
                           alt=""
                         />
@@ -1377,13 +1368,13 @@ const ExtraComponent = () => {
                             margin: 0,
                           }}
                         >
-                          {v.tenDanhMuc} (
+                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
                           {
                             dsDiemDuLich.features.filter(
                               (va) => va.properties.tenDanhMuc == v.tenDanhMuc
                             ).length
                           }{" "}
-                          điểm)
+                          {translate("destination")})
                         </label>
                       </div>
                     </div>
@@ -1399,7 +1390,7 @@ const ExtraComponent = () => {
                 margin: "0px 12px",
               }}
             >
-              Lưu trú : {dsLuuTru.features.length} điểm
+              {translate("accommodationPoint")}: {dsLuuTru.features.length}  {translate("destination")}
             </p>
             <div
               style={{
@@ -1439,10 +1430,10 @@ const ExtraComponent = () => {
                             v.tenDanhMuc == "Homestay"
                               ? "https://cdn-icons-png.flaticon.com/512/7059/7059852.png"
                               : v.tenDanhMuc == "Khách sạn"
-                              ? "https://cdn-icons-png.flaticon.com/512/235/235889.png"
-                              : v.tenDanhMuc == "Nhà nghỉ"
-                              ? "https://cdn3.iconfinder.com/data/icons/flat-building-1/70/1-512.png"
-                              : ""
+                                ? "https://cdn-icons-png.flaticon.com/512/235/235889.png"
+                                : v.tenDanhMuc == "Nhà nghỉ"
+                                  ? "https://cdn3.iconfinder.com/data/icons/flat-building-1/70/1-512.png"
+                                  : ""
                           }
                           alt=""
                         />
@@ -1453,13 +1444,13 @@ const ExtraComponent = () => {
                             margin: 0,
                           }}
                         >
-                          {v.tenDanhMuc} (
+                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
                           {
                             dsLuuTru.features.filter(
                               (va) => va.properties.tenDanhMuc == v.tenDanhMuc
                             ).length
                           }{" "}
-                          điểm)
+                          {translate("destination")})
                         </label>
                       </div>
                     </div>
@@ -1475,7 +1466,7 @@ const ExtraComponent = () => {
                 margin: "0px 12px",
               }}
             >
-              Ẩm thực : {dsAmThuc.features.length} điểm
+              {translate("cuisine")} : {dsAmThuc.features.length} {translate("destination")}
             </p>
             <div
               style={{
@@ -1525,13 +1516,13 @@ const ExtraComponent = () => {
                             margin: 0,
                           }}
                         >
-                          {v.tenDanhMuc} (
+                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
                           {
                             dsAmThuc.features.filter(
                               (va) => va.properties.tenDanhMuc == v.tenDanhMuc
                             ).length
                           }{" "}
-                          điểm)
+                          {translate("destination")})
                         </label>
                       </div>
                     </div>
@@ -1547,7 +1538,7 @@ const ExtraComponent = () => {
                 margin: "0px 12px",
               }}
             >
-              Dịch vụ thuê xe : {dsPhuongTien.features.length} điểm
+              {translate("rentService")} : {dsPhuongTien.features.length} {translate("destination")}
             </p>
             <div
               style={{
@@ -1587,12 +1578,12 @@ const ExtraComponent = () => {
                             v.tenDanhMuc == "Xe máy"
                               ? "https://cdn-icons-png.flaticon.com/512/1986/1986937.png"
                               : v.tenDanhMuc == "Xe đạp"
-                              ? "https://cdn-icons-png.flaticon.com/512/2972/2972185.png"
-                              : v.tenDanhMuc == "Ô tô"
-                              ? "https://cdn-icons-png.flaticon.com/512/2554/2554936.png"
-                              : v.tenDanhMuc == "Xe điện"
-                              ? "https://cdn-icons-png.flaticon.com/512/1574/1574055.png"
-                              : ""
+                                ? "https://cdn-icons-png.flaticon.com/512/2972/2972185.png"
+                                : v.tenDanhMuc == "Ô tô"
+                                  ? "https://cdn-icons-png.flaticon.com/512/2554/2554936.png"
+                                  : v.tenDanhMuc == "Xe điện"
+                                    ? "https://cdn-icons-png.flaticon.com/512/1574/1574055.png"
+                                    : ""
                           }
                           alt=""
                         />
@@ -1603,13 +1594,13 @@ const ExtraComponent = () => {
                             margin: 0,
                           }}
                         >
-                          {v.tenDanhMuc} (
+                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
                           {
                             dsPhuongTien.features.filter(
                               (va) => va.properties.tenDanhMuc == v.tenDanhMuc
                             ).length
                           }{" "}
-                          điểm)
+                          {translate("destination")})
                         </label>
                       </div>
                     </div>
@@ -1647,7 +1638,7 @@ const ExtraComponent = () => {
                   margin: "0px 12px",
                 }}
               >
-                Danh sách bản đồ nền
+                {translate("listOfBasemaps")}
               </p>
               <button
                 type="button"
@@ -1873,8 +1864,8 @@ const ExtraComponent = () => {
               }}
               placeholder={
                 selectSearch != "KHOANGCACH"
-                  ? "Nhập từ khoá để tìm kiếm"
-                  : "Nhập khoảng cách muốn tìm kiếm"
+                  ? translate("searchKeyWord")
+                  : translate("searchDistance")
               }
             />
           </div>
@@ -2432,7 +2423,6 @@ const ExtraComponent = () => {
                 <div className="text-muted fw-semibold fs-8">
                   Bạn cần xem ảnh vệ tinh trong{" "}
                   <a
-                    href="#"
                     className="fw-bold"
                     style={{
                       color: "#fe7524",

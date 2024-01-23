@@ -27,6 +27,8 @@ export const ROUTE_PATH = {
 
     LAYOUT_MAP: `/${PREFIX}map`,
 
+    DOWNLOAD: `/${PREFIX}download-app`,
+
     HOME_PAGE: `/`,
 
 };

@@ -17,6 +17,7 @@ import RestaurantPage from './pages/restaurant';
 import RestaurantDetail from './pages/restaurant/view';
 import HotelPage from './pages/hotel';
 import HotelDetail from './pages/hotel/view';
+import DownLoadPage from './pages/download-page';
 
 const RouteRoot = () => {
   return (
@@ -44,6 +45,8 @@ const RouteRoot = () => {
         <Route path={ROUTE_PATH.VIEW_HOTEL} element={<HotelDetail />} />
 
         <Route path={ROUTE_PATH.LAYOUT_MAP} element={<ExtraComponent />} />
+
+        <Route path={ROUTE_PATH.DOWNLOAD} element={<DownLoadPage />} />
 
         {/* <Route path={ROUTE_PATH.DESTINATION} element={<DestinationPage />} />
     <Route path={ROUTE_PATH.VIEW_DESTINATION} element={<DestinationDetail />} />

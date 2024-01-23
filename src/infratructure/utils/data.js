@@ -138,7 +138,20 @@ export const translations = {
     noDestination: "There has been no service recently",
     destinatioService: "Service location",
     noVideo: "No Video",
-    noGallery: "No Gallery"
+    noGallery: "No Gallery",
+
+    // Map ////////
+    searchKeyWord: "Enter keywords to search",
+    searchDistance: "Enter the distance you want to search for",
+
+    listOfBasemaps: "List of Basemaps",
+    touristAttraction: "TouristAattraction",
+    accommodationPoint: "Accommodation Point",
+    cuisine: "Cuisine",
+    rentService: "Rent Service",
+    viewSatelliteImages: "View satellite images",
+    // Map ////////
+
   },
   vi: {
     homePage: "Trang chủ",
@@ -274,4 +287,15 @@ export const translations = {
     noGallery: "Chưa có danh sách ảnh",
   },
   // Thêm các ngôn ngữ khác nếu cần
+
+  // Map ////////
+  searchKeyWord: "Nhập từ khoá để tìm kiếm",
+  searchDistance: "Nhập khoảng cách muốn tìm kiếm",
+
+  listOfBasemaps: "Danh sách bản đồ nền",
+  touristAttraction: "Địa điểm du lịch ",
+  accommodationPoint: "Lưu trú",
+  cuisine: "Ẩm thực",
+  rentService: "Dịch vụ thuê xe",
+  // Map ////////
 };

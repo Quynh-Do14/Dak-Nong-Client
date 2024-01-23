@@ -1,0 +1,38 @@
+.download-page {
+    padding: 0 10px;
+    height: 100vh;
+}
+
+.download-page .title {
+    text-align: center;
+    color: #094174;
+    margin-bottom: 10px;
+}
+
+.download-page .btn-part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #094174;
+    border-radius: 4px;
+    padding: 20px 10px;
+}
+
+.download-page .icon-download {
+    font-size: 32px;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.download-page .btn-part .btn-download {
+    background-color: #fe7524;
+    margin: 0 10px;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.download-page .btn-download .name-btn {
+    font-size: 14px;
+    color: #fff;
+}
