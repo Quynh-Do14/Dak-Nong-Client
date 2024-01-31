@@ -146,7 +146,7 @@ export const translations = {
     searchDistance: "Enter the distance you want to search for",
 
     listOfBasemaps: "List of Basemaps",
-    touristAttraction: "TouristAattraction",
+    touristAttraction: "Tourist Aattraction",
     accommodationPoint: "Accommodation Point",
     cuisine: "Cuisine",
     rentService: "Rent Service",
@@ -302,32 +302,33 @@ export const translations = {
     destinatioService: "Địa điểm cung cấp dịch vụ",
     noVideo: "Chưa có video",
     noGallery: "Chưa có danh sách ảnh",
+
+    // Map ////////
+    searchKeyWord: "Nhập từ khoá để tìm kiếm",
+    searchDistance: "Nhập khoảng cách muốn tìm kiếm",
+
+    listOfBasemaps: "Danh sách bản đồ nền",
+    touristAttraction: "Địa điểm du lịch",
+    accommodationPoint: "Lưu trú",
+    cuisine: "Ẩm thực",
+    rentService: "Dịch vụ thuê xe",
+    viewSatelliteImages: "Xem ảnh vệ tinh",
+    needSeeSatellite: "Bạn cần xem ảnh vệ tinh trong",
+    aPeriodOfTime: "1 khoảng thời gian.",
+    photoType: "Loại ảnh",
+    cloudCover: "Độ phủ mây",
+    enterCloudCover: "Nhập độ phủ mây (Mặc định 100)",
+    viewPhoto: "Xem ảnh",
+    suggestedSchedule: "Gợi ý lịch trình",
+    numberDestination: "Số địa điểm",
+    dest: "Điểm",
+    endSchedule: "Kết thúc lịch trình",
+    searchRestaurants: "Tìm kiếm nhà hàng",
+    searchDestination: "Tìm kiếm địa điểm du lịch",
+    searchAccommodationPoint: "Tìm kiếm địa điểm lưu trú",
+    searchDistance: "Tìm kiếm địa điểm theo khoảng cách",
+    // Map ////////
+
   },
   // Thêm các ngôn ngữ khác nếu cần
-
-  // Map ////////
-  searchKeyWord: "Nhập từ khoá để tìm kiếm",
-  searchDistance: "Nhập khoảng cách muốn tìm kiếm",
-
-  listOfBasemaps: "Danh sách bản đồ nền",
-  touristAttraction: "Địa điểm du lịch ",
-  accommodationPoint: "Lưu trú",
-  cuisine: "Ẩm thực",
-  rentService: "Dịch vụ thuê xe",
-  viewSatelliteImages: "Xem ảnh vệ tinh",
-  needSeeSatellite: "Bạn cần xem ảnh vệ tinh trong",
-  aPeriodOfTime: "1 khoảng thời gian.",
-  photoType: "Loại ảnh",
-  cloudCover: "Độ phủ mây",
-  enterCloudCover: "Nhập độ phủ mây (Mặc định 100)",
-  viewPhoto: "Xem ảnh",
-  suggestedSchedule: "Gợi ý lịch trình",
-  numberDestination: "Số địa điểm",
-  dest: "Điểm",
-  endSchedule: "Kết thúc lịch trình",
-  searchRestaurants: "Tìm kiếm nhà hàng",
-  searchDestination: "Tìm kiếm địa điểm du lịch",
-  searchAccommodationPoint: "Tìm kiếm địa điểm lưu trú",
-  searchDistance: "Tìm kiếm địa điểm theo khoảng cách",
-  // Map ////////
 };
