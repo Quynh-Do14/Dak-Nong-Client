@@ -260,7 +260,7 @@ const HeaderPage = () => {
                               <ul>
                                 {
                                   it.children.map((item, index) => (
-                                    <li key={index}><a href={it.link} className="">{translate(item.label)} </a></li>
+                                    <li key={index}><a href={item.link} className="">{translate(item.label)} </a></li>
                                   ))
                                 }
                               </ul>

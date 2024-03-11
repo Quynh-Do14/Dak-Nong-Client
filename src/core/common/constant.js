@@ -58,30 +58,37 @@ export default class Constants {
           {
             id: 1,
             label: "satelliteImageMapOfDakNong",
+            link: ROUTE_PATH.LAYOUT_MAP,
           },
           {
             id: 2,
             label: "dakNongOverlayMap",
+            link: ROUTE_PATH.LAYOUT_MAP,
           },
           {
             id: 3,
             label: "mapOfTouristAttractionsInDakNongProvince",
+            link: ROUTE_PATH.LAYOUT_MAP,
           },
           {
             id: 4,
             label: "dakNongProvinceTouristRouteMap",
+            link: ROUTE_PATH.LAYOUT_MAP,
           },
           {
             id: 5,
             label: "naturalTourismResourcesMapOfDakNongProvince",
+            link: ROUTE_PATH.LAYOUT_MAP,
           },
           {
             id: 6,
             label: "culturalTourismResourcesMapOfDakNongProvince",
+            link: ROUTE_PATH.LAYOUT_MAP,
           },
           {
             id: 7,
             label: "mapOfNaturalTourismResourcesOfTheProvinceDakNong",
+            link: ROUTE_PATH.LAYOUT_MAP,
           },
         ],
       },
