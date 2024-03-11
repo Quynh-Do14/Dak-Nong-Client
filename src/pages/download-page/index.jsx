@@ -8,7 +8,7 @@ const DownLoadPage = () => {
           <h1 className="title">Tải ứng dụng </h1>
           <div className="btn-part">
             <a
-              href="http://14.248.94.155:46928/api/public/DuLichDakNong.apk"
+              href="http://103.130.212.145:46928/api/public/DuLichDakNong.apk"
               className="btn-download d-flex align-items-center justify-content-center"
             >
               <div>

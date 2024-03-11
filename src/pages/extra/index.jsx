@@ -417,7 +417,7 @@ const ExtraComponent = () => {
 
         map.addSource("ranhGioiHuyen", {
           type: "geojson",
-          data: `http://14.248.94.155:46928/api/quanHuyen/ranhGioiHuyen`,
+          data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
         });
         map.addLayer({
           id: "ranhGioiHuyen",
@@ -442,7 +442,7 @@ const ExtraComponent = () => {
         // Load an image from an external URL.
         map.addSource("ranhGioiTinh", {
           type: "geojson",
-          data: `http://14.248.94.155:46928/api/quanHuyen/ranhGioiTinh`,
+          data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiTinh`,
         });
         map.addLayer({
           id: "ranhGioiTinh",
@@ -467,7 +467,7 @@ const ExtraComponent = () => {
 
         map.addSource("diaDiemDuLich", {
           type: "geojson",
-          data: `http://14.248.94.155:46928/api/diaDiem/getAllDiaDiemBanDo`,
+          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiaDiemBanDo`,
         });
 
         for (const feature of dataDsDiaDiemGeoJson.features) {
@@ -567,7 +567,7 @@ const ExtraComponent = () => {
 
         map.addSource("luuTru", {
           type: "geojson",
-          data: `http://14.248.94.155:46928/api/diaDiem/getAllDiemLuuTruBanDo`,
+          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemLuuTruBanDo`,
         });
 
         for (const feature of dataDsLuuTruGeoJson.features) {
@@ -667,7 +667,7 @@ const ExtraComponent = () => {
 
         map.addSource("amThuc", {
           type: "geojson",
-          data: `http://14.248.94.155:46928/api/diaDiem/getAllDiemAmThucBanDo`,
+          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemAmThucBanDo`,
         });
 
         for (const feature of dataDsAmThucGeoJson.features) {
@@ -767,7 +767,7 @@ const ExtraComponent = () => {
 
         map.addSource("phuongTien", {
           type: "geojson",
-          data: `http://14.248.94.155:46928/api/diaDiem/getAllDiemPhuongTienBanDo`,
+          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemPhuongTienBanDo`,
         });
 
         for (const feature of dataDsPhuongTienGeoJson.features) {
