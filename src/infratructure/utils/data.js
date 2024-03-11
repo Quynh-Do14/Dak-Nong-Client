@@ -167,7 +167,13 @@ export const translations = {
     searchDistance: "Search by distance",
 
     // Map ////////
-
+    satelliteImageMapOfDakNong: "Satellite image map of Dak Nong",
+    dakNongOverlayMap: "Dak Nong overlay map",
+    mapOfTouristAttractionsInDakNongProvince: "Map of tourist attractions in Dak Nong province",
+    dakNongProvinceTouristRouteMap: "Dak Nong province tourist route map",
+    naturalTourismResourcesMapOfDakNongProvince: "Natural tourism resources map of Dak Nong province",
+    culturalTourismResourcesMapOfDakNongProvince: "Cultural tourism resources map of Dak Nong province",
+    mapOfNaturalTourismResourcesOfTheProvinceDakNong: "Map of natural tourism resources of the province Dak Nong",
   },
   vi: {
     homePage: "Trang chủ",
@@ -328,6 +334,14 @@ export const translations = {
     searchAccommodationPoint: "Tìm kiếm địa điểm lưu trú",
     searchDistance: "Tìm kiếm địa điểm theo khoảng cách",
     // Map ////////
+
+    satelliteImageMapOfDakNong: "Bản đồ Ảnh vệ tinh Đắk Nông",
+    dakNongOverlayMap: "Bản đồ lớp phủ Đắk Nông",
+    mapOfTouristAttractionsInDakNongProvince: "Bản đồ điểm du lịch tỉnh Đắk Nông",
+    dakNongProvinceTouristRouteMap: "Bản đồ tuyến du lịch tỉnh Đắk Nông",
+    naturalTourismResourcesMapOfDakNongProvince: "Bản đồ Tài nguyên du lịch tự nhiên tỉnh Đắk Nông",
+    culturalTourismResourcesMapOfDakNongProvince: "Bản đồ Tài nguyên du lịch văn hóa tỉnh Đắk Nông",
+    mapOfNaturalTourismResourcesOfTheProvinceDakNong: "Bản đồ tài nguyên du lịch tự nhiên tỉnh Đắk Nông",
 
   },
   // Thêm các ngôn ngữ khác nếu cần

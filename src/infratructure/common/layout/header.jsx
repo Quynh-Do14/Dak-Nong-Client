@@ -259,8 +259,8 @@ const HeaderPage = () => {
                               ?
                               <ul>
                                 {
-                                  it.children.map((it, index) => (
-                                    <li key={index}><a href={it.link} className="">{translate(it.label)} </a></li>
+                                  it.children.map((item, index) => (
+                                    <li key={index}><a href={it.link} className="">{translate(item.label)} </a></li>
                                   ))
                                 }
                               </ul>
