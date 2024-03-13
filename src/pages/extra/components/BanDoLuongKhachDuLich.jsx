@@ -233,6 +233,46 @@ const BanDoLuongKhachDuLich = () => {
         },
       });
 
+      map.addSource("tuyen_dl", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/tuyen_dl`,
+      });
+      map.addLayer({
+        id: `tuyen_dl`,
+        type: "line",
+        source: "tuyen_dl",
+        layout: {},
+        paint: {
+          "line-color": "#1b84ff",
+          "line-width": 3,
+        },
+      });
+
+      map.addSource("khoanhvungdulich", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diadiem/shp/khoanh_vung_diem_dl_hapdan`,
+      });
+      map.addLayer({
+        id: "khoanhvungdulich",
+        type: "fill",
+        source: "khoanhvungdulich",
+        layout: {},
+        paint: {
+          "fill-color": "#ff003d",
+          "fill-opacity": 0.2,
+        },
+      });
+      map.addLayer({
+        id: "outline-khoanhvungdulich",
+        type: "line",
+        source: "khoanhvungdulich",
+        layout: {},
+        paint: {
+          "line-color": "#ff003d",
+          "line-width": 2,
+        },
+      });
+
       map.loadImage(
         "https://cdn-icons-png.flaticon.com/128/1934/1934285.png",
         (error, image) => {
@@ -1452,6 +1492,12 @@ const BanDoLuongKhachDuLich = () => {
       "visibility",
       e.target.checked ? "visible" : "none"
     );
+    if (e.target.value == "khoanhvungdulich")
+      map.setLayoutProperty(
+        `outline-khoanhvungdulich`,
+        "visibility",
+        e.target.checked ? "visible" : "none"
+      );
   };
 
   function haversine(lat1, lon1, lat2, lon2) {
@@ -1545,12 +1591,13 @@ const BanDoLuongKhachDuLich = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${e.properties.hinhAnh.indexOf("https") != -1
-        ? e.properties.hinhAnh
-        : e.properties.hinhAnh.indexOf("http") != -1
-          ? e.properties.hinhAnh
-          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-      }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.properties.hinhAnh.indexOf("https") != -1
+                  ? e.properties.hinhAnh
+                  : e.properties.hinhAnh.indexOf("http") != -1
+                  ? e.properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -1921,7 +1968,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Khu du lịch
+                    {translate("touristArea")}
                   </label>
                 </div>
               </div>
@@ -1960,7 +2007,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Hang động địa chất
+                    {translate("geologicalCave")}
                   </label>
                 </div>
               </div>
@@ -1999,7 +2046,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Sông, suối
+                    {translate("riverStream")}
                   </label>
                 </div>
               </div>
@@ -2038,7 +2085,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Di tích lịch sử
+                    {translate("historicalSites")}
                   </label>
                 </div>
               </div>
@@ -2077,7 +2124,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Thác
+                    {translate("waterfall")}
                   </label>
                 </div>
               </div>
@@ -2116,7 +2163,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Hồ
+                    {translate("lake")}
                   </label>
                 </div>
               </div>
@@ -2155,7 +2202,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Công viên
+                    {translate("park")}
                   </label>
                 </div>
               </div>
@@ -2194,7 +2241,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Tu viện
+                    {translate("abbey")}
                   </label>
                 </div>
               </div>
@@ -2233,7 +2280,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Trang trại
+                    {translate("farm")}
                   </label>
                 </div>
               </div>
@@ -2272,7 +2319,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Thiền viện
+                    {translate("monastery")}
                   </label>
                 </div>
               </div>
@@ -2311,7 +2358,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Bảo tàng, nhà trưng bày
+                    {translate("museumsGalleries")}
                   </label>
                 </div>
               </div>
@@ -2350,7 +2397,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Chùa
+                    {translate("pagoda")}
                   </label>
                 </div>
               </div>
@@ -2389,7 +2436,7 @@ const BanDoLuongKhachDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Tượng đài
+                    {translate("monument")}
                   </label>
                 </div>
               </div>
@@ -2429,6 +2476,118 @@ const BanDoLuongKhachDuLich = () => {
                     }}
                   >
                     {translate("other")}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <p
+              style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                padding: 8,
+                color: "#050505",
+                margin: "0px 12px",
+              }}
+            >
+              {translate("touristRoutes")}
+            </p>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`tuyen_dl`}
+                    id={`tuyen_dl`}
+                    value={`tuyen_dl`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/5264/5264589.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`tuyen_dl`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    {translate("touristRoutes")}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <p
+              style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                padding: 8,
+                color: "#050505",
+                margin: "0px 12px",
+              }}
+            >
+              Vùng điểm du lịch hấp dẫn
+            </p>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`khoanhvungdulich`}
+                    id={`khoanhvungdulich`}
+                    value={`khoanhvungdulich`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/3283/3283435.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`khoanhvungdulich`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    {translate("attractiveTouristDestinationArea")}
                   </label>
                 </div>
               </div>
@@ -3029,7 +3188,7 @@ const BanDoLuongKhachDuLich = () => {
                     color: "#fff",
                   }}
                 >
-                  Điểm c
+                  {translate("locationC")}
                 </div>
                 {/*end::Label*/}
                 {/*begin::Badge*/}

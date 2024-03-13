@@ -2246,7 +2246,7 @@ const ExtraComponent = () => {
                     color: "#fff",
                   }}
                 >
-                  Điểm c
+                  {translate("locationC")}
                 </div>
                 {/*end::Label*/}
                 {/*begin::Badge*/}

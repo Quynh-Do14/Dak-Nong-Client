@@ -13,8 +13,6 @@ import giaiTri from "../../asset/img/extra/giai-tri.jpg";
 import tp from "../../asset/img/extra/tpGiaNghia.jpg";
 import tamLinh from "../../asset/img/extra/du-lich-tam-linh.jpg";
 
-
-
 export default class Constants {
   static Menu = class {
     static List = [
@@ -41,7 +39,7 @@ export default class Constants {
             label: "hotel",
             link: ROUTE_PATH.HOTEL,
           },
-        ]
+        ],
       },
       {
         label: "festival",
@@ -63,7 +61,8 @@ export default class Constants {
           {
             id: 2,
             label: "dakNongOverlayMap",
-            link: `/bandolopphu`,
+            // link: `/bandolopphu`,
+            link: `/map`,
           },
           {
             id: 3,
@@ -88,7 +87,7 @@ export default class Constants {
           {
             id: 7,
             label: "mapOfNaturalTourismResourcesOfTheProvinceDakNong",
-            link: '/bandocosovatchatdulich',
+            link: "/bandocosovatchatdulich",
           },
         ],
       },
@@ -209,7 +208,7 @@ export default class Constants {
       static Position = "top-right";
       static Duration = 6000;
     };
-    static Confirmation = class { };
+    static Confirmation = class {};
   };
   static DataTemplate = class {
     static list = [
@@ -312,7 +311,6 @@ export default class Constants {
         name: "gallery",
         icon: "fa fa-file-image",
       },
-
     ];
   };
   static TypeTourism = class {
@@ -321,38 +319,38 @@ export default class Constants {
         name: "travelDiscover",
         icon: "assets/images/icons/c-1.png",
         link: "https://www.youtube.com/embed/AITILCLleGA?si=srWvnIBNZCYiAcfG&amp;start=1",
-        img: slide2
+        img: slide2,
       },
       {
         name: "ecoTourism",
         icon: "assets/images/icons/c-2.png",
         link: "https://www.youtube.com/embed/IFQWmS5Cl2w?si=R78pi-K8i9AmhStJ",
-        img: slide1
+        img: slide1,
       },
       {
         name: "commerceCuisine",
         icon: "assets/images/icons/c-3.png",
         link: "https://www.youtube.com/embed/rrFAN_cIZ4g?si=xB9nef5JpYC4ctmD",
-        img: amThuc
+        img: amThuc,
       },
       {
         name: "leisureTravel",
         icon: "assets/images/icons/c-4.png",
         link: "https://www.youtube.com/embed/rrFAN_cIZ4g?si=MNFRnOHdyY_QyeAX",
-        img: giaiTri
+        img: giaiTri,
       },
       {
         name: "structures",
         icon: "assets/images/icons/c-5.png",
         link: "https://www.youtube.com/embed/RcYERGLymdY?si=vYHeffN12fiWVT9s",
-        img: kienTruc
+        img: kienTruc,
       },
       {
         name: "spiritualTourism",
         icon: "assets/images/icons/c-6.png",
         link: "https://www.youtube.com/embed/Ji4SJHSyXU4?si=HEDTlfp3mxD3xAky",
-        img: tamLinh
+        img: tamLinh,
       },
-    ]
-  }
+    ];
+  };
 }

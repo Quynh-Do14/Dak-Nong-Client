@@ -242,8 +242,8 @@ const BanDoTuyenDuLich = () => {
         source: "tuyen_dl",
         layout: {},
         paint: {
-          "line-color": "#094174",
-          "line-width": 2,
+          "line-color": "#1b84ff",
+          "line-width": 3,
         },
       });
       map.on("click", `tuyen_dl`, (e) => {
@@ -411,12 +411,13 @@ const BanDoTuyenDuLich = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${e.properties.hinhAnh.indexOf("https") != -1
-        ? e.properties.hinhAnh
-        : e.properties.hinhAnh.indexOf("http") != -1
-          ? e.properties.hinhAnh
-          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-      }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.properties.hinhAnh.indexOf("https") != -1
+                  ? e.properties.hinhAnh
+                  : e.properties.hinhAnh.indexOf("http") != -1
+                  ? e.properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -682,7 +683,7 @@ const BanDoTuyenDuLich = () => {
                       marginRight: 8,
                     }}
                     src={
-                      "https://cdn-icons-png.flaticon.com/128/2322/2322127.png"
+                      "https://cdn-icons-png.flaticon.com/128/5264/5264589.png"
                     }
                     alt=""
                   />
@@ -1294,7 +1295,7 @@ const BanDoTuyenDuLich = () => {
                     color: "#fff",
                   }}
                 >
-                  Điểm c
+                  {translate("locationC")}
                 </div>
                 {/*end::Label*/}
                 {/*begin::Badge*/}

@@ -171,9 +171,12 @@ export const translations = {
     dakNongOverlayMap: "Dak Nong overlay map",
     mapOfTouristAttractionsInDakNongProvince: "Map of tourist attractions",
     dakNongProvinceTouristRouteMap: "Dak Nong province tourist route map",
-    naturalTourismResourcesMapOfDakNongProvince: "Natural tourism resources map",
-    culturalTourismResourcesMapOfDakNongProvince: "Cultural tourism resources map",
-    mapOfNaturalTourismResourcesOfTheProvinceDakNong: "Map of natural tourism resources",
+    naturalTourismResourcesMapOfDakNongProvince:
+      "Natural tourism resources map",
+    culturalTourismResourcesMapOfDakNongProvince:
+      "Cultural tourism resources map",
+    mapOfNaturalTourismResourcesOfTheProvinceDakNong:
+      "Map of natural tourism resources",
     /////
 
     touristRouteMap: "Tourist route map",
@@ -210,7 +213,15 @@ export const translations = {
     culturalTourismResources: "Cultural tourism resources",
     touristFlow: "Tourist flow",
     touristFlowChart: "Tourist flow chart",
-
+    locationC: "Loation C",
+    museumsGalleries: "Museums, galleries",
+    monastery: "Monastery",
+    farm: "Farm",
+    abbey: "Abbey",
+    park: "Park",
+    riverStream: "River, Stream",
+    touristArea: "Tourist area",
+    attractiveTouristDestinationArea: "Attractive tourist destination area",
   },
   vi: {
     homePage: "Trang chủ",
@@ -376,9 +387,12 @@ export const translations = {
     dakNongOverlayMap: "Bản đồ lớp phủ",
     mapOfTouristAttractionsInDakNongProvince: "Bản đồ luống khách du lịch",
     dakNongProvinceTouristRouteMap: "Bản đồ tuyến du lịch",
-    naturalTourismResourcesMapOfDakNongProvince: "Bản đồ Tài nguyên du lịch tự nhiên",
-    culturalTourismResourcesMapOfDakNongProvince: "Bản đồ Tài nguyên du lịch văn hóa",
-    mapOfNaturalTourismResourcesOfTheProvinceDakNong: "Bản đồ cơ sở vật chất du lịch",
+    naturalTourismResourcesMapOfDakNongProvince:
+      "Bản đồ Tài nguyên du lịch tự nhiên",
+    culturalTourismResourcesMapOfDakNongProvince:
+      "Bản đồ Tài nguyên du lịch văn hóa",
+    mapOfNaturalTourismResourcesOfTheProvinceDakNong:
+      "Bản đồ cơ sở vật chất du lịch",
     /////////////////
     touristRouteMap: "Bản đồ tuyến du lịch",
     touristRoutes: "Tuyến du lịch",
@@ -415,6 +429,15 @@ export const translations = {
     culturalTourismResources: "Tài nguyên du lịch văn hoá",
     touristFlow: "Luồng khách du lịch",
     touristFlowChart: "Biểu đồ luồng khách du lịch",
+    locationC: "Điểm C",
+    museumsGalleries: "Bảo tàng, nhà trưng bày",
+    monastery: "Thiền viện",
+    farm: "Trang trại",
+    abbey: "Tu viện",
+    park: "Công viên",
+    riverStream: "Sông, oSuoiosF",
+    touristArea: "Khu du lịch",
+    attractiveTouristDestinationArea: "Vùng điểm du lịch hấp dẫn",
   },
   // Thêm các ngôn ngữ khác nếu cần
 };
