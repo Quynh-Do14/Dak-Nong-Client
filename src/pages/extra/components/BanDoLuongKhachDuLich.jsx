@@ -54,6 +54,7 @@ const BanDoLuongKhachDuLich = () => {
 
   const [visibleXemAnhVeTinh, setVisibleXemAnhVeTinh] = useState(false);
   const [isGoiYLichTrinh, setIsGoiYLichTrinh] = useState(false);
+  const [isBieuDo, setIsBieuDo] = useState(true);
   const [isLopBanDo, setIsLopBanDo] = useState(true);
   const [isDanhSachBanDo, setIsDanhSachBanDo] = useState(false);
   const [dsStyleBanDo, setDsStyleBanDo] = useState(DSSTYLEBANDO);
@@ -192,8 +193,8 @@ const BanDoLuongKhachDuLich = () => {
         source: "ranhGioiHuyen",
         layout: {},
         paint: {
-          "fill-color": "#094174",
-          "fill-opacity": 0.0,
+          "fill-color": ["get", "color"],
+          "fill-opacity": 0.8,
         },
       });
       map.addLayer({
@@ -232,74 +233,1207 @@ const BanDoLuongKhachDuLich = () => {
         },
       });
 
-      map.addSource("tuyen_dl", {
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/1934/1934285.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`khudulich`, image);
+        }
+      );
+      map.addSource("khudulich", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tuyen_dl`,
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Khu du lịch'`,
       });
       map.addLayer({
-        id: `tuyen_dl`,
-        type: "line",
-        source: "tuyen_dl",
-        layout: {},
+        id: `khudulich`,
+        type: "symbol",
+        source: "khudulich",
+        layout: {
+          "icon-image": `khudulich`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
         paint: {
-          "line-color": "#094174",
-          "line-width": 2,
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
         },
       });
-      map.on("click", `tuyen_dl`, (e) => {
-        console.log(e);
-        // const coordinates = e.features[0].geometry.coordinates.slice();
-        // const html = `<div>
+      map.on("click", `khudulich`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
 
-        //   <div style="
-        //       padding: 20px;
-        //   ">
-        //           <p style="
-        //   color: #d32f2f;
-        //   font-size: 11px;
-        //   text-transform: uppercase;
-        //   ">${e.features[0].properties.phanloai}</p>
-        //           <a href="#" style="
-        //   color: #333;
-        //   font-size: 18px;
-        //   width: 240px;
-        //   font-weight: 500;
-        //   ">${e.features[0].properties.tendiemdl}</a>
-        //           <p style="
-        //   font-size: 11px;
-        //   color: #333;
-        //   font-weight: 400;
-        //   ">${e.features[0].properties.nguon}</p>
-        //           <p style="
-        //   width: 240px;
-        //   overflow: hidden;
-        //   text-overflow: ellipsis;
-        //   -webkit-line-clamp: 3;
-        //   display: -webkit-box;
-        //   -webkit-box-orient: vertical;
-        //   font-size: 13px;
-        //   line-height: 1.6;
-        //   color: #333;
-        //   ">${e.features[0].properties.thongtin}</p>
-        //       </div>
-        //   </div>`;
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
 
-        // while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        //   coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        // }
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
 
-        // map.flyTo({
-        //   center: e.features[0].geometry.coordinates,
-        //   essential: true,
-        //   duration: 1000,
-        // });
-
-        // new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
       });
-      map.on("mouseenter", `tuyen_dl`, () => {
+      map.on("mouseenter", `khudulich`, () => {
         map.getCanvas().style.cursor = "pointer";
       });
-      map.on("mouseleave", `tuyen_dl`, () => {
+      map.on("mouseleave", `khudulich`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/5454/5454117.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`hangdongdiachat`, image);
+        }
+      );
+      map.addSource("hangdongdiachat", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Hang động địa chất'`,
+      });
+      map.addLayer({
+        id: `hangdongdiachat`,
+        type: "symbol",
+        source: "hangdongdiachat",
+        layout: {
+          "icon-image": `hangdongdiachat`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `hangdongdiachat`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `hangdongdiachat`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `hangdongdiachat`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/3158/3158062.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`songsuoi`, image);
+        }
+      );
+      map.addSource("songsuoi", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Sông, suối'`,
+      });
+      map.addLayer({
+        id: `songsuoi`,
+        type: "symbol",
+        source: "songsuoi",
+        layout: {
+          "icon-image": `songsuoi`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `songsuoi`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `songsuoi`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `songsuoi`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/3660/3660590.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`ditichlichsu`, image);
+        }
+      );
+      map.addSource("ditichlichsu", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Di tích lịch sử'`,
+      });
+      map.addLayer({
+        id: `ditichlichsu`,
+        type: "symbol",
+        source: "ditichlichsu",
+        layout: {
+          "icon-image": `ditichlichsu`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `ditichlichsu`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `ditichlichsu`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `ditichlichsu`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/756/756089.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`thac`, image);
+        }
+      );
+      map.addSource("thac", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Thác'`,
+      });
+      map.addLayer({
+        id: `thac`,
+        type: "symbol",
+        source: "thac",
+        layout: {
+          "icon-image": `thac`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `thac`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `thac`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `thac`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/3719/3719852.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`ho`, image);
+        }
+      );
+      map.addSource("ho", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Hồ'`,
+      });
+      map.addLayer({
+        id: `ho`,
+        type: "symbol",
+        source: "ho",
+        layout: {
+          "icon-image": `ho`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `ho`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `ho`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `ho`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/2169/2169407.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`congvien`, image);
+        }
+      );
+      map.addSource("congvien", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Công viên'`,
+      });
+      map.addLayer({
+        id: `congvien`,
+        type: "symbol",
+        source: "congvien",
+        layout: {
+          "icon-image": `congvien`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `congvien`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `congvien`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `congvien`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/2414/2414579.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`tuvien`, image);
+        }
+      );
+      map.addSource("tuvien", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Tu viện'`,
+      });
+      map.addLayer({
+        id: `tuvien`,
+        type: "symbol",
+        source: "tuvien",
+        layout: {
+          "icon-image": `tuvien`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `tuvien`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `tuvien`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `tuvien`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/3033/3033239.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`trangtrai`, image);
+        }
+      );
+      map.addSource("trangtrai", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Trang trại'`,
+      });
+      map.addLayer({
+        id: `trangtrai`,
+        type: "symbol",
+        source: "trangtrai",
+        layout: {
+          "icon-image": `trangtrai`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `trangtrai`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `trangtrai`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `trangtrai`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/4840/4840947.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`thienvien`, image);
+        }
+      );
+      map.addSource("thienvien", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Thiền viện'`,
+      });
+      map.addLayer({
+        id: `thienvien`,
+        type: "symbol",
+        source: "thienvien",
+        layout: {
+          "icon-image": `thienvien`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `thienvien`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `thienvien`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `thienvien`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/5300/5300933.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`baotangnhatrungbay`, image);
+        }
+      );
+      map.addSource("baotangnhatrungbay", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Bảo tàng, nhà trưng bày'`,
+      });
+      map.addLayer({
+        id: `baotangnhatrungbay`,
+        type: "symbol",
+        source: "baotangnhatrungbay",
+        layout: {
+          "icon-image": `baotangnhatrungbay`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `baotangnhatrungbay`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `baotangnhatrungbay`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `baotangnhatrungbay`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/2095/2095642.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`chua`, image);
+        }
+      );
+      map.addSource("chua", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Chùa'`,
+      });
+      map.addLayer({
+        id: `chua`,
+        type: "symbol",
+        source: "chua",
+        layout: {
+          "icon-image": `chua`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `chua`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `chua`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `chua`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/553/553968.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`tuongdai`, image);
+        }
+      );
+      map.addSource("tuongdai", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Tượng đài'`,
+      });
+      map.addLayer({
+        id: `tuongdai`,
+        type: "symbol",
+        source: "tuongdai",
+        layout: {
+          "icon-image": `tuongdai`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `tuongdai`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `tuongdai`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `tuongdai`, () => {
+        map.getCanvas().style.cursor = "";
+      });
+
+      map.loadImage(
+        "https://cdn-icons-png.flaticon.com/128/3660/3660499.png",
+        (error, image) => {
+          if (error) throw error;
+          map.addImage(`khac`, image);
+        }
+      );
+      map.addSource("khac", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Khác'`,
+      });
+      map.addLayer({
+        id: `khac`,
+        type: "symbol",
+        source: "khac",
+        layout: {
+          "icon-image": `khac`,
+          // "icon-allow-overlap": true,
+          "icon-size": 0.2,
+          "icon-offset": [0, -17],
+          "text-field": ["get", "tenngan"],
+          "text-size": 11,
+          "text-offset": [0, 2],
+        },
+        paint: {
+          "text-color": "#004eff",
+          "text-halo-color": "#fff",
+          "text-halo-width": 2,
+        },
+      });
+      map.on("click", `khac`, (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const html = `<div>
+        
+          <div style="
+              padding: 20px;
+          ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+          ">${e.features[0].properties.phanloai}</p>
+                  <a href="#" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+          ">${e.features[0].properties.tenngan}</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+          ">${e.features[0].properties.tendaydu}</p>
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+          ">${e.features[0].properties.ghichukhac}</p>
+              </div>
+          </div>`;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          essential: true,
+          duration: 1000,
+        });
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+      });
+      map.on("mouseenter", `khac`, () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", `khac`, () => {
         map.getCanvas().style.cursor = "";
       });
     });
@@ -411,12 +1545,13 @@ const BanDoLuongKhachDuLich = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${e.properties.hinhAnh.indexOf("https") != -1
-        ? e.properties.hinhAnh
-        : e.properties.hinhAnh.indexOf("http") != -1
-          ? e.properties.hinhAnh
-          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-      }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.properties.hinhAnh.indexOf("https") != -1
+                  ? e.properties.hinhAnh
+                  : e.properties.hinhAnh.indexOf("http") != -1
+                  ? e.properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -595,6 +1730,99 @@ const BanDoLuongKhachDuLich = () => {
         }}
       >
         <div id="map" ref={mapContainer}></div>
+        {isBieuDo && (
+          <div
+            style={{
+              backgroundColor: "#fff",
+              padding: 4,
+              position: "absolute",
+              top: 12,
+              right: 50,
+              boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
+              width: 380,
+              height: "calc(100vh - 104px - 180px)",
+              overflowY: "scroll",
+              paddingBottom: 12,
+            }}
+          >
+            <div
+              className="d-flex flex-row justify-content-between"
+              style={{
+                marginBottom: 12,
+              }}
+            >
+              <p
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  padding: 8,
+                  color: "#094174",
+                  textAlign: "center",
+                  borderBottom: "1px solid #ccc",
+                  margin: "0px 12px",
+                }}
+              >
+                Biểu đồ luồng khách du lịch
+              </p>
+              <button
+                type="button"
+                // className="close"
+                aria-label="Close"
+                onClick={() => {
+                  setIsBieuDo(false);
+                }}
+                style={{
+                  padding: "4px 16px",
+                }}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px", flexWrap: "wrap" }}
+              >
+                <img
+                  src="http://103.130.212.145:46928/api/public/bieudo/doanhthu.png"
+                  alt=""
+                  style={{
+                    maxWidth: "100%",
+                    marginBottom: 20,
+                  }}
+                />
+                <img
+                  src="http://103.130.212.145:46928/api/public/bieudo/khachnoidia.png"
+                  alt=""
+                  style={{
+                    maxWidth: "100%",
+                    marginBottom: 20,
+                  }}
+                />
+                <img
+                  src="http://103.130.212.145:46928/api/public/bieudo/khachquocte.png"
+                  alt=""
+                  style={{
+                    maxWidth: "100%",
+                    marginBottom: 20,
+                  }}
+                />
+                <img
+                  src="http://103.130.212.145:46928/api/public/bieudo/nhanluc.png"
+                  alt=""
+                  style={{
+                    maxWidth: "100%",
+                    marginBottom: 20,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
         {isLopBanDo && (
           <div
             style={{
@@ -605,6 +1833,7 @@ const BanDoLuongKhachDuLich = () => {
               left: 10,
               boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
               width: 380,
+              height: "calc(100vh - 104px - 180px)",
               overflowY: "scroll",
               paddingBottom: 12,
             }}
@@ -651,7 +1880,7 @@ const BanDoLuongKhachDuLich = () => {
                 margin: "0px 12px",
               }}
             >
-              {translate("touristRouteMap")}
+              Luồng khách du lịch
             </p>
             <div
               style={{
@@ -666,9 +1895,9 @@ const BanDoLuongKhachDuLich = () => {
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    name={`tuyen_dl`}
-                    id={`tuyen_dl`}
-                    value={`tuyen_dl`}
+                    name={`khudulich`}
+                    id={`khudulich`}
+                    value={`khudulich`}
                     style={{
                       marginRight: 8,
                     }}
@@ -682,18 +1911,525 @@ const BanDoLuongKhachDuLich = () => {
                       marginRight: 8,
                     }}
                     src={
-                      "https://cdn-icons-png.flaticon.com/128/2322/2322127.png"
+                      "https://cdn-icons-png.flaticon.com/128/1934/1934285.png"
                     }
                     alt=""
                   />
                   <label
                     className="form-check-label"
-                    htmlFor={`tuyen_dl`}
+                    htmlFor={`khudulich`}
                     style={{
                       margin: 0,
                     }}
                   >
-                    {translate("touristRoutes")}
+                    Khu du lịch
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`hangdongdiachat`}
+                    id={`hangdongdiachat`}
+                    value={`hangdongdiachat`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/5454/5454117.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`hangdongdiachat`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Hang động địa chất
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`songsuoi`}
+                    id={`songsuoi`}
+                    value={`songsuoi`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/3158/3158062.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`songsuoi`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Sông, suối
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`ditichlichsu`}
+                    id={`ditichlichsu`}
+                    value={`ditichlichsu`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/3660/3660590.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`ditichlichsu`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Di tích lịch sử
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`thac`}
+                    id={`thac`}
+                    value={`thac`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/756/756089.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`thac`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Thác
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`ho`}
+                    id={`ho`}
+                    value={`ho`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/3719/3719852.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`ho`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Hồ
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`congvien`}
+                    id={`congvien`}
+                    value={`congvien`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/2169/2169407.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`congvien`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Công viên
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`tuvien`}
+                    id={`tuvien`}
+                    value={`tuvien`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/2414/2414579.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`tuvien`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Tu viện
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`trangtrai`}
+                    id={`trangtrai`}
+                    value={`trangtrai`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/3033/3033239.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`trangtrai`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Trang trại
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`thienvien`}
+                    id={`thienvien`}
+                    value={`thienvien`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/4840/4840947.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`thienvien`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Thiền viện
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`baotangnhatrungbay`}
+                    id={`baotangnhatrungbay`}
+                    value={`baotangnhatrungbay`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/5300/5300933.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`baotangnhatrungbay`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Bảo tàng, nhà trưng bày
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`chua`}
+                    id={`chua`}
+                    value={`chua`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/2095/2095642.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`chua`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Chùa
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`tuongdai`}
+                    id={`tuongdai`}
+                    value={`tuongdai`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/553/553968.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`tuongdai`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    Tượng đài
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`khac`}
+                    id={`khac`}
+                    value={`khac`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/3660/3660499.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`khac`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    {translate("other")}
                   </label>
                 </div>
               </div>
@@ -1328,6 +3064,34 @@ const BanDoLuongKhachDuLich = () => {
           style={{
             position: "absolute",
             bottom: 10,
+            left: 50,
+          }}
+        >
+          <button
+            onClick={() => {
+              setIsBieuDo(true);
+            }}
+            style={{
+              width: 29,
+              height: 29,
+              display: "block",
+              padding: 0,
+              outline: "none",
+              border: 0,
+              boxSizing: "border-box",
+              backgroundColor: "#fff",
+              cursor: "pointer",
+              boxShadow: "0 0 0 2px rgba(0,0,0,.1)",
+              borderRadius: 4,
+            }}
+          >
+            <i class="fa-solid fa-chart-simple"></i>
+          </button>
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            bottom: 10,
             left: 10,
           }}
         >
@@ -1366,6 +3130,7 @@ const BanDoLuongKhachDuLich = () => {
             onClick={() => {
               setIsTimDuong("");
               map.removeControl(isTimDuong);
+              setIsBieuDo(false);
               setIsLopBanDo(false);
               setIsDanhSachBanDo(true);
             }}
@@ -1396,6 +3161,7 @@ const BanDoLuongKhachDuLich = () => {
         >
           <button
             onClick={() => {
+              setIsBieuDo(false);
               setIsLopBanDo(false);
               setIsDanhSachBanDo(false);
               if (isTimDuong != "") {

@@ -182,6 +182,25 @@ const BanDoAnhVeTinh = () => {
         exaggeration: 1.5,
       });
 
+      map.addSource("DakNong2022_Sentinel_tiff", {
+        type: "image",
+        url: "http://103.130.212.145:46928/api/public/anhvetinh/DakNong2022_Sentinel_tiff.gif",
+        coordinates: [
+          [107.20629162700004, 12.812316930000065],
+          [108.11636491700006, 12.812316930000065],
+          [108.11636491700006, 11.74900376100004],
+          [107.20629162700004, 11.74900376100004],
+        ],
+      });
+      map.addLayer({
+        id: "DakNong2022_Sentinel_tiff",
+        type: "raster",
+        source: "DakNong2022_Sentinel_tiff",
+        paint: {
+          "raster-fade-duration": 0,
+        },
+      });
+
       map.addSource("ranhGioiHuyen", {
         type: "geojson",
         data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
@@ -230,77 +249,6 @@ const BanDoAnhVeTinh = () => {
           "line-color": "#FE7524",
           "line-width": 4,
         },
-      });
-
-      map.addSource("tuyen_dl", {
-        type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tuyen_dl`,
-      });
-      map.addLayer({
-        id: `tuyen_dl`,
-        type: "line",
-        source: "tuyen_dl",
-        layout: {},
-        paint: {
-          "line-color": "#094174",
-          "line-width": 2,
-        },
-      });
-      map.on("click", `tuyen_dl`, (e) => {
-        console.log(e);
-        // const coordinates = e.features[0].geometry.coordinates.slice();
-        // const html = `<div>
-
-        //   <div style="
-        //       padding: 20px;
-        //   ">
-        //           <p style="
-        //   color: #d32f2f;
-        //   font-size: 11px;
-        //   text-transform: uppercase;
-        //   ">${e.features[0].properties.phanloai}</p>
-        //           <a href="#" style="
-        //   color: #333;
-        //   font-size: 18px;
-        //   width: 240px;
-        //   font-weight: 500;
-        //   ">${e.features[0].properties.tendiemdl}</a>
-        //           <p style="
-        //   font-size: 11px;
-        //   color: #333;
-        //   font-weight: 400;
-        //   ">${e.features[0].properties.nguon}</p>
-        //           <p style="
-        //   width: 240px;
-        //   overflow: hidden;
-        //   text-overflow: ellipsis;
-        //   -webkit-line-clamp: 3;
-        //   display: -webkit-box;
-        //   -webkit-box-orient: vertical;
-        //   font-size: 13px;
-        //   line-height: 1.6;
-        //   color: #333;
-        //   ">${e.features[0].properties.thongtin}</p>
-        //       </div>
-        //   </div>`;
-
-        // while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        //   coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        // }
-
-        // map.flyTo({
-        //   center: e.features[0].geometry.coordinates,
-        //   essential: true,
-        //   duration: 1000,
-        // });
-
-        // new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
-      });
-      map.on("mouseenter", `tuyen_dl`, () => {
-        map.getCanvas().style.cursor = "pointer";
-      });
-      map.on("mouseleave", `tuyen_dl`, () => {
-        map.getCanvas().style.cursor = "";
       });
     });
 
@@ -411,12 +359,13 @@ const BanDoAnhVeTinh = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${e.properties.hinhAnh.indexOf("https") != -1
-        ? e.properties.hinhAnh
-        : e.properties.hinhAnh.indexOf("http") != -1
-          ? e.properties.hinhAnh
-          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-      }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.properties.hinhAnh.indexOf("https") != -1
+                  ? e.properties.hinhAnh
+                  : e.properties.hinhAnh.indexOf("http") != -1
+                  ? e.properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -651,7 +600,7 @@ const BanDoAnhVeTinh = () => {
                 margin: "0px 12px",
               }}
             >
-              {translate("touristRouteMap")}
+              Ảnh vệ tinh
             </p>
             <div
               style={{
@@ -666,9 +615,9 @@ const BanDoAnhVeTinh = () => {
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    name={`tuyen_dl`}
-                    id={`tuyen_dl`}
-                    value={`tuyen_dl`}
+                    name={`DakNong2022_Sentinel_tiff`}
+                    id={`DakNong2022_Sentinel_tiff`}
+                    value={`DakNong2022_Sentinel_tiff`}
                     style={{
                       marginRight: 8,
                     }}
@@ -682,18 +631,18 @@ const BanDoAnhVeTinh = () => {
                       marginRight: 8,
                     }}
                     src={
-                      "https://cdn-icons-png.flaticon.com/128/2322/2322127.png"
+                      "https://cdn-icons-png.flaticon.com/128/3301/3301722.png"
                     }
                     alt=""
                   />
                   <label
                     className="form-check-label"
-                    htmlFor={`tuyen_dl`}
+                    htmlFor={`DakNong2022_Sentinel_tiff`}
                     style={{
                       margin: 0,
                     }}
                   >
-                    {translate("touristRoutes")}                   
+                    Ảnh vệ tinh
                   </label>
                 </div>
               </div>
