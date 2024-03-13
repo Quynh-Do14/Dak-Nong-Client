@@ -1372,13 +1372,12 @@ const BanDoCoSoVatChatDuLich = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${
-                e.properties.hinhAnh.indexOf("https") != -1
-                  ? e.properties.hinhAnh
-                  : e.properties.hinhAnh.indexOf("http") != -1
-                  ? e.properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.properties.hinhAnh.indexOf("https") != -1
+        ? e.properties.hinhAnh
+        : e.properties.hinhAnh.indexOf("http") != -1
+          ? e.properties.hinhAnh
+          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+      }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -1655,7 +1654,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Chợ
+                    {translate("market")}
                   </label>
                 </div>
               </div>
@@ -1694,7 +1693,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Bệnh viện
+                    {translate("hospital")}
                   </label>
                 </div>
               </div>
@@ -1733,7 +1732,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Ngân hàng
+                    {translate("bank")}
                   </label>
                 </div>
               </div>
@@ -1772,7 +1771,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Siêu thị, trung tâm thương mại
+                    {translate("supermarketsTradeCenters")}
                   </label>
                 </div>
               </div>
@@ -1811,7 +1810,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Khách sạn
+                    {translate("hotel")}
                   </label>
                 </div>
               </div>
@@ -1850,7 +1849,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Nhà khách
+                    {translate("guestHouse")}
                   </label>
                 </div>
               </div>
@@ -1889,7 +1888,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Nhà nghỉ
+                    {translate("budgetMotel")}
                   </label>
                 </div>
               </div>
@@ -1928,7 +1927,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Nhà hàng
+                    {translate("restaurant")}
                   </label>
                 </div>
               </div>
@@ -1967,7 +1966,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Quán ăn
+                    {translate("eatery")}
                   </label>
                 </div>
               </div>
@@ -2006,7 +2005,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Rạp chiếu phim
+                    {translate("cinema")}
                   </label>
                 </div>
               </div>
@@ -2045,7 +2044,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Cty lưu hành nội địa
+                    {translate("domesticCirculationCompany")}
                   </label>
                 </div>
               </div>
@@ -2084,7 +2083,7 @@ const BanDoCoSoVatChatDuLich = () => {
                       margin: 0,
                     }}
                   >
-                    Cơ sở lưu trú khác
+                    {translate("otherAccommodationFacilities")}
                   </label>
                 </div>
               </div>

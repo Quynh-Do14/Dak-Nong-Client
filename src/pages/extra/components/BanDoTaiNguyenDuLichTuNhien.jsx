@@ -1114,13 +1114,12 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${
-                e.properties.hinhAnh.indexOf("https") != -1
-                  ? e.properties.hinhAnh
-                  : e.properties.hinhAnh.indexOf("http") != -1
-                  ? e.properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.properties.hinhAnh.indexOf("https") != -1
+        ? e.properties.hinhAnh
+        : e.properties.hinhAnh.indexOf("http") != -1
+          ? e.properties.hinhAnh
+          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+      }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -1397,7 +1396,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                       margin: 0,
                     }}
                   >
-                    Khu bảo tồn thiên nhiên
+                    {translate("natureReserve")}
                   </label>
                 </div>
               </div>
@@ -1436,7 +1435,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                       margin: 0,
                     }}
                   >
-                    Vườn quốc gia
+                    {translate("nationalParks")}
                   </label>
                 </div>
               </div>
@@ -1475,7 +1474,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                       margin: 0,
                     }}
                   >
-                    Hang động địa chất
+                    {translate("geologicalCave")}
                   </label>
                 </div>
               </div>
@@ -1514,7 +1513,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                       margin: 0,
                     }}
                   >
-                    Sông
+                    {translate("river")}
                   </label>
                 </div>
               </div>
@@ -1553,7 +1552,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                       margin: 0,
                     }}
                   >
-                    Thác
+                    {translate("waterfall")}
                   </label>
                 </div>
               </div>
@@ -1592,7 +1591,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                       margin: 0,
                     }}
                   >
-                    Hồ
+                    {translate("lake")}
                   </label>
                 </div>
               </div>
@@ -1631,7 +1630,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                       margin: 0,
                     }}
                   >
-                    Đảo
+                    {translate("isLand")}
                   </label>
                 </div>
               </div>
@@ -1670,7 +1669,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                       margin: 0,
                     }}
                   >
-                    Núi lửa
+                    {translate("volcano")}
                   </label>
                 </div>
               </div>
@@ -1709,7 +1708,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                       margin: 0,
                     }}
                   >
-                    Khác
+                    {translate("other")}
                   </label>
                 </div>
               </div>

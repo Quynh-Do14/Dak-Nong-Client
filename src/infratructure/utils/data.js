@@ -174,6 +174,36 @@ export const translations = {
     naturalTourismResourcesMapOfDakNongProvince: "Natural tourism resources map",
     culturalTourismResourcesMapOfDakNongProvince: "Cultural tourism resources map",
     mapOfNaturalTourismResourcesOfTheProvinceDakNong: "Map of natural tourism resources",
+    /////
+
+    touristRouteMap: "Tourist route map",
+    touristRoutes: " Tourist routes",
+    natureReserve: "Nature reserve",
+    nationalParks: "National Parks",
+    geologicalCave: "Geological cave",
+    river: "River",
+    waterfall: "Waterfall",
+    lake: "Lake",
+    isLand: "IsLand",
+    volcano: "Volcano",
+    other: "Other",
+
+    pagoda: "Pagoda",
+    historicalSites: "Historical Sites",
+    monument: "Monument",
+
+    market: "Market",
+    hospital: "Hospital",
+    bank: "Bank",
+    supermarketsTradeCenters: "Supermarkets, trade centers",
+    hotel: "Hotel",
+    guestHouse: "Guest house",
+    budgetMotel: "Budget motel",
+    restaurant: "Restaurant",
+    eatery: "Eatery",
+    cinema: "Cinema",
+    domesticCirculationCompany: "Domestic circulation company",
+    otherAccommodationFacilities: "Other accommodation facilities"
   },
   vi: {
     homePage: "Trang chủ",
@@ -342,7 +372,36 @@ export const translations = {
     naturalTourismResourcesMapOfDakNongProvince: "Bản đồ Tài nguyên du lịch tự nhiên",
     culturalTourismResourcesMapOfDakNongProvince: "Bản đồ Tài nguyên du lịch văn hóa",
     mapOfNaturalTourismResourcesOfTheProvinceDakNong: "Bản đồ cơ sở vật chất du lịch",
+    /////////////////
+    touristRouteMap: "Bản đồ tuyến du lịch",
+    touristRoutes: "Tuyến du lịch",
 
+    natureReserve: "Khu bảo tồn thiên nhiên",
+    nationalParks: "Vườn quốc gia",
+    geologicalCave: "Hang động địa chất",
+    river: "Sông",
+    waterfall: "Thác",
+    lake: "Hồ",
+    isLand: "Đảo",
+    volcano: "Núi lửa",
+    other: "Khác",
+
+    pagoda: "Chùa",
+    historicalSites: "Di tích lịch sử",
+    monument: "Tượng đài",
+
+    market: "Chợ",
+    hospital: "Bệnh viện",
+    bank: "Ngân hàng",
+    supermarketsTradeCenters: "Siêu thị, trung tâm thương mại",
+    hotel: "Khách sạn",
+    guestHouse: "Nhà khách",
+    budgetMotel: "Nhà nghỉ",
+    restaurant: "Nhà hàng",
+    eatery: "Quán ăn",
+    cinema: "Rạp chiếu phim",
+    domesticCirculationCompany: "Cty lưu hành nội địa",
+    otherAccommodationFacilities: "Cơ sở lưu trú khác"
   },
   // Thêm các ngôn ngữ khác nếu cần
 };
