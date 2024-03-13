@@ -21,6 +21,10 @@ import DownLoadPage from "./pages/download-page";
 import BanDoTaiNguyenDuLichTuNhien from "./pages/extra/components/BanDoTaiNguyenDuLichTuNhien";
 import BanDoTaiNguyenDuLichVanHoa from "./pages/extra/components/BanDoTaiNguyenDuLichVanHoa";
 import BanDoTuyenDuLich from "./pages/extra/components/BanDoTuyenDuLich";
+import BanDoCoSoVatChatDuLich from "./pages/extra/components/BanDoCoSoVatChatDuLich";
+import BanDoAnhVeTinh from "./pages/extra/components/BanDoAnhVeTinh";
+import BanDoLopPhu from "./pages/extra/components/BanDoLopPhu";
+import BanDoLuongKhachDuLich from "./pages/extra/components/BanDoLuongKhachDuLich";
 
 const RouteRoot = () => {
   return (
@@ -61,9 +65,20 @@ const RouteRoot = () => {
           path={`/bandotainguyendulichvanhoa`}
           element={<BanDoTaiNguyenDuLichVanHoa />}
         />
-         <Route
-          path={`/bandotuyendulich`}
-          element={<BanDoTuyenDuLich />}
+        <Route path={`/bandotuyendulich`} element={<BanDoTuyenDuLich />} />
+
+        <Route
+          path={`/bandocosovatchatdulich`}
+          element={<BanDoCoSoVatChatDuLich />}
+        />
+
+        <Route path={`/bandoanhvetinh`} element={<BanDoAnhVeTinh />} />
+
+        <Route path={`/bandolopphu`} element={<BanDoLopPhu />} />
+
+        <Route
+          path={`/bandoluongkhachdulich`}
+          element={<BanDoLuongKhachDuLich />}
         />
 
         {/* <Route path={ROUTE_PATH.DESTINATION} element={<DestinationPage />} />

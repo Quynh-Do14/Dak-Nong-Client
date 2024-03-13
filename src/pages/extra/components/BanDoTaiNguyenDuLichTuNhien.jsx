@@ -182,6 +182,56 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
         exaggeration: 1.5,
       });
 
+      map.addSource("ranhGioiHuyen", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
+      });
+      map.addLayer({
+        id: "ranhGioiHuyen",
+        type: "fill",
+        source: "ranhGioiHuyen",
+        layout: {},
+        paint: {
+          "fill-color": "#094174",
+          "fill-opacity": 0.0,
+        },
+      });
+      map.addLayer({
+        id: "outline-ranhGioiHuyen",
+        type: "line",
+        source: "ranhGioiHuyen",
+        layout: {},
+        paint: {
+          "line-color": "#094174",
+          "line-width": 2,
+        },
+      });
+      // Load an image from an external URL.
+      map.addSource("ranhGioiTinh", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiTinh`,
+      });
+      map.addLayer({
+        id: "ranhGioiTinh",
+        type: "fill",
+        source: "ranhGioiTinh",
+        layout: {},
+        paint: {
+          "fill-color": "#FE7524",
+          "fill-opacity": 0.0,
+        },
+      });
+      map.addLayer({
+        id: "outline-ranhGioiTinh",
+        type: "line",
+        source: "ranhGioiTinh",
+        layout: {},
+        paint: {
+          "line-color": "#FE7524",
+          "line-width": 4,
+        },
+      });
+
       map.loadImage(
         "https://cdn-icons-png.flaticon.com/128/1609/1609077.png",
         (error, image) => {
@@ -1067,7 +1117,9 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
               <img src="${
                 e.properties.hinhAnh.indexOf("https") != -1
                   ? e.properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.properties.hinhAnh}`
+                  : e.properties.hinhAnh.indexOf("http") != -1
+                  ? e.properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;

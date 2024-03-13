@@ -58,17 +58,17 @@ export default class Constants {
           {
             id: 1,
             label: "satelliteImageMapOfDakNong",
-            link: ROUTE_PATH.LAYOUT_MAP,
+            link: `/bandoanhvetinh`,
           },
           {
             id: 2,
             label: "dakNongOverlayMap",
-            link: ROUTE_PATH.LAYOUT_MAP,
+            link: `/bandolopphu`,
           },
           {
             id: 3,
             label: "mapOfTouristAttractionsInDakNongProvince",
-            link: ROUTE_PATH.LAYOUT_MAP,
+            link: `/bandoluongkhachdulich`,
           },
           {
             id: 4,
@@ -88,7 +88,7 @@ export default class Constants {
           {
             id: 7,
             label: "mapOfNaturalTourismResourcesOfTheProvinceDakNong",
-            link: ROUTE_PATH.LAYOUT_MAP,
+            link: '/bandocosovatchatdulich',
           },
         ],
       },

@@ -28,7 +28,7 @@ function getRandomValueFromArray(arr) {
   return arr[randomIndex];
 }
 
-const BanDoTaiNguyenDuLichVanHoa = () => {
+const BanDoAnhVeTinh = () => {
   const location = useLocation();
   const receivedProps = location.state;
   const mapContainer = useRef();
@@ -232,347 +232,74 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
         },
       });
 
-      map.loadImage(
-        "https://cdn-icons-png.flaticon.com/128/2322/2322127.png",
-        (error, image) => {
-          if (error) throw error;
-          map.addImage(`chua`, image);
-        }
-      );
-      map.addSource("chua", {
+      map.addSource("tuyen_dl", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_vanhoa?where=and phanloai like 'Chùa'`,
+        data: `http://103.130.212.145:46928/api/diaDiem/shp/tuyen_dl`,
       });
       map.addLayer({
-        id: `chua`,
-        type: "symbol",
-        source: "chua",
-        layout: {
-          "icon-image": `chua`,
-          // "icon-allow-overlap": true,
-          "icon-size": 0.2,
-          "icon-offset": [0, -17],
-          "text-field": ["get", "tendiemdl"],
-          "text-size": 11,
-          "text-offset": [0, 2],
-        },
+        id: `tuyen_dl`,
+        type: "line",
+        source: "tuyen_dl",
+        layout: {},
         paint: {
-          "text-color": "#004eff",
-          "text-halo-color": "#fff",
-          "text-halo-width": 2,
+          "line-color": "#094174",
+          "line-width": 2,
         },
       });
-      map.on("click", `chua`, (e) => {
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        const html = `<div>
-        
-          <div style="
-              padding: 20px;
-          ">
-                  <p style="
-          color: #d32f2f;
-          font-size: 11px;
-          text-transform: uppercase;
-          ">${e.features[0].properties.phanloai}</p>
-                  <a href="#" style="
-          color: #333;
-          font-size: 18px;
-          width: 240px;
-          font-weight: 500;
-          ">${e.features[0].properties.tendiemdl}</a>
-                  <p style="
-          font-size: 11px;
-          color: #333;
-          font-weight: 400;
-          ">${e.features[0].properties.nguon}</p>
-                  <p style="
-          width: 240px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          -webkit-line-clamp: 3;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          font-size: 13px;
-          line-height: 1.6;
-          color: #333;
-          ">${e.features[0].properties.thongtin}</p>
-              </div>
-          </div>`;
+      map.on("click", `tuyen_dl`, (e) => {
+        console.log(e);
+        // const coordinates = e.features[0].geometry.coordinates.slice();
+        // const html = `<div>
 
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
+        //   <div style="
+        //       padding: 20px;
+        //   ">
+        //           <p style="
+        //   color: #d32f2f;
+        //   font-size: 11px;
+        //   text-transform: uppercase;
+        //   ">${e.features[0].properties.phanloai}</p>
+        //           <a href="#" style="
+        //   color: #333;
+        //   font-size: 18px;
+        //   width: 240px;
+        //   font-weight: 500;
+        //   ">${e.features[0].properties.tendiemdl}</a>
+        //           <p style="
+        //   font-size: 11px;
+        //   color: #333;
+        //   font-weight: 400;
+        //   ">${e.features[0].properties.nguon}</p>
+        //           <p style="
+        //   width: 240px;
+        //   overflow: hidden;
+        //   text-overflow: ellipsis;
+        //   -webkit-line-clamp: 3;
+        //   display: -webkit-box;
+        //   -webkit-box-orient: vertical;
+        //   font-size: 13px;
+        //   line-height: 1.6;
+        //   color: #333;
+        //   ">${e.features[0].properties.thongtin}</p>
+        //       </div>
+        //   </div>`;
 
-        map.flyTo({
-          center: e.features[0].geometry.coordinates,
-          essential: true,
-          duration: 1000,
-        });
+        // while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        //   coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        // }
 
-        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+        // map.flyTo({
+        //   center: e.features[0].geometry.coordinates,
+        //   essential: true,
+        //   duration: 1000,
+        // });
+
+        // new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
       });
-      map.on("mouseenter", `chua`, () => {
+      map.on("mouseenter", `tuyen_dl`, () => {
         map.getCanvas().style.cursor = "pointer";
       });
-      map.on("mouseleave", `chua`, () => {
-        map.getCanvas().style.cursor = "";
-      });
-
-      map.loadImage(
-        "https://cdn-icons-png.flaticon.com/128/3660/3660590.png",
-        (error, image) => {
-          if (error) throw error;
-          map.addImage(`ditichlichsu`, image);
-        }
-      );
-      map.addSource("ditichlichsu", {
-        type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_vanhoa?where=and phanloai like 'Di tích lịch sử'`,
-      });
-      map.addLayer({
-        id: `ditichlichsu`,
-        type: "symbol",
-        source: "ditichlichsu",
-        layout: {
-          "icon-image": `ditichlichsu`,
-          // "icon-allow-overlap": true,
-          "icon-size": 0.2,
-          "icon-offset": [0, -17],
-          "text-field": ["get", "tendiemdl"],
-          "text-size": 11,
-          "text-offset": [0, 2],
-        },
-        paint: {
-          "text-color": "#004eff",
-          "text-halo-color": "#fff",
-          "text-halo-width": 2,
-        },
-      });
-      map.on("click", `ditichlichsu`, (e) => {
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        const html = `<div>
-        
-          <div style="
-              padding: 20px;
-          ">
-                  <p style="
-          color: #d32f2f;
-          font-size: 11px;
-          text-transform: uppercase;
-          ">${e.features[0].properties.phanloai}</p>
-                  <a href="#" style="
-          color: #333;
-          font-size: 18px;
-          width: 240px;
-          font-weight: 500;
-          ">${e.features[0].properties.tendiemdl}</a>
-                  <p style="
-          font-size: 11px;
-          color: #333;
-          font-weight: 400;
-          ">${e.features[0].properties.nguon}</p>
-                  <p style="
-          width: 240px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          -webkit-line-clamp: 3;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          font-size: 13px;
-          line-height: 1.6;
-          color: #333;
-          ">${e.features[0].properties.thongtin}</p>
-              </div>
-          </div>`;
-
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        map.flyTo({
-          center: e.features[0].geometry.coordinates,
-          essential: true,
-          duration: 1000,
-        });
-
-        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
-      });
-      map.on("mouseenter", `ditichlichsu`, () => {
-        map.getCanvas().style.cursor = "pointer";
-      });
-      map.on("mouseleave", `ditichlichsu`, () => {
-        map.getCanvas().style.cursor = "";
-      });
-
-      map.loadImage(
-        "https://cdn-icons-png.flaticon.com/128/4926/4926642.png",
-        (error, image) => {
-          if (error) throw error;
-          map.addImage(`tuongdai`, image);
-        }
-      );
-      map.addSource("tuongdai", {
-        type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_vanhoa?where=and phanloai like 'Tượng đài'`,
-      });
-      map.addLayer({
-        id: `tuongdai`,
-        type: "symbol",
-        source: "tuongdai",
-        layout: {
-          "icon-image": `tuongdai`,
-          // "icon-allow-overlap": true,
-          "icon-size": 0.2,
-          "icon-offset": [0, -17],
-          "text-field": ["get", "tendiemdl"],
-          "text-size": 11,
-          "text-offset": [0, 2],
-        },
-        paint: {
-          "text-color": "#004eff",
-          "text-halo-color": "#fff",
-          "text-halo-width": 2,
-        },
-      });
-      map.on("click", `tuongdai`, (e) => {
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        const html = `<div>
-        
-          <div style="
-              padding: 20px;
-          ">
-                  <p style="
-          color: #d32f2f;
-          font-size: 11px;
-          text-transform: uppercase;
-          ">${e.features[0].properties.phanloai}</p>
-                  <a href="#" style="
-          color: #333;
-          font-size: 18px;
-          width: 240px;
-          font-weight: 500;
-          ">${e.features[0].properties.tendiemdl}</a>
-                  <p style="
-          font-size: 11px;
-          color: #333;
-          font-weight: 400;
-          ">${e.features[0].properties.nguon}</p>
-                  <p style="
-          width: 240px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          -webkit-line-clamp: 3;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          font-size: 13px;
-          line-height: 1.6;
-          color: #333;
-          ">${e.features[0].properties.thongtin}</p>
-              </div>
-          </div>`;
-
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        map.flyTo({
-          center: e.features[0].geometry.coordinates,
-          essential: true,
-          duration: 1000,
-        });
-
-        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
-      });
-      map.on("mouseenter", `tuongdai`, () => {
-        map.getCanvas().style.cursor = "pointer";
-      });
-      map.on("mouseleave", `tuongdai`, () => {
-        map.getCanvas().style.cursor = "";
-      });
-
-      map.loadImage(
-        "https://cdn-icons-png.flaticon.com/128/3660/3660499.png",
-        (error, image) => {
-          if (error) throw error;
-          map.addImage(`khac`, image);
-        }
-      );
-      map.addSource("khac", {
-        type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_vanhoa?where=and phanloai like 'Khác'`,
-      });
-      map.addLayer({
-        id: `khac`,
-        type: "symbol",
-        source: "khac",
-        layout: {
-          "icon-image": `khac`,
-          // "icon-allow-overlap": true,
-          "icon-size": 0.2,
-          "icon-offset": [0, -17],
-          "text-field": ["get", "tendiemdl"],
-          "text-size": 11,
-          "text-offset": [0, 2],
-        },
-        paint: {
-          "text-color": "#004eff",
-          "text-halo-color": "#fff",
-          "text-halo-width": 2,
-        },
-      });
-      map.on("click", `khac`, (e) => {
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        const html = `<div>
-        
-          <div style="
-              padding: 20px;
-          ">
-                  <p style="
-          color: #d32f2f;
-          font-size: 11px;
-          text-transform: uppercase;
-          ">${e.features[0].properties.phanloai}</p>
-                  <a href="#" style="
-          color: #333;
-          font-size: 18px;
-          width: 240px;
-          font-weight: 500;
-          ">${e.features[0].properties.tendiemdl}</a>
-                  <p style="
-          font-size: 11px;
-          color: #333;
-          font-weight: 400;
-          ">${e.features[0].properties.nguon}</p>
-                  <p style="
-          width: 240px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          -webkit-line-clamp: 3;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          font-size: 13px;
-          line-height: 1.6;
-          color: #333;
-          ">${e.features[0].properties.thongtin}</p>
-              </div>
-          </div>`;
-
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        map.flyTo({
-          center: e.features[0].geometry.coordinates,
-          essential: true,
-          duration: 1000,
-        });
-
-        new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
-      });
-      map.on("mouseenter", `khac`, () => {
-        map.getCanvas().style.cursor = "pointer";
-      });
-      map.on("mouseleave", `khac`, () => {
+      map.on("mouseleave", `tuyen_dl`, () => {
         map.getCanvas().style.cursor = "";
       });
     });
@@ -925,7 +652,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
                 margin: "0px 12px",
               }}
             >
-              Tài nguyên du lịch văn hoá
+              Bản đồ tuyến du lịch
             </p>
             <div
               style={{
@@ -940,9 +667,9 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    name={`chua`}
-                    id={`chua`}
-                    value={`chua`}
+                    name={`tuyen_dl`}
+                    id={`tuyen_dl`}
+                    value={`tuyen_dl`}
                     style={{
                       marginRight: 8,
                     }}
@@ -962,129 +689,12 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
                   />
                   <label
                     className="form-check-label"
-                    htmlFor={`chua`}
+                    htmlFor={`tuyen_dl`}
                     style={{
                       margin: 0,
                     }}
                   >
-                    Chùa
-                  </label>
-                </div>
-              </div>
-              <div
-                className="d-flex align-items-center"
-                style={{ padding: "8px 12px" }}
-              >
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name={`ditichlichsu`}
-                    id={`ditichlichsu`}
-                    value={`ditichlichsu`}
-                    style={{
-                      marginRight: 8,
-                    }}
-                    onClick={btDiaDiemDuLich}
-                    defaultChecked={true}
-                  />
-                  <img
-                    style={{
-                      width: 25,
-                      height: 25,
-                      marginRight: 8,
-                    }}
-                    src={
-                      "https://cdn-icons-png.flaticon.com/128/3660/3660590.png"
-                    }
-                    alt=""
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor={`ditichlichsu`}
-                    style={{
-                      margin: 0,
-                    }}
-                  >
-                    Di tích lịch sử
-                  </label>
-                </div>
-              </div>
-              <div
-                className="d-flex align-items-center"
-                style={{ padding: "8px 12px" }}
-              >
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name={`tuongdai`}
-                    id={`tuongdai`}
-                    value={`tuongdai`}
-                    style={{
-                      marginRight: 8,
-                    }}
-                    onClick={btDiaDiemDuLich}
-                    defaultChecked={true}
-                  />
-                  <img
-                    style={{
-                      width: 25,
-                      height: 25,
-                      marginRight: 8,
-                    }}
-                    src={
-                      "https://cdn-icons-png.flaticon.com/128/4926/4926642.png"
-                    }
-                    alt=""
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor={`tuongdai`}
-                    style={{
-                      margin: 0,
-                    }}
-                  >
-                    Tượng đài
-                  </label>
-                </div>
-              </div>
-              <div
-                className="d-flex align-items-center"
-                style={{ padding: "8px 12px" }}
-              >
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name={`khac`}
-                    id={`khac`}
-                    value={`khac`}
-                    style={{
-                      marginRight: 8,
-                    }}
-                    onClick={btDiaDiemDuLich}
-                    defaultChecked={true}
-                  />
-                  <img
-                    style={{
-                      width: 25,
-                      height: 25,
-                      marginRight: 8,
-                    }}
-                    src={
-                      "https://cdn-icons-png.flaticon.com/128/3660/3660499.png"
-                    }
-                    alt=""
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor={`khac`}
-                    style={{
-                      margin: 0,
-                    }}
-                  >
-                    Khác
+                    Tuyến du lịch
                   </label>
                 </div>
               </div>
@@ -2030,4 +1640,4 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
   );
 };
 
-export default BanDoTaiNguyenDuLichVanHoa;
+export default BanDoAnhVeTinh;

@@ -500,7 +500,9 @@ const ExtraComponent = () => {
             <img src="${
               e.features[0].properties.hinhAnh.indexOf("https") != -1
                 ? e.features[0].properties.hinhAnh
-                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                ? e.features[0].properties.hinhAnh
+                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
             }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
@@ -600,7 +602,9 @@ const ExtraComponent = () => {
             <img src="${
               e.features[0].properties.hinhAnh.indexOf("https") != -1
                 ? e.features[0].properties.hinhAnh
-                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                ? e.features[0].properties.hinhAnh
+                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
             }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
@@ -700,7 +704,9 @@ const ExtraComponent = () => {
             <img src="${
               e.features[0].properties.hinhAnh.indexOf("https") != -1
                 ? e.features[0].properties.hinhAnh
-                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                ? e.features[0].properties.hinhAnh
+                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
             }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
@@ -800,7 +806,9 @@ const ExtraComponent = () => {
             <img src="${
               e.features[0].properties.hinhAnh.indexOf("https") != -1
                 ? e.features[0].properties.hinhAnh
-                : `http://14.248.94.155:9022/${e.features[0].properties.hinhAnh}`
+                : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                ? e.features[0].properties.hinhAnh
+                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
             }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
@@ -976,7 +984,9 @@ const ExtraComponent = () => {
               <img src="${
                 e.properties.hinhAnh.indexOf("https") != -1
                   ? e.properties.hinhAnh
-                  : `http://14.248.94.155:9022/${e.properties.hinhAnh}`
+                  : e.properties.hinhAnh.indexOf("http") != -1
+                  ? e.properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
