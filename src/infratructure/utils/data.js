@@ -203,7 +203,14 @@ export const translations = {
     eatery: "Eatery",
     cinema: "Cinema",
     domesticCirculationCompany: "Domestic circulation company",
-    otherAccommodationFacilities: "Other accommodation facilities"
+    otherAccommodationFacilities: "Other accommodation facilities",
+    satelliteImage: "Satellite image",
+    tourismFacilities: "Tourism facilities",
+    naturalTourismResources: "Natural tourism resources",
+    culturalTourismResources: "Cultural tourism resources",
+    touristFlow: "Tourist flow",
+    touristFlowChart: "Tourist flow chart",
+
   },
   vi: {
     homePage: "Trang chủ",
@@ -401,7 +408,13 @@ export const translations = {
     eatery: "Quán ăn",
     cinema: "Rạp chiếu phim",
     domesticCirculationCompany: "Cty lưu hành nội địa",
-    otherAccommodationFacilities: "Cơ sở lưu trú khác"
+    otherAccommodationFacilities: "Cơ sở lưu trú khác",
+    satelliteImage: "Ảnh vệ tinh",
+    tourismFacilities: "Cơ sở vật chất du lịch",
+    naturalTourismResources: "Tài nguyên du lịch tự nhiên",
+    culturalTourismResources: "Tài nguyên du lịch văn hoá",
+    touristFlow: "Luồng khách du lịch",
+    touristFlowChart: "Biểu đồ luồng khách du lịch",
   },
   // Thêm các ngôn ngữ khác nếu cần
 };

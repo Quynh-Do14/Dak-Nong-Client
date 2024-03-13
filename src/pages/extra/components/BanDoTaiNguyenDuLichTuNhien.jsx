@@ -1354,7 +1354,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
                 margin: "0px 12px",
               }}
             >
-              Tài nguyên du lịch tự nhiên
+              {translate("naturalTourismResources")}
             </p>
             <div
               style={{

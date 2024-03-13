@@ -359,13 +359,12 @@ const BanDoAnhVeTinh = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${
-                e.properties.hinhAnh.indexOf("https") != -1
-                  ? e.properties.hinhAnh
-                  : e.properties.hinhAnh.indexOf("http") != -1
-                  ? e.properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.properties.hinhAnh.indexOf("https") != -1
+        ? e.properties.hinhAnh
+        : e.properties.hinhAnh.indexOf("http") != -1
+          ? e.properties.hinhAnh
+          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+      }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -600,7 +599,7 @@ const BanDoAnhVeTinh = () => {
                 margin: "0px 12px",
               }}
             >
-              Ảnh vệ tinh
+              {translate("satelliteImage")}
             </p>
             <div
               style={{
@@ -642,7 +641,7 @@ const BanDoAnhVeTinh = () => {
                       margin: 0,
                     }}
                   >
-                    Ảnh vệ tinh
+                    {translate("satelliteImage")}
                   </label>
                 </div>
               </div>

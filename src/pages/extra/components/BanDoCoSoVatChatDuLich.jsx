@@ -1612,7 +1612,7 @@ const BanDoCoSoVatChatDuLich = () => {
                 margin: "0px 12px",
               }}
             >
-              Cơ sở vật chất du lịch
+              {translate("tourismFacilities")}
             </p>
             <div
               style={{
