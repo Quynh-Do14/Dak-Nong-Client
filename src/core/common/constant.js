@@ -73,17 +73,17 @@ export default class Constants {
           {
             id: 4,
             label: "dakNongProvinceTouristRouteMap",
-            link: ROUTE_PATH.LAYOUT_MAP,
+            link: `/bandotuyendulich`,
           },
           {
             id: 5,
             label: "naturalTourismResourcesMapOfDakNongProvince",
-            link: ROUTE_PATH.LAYOUT_MAP,
+            link: `/bandotainguyendulichtunhien`,
           },
           {
             id: 6,
             label: "culturalTourismResourcesMapOfDakNongProvince",
-            link: ROUTE_PATH.LAYOUT_MAP,
+            link: `/bandotainguyendulichvanhoa`,
           },
           {
             id: 7,
