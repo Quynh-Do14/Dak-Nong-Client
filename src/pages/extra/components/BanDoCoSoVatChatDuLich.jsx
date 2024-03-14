@@ -135,7 +135,16 @@ const BanDoCoSoVatChatDuLich = () => {
   };
 
   const fecthData = async (style = dsStyleBanDo[0]) => {
-    // document.getElementById("map").scrollIntoView()
+    try {
+      const res = await api.getCuaTao(
+        `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point`
+      );
+      if (res.features.length > 0) {
+        setDsDiemDuLich(res);
+      }
+    } catch (error) {
+      console.log("error res", error);
+    }
     navigator.geolocation.getCurrentPosition(
       (e) => {
         console.log([e.coords.longitude, e.coords.latitude]);
@@ -1353,8 +1362,8 @@ const BanDoCoSoVatChatDuLich = () => {
       } else {
         dsDiaDiemSearch = dsDiaDiem.filter(
           (v) =>
-            removeAccents(v.properties.tenDiaDiem.toLowerCase()).indexOf(
-              removeAccents(e.target.value)
+            removeAccents(v.properties.tendaydu.toLowerCase()).indexOf(
+              removeAccents(e.target.value.toLowerCase())
             ) != -1
         );
       }
@@ -1372,12 +1381,6 @@ const BanDoCoSoVatChatDuLich = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${e.properties.hinhAnh.indexOf("https") != -1
-        ? e.properties.hinhAnh
-        : e.properties.hinhAnh.indexOf("http") != -1
-          ? e.properties.hinhAnh
-          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-      }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -1385,18 +1388,18 @@ const BanDoCoSoVatChatDuLich = () => {
           color: #d32f2f;
           font-size: 11px;
           text-transform: uppercase;
-      ">${e.properties.tenDanhMuc}</p>
-      <a href="/tour-view?${e.properties.idDiaDiem}" style="
+      ">${e.properties.phanloai}</p>
+      <a href="#" style="
           color: #333;
           font-size: 18px;
           width: 240px;
           font-weight: 500;
-      ">${e.properties.tenDiaDiem}</a>
+      ">${e.properties.tendaydu}</a>
                   <p style="
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.properties.gioMoCua} - ${e.properties.gioDongCua}</p>
+      ">${e.properties.info}</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -1407,7 +1410,7 @@ const BanDoCoSoVatChatDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-      ">${e.properties.moTa}</p>
+      ">${e.properties.ghichu}</p>
               </div>
           </div>`;
     map.flyTo({
@@ -2196,7 +2199,7 @@ const BanDoCoSoVatChatDuLich = () => {
           </div>
         )}
 
-        {/* <div
+        <div
           style={{
             position: "absolute",
             top: 12,
@@ -2218,7 +2221,7 @@ const BanDoCoSoVatChatDuLich = () => {
               {renderDropdownSearch()}
             </button>
             <ul className="dropdown-menu">
-              {selectSearch != "DIEMDULICH" && (
+              {/* {selectSearch != "DIEMDULICH" && (
                 <li onClick={() => setSelectSearch("DIEMDULICH")}>
                   <a
                     className="dropdown-item"
@@ -2322,7 +2325,7 @@ const BanDoCoSoVatChatDuLich = () => {
                     </a>
                   </li>
                 </>
-              )}
+              )} */}
             </ul>
             <input
               type={selectSearch == "KHOANGCACH" ? "number" : "text"}
@@ -2388,7 +2391,7 @@ const BanDoCoSoVatChatDuLich = () => {
                         fontWeight: "bold",
                       }}
                     >
-                      {v.properties.tenDiaDiem}
+                      {v.properties.tendaydu}
                     </p>
                     <p
                       style={{
@@ -2398,14 +2401,14 @@ const BanDoCoSoVatChatDuLich = () => {
                         marginTop: -4,
                       }}
                     >
-                      {v.properties.tenDanhMuc}
+                      {v.properties.phanloai}
                     </p>
                   </div>
                 </div>
               ))}
             </div>
           )}
-        </div> */}
+        </div>
         {isGoiYLichTrinh && (
           <div
             style={{
@@ -2645,7 +2648,7 @@ const BanDoCoSoVatChatDuLich = () => {
                         color: "#252f4a",
                       }}
                     >
-                      {translationData(v.tenDiaDiem, v.tenDiaDiemUS)}
+                      {translationData(v.tendaydu, v.tendayduUS)}
                       <br />
                       <div
                         style={{

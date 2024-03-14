@@ -135,7 +135,16 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
   };
 
   const fecthData = async (style = dsStyleBanDo[0]) => {
-    // document.getElementById("map").scrollIntoView()
+    try {
+      const res = await api.getCuaTao(
+        `http://103.130.212.145:46928/api/diaDiem/shp/dl_vanhoa`
+      );
+      if (res.features.length > 0) {
+        setDsDiemDuLich(res);
+      }
+    } catch (error) {
+      console.log("error res", error);
+    }
     navigator.geolocation.getCurrentPosition(
       (e) => {
         console.log([e.coords.longitude, e.coords.latitude]);
@@ -252,7 +261,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           // "icon-allow-overlap": true,
           "icon-size": 0.2,
           "icon-offset": [0, -17],
-          "text-field": ["get", "tendiemdl"],
+          "text-field": ["get", "cotd"],
           "text-size": 11,
           "text-offset": [0, 2],
         },
@@ -279,12 +288,12 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           font-size: 18px;
           width: 240px;
           font-weight: 500;
-          ">${e.features[0].properties.tendiemdl}</a>
+          ">${e.features[0].properties.cotd}</a>
                   <p style="
           font-size: 11px;
           color: #333;
           font-weight: 400;
-          ">${e.features[0].properties.nguon}</p>
+          ">${e.features[0].properties.phuong_tt}</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -338,7 +347,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           // "icon-allow-overlap": true,
           "icon-size": 0.2,
           "icon-offset": [0, -17],
-          "text-field": ["get", "tendiemdl"],
+          "text-field": ["get", "cotd"],
           "text-size": 11,
           "text-offset": [0, 2],
         },
@@ -365,12 +374,12 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           font-size: 18px;
           width: 240px;
           font-weight: 500;
-          ">${e.features[0].properties.tendiemdl}</a>
+          ">${e.features[0].properties.cotd}</a>
                   <p style="
           font-size: 11px;
           color: #333;
           font-weight: 400;
-          ">${e.features[0].properties.nguon}</p>
+          ">${e.features[0].properties.phuong_tt}</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -424,7 +433,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           // "icon-allow-overlap": true,
           "icon-size": 0.2,
           "icon-offset": [0, -17],
-          "text-field": ["get", "tendiemdl"],
+          "text-field": ["get", "cotd"],
           "text-size": 11,
           "text-offset": [0, 2],
         },
@@ -451,12 +460,12 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           font-size: 18px;
           width: 240px;
           font-weight: 500;
-          ">${e.features[0].properties.tendiemdl}</a>
+          ">${e.features[0].properties.cotd}</a>
                   <p style="
           font-size: 11px;
           color: #333;
           font-weight: 400;
-          ">${e.features[0].properties.nguon}</p>
+          ">${e.features[0].properties.phuong_tt}</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -510,7 +519,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           // "icon-allow-overlap": true,
           "icon-size": 0.2,
           "icon-offset": [0, -17],
-          "text-field": ["get", "tendiemdl"],
+          "text-field": ["get", "cotd"],
           "text-size": 11,
           "text-offset": [0, 2],
         },
@@ -537,12 +546,12 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           font-size: 18px;
           width: 240px;
           font-weight: 500;
-          ">${e.features[0].properties.tendiemdl}</a>
+          ">${e.features[0].properties.cotd}</a>
                   <p style="
           font-size: 11px;
           color: #333;
           font-weight: 400;
-          ">${e.features[0].properties.nguon}</p>
+          ">${e.features[0].properties.phuong_tt}</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -665,8 +674,8 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
       } else {
         dsDiaDiemSearch = dsDiaDiem.filter(
           (v) =>
-            removeAccents(v.properties.tenDiaDiem.toLowerCase()).indexOf(
-              removeAccents(e.target.value)
+            removeAccents(v.properties.cotd.toLowerCase()).indexOf(
+              removeAccents(e.target.value.toLowerCase())
             ) != -1
         );
       }
@@ -684,12 +693,6 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${e.properties.hinhAnh.indexOf("https") != -1
-        ? e.properties.hinhAnh
-        : e.properties.hinhAnh.indexOf("http") != -1
-          ? e.properties.hinhAnh
-          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-      }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -697,18 +700,18 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           color: #d32f2f;
           font-size: 11px;
           text-transform: uppercase;
-      ">${e.properties.tenDanhMuc}</p>
-      <a href="/tour-view?${e.properties.idDiaDiem}" style="
+      ">${e.properties.phanloai}</p>
+      <a href="#" style="
           color: #333;
           font-size: 18px;
           width: 240px;
           font-weight: 500;
-      ">${e.properties.tenDiaDiem}</a>
+      ">${e.properties.cotd}</a>
                   <p style="
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.properties.gioMoCua} - ${e.properties.gioDongCua}</p>
+      ">${e.properties.phuong_tt}</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -719,7 +722,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-      ">${e.properties.moTa}</p>
+      ">${e.properties.thongtin}</p>
               </div>
           </div>`;
     map.flyTo({
@@ -1196,7 +1199,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
           </div>
         )}
 
-        {/* <div
+        <div
           style={{
             position: "absolute",
             top: 12,
@@ -1218,7 +1221,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
               {renderDropdownSearch()}
             </button>
             <ul className="dropdown-menu">
-              {selectSearch != "DIEMDULICH" && (
+              {/* {selectSearch != "DIEMDULICH" && (
                 <li onClick={() => setSelectSearch("DIEMDULICH")}>
                   <a
                     className="dropdown-item"
@@ -1322,7 +1325,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
                     </a>
                   </li>
                 </>
-              )}
+              )} */}
             </ul>
             <input
               type={selectSearch == "KHOANGCACH" ? "number" : "text"}
@@ -1388,7 +1391,7 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
                         fontWeight: "bold",
                       }}
                     >
-                      {v.properties.tenDiaDiem}
+                      {v.properties.cotd}
                     </p>
                     <p
                       style={{
@@ -1398,14 +1401,14 @@ const BanDoTaiNguyenDuLichVanHoa = () => {
                         marginTop: -4,
                       }}
                     >
-                      {v.properties.tenDanhMuc}
+                      {v.properties.phanloai}
                     </p>
                   </div>
                 </div>
               ))}
             </div>
           )}
-        </div> */}
+        </div>
         {isGoiYLichTrinh && (
           <div
             style={{

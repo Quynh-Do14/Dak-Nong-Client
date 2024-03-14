@@ -952,7 +952,6 @@ const ExtraComponent = () => {
       }
       var dsDiaDiemSearch = [];
       if (selectSearch == "KHOANGCACH") {
-        console.log("dsDiaDiem", dsDiaDiem);
         dsDiaDiemSearch = filterByDistance(
           dsDiaDiem,
           gps[1],
@@ -963,7 +962,7 @@ const ExtraComponent = () => {
         dsDiaDiemSearch = dsDiaDiem.filter(
           (v) =>
             removeAccents(v.properties.tenDiaDiem.toLowerCase()).indexOf(
-              removeAccents(e.target.value)
+              removeAccents(e.target.value.toLowerCase())
             ) != -1
         );
       }

@@ -136,7 +136,17 @@ const BanDoLuongKhachDuLich = () => {
   };
 
   const fecthData = async (style = dsStyleBanDo[0]) => {
-    // document.getElementById("map").scrollIntoView()
+    try {
+      const res = await api.getCuaTao(
+        `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong`
+      );
+      if (res.features.length > 0) {
+        setDsDiemDuLich(res);
+      }
+    } catch (error) {
+      console.log("error res", error);
+    }
+
     navigator.geolocation.getCurrentPosition(
       (e) => {
         console.log([e.coords.longitude, e.coords.latitude]);
@@ -336,7 +346,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -422,7 +432,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -508,7 +518,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -594,7 +604,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -680,7 +690,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -766,7 +776,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -852,7 +862,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -938,7 +948,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -1024,7 +1034,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -1110,7 +1120,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -1196,7 +1206,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -1282,7 +1292,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -1368,7 +1378,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -1454,7 +1464,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-          ">${e.features[0].properties.ghichukhac}</p>
+          ">${e.features[0].properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
 
@@ -1572,8 +1582,8 @@ const BanDoLuongKhachDuLich = () => {
       } else {
         dsDiaDiemSearch = dsDiaDiem.filter(
           (v) =>
-            removeAccents(v.properties.tenDiaDiem.toLowerCase()).indexOf(
-              removeAccents(e.target.value)
+            removeAccents(v.properties.tendaydu.toLowerCase()).indexOf(
+              removeAccents(e.target.value.toLowerCase())
             ) != -1
         );
       }
@@ -1591,13 +1601,6 @@ const BanDoLuongKhachDuLich = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${
-                e.properties.hinhAnh.indexOf("https") != -1
-                  ? e.properties.hinhAnh
-                  : e.properties.hinhAnh.indexOf("http") != -1
-                  ? e.properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -1605,18 +1608,18 @@ const BanDoLuongKhachDuLich = () => {
           color: #d32f2f;
           font-size: 11px;
           text-transform: uppercase;
-      ">${e.properties.tenDanhMuc}</p>
-      <a href="/tour-view?${e.properties.idDiaDiem}" style="
+      ">${e.properties.phanloai}</p>
+      <a href="#" style="
           color: #333;
           font-size: 18px;
           width: 240px;
           font-weight: 500;
-      ">${e.properties.tenDiaDiem}</a>
+      ">${e.properties.tenngan}</a>
                   <p style="
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.properties.gioMoCua} - ${e.properties.gioDongCua}</p>
+      ">${e.properties.tendaydu}</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -1627,7 +1630,7 @@ const BanDoLuongKhachDuLich = () => {
           font-size: 13px;
           line-height: 1.6;
           color: #333;
-      ">${e.properties.moTa}</p>
+      ">${e.properties.ghichukhac ?? ''}</p>
               </div>
           </div>`;
     map.flyTo({
@@ -1776,99 +1779,7 @@ const BanDoLuongKhachDuLich = () => {
         }}
       >
         <div id="map" ref={mapContainer}></div>
-        {isBieuDo && (
-          <div
-            style={{
-              backgroundColor: "#fff",
-              padding: 4,
-              position: "absolute",
-              top: 12,
-              right: 50,
-              boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
-              width: 380,
-              height: "calc(100vh - 104px - 180px)",
-              overflowY: "scroll",
-              paddingBottom: 12,
-            }}
-          >
-            <div
-              className="d-flex flex-row justify-content-between"
-              style={{
-                marginBottom: 12,
-              }}
-            >
-              <p
-                style={{
-                  fontSize: 15,
-                  fontWeight: "bold",
-                  padding: 8,
-                  color: "#094174",
-                  textAlign: "center",
-                  borderBottom: "1px solid #ccc",
-                  margin: "0px 12px",
-                }}
-              >
-                {translate("touristFlowChart")}
-              </p>
-              <button
-                type="button"
-                // className="close"
-                aria-label="Close"
-                onClick={() => {
-                  setIsBieuDo(false);
-                }}
-                style={{
-                  padding: "4px 16px",
-                }}
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div
-              style={{
-                paddingLeft: 20,
-              }}
-            >
-              <div
-                className="d-flex align-items-center"
-                style={{ padding: "8px 12px", flexWrap: "wrap" }}
-              >
-                <img
-                  src="http://103.130.212.145:46928/api/public/bieudo/doanhthu.png"
-                  alt=""
-                  style={{
-                    maxWidth: "100%",
-                    marginBottom: 20,
-                  }}
-                />
-                <img
-                  src="http://103.130.212.145:46928/api/public/bieudo/khachnoidia.png"
-                  alt=""
-                  style={{
-                    maxWidth: "100%",
-                    marginBottom: 20,
-                  }}
-                />
-                <img
-                  src="http://103.130.212.145:46928/api/public/bieudo/khachquocte.png"
-                  alt=""
-                  style={{
-                    maxWidth: "100%",
-                    marginBottom: 20,
-                  }}
-                />
-                <img
-                  src="http://103.130.212.145:46928/api/public/bieudo/nhanluc.png"
-                  alt=""
-                  style={{
-                    maxWidth: "100%",
-                    marginBottom: 20,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
+
         {isLopBanDo && (
           <div
             style={{
@@ -2700,7 +2611,7 @@ const BanDoLuongKhachDuLich = () => {
           </div>
         )}
 
-        {/* <div
+        <div
           style={{
             position: "absolute",
             top: 12,
@@ -2722,7 +2633,7 @@ const BanDoLuongKhachDuLich = () => {
               {renderDropdownSearch()}
             </button>
             <ul className="dropdown-menu">
-              {selectSearch != "DIEMDULICH" && (
+              {/* {selectSearch != "DIEMDULICH" && (
                 <li onClick={() => setSelectSearch("DIEMDULICH")}>
                   <a
                     className="dropdown-item"
@@ -2826,7 +2737,7 @@ const BanDoLuongKhachDuLich = () => {
                     </a>
                   </li>
                 </>
-              )}
+              )} */}
             </ul>
             <input
               type={selectSearch == "KHOANGCACH" ? "number" : "text"}
@@ -2892,7 +2803,7 @@ const BanDoLuongKhachDuLich = () => {
                         fontWeight: "bold",
                       }}
                     >
-                      {v.properties.tenDiaDiem}
+                      {v.properties.tendaydu}
                     </p>
                     <p
                       style={{
@@ -2902,14 +2813,107 @@ const BanDoLuongKhachDuLich = () => {
                         marginTop: -4,
                       }}
                     >
-                      {v.properties.tenDanhMuc}
+                      {v.properties.phanloai}
                     </p>
                   </div>
                 </div>
               ))}
             </div>
           )}
-        </div> */}
+        </div>
+        {isBieuDo && (
+          <div
+            style={{
+              backgroundColor: "#fff",
+              padding: 4,
+              position: "absolute",
+              top: 12,
+              right: 50,
+              boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
+              width: 380,
+              height: "calc(100vh - 104px - 180px)",
+              overflowY: "scroll",
+              paddingBottom: 12,
+            }}
+          >
+            <div
+              className="d-flex flex-row justify-content-between"
+              style={{
+                marginBottom: 12,
+              }}
+            >
+              <p
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  padding: 8,
+                  color: "#094174",
+                  textAlign: "center",
+                  borderBottom: "1px solid #ccc",
+                  margin: "0px 12px",
+                }}
+              >
+                {translate("touristFlowChart")}
+              </p>
+              <button
+                type="button"
+                // className="close"
+                aria-label="Close"
+                onClick={() => {
+                  setIsBieuDo(false);
+                }}
+                style={{
+                  padding: "4px 16px",
+                }}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px", flexWrap: "wrap" }}
+              >
+                <img
+                  src="http://103.130.212.145:46928/api/public/bieudo/doanhthu.png"
+                  alt=""
+                  style={{
+                    maxWidth: "100%",
+                    marginBottom: 20,
+                  }}
+                />
+                <img
+                  src="http://103.130.212.145:46928/api/public/bieudo/khachnoidia.png"
+                  alt=""
+                  style={{
+                    maxWidth: "100%",
+                    marginBottom: 20,
+                  }}
+                />
+                <img
+                  src="http://103.130.212.145:46928/api/public/bieudo/khachquocte.png"
+                  alt=""
+                  style={{
+                    maxWidth: "100%",
+                    marginBottom: 20,
+                  }}
+                />
+                <img
+                  src="http://103.130.212.145:46928/api/public/bieudo/nhanluc.png"
+                  alt=""
+                  style={{
+                    maxWidth: "100%",
+                    marginBottom: 20,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
         {isGoiYLichTrinh && (
           <div
             style={{

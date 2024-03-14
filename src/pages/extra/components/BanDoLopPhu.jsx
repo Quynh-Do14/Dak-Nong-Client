@@ -393,7 +393,7 @@ const BanDoLopPhu = () => {
         dsDiaDiemSearch = dsDiaDiem.filter(
           (v) =>
             removeAccents(v.properties.tenDiaDiem.toLowerCase()).indexOf(
-              removeAccents(e.target.value)
+              removeAccents(e.target.value.toLowerCase())
             ) != -1
         );
       }

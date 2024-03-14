@@ -109,5 +109,6 @@ const api = {
     ),
   xemAnhVeTinh: (params, setLoading) =>
     request.get(`${apiLinks.API}/gee/xemAnhVeTinh?${params}`, setLoading),
+  getCuaTao: (uri) => request.getCuaTao(uri),
 };
 export default api;

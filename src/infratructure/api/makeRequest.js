@@ -2,11 +2,10 @@
 
 import { FailMessage, SuccessMessage } from "../common/toast/toastMessage";
 
-
 // import store from "../store";
 const request = {
   get: async (url, setLoading) => {
-    let token = sessionStorage.getItem('token');
+    let token = sessionStorage.getItem("token");
     console.log(url);
     setLoading(true);
     let result = await fetch(`${url}`, {
@@ -14,15 +13,35 @@ const request = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }).catch((e) => {
-    });
+    }).catch((e) => {});
     if (result.ok) {
-      setLoading(false)
+      setLoading(false);
       return result.json();
     } else {
-      setLoading(false)
+      setLoading(false);
       return {
         status: false,
+        data: {},
+        message: "connect server failed",
+      };
+    }
+  },
+
+  getCuaTao: async (url) => {
+    let result = await fetch(`${url}`, {
+      method: "GET",
+    }).catch((e) => {
+      return {
+        success: false,
+        data: {},
+        message: "connect server failed",
+      };
+    });
+    if (result.ok) {
+      return result.json();
+    } else {
+      return {
+        success: false,
         data: {},
         message: "connect server failed",
       };
@@ -55,11 +74,11 @@ const request = {
     });
   },
   postUploadFile: async (url, data, callBack, setLoading) => {
-    let token = sessionStorage.getItem('token');
+    let token = sessionStorage.getItem("token");
     let result = await fetch(url, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: data,
       redirect: "follow",
@@ -67,14 +86,14 @@ const request = {
       console.log(e);
     });
     console.log(result);
-    setLoading(true)
+    setLoading(true);
     if (result.ok) {
       // SuccessMessage("Upload dữ liệu thành công", "Dữ liệu đã được upload thành công")
-      setLoading(false)
-      callBack()
+      setLoading(false);
+      callBack();
       return result.json();
     } else {
-      setLoading(false)
+      setLoading(false);
       // FailMessage("Upload dữ liệu thất bại", "Dữ liệu đã được Upload thất bại");
       return {
         status: false,
@@ -84,13 +103,12 @@ const request = {
     }
   },
 
-
   putUploadFile: async (url, data, callBack, setLoading) => {
-    let token = sessionStorage.getItem('token');
+    let token = sessionStorage.getItem("token");
     let result = await fetch(url, {
       method: "PUT",
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: data,
       redirect: "follow",
@@ -98,14 +116,14 @@ const request = {
       console.log(e);
     });
     console.log(result);
-    setLoading(true)
+    setLoading(true);
     if (result.ok) {
       // SuccessMessage("Upload dữ liệu thành công", "Dữ liệu đã được upload thành công")
-      setLoading(false)
-      callBack()
+      setLoading(false);
+      callBack();
       return result.json();
     } else {
-      setLoading(false)
+      setLoading(false);
       // FailMessage("Upload dữ liệu thất bại", "Dữ liệu đã được Upload thất bại");
       return {
         status: false,
@@ -117,12 +135,12 @@ const request = {
 
   post: async (url, data, callBack, setLoading) => {
     // console.log(url, data);
-    let token = sessionStorage.getItem('token');
+    let token = sessionStorage.getItem("token");
     let result = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
       // redirect: 'follow',
@@ -131,12 +149,15 @@ const request = {
     });
     setLoading(true);
     if (result.ok) {
-      SuccessMessage(`Đánh giá thành công`, `Cảm ơn bạn đánh giá địa điểm này`)
+      SuccessMessage(`Đánh giá thành công`, `Cảm ơn bạn đánh giá địa điểm này`);
       setLoading(false);
-      callBack()
+      callBack();
       return result.json();
     } else {
-      FailMessage(`Đánh giá thất bại`, "Đánh giá địa điểm này không thành công");
+      FailMessage(
+        `Đánh giá thất bại`,
+        "Đánh giá địa điểm này không thành công"
+      );
       setLoading(false);
       return {
         status: false,
@@ -148,19 +169,19 @@ const request = {
 
   put: async (url, data, callBack, setLoading) => {
     // console.log(url, data);
-    let token = sessionStorage.getItem('token');
+    let token = sessionStorage.getItem("token");
     let result = await fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
       // redirect: 'follow',
     }).catch((e) => {
       console.log(e);
     });
-    setLoading(true)
+    setLoading(true);
     if (result.ok) {
       // SuccessMessage("Cập nhật dữ liệu thành công", "Dữ liệu đã được cập nhật thành công")
       callBack();
@@ -179,12 +200,12 @@ const request = {
 
   delete: async (url, data, callBack, setLoading) => {
     // console.log(url, data);
-    let token = sessionStorage.getItem('token');
+    let token = sessionStorage.getItem("token");
     let result = await fetch(url, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
       // redirect: 'follow',
@@ -195,7 +216,7 @@ const request = {
     if (result.ok) {
       // SuccessMessage("Xóa dữ liệu thành công", "Dữ liệu đã được xóa thành công")
       setLoading(false);
-      callBack()
+      callBack();
       return result.json();
     } else {
       // FailMessage("Xóa dữ liệu thất bại", "Dữ liệu đã được xóa thất bại");
@@ -236,7 +257,7 @@ const request = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": sessionStorage.getItem("token")
+        Authorization: sessionStorage.getItem("token"),
       },
       body: JSON.stringify(data),
       // redirect: 'follow',
@@ -244,13 +265,13 @@ const request = {
       console.log(e);
     });
     if (result.ok) {
-      setTimeout(() => setLoading(false), 2000)
+      setTimeout(() => setLoading(false), 2000);
       SuccessMessage(`${title} thành công`, "");
-      callBack()
+      callBack();
       setLoading(false);
       return result.json();
     } else {
-      setTimeout(() => setLoading(false), 2000)
+      setTimeout(() => setLoading(false), 2000);
       FailMessage(`${title} thất bại`, "");
       setLoading(false);
       return {
@@ -260,8 +281,6 @@ const request = {
       };
     }
   },
-
 };
 
 export default request;
-
