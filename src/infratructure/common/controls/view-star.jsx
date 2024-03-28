@@ -16,7 +16,7 @@ export const ViewStarCommon = (star) => {
         );
     }
     return (
-        <ul className="ratings">
+        <ul className="d-flex">
             {stars}
             {
                 !checkStar && <li><i className="fa fa-star-half"></i></li>

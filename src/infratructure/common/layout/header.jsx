@@ -19,6 +19,7 @@ const HeaderPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [isEnglish, setIsEnglish] = useState(false);
+  const [storage, setStorage] = useState(false);
 
   const [isOpenShowDrawer, setIsOpenShowDrawer] = useState(false);
   const [swicthLanguage, setSwicthLanguage] = useState(
@@ -44,7 +45,10 @@ const HeaderPage = () => {
   const onClosePopupLogin = () => {
     setIsOpenPopupLogin(false);
   };
-  let storage = sessionStorage.getItem(Constants.TOKEN);
+  useEffect(() => {
+    let storage = sessionStorage.getItem(Constants.TOKEN);
+    setStorage(storage)
+  }, [sessionStorage.getItem(Constants.TOKEN)])
 
   const onLogout = () => {
     setLoading(true);

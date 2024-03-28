@@ -15,6 +15,10 @@ import useTranslate from "../../core/common/hook/useTranslate";
 import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
 import ListImageDestination from "./list-image";
+import Evaluate from "./evaluate";
+import LoginPopup from "../../infratructure/common/popup/login-popup";
+import RegisterPopup from "../../infratructure/common/popup/register-modal";
+import { WarningMessage } from "../../infratructure/common/toast/toastMessage";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
@@ -33,16 +37,36 @@ const TourDetail = () => {
   const [dsPhuongTien, setDsPhuongTien] = useState([]);
   const [dsDiemDichVu, setDsDiemDichVu] = useState([]);
   const [listImage, setListImage] = useState([]);
+  const [listEvaluate, setListEvaluate] = useState([]);
+  const [pagination, setPagination] = useState({});
+  const [totalItem, setTotalItem] = useState();
+  const [pageSize, setPageSize] = useState(Constants.PaginationConfigs.Size);
+  const [noiDung, setNoiDung] = useState("");
+  const [soSao, setSoSao] = useState(0)
+  const [isOpenLogin, setIsOpenLogin] = useState(false);
+  const [isOpenRegister, setIsOpenRegister] = useState(false);
 
   const [map, setMap] = useState({});
+  let storage = sessionStorage.getItem(Constants.TOKEN);
 
+  const dateTime = new Date();
+
+  const converDateTime = (date) => {
+    const dateLength = date.toString().split("").length
+    if (dateLength < 2) {
+      return `0${date}`
+    }
+    return date
+  }
+
+  const timeNow = `${converDateTime(dateTime.getFullYear())}-${converDateTime(dateTime.getMonth() + 1)}-${dateTime.getDate()}`
   const param = location.search.replace("?", "");
   const { translate } = useTranslate();
 
   const onGetDetailDiemDenAsync = async () => {
     const response = await api.getDiaDiemById(
       `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      () => {}
+      () => { }
     );
     setDetailTour(response.diaDiem);
     getAllHinhAnh(response.diaDiem);
@@ -52,6 +76,68 @@ const TourDetail = () => {
     //   setLoading
     // );
     // setDiaDiemLienQuan(responses.data.diaDiems);
+  };
+
+  const getAllEvaluate = async () => {
+    const response = await api.getAllDanhGiaDiaDiem(
+      `idDiaDiem=${param}`,
+      setLoading
+    );
+    setListEvaluate(response.data.danhGias);
+    setPagination(response.data.pagination);
+    setTotalItem(response.data.totalItems);
+  };
+
+  useEffect(() => {
+    getAllEvaluate().then((_) => { });
+  }, [pageSize]);
+
+  const showMore = (prev) => {
+    setPageSize(prev + Constants.Params.limit);
+  };
+
+  const onEvaluate = async () => {
+    if (storage) {
+      if (noiDung && soSao) {
+        api.danhGiaDiaDiem({
+          soSao: soSao,
+          noiDung: noiDung,
+          thoiGianDanhGia: timeNow,
+          idDiaDiem: Number(param)
+        },
+          () => {
+            getAllEvaluate();
+            onGetDetailDiemDenAsync()
+          },
+          setLoading,
+        )
+        setNoiDung("");
+        setSoSao(0);
+      }
+
+      else {
+        WarningMessage("Không thể đánh giá", "Vui lòng đánh giá số sao và nhập đánh giá của bạn")
+      }
+    }
+    else {
+      onOpenLogin()
+    }
+  }
+
+  const onOpenLogin = () => {
+    setIsOpenLogin(true);
+  };
+
+  const onCloseLogin = () => {
+    setIsOpenLogin(false);
+  };
+
+  const onOpenRegister = () => {
+    setIsOpenRegister(true);
+  };
+
+  const onCloseRegister = () => {
+    setIsOpenRegister(false);
   };
 
   function haversine(lat1, lon1, lat2, lon2) {
@@ -96,28 +182,28 @@ const TourDetail = () => {
   const fecthData = async () => {
     var dsDiaDiem = [];
 
-    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, () => {});
-    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(``, () => {});
-    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => {});
+    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, () => { });
+    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(``, () => { });
+    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => { });
     const resGetPhuongTienGeometry = await api.getAllDiemPhuongTienBanDo(
       ``,
-      () => {}
+      () => { }
     );
 
     const resGetDanhMucConCuaDanhMucDiaDiem = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${1}`,
-      () => {}
+      () => { }
     );
     const resGetDanhMucConCuaDanhMucLuuTru = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${2}`,
-      () => {}
+      () => { }
     );
     const resGetDanhMucConCuaDanhMucAmThuc = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${3}`,
-      () => {}
+      () => { }
     );
     const resGetDanhMucConCuaDanhMucPhuongTien =
-      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, () => {});
+      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, () => { });
 
     var dataDsDiaDiemGeoJson = { ...resGetDiaDiemGeometry };
     setDsDiemDuLich(dataDsDiaDiemGeoJson);
@@ -137,7 +223,7 @@ const TourDetail = () => {
 
     const response = await api.getDiaDiemById(
       `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      () => {}
+      () => { }
     );
 
     if (response) {
@@ -480,13 +566,12 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                      ? e.features[0].properties.hinhAnh
+                      : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -496,8 +581,7 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${
-                    e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -508,9 +592,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -591,13 +674,12 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                      ? e.features[0].properties.hinhAnh
+                      : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -607,8 +689,7 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${
-                    e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -619,9 +700,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -702,13 +782,12 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                      ? e.features[0].properties.hinhAnh
+                      : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -718,8 +797,7 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${
-                    e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -730,9 +808,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -813,13 +890,12 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${
-                e.features[0].properties.hinhAnh.indexOf("https") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                  ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
+                    ? e.features[0].properties.hinhAnh
+                    : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                      ? e.features[0].properties.hinhAnh
+                      : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -829,8 +905,7 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${
-                    e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -841,9 +916,8 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${
-                  e.features[0].properties.gioDongCua
-                }</p>
+      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
+                  }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -899,7 +973,7 @@ const TourDetail = () => {
     if (idDiaDiem.idDiaDiem) {
       const response = await api.getHinhAnhByIdDiaDiem(
         `${idDiaDiem.idDiaDiem}`,
-        () => {}
+        () => { }
       );
       setListImage(response.data);
     }
@@ -907,7 +981,7 @@ const TourDetail = () => {
 
   useEffect(() => {
     setLoading(true);
-    onGetDetailDiemDenAsync().then((_) => {});
+    onGetDetailDiemDenAsync().then((_) => { });
     fecthData();
     setTimeout(() => setLoading(false), 1000);
   }, []);
@@ -928,7 +1002,7 @@ const TourDetail = () => {
         {/* </div> */}
         <div className="container">
           <div className="row">
-            <div className="col-lg-12">
+            <div className="col-lg-8">
               <div className="package-details-left-container">
                 <div className="package-tab">
                   <nav>
@@ -937,9 +1011,8 @@ const TourDetail = () => {
                         <button
                           key={index}
                           onClick={() => setTabSelect(index)}
-                          className={`nav-link ${
-                            tabSelect == index ? "active" : ""
-                          }`}
+                          className={`nav-link ${tabSelect == index ? "active" : ""
+                            }`}
                           id="nav-home-tab"
                           type="button"
                           role="tab"
@@ -976,7 +1049,7 @@ const TourDetail = () => {
                       <div className="pkg-common-title mt-20">
                         <h4>{translate("geographicalLocation")} </h4>
                       </div>
-                      <p className="text-align-justify">
+                      <p className="text-align-justify mb-20">
                         {translationData(
                           detailTour?.viTriDiaLy,
                           detailTour?.viTriDiaLyUS
@@ -989,91 +1062,6 @@ const TourDetail = () => {
                       <p className="text-align-justify">
                         {translationData(detailTour.moTa, detailTour.moTaUS)}{" "}
                       </p>
-
-                      <div className="pkg-list-info">
-                        <ul>
-                          <li>
-                            <h6>{translate("destination")} :</h6>{" "}
-                            <span>
-                              {translationData(
-                                detailTour.tenDiaDiem,
-                                detailTour.tenDiaDiemUS
-                              )}
-                            </span>
-                          </li>
-                          <li>
-                            <h6>{translate("type")} :</h6>{" "}
-                            <span>{translate(detailTour.tenDanhMuc)}</span>
-                          </li>
-                          <li>
-                            <h6>{translate("address")} :</h6>{" "}
-                            <span>
-                              {translationData(
-                                detailTour.diaChi,
-                                detailTour.diaChiUS
-                              )}
-                            </span>
-                          </li>
-                          <li>
-                            <h6>{translate("price")} :</h6>{" "}
-                            <span>
-                              {detailTour.giaVe === Constants.FreePrice
-                                ? translationData(
-                                    detailTour.giaVe,
-                                    detailTour.giaVeUS
-                                  )
-                                : detailTour.giaVe == null
-                                ? translate("free")
-                                : `Chỉ từ: ${detailTour.giaVe}`}
-                            </span>
-                          </li>
-                          <li>
-                            <h6>{translate("openTime")} :</h6>{" "}
-                            <span>
-                              {detailTour.gioMoCua} - {detailTour.gioDongCua}
-                            </span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="pkg-info-container">
-                        <ul>
-                          <li className="d-flex align-items-center">
-                            <div className="mr-10">
-                              <i className="fa fa-star"></i>
-                            </div>
-                            <div>{detailTour.soSaoTrungBinh}</div>
-                          </li>
-                          <li className="d-flex align-items-center">
-                            <div className="mr-10">
-                              <i className="fa fa-eye"></i>
-                            </div>
-                            <div>
-                              ({detailTour.luotXem} {translate("view")}){" "}
-                            </div>
-                          </li>
-                          <li className="d-flex align-items-center">
-                            <div className="mr-10">
-                              <i className="fa fa-wifi"></i>
-                            </div>
-                            <div>Wi-fi</div>
-                          </li>
-                        </ul>
-                        <ul>
-                          <li className="d-flex align-items-center">
-                            <div className="mr-10">
-                              <i className="fa fa-gear"></i>
-                            </div>
-                            <div>{translate("serviceAttentive")} </div>
-                          </li>
-                          <li className="d-flex align-items-center">
-                            <div className="mr-10">
-                              <i className="fa fa-car"></i>
-                            </div>
-                            <div>{translate("transportation")} </div>
-                          </li>
-                        </ul>
-                      </div>
-
                       <div className="faq-accordion ">
                         <div className="accordion" id="accordionExample">
                           <div className="accordion-item">
@@ -1105,19 +1093,6 @@ const TourDetail = () => {
                           </div>
                         </div>
                       </div>
-
-                      <div
-                        style={{
-                          width: "100%",
-                          height: 500,
-                        }}
-                        ref={mapContainer}
-                      ></div>
-
-                      <RelationDestination
-                        title={translate("destinatioService")}
-                        data={dsDiemDichVu}
-                      />
                     </div>
                   ) : tabSelect == 1 ? (
                     <div>
@@ -1156,9 +1131,133 @@ const TourDetail = () => {
                 </div>
               </div>
             </div>
+
+            <div className="col-lg-4">
+              <div className="pkg-list-info">
+                <ul>
+                  <li className="flex-detail">
+                    <h6>{translate("destination")} :</h6>{" "}
+                    <span>
+                      {translationData(
+                        detailTour.tenDiaDiem,
+                        detailTour.tenDiaDiemUS
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex-detail">
+                    <h6>{translate("type")} :</h6>{" "}
+                    <span>{translate(detailTour.tenDanhMuc)}</span>
+                  </li>
+                  <li className="flex-detail">
+                    <h6>{translate("address")} :</h6>{" "}
+                    <span>
+                      {translationData(
+                        detailTour.diaChi,
+                        detailTour.diaChiUS
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex-detail">
+                    <h6>{translate("price")} :</h6>{" "}
+                    <span>
+                      {detailTour.giaVe === Constants.FreePrice
+                        ? translationData(
+                          detailTour.giaVe,
+                          detailTour.giaVeUS
+                        )
+                        : detailTour.giaVe == null
+                          ? translate("free")
+                          : `Chỉ từ: ${detailTour.giaVe}`}
+                    </span>
+                  </li>
+                  <li>
+                    <h6>{translate("openTime")} :</h6>{" "}
+                    <span>
+                      {detailTour.gioMoCua} - {detailTour.gioDongCua}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pkg-info-container">
+                <ul>
+                  <li className="d-flex align-items-center">
+                    <div className="mr-10">
+                      <i className="fa fa-star"></i>
+                    </div>
+                    <div>{Number(detailTour.soSaoTrungBinh).toFixed(2)}</div>
+                  </li>
+                  <li className="d-flex align-items-center">
+                    <div className="mr-10">
+                      <i className="fa fa-eye"></i>
+                    </div>
+                    <div>
+                      ({detailTour.luotXem} {translate("view")}){" "}
+                    </div>
+                  </li>
+                </ul>
+                <ul>
+                  <li className="d-flex align-items-center">
+                    <div className="mr-10">
+                      <i className="fa fa-wifi"></i>
+                    </div>
+                    <div>Wi-fi</div>
+                  </li>
+                  <li className="d-flex align-items-center">
+                    <div className="mr-10">
+                      <i className="fa fa-gear"></i>
+                    </div>
+                    <div>{translate("serviceAttentive")} </div>
+                  </li>
+
+                </ul>
+                <ul>
+
+                  <li className="d-flex align-items-center">
+                    <div className="mr-10">
+                      <i className="fa fa-car"></i>
+                    </div>
+                    <div>{translate("transportation")} </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
+          <div
+            style={{
+              width: "100%",
+              height: 500,
+            }}
+            ref={mapContainer}
+          ></div>
+          <RelationDestination
+            title={translate("destinatioService")}
+            data={dsDiemDichVu}
+          />
+          <Evaluate
+            listEvaluate={listEvaluate}
+            showMore={showMore}
+            soSao={soSao}
+            setSoSao={setSoSao}
+            onEvaluate={onEvaluate}
+            noiDung={noiDung}
+            setNoiDung={setNoiDung}
+          />
         </div>
       </section>
+      <LoginPopup
+        title={"Đăng nhập"}
+        visible={isOpenLogin}
+        onCancel={onCloseLogin}
+        setLoading={setLoading}
+        onOpenRegister={onOpenRegister}
+        isCurrentPage={true}
+      />
+      <RegisterPopup
+        title={"Đăng kí"}
+        visible={isOpenRegister}
+        onCancel={onCloseRegister}
+        setLoading={setLoading}
+      />
       <LoadingFullPage loading={loading} />
     </MainLayout>
   );
