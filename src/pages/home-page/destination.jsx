@@ -46,7 +46,7 @@ const Destination = ({ data = [] }) => {
                         <i className="fa fa-star"></i>
                       </div>
                       <div>
-                        {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}){" "}
+                        {Number(it.soSaoTrungBinh).toFixed(1)} ({it.luotXem} {translate("view")}){" "}
                       </div>
                     </li>
                     <li>

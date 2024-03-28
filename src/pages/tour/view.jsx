@@ -1184,7 +1184,7 @@ const TourDetail = () => {
                     <div className="mr-10">
                       <i className="fa fa-star"></i>
                     </div>
-                    <div>{Number(detailTour.soSaoTrungBinh).toFixed(2)}</div>
+                    <div>{Number(detailTour.soSaoTrungBinh).toFixed(1)}</div>
                   </li>
                   <li className="d-flex align-items-center">
                     <div className="mr-10">

@@ -4,7 +4,10 @@ import { ROUTE_PATH } from "../../core/common/appRouter";
 import MainLayout from "../../infratructure/common/layout/main-layout";
 import api from "../../infratructure/api";
 import Constants from "../../core/common/constant";
-import { showImageCommon, translationData } from "../../infratructure/utils/helper";
+import {
+  showImageCommon,
+  translationData,
+} from "../../infratructure/utils/helper";
 import PaginationCommon from "../../infratructure/common/controls/pagination";
 import LoadingFullPage from "../../infratructure/common/controls/loading";
 import SearchTour from "./search";
@@ -82,7 +85,7 @@ const TourPage = () => {
         changePage,
         searchDanhMuc,
         searchQuanHuyen
-      ).then((_) => { });
+      ).then((_) => {});
     }, Constants.DEBOUNCE_SEARCH);
   };
 
@@ -94,7 +97,7 @@ const TourPage = () => {
       changePage - 1,
       searchDanhMuc,
       searchQuanHuyen
-    ).then((_) => { });
+    ).then((_) => {});
   };
 
   const onNextPage = () => {
@@ -105,33 +108,25 @@ const TourPage = () => {
       changePage + 1,
       searchDanhMuc,
       searchQuanHuyen
-    ).then((_) => { });
+    ).then((_) => {});
   };
   useEffect(() => {
-    onSearch().then((_) => { });
-    onGetQuanHuyenAsync().then((_) => { });
+    onSearch().then((_) => {});
+    onGetQuanHuyenAsync().then((_) => {});
   }, []);
 
   const onSelectDanhMuc = (e) => {
     setSearchDanhMuc(e);
-    onSearch(
-      searchText,
-      pageSize,
-      changePage,
-      e,
-      searchQuanHuyen
-    ).then((_) => { });
+    onSearch(searchText, pageSize, changePage, e, searchQuanHuyen).then(
+      (_) => {}
+    );
   };
 
   const onSelectQuanHuyen = (e) => {
     setSearchQuanHuyen(e);
-    onSearch(
-      searchText,
-      pageSize,
-      changePage,
-      searchDanhMuc,
-      e
-    ).then((_) => { });
+    onSearch(searchText, pageSize, changePage, searchDanhMuc, e).then(
+      (_) => {}
+    );
   };
 
   return (
@@ -158,10 +153,7 @@ const TourPage = () => {
             <div className="col-lg-12">
               <div className="common-title">
                 <div className="deal-icon">
-                  <img
-                    src="assets/images/icons/doler.png"
-                    alt="doler"
-                  />
+                  <img src="assets/images/icons/doler.png" alt="doler" />
                 </div>
               </div>
             </div>
@@ -170,7 +162,10 @@ const TourPage = () => {
         <div className="container-fluid padding-common">
           <div className="row">
             {listDiaDiem.map((it, index) => (
-              <div key={index} className="pl-10 mb-30 pr-10 col-xl-3 col-lg-4 col-md-6 col-xs-12">
+              <div
+                key={index}
+                className="pl-10 mb-30 pr-10 col-xl-3 col-lg-4 col-md-6 col-xs-12"
+              >
                 <div className="deals-content ">
                   <div className="deals-image custom-image">
                     <a href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}>
@@ -192,20 +187,18 @@ const TourPage = () => {
                           <i className="fa fa-star"></i>
                         </div>
                         <div>
-                          {it.soSaoTrungBinh} ({it.luotXem} {translate("view")}){" "}
+                          {Number(it.soSaoTrungBinh).toFixed(1)} ({it.luotXem}{" "}
+                          {translate("view")}){" "}
                         </div>
                       </li>
                       <li>
                         <span>
                           {" "}
-                          {it.giaVe === Constants.FreePrice ?
-                            (translationData(it.giaVe, it.giaVeUS))
-                            :
-                            it.giaVe == null
-                              ? translate("free")
-                              : `Chỉ từ: ${it.giaVe}`
-                          }
-                          {" "}
+                          {it.giaVe === Constants.FreePrice
+                            ? translationData(it.giaVe, it.giaVeUS)
+                            : it.giaVe == null
+                            ? translate("free")
+                            : `Chỉ từ: ${it.giaVe}`}{" "}
                         </span>
                       </li>
                     </ul>
@@ -213,13 +206,11 @@ const TourPage = () => {
                       href={`${ROUTE_PATH.VIEW_TOUR}?${it.idDiaDiem}`}
                       className="deals-info-link text-truncate-origin"
                     >
-                      {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}
-                      {" "}
+                      {translationData(it.tenDiaDiem, it.tenDiaDiemUS)}{" "}
                     </a>
                     <p className="text-truncate-address-destination">
                       <i className="flaticon-map"></i>
-                      {translationData(it.diaChi, it.diaChiUS)}
-                      {" "}
+                      {translationData(it.diaChi, it.diaChiUS)}{" "}
                     </p>
                   </div>
                 </div>
@@ -233,9 +224,9 @@ const TourPage = () => {
             />
           </div>
         </div>
-      </section >
+      </section>
       <LoadingFullPage loading={loading} />
-    </MainLayout >
+    </MainLayout>
   );
 };
 
