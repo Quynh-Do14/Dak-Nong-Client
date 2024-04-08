@@ -41,7 +41,7 @@ const FooterPage = () => {
                                     </div>
                                     <div className="widget_content">
                                         <ul className="links_list clearfix text-align-justify ">
-                                            <li className=''><a >{translate("address")}: Đường 23/3, TP.Gia Nghĩa,Đắk Nông</a></li>
+                                            <li className=''><a >{translate("address")}: {translate('addressDN')}</a></li>
                                             <li className=''><a >{translate("phone")}: 02613.701166</a></li>
                                             <li className=''><a >{translate("Email")}: banbientap@daknong.gov.vn</a></li>
                                         </ul>

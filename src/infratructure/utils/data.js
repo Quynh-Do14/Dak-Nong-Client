@@ -54,7 +54,7 @@ export const translations = {
 
     restaurantSlogan: "Enjoy the culinary spaces",
     hotelSlogan: "Luxurious resting space",
-    festivalSlogan: "Những nét đẹp văn hóa của vùng đất này",
+    festivalSlogan: "The cultural beauty of this land",
     specialtySlogan: "Experience culinary culture",
 
     detail: "Information Detail",
@@ -222,6 +222,7 @@ export const translations = {
     riverStream: "River, Stream",
     touristArea: "Tourist area",
     attractiveTouristDestinationArea: "Attractive tourist destination area",
+    addressDN: "23/3 street Gia Nghia, Dak Nong",
   },
   vi: {
     homePage: "Trang chủ",
@@ -438,6 +439,8 @@ export const translations = {
     riverStream: "Sông, oSuoiosF",
     touristArea: "Khu du lịch",
     attractiveTouristDestinationArea: "Vùng điểm du lịch hấp dẫn",
+    addressDN: "Đường 23/3, TP.Gia Nghĩa,Đắk Nông",
+
   },
   // Thêm các ngôn ngữ khác nếu cần
 };
