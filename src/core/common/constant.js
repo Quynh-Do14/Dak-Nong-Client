@@ -62,7 +62,7 @@ export default class Constants {
             id: 2,
             label: "dakNongOverlayMap",
             // link: `/bandolopphu`,
-            link: `/map`,
+            link: `/bandolopphu`,
           },
           {
             id: 3,

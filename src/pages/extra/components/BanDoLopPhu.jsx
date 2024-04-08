@@ -182,6 +182,25 @@ const BanDoLopPhu = () => {
         exaggeration: 1.5,
       });
 
+      map.addSource("LC_daknong_tiff", {
+        type: "image",
+        url: "http://103.130.212.145:46928/api/public/anhvetinh/LC_daknong_tiff.gif",
+        coordinates: [
+          [107.20629162700004, 12.812316930000065],
+          [108.11636491700006, 12.812316930000065],
+          [108.11636491700006, 11.74900376100004],
+          [107.20629162700004, 11.74900376100004],
+        ],
+      });
+      map.addLayer({
+        id: "LC_daknong_tiff",
+        type: "raster",
+        source: "LC_daknong_tiff",
+        paint: {
+          "raster-fade-duration": 0,
+        },
+      });
+
       map.addSource("ranhGioiHuyen", {
         type: "geojson",
         data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
@@ -242,7 +261,7 @@ const BanDoLopPhu = () => {
         source: "tuyen_dl",
         layout: {},
         paint: {
-          "line-color": "#094174",
+          "line-color": "#f8285a",
           "line-width": 2,
         },
       });
@@ -411,12 +430,13 @@ const BanDoLopPhu = () => {
       popup[0].remove();
     }
     const html = `<div>
-              <img src="${e.properties.hinhAnh.indexOf("https") != -1
-        ? e.properties.hinhAnh
-        : e.properties.hinhAnh.indexOf("http") != -1
-          ? e.properties.hinhAnh
-          : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-      }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.properties.hinhAnh.indexOf("https") != -1
+                  ? e.properties.hinhAnh
+                  : e.properties.hinhAnh.indexOf("http") != -1
+                  ? e.properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -682,7 +702,7 @@ const BanDoLopPhu = () => {
                       marginRight: 8,
                     }}
                     src={
-                      "https://cdn-icons-png.flaticon.com/128/2322/2322127.png"
+                      "https://cdn-icons-png.flaticon.com/128/5264/5264589.png"
                     }
                     alt=""
                   />
@@ -695,6 +715,56 @@ const BanDoLopPhu = () => {
                   >
                     {translate("touristRoutes")}
                   </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`LC_daknong_tiff`}
+                    id={`LC_daknong_tiff`}
+                    value={`LC_daknong_tiff`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                    defaultChecked={true}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/128/3301/3301722.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`LC_daknong_tiff`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    {translate("satelliteImage")}
+                  </label>
+                </div>
+              </div>
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check" style={{ paddingLeft: 0 }}>
+                  <img
+                    src="http://103.130.212.145:46928/api/public/anhvetinh/z5327157684746_75715c1a873120cc3fb97a411f8f25ad.jpg"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
