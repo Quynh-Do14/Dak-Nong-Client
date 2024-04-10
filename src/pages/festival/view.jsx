@@ -153,7 +153,7 @@ const FestivalDetail = () => {
                                                     {detailFestival.uriVideo ? (
                                                         <video style={{ width: "100%" }} controls>
                                                             <source
-                                                                src={detailFestival.uriVideo}
+                                                                src={showImageCommon(detailFestival.uriVideo)}
                                                                 type="video/mp4"
                                                             />
                                                         </video>

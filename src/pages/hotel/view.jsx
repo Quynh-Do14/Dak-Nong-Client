@@ -16,7 +16,7 @@ const HotelDetail = () => {
     const [detailHotel, setDetailHotel] = useState({});
     const [tabSelect, setTabSelect] = useState(0);
     const [listImage, setListImage] = useState([]);
-    
+
     const location = useLocation()
     const param = location.search.replace("?", "");
     const { translate } = useTranslate();
@@ -153,7 +153,7 @@ const HotelDetail = () => {
                                                     {detailHotel.uriVideo ? (
                                                         <video style={{ width: "100%" }} controls>
                                                             <source
-                                                                src={detailHotel.uriVideo}
+                                                                src={showImageCommon(detailHotel.uriVideo)}
                                                                 type="video/mp4"
                                                             />
                                                         </video>

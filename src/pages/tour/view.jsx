@@ -1101,7 +1101,7 @@ const TourDetail = () => {
                           {detailTour.uriVideo ? (
                             <video style={{ width: "100%" }} controls>
                               <source
-                                src={detailTour.uriVideo}
+                                src={showImageCommon(detailTour.uriVideo)}
                                 type="video/mp4"
                               />
                             </video>

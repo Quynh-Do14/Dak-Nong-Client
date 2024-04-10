@@ -145,7 +145,7 @@ const SpecialtyDetail = () => {
                                                     {detailSpecialty.uriVideo ? (
                                                         <video style={{ width: "100%" }} controls>
                                                             <source
-                                                                src={detailSpecialty.uriVideo}
+                                                                src={showImageCommon(detailSpecialty.uriVideo)}
                                                                 type="video/mp4"
                                                             />
                                                         </video>

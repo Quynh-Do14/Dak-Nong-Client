@@ -62,8 +62,8 @@ export const convertTimeOnly = (date) => {
     } return null;
 };
 
-export const showImageCommon = (img) => {
-    return `${API}${PUBLIC}/${img}`
+export const showImageCommon = (img = "") => {
+    return img
 }
 export const convertNumber = (number) => {
     let checkStar = Number.isInteger(parseFloat(number));

@@ -153,7 +153,7 @@ const RestaurantDetail = () => {
                                                     {detailRestaurant.uriVideo ? (
                                                         <video style={{ width: "100%" }} controls>
                                                             <source
-                                                                src={detailRestaurant.uriVideo}
+                                                                src={showImageCommon(detailRestaurant.uriVideo)}
                                                                 type="video/mp4"
                                                             />
                                                         </video>
