@@ -7,7 +7,7 @@ const PaginationCommon = (props) => {
         if (pagination.limit > pagination.total) {
             setIsLastPage(true);
         }
-        else {
+        else if (pagination.limit <= pagination.total) {
             setIsLastPage(false);
         }
     }, [pagination])

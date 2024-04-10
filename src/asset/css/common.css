@@ -1,7 +1,7 @@
 /* input */
-.service-form-option input.ant-input.css-dev-only-do-not-override-2rgkd4.css-dev-only-do-not-override-2rgkd4,
+.service-form-option input.ant-input,
 .service-form-option .ant-select-selector,
-.service-form-option .ant-picker.css-dev-only-do-not-override-2rgkd4 {
+.service-form-option .ant-picker{
     height: 40px;
     width: 100%;
     padding: 0.375rem 0.75rem;
@@ -19,8 +19,8 @@
     position: relative;
 }
 
-.service-form-option.focused input.ant-input.css-dev-only-do-not-override-2rgkd4.css-dev-only-do-not-override-2rgkd4,
-.service-form-option.focused .ant-picker.css-dev-only-do-not-override-2rgkd4 {
+.service-form-option.focused input.ant-input,
+.service-form-option.focused .ant-picker{
     /* border-top: 1px solid #72b6f6;
   border-left: 1px solid #1890ff;
   border-right: 1px solid #1890ff; */
@@ -30,7 +30,7 @@
 /* input */
 
 /* select */
-.service-form-option .ant-select.css-dev-only-do-not-override-2rgkd4.ant-select-single.ant-select-show-arrow {
+.service-form-option .ant-select.ant-select-single.ant-select-show-arrow {
     height: 40px;
     border: 1px solid #fe74247d;
     /* border-top: none;
@@ -40,7 +40,7 @@
     border-radius: 5px;
 }
 
-.service-form-option.focused .ant-select.css-dev-only-do-not-override-2rgkd4.ant-select-single.ant-select-show-arrow {
+.service-form-option.focused .ant-select.ant-select-single.ant-select-show-arrow {
     border: 2px solid #1890ff !important;
 }
 

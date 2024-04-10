@@ -1170,7 +1170,7 @@ const TourDetail = () => {
                           : `Chỉ từ: ${detailTour.giaVe}`}
                     </span>
                   </li>
-                  <li>
+                  <li className="flex-detail">
                     <h6>{translate("openTime")} :</h6>{" "}
                     <span>
                       {detailTour.gioMoCua} - {detailTour.gioDongCua}
@@ -1196,19 +1196,20 @@ const TourDetail = () => {
                   </li>
                 </ul>
                 <ul>
-                  <li className="d-flex align-items-center">
+                  <li className="d-flex align-items-center white-space">
                     <div className="mr-10">
                       <i className="fa fa-wifi"></i>
                     </div>
                     <div>Wi-fi</div>
                   </li>
+                </ul>
+                <ul>
                   <li className="d-flex align-items-center">
                     <div className="mr-10">
                       <i className="fa fa-gear"></i>
                     </div>
                     <div>{translate("serviceAttentive")} </div>
                   </li>
-
                 </ul>
                 <ul>
 
