@@ -143,7 +143,6 @@ export const translations = {
 
     // Map ////////
     searchKeyWord: "Enter keywords to search",
-    searchDistance: "Enter the distance you want to search for",
 
     listOfBasemaps: "List of Basemaps",
     touristAttraction: "Tourist Aattraction",
@@ -165,6 +164,7 @@ export const translations = {
     searchDestination: "Search by destination",
     searchAccommodationPoint: "Search by accommodation point",
     searchDistance: "Search by distance",
+    searchBK: "Enter the distance (km) you want to search for",
 
     // Map ////////
     satelliteImageMapOfDakNong: "Satellite image map of Dak Nong",
@@ -360,7 +360,6 @@ export const translations = {
 
     // Map ////////
     searchKeyWord: "Nhập từ khoá để tìm kiếm",
-    searchDistance: "Nhập khoảng cách muốn tìm kiếm",
 
     listOfBasemaps: "Danh sách bản đồ nền",
     touristAttraction: "Địa điểm du lịch",
@@ -382,6 +381,8 @@ export const translations = {
     searchDestination: "Tìm kiếm địa điểm du lịch",
     searchAccommodationPoint: "Tìm kiếm địa điểm lưu trú",
     searchDistance: "Tìm kiếm địa điểm theo khoảng cách",
+    searchBK: "Nhập khoảng cách (km) muốn tìm kiếm",
+
     // Map ////////
 
     satelliteImageMapOfDakNong: "Bản đồ Ảnh vệ tinh",
@@ -440,7 +441,6 @@ export const translations = {
     touristArea: "Khu du lịch",
     attractiveTouristDestinationArea: "Vùng điểm du lịch hấp dẫn",
     addressDN: "Đường 23/3, TP.Gia Nghĩa,Đắk Nông",
-
   },
   // Thêm các ngôn ngữ khác nếu cần
 };

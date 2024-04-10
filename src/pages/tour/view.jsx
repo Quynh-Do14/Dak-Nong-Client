@@ -42,7 +42,7 @@ const TourDetail = () => {
   const [totalItem, setTotalItem] = useState();
   const [pageSize, setPageSize] = useState(Constants.PaginationConfigs.Size);
   const [noiDung, setNoiDung] = useState("");
-  const [soSao, setSoSao] = useState(0)
+  const [soSao, setSoSao] = useState(0);
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenRegister, setIsOpenRegister] = useState(false);
 
@@ -52,22 +52,21 @@ const TourDetail = () => {
   const dateTime = new Date();
 
   const converDateTime = (date) => {
-    const dateLength = date.toString().split("").length
+    const dateLength = date.toString().split("").length;
     if (dateLength < 2) {
-      return `0${date}`
+      return `0${date}`;
     }
-    return date
-  }
+    return date;
+  };
 
-  const timeNow = `${converDateTime(dateTime.getFullYear())}-${converDateTime(dateTime.getMonth() + 1)}-${dateTime.getDate()}`
+  const timeNow = `${converDateTime(dateTime.getFullYear())}-${converDateTime(
+    dateTime.getMonth() + 1
+  )}-${dateTime.getDate()}`;
   const param = location.search.replace("?", "");
   const { translate } = useTranslate();
 
   const onGetDetailDiemDenAsync = async () => {
-    const response = await api.getDiaDiemById(
-      `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      () => { }
-    );
+    const response = await api.getDiaDiemById(`dichvu/top/${param}`, () => {});
     setDetailTour(response.diaDiem);
     getAllHinhAnh(response.diaDiem);
     // const responses = await api.getAllDiaDiem(
@@ -89,7 +88,7 @@ const TourDetail = () => {
   };
 
   useEffect(() => {
-    getAllEvaluate().then((_) => { });
+    getAllEvaluate().then((_) => {});
   }, [pageSize]);
 
   const showMore = (prev) => {
@@ -99,30 +98,31 @@ const TourDetail = () => {
   const onEvaluate = async () => {
     if (storage) {
       if (noiDung && soSao) {
-        api.danhGiaDiaDiem({
-          soSao: soSao,
-          noiDung: noiDung,
-          thoiGianDanhGia: timeNow,
-          idDiaDiem: Number(param)
-        },
+        api.danhGiaDiaDiem(
+          {
+            soSao: soSao,
+            noiDung: noiDung,
+            thoiGianDanhGia: timeNow,
+            idDiaDiem: Number(param),
+          },
           () => {
             getAllEvaluate();
-            onGetDetailDiemDenAsync()
+            onGetDetailDiemDenAsync();
           },
-          setLoading,
-        )
+          setLoading
+        );
         setNoiDung("");
         setSoSao(0);
+      } else {
+        WarningMessage(
+          "Không thể đánh giá",
+          "Vui lòng đánh giá số sao và nhập đánh giá của bạn"
+        );
       }
-
-      else {
-        WarningMessage("Không thể đánh giá", "Vui lòng đánh giá số sao và nhập đánh giá của bạn")
-      }
+    } else {
+      onOpenLogin();
     }
-    else {
-      onOpenLogin()
-    }
-  }
+  };
 
   const onOpenLogin = () => {
     setIsOpenLogin(true);
@@ -182,28 +182,28 @@ const TourDetail = () => {
   const fecthData = async () => {
     var dsDiaDiem = [];
 
-    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, () => { });
-    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(``, () => { });
-    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => { });
+    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, () => {});
+    const resGetLuuTruGeometry = await api.getAllDiemLuuTruBanDo(``, () => {});
+    const resGetAmThucGeometry = await api.getAllDiemAmThucBanDo(``, () => {});
     const resGetPhuongTienGeometry = await api.getAllDiemPhuongTienBanDo(
       ``,
-      () => { }
+      () => {}
     );
 
     const resGetDanhMucConCuaDanhMucDiaDiem = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${1}`,
-      () => { }
+      () => {}
     );
     const resGetDanhMucConCuaDanhMucLuuTru = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${2}`,
-      () => { }
+      () => {}
     );
     const resGetDanhMucConCuaDanhMucAmThuc = await api.getDanhMucConCuaDanhMuc(
       `idDanhMuc=${3}`,
-      () => { }
+      () => {}
     );
     const resGetDanhMucConCuaDanhMucPhuongTien =
-      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, () => { });
+      await api.getDanhMucConCuaDanhMuc(`idDanhMuc=${4}`, () => {});
 
     var dataDsDiaDiemGeoJson = { ...resGetDiaDiemGeometry };
     setDsDiemDuLich(dataDsDiaDiemGeoJson);
@@ -221,11 +221,8 @@ const TourDetail = () => {
       ),
     ];
 
-    const response = await api.getDiaDiemById(
-      `dichvu/top/${param}?idDanhMuc=${Constants.CategoryConfig.Location.value}`,
-      () => { }
-    );
-
+    const response = await api.getDiaDiemById(`dichvu/top/${param}`, () => {});
+    console.log("response", response);
     if (response) {
       var dsDiaDiemSearch = [];
       dsDiaDiemSearch = filterByDistance(
@@ -566,12 +563,13 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
-                    ? e.features[0].properties.hinhAnh
-                    : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                      ? e.features[0].properties.hinhAnh
-                      : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-                  }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -581,7 +579,8 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -592,8 +591,9 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
-                  }</p>
+      ">${e.features[0].properties.gioMoCua} - ${
+                  e.features[0].properties.gioDongCua
+                }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -674,12 +674,13 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
-                    ? e.features[0].properties.hinhAnh
-                    : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                      ? e.features[0].properties.hinhAnh
-                      : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-                  }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -689,7 +690,8 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -700,8 +702,9 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
-                  }</p>
+      ">${e.features[0].properties.gioMoCua} - ${
+                  e.features[0].properties.gioDongCua
+                }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -782,12 +785,13 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
-                    ? e.features[0].properties.hinhAnh
-                    : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                      ? e.features[0].properties.hinhAnh
-                      : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-                  }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -797,7 +801,8 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -808,8 +813,9 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
-                  }</p>
+      ">${e.features[0].properties.gioMoCua} - ${
+                  e.features[0].properties.gioDongCua
+                }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -890,12 +896,13 @@ const TourDetail = () => {
               map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const html = `<div>
-              <img src="${e.features[0].properties.hinhAnh.indexOf("https") != -1
-                    ? e.features[0].properties.hinhAnh
-                    : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                      ? e.features[0].properties.hinhAnh
-                      : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-                  }" alt="" style="min-width: 280px;min-height: 120px;">
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
               ">
@@ -905,7 +912,8 @@ const TourDetail = () => {
           text-transform: uppercase;
       ">${e.features[0].properties.tenDanhMuc}</p>
 
-                  <a href="/tour-view?${e.features[0].properties.idDiaDiem
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
                   }" style="
           color: #333;
           font-size: 18px;
@@ -916,8 +924,9 @@ const TourDetail = () => {
           font-size: 11px;
           color: #333;
           font-weight: 400;
-      ">${e.features[0].properties.gioMoCua} - ${e.features[0].properties.gioDongCua
-                  }</p>
+      ">${e.features[0].properties.gioMoCua} - ${
+                  e.features[0].properties.gioDongCua
+                }</p>
                   <p style="
           width: 240px;
           overflow: hidden;
@@ -973,7 +982,7 @@ const TourDetail = () => {
     if (idDiaDiem.idDiaDiem) {
       const response = await api.getHinhAnhByIdDiaDiem(
         `${idDiaDiem.idDiaDiem}`,
-        () => { }
+        () => {}
       );
       setListImage(response.data);
     }
@@ -981,7 +990,7 @@ const TourDetail = () => {
 
   useEffect(() => {
     setLoading(true);
-    onGetDetailDiemDenAsync().then((_) => { });
+    onGetDetailDiemDenAsync().then((_) => {});
     fecthData();
     setTimeout(() => setLoading(false), 1000);
   }, []);
@@ -1011,8 +1020,9 @@ const TourDetail = () => {
                         <button
                           key={index}
                           onClick={() => setTabSelect(index)}
-                          className={`nav-link ${tabSelect == index ? "active" : ""
-                            }`}
+                          className={`nav-link ${
+                            tabSelect == index ? "active" : ""
+                          }`}
                           id="nav-home-tab"
                           type="button"
                           role="tab"
@@ -1151,23 +1161,17 @@ const TourDetail = () => {
                   <li className="flex-detail">
                     <h6>{translate("address")} :</h6>{" "}
                     <span>
-                      {translationData(
-                        detailTour.diaChi,
-                        detailTour.diaChiUS
-                      )}
+                      {translationData(detailTour.diaChi, detailTour.diaChiUS)}
                     </span>
                   </li>
                   <li className="flex-detail">
                     <h6>{translate("price")} :</h6>{" "}
                     <span>
                       {detailTour.giaVe === Constants.FreePrice
-                        ? translationData(
-                          detailTour.giaVe,
-                          detailTour.giaVeUS
-                        )
+                        ? translationData(detailTour.giaVe, detailTour.giaVeUS)
                         : detailTour.giaVe == null
-                          ? translate("free")
-                          : `Chỉ từ: ${detailTour.giaVe}`}
+                        ? translate("free")
+                        : `Chỉ từ: ${detailTour.giaVe}`}
                     </span>
                   </li>
                   <li className="flex-detail">
@@ -1212,7 +1216,6 @@ const TourDetail = () => {
                   </li>
                 </ul>
                 <ul>
-
                   <li className="d-flex align-items-center">
                     <div className="mr-10">
                       <i className="fa fa-car"></i>

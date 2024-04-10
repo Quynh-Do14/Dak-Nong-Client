@@ -133,7 +133,7 @@ const BanDoAnhVeTinh = () => {
       return <i className="fa-solid fa-street-view"></i>;
     }
   };
-
+  const [dataLichTrinh, setDataLichTrinh] = useState([]);
   const fecthData = async (style = dsStyleBanDo[0]) => {
     // document.getElementById("map").scrollIntoView()
     navigator.geolocation.getCurrentPosition(
@@ -145,6 +145,14 @@ const BanDoAnhVeTinh = () => {
         console.log(e);
       }
     );
+    const resGetAllLichTrinh = await api.getAllLichTrinh(``, setLoading);
+    var dt = resGetAllLichTrinh.data.lichTrinhs;
+    dt = dt.map((v) => {
+      v.geometry = JSON.parse(v.geometry);
+      v.danhSachDiaDiem = JSON.parse(v.danhSachDiaDiem);
+      return v;
+    });
+    setDataLichTrinh(dt);
     let map = new mapboxgl.Map({
       container: mapContainer.current,
       zoom: 9,
@@ -904,7 +912,7 @@ const BanDoAnhVeTinh = () => {
               placeholder={
                 selectSearch != "KHOANGCACH"
                   ? translate("searchKeyWord")
-                  : translate("searchDistance")
+                  : translate("searchBK")
               }
             />
           </div>
@@ -1016,7 +1024,7 @@ const BanDoAnhVeTinh = () => {
                 marginRight: 12,
               }}
             >
-              {DATALICHTRINH.danhSachLichTrinh.map((v, k) => (
+              {dataLichTrinh.map((v, k) => (
                 <div
                   className="detailLichTrinh"
                   onClick={() => openLichTrinh(v)}
