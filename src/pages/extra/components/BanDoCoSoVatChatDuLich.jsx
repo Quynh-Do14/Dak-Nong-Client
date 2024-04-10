@@ -133,8 +133,16 @@ const BanDoCoSoVatChatDuLich = () => {
       return <i className="fa-solid fa-street-view"></i>;
     }
   };
-
+  const [dataLichTrinh, setDataLichTrinh] = useState([]);
   const fecthData = async (style = dsStyleBanDo[0]) => {
+    const resGetAllLichTrinh = await api.getAllLichTrinh(``, setLoading);
+    var dt = resGetAllLichTrinh.data.lichTrinhs;
+    dt = dt.map((v) => {
+      v.geometry = JSON.parse(v.geometry);
+      v.danhSachDiaDiem = JSON.parse(v.danhSachDiaDiem);
+      return v;
+    });
+    setDataLichTrinh(dt);
     try {
       const res = await api.getCuaTao(
         `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point`
@@ -2349,7 +2357,7 @@ const BanDoCoSoVatChatDuLich = () => {
               placeholder={
                 selectSearch != "KHOANGCACH"
                   ? translate("searchKeyWord")
-                  : translate("searchDistance")
+                  : translate("searchBK")
               }
             />
           </div>
@@ -2461,7 +2469,7 @@ const BanDoCoSoVatChatDuLich = () => {
                 marginRight: 12,
               }}
             >
-              {DATALICHTRINH.danhSachLichTrinh.map((v, k) => (
+              {dataLichTrinh.map((v, k) => (
                 <div
                   className="detailLichTrinh"
                   onClick={() => openLichTrinh(v)}

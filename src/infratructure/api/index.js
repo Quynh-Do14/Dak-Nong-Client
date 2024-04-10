@@ -50,6 +50,11 @@ const api = {
       `${apiLinks.API}${Endpoint.Module.DiaDiem}/getAllDiaDiemBanDo?${params}`,
       setLoading
     ),
+  getAllLichTrinh: (params, setLoading) =>
+    request.get(
+      `${apiLinks.API}/lichTrinh/getAllLichTrinh?${params}`,
+      setLoading
+    ),
   getAllDiemLuuTruBanDo: (params, setLoading) =>
     request.get(
       `${apiLinks.API}${Endpoint.Module.DiaDiem}/getAllDiemLuuTruBanDo?${params}`,

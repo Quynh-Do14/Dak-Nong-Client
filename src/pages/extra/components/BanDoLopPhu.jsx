@@ -133,9 +133,17 @@ const BanDoLopPhu = () => {
       return <i className="fa-solid fa-street-view"></i>;
     }
   };
-
+  const [dataLichTrinh, setDataLichTrinh] = useState([]);
   const fecthData = async (style = dsStyleBanDo[0]) => {
     // document.getElementById("map").scrollIntoView()
+    const resGetAllLichTrinh = await api.getAllLichTrinh(``, setLoading);
+    var dt = resGetAllLichTrinh.data.lichTrinhs;
+    dt = dt.map((v) => {
+      v.geometry = JSON.parse(v.geometry);
+      v.danhSachDiaDiem = JSON.parse(v.danhSachDiaDiem);
+      return v;
+    });
+    setDataLichTrinh(dt);
     navigator.geolocation.getCurrentPosition(
       (e) => {
         console.log([e.coords.longitude, e.coords.latitude]);
@@ -182,24 +190,24 @@ const BanDoLopPhu = () => {
         exaggeration: 1.5,
       });
 
-      map.addSource("LC_daknong_tiff", {
-        type: "image",
-        url: "http://103.130.212.145:46928/api/public/anhvetinh/LC_daknong_tiff.gif",
-        coordinates: [
-          [107.20629162700004, 12.812316930000065],
-          [108.11636491700006, 12.812316930000065],
-          [108.11636491700006, 11.74900376100004],
-          [107.20629162700004, 11.74900376100004],
-        ],
-      });
-      map.addLayer({
-        id: "LC_daknong_tiff",
-        type: "raster",
-        source: "LC_daknong_tiff",
-        paint: {
-          "raster-fade-duration": 0,
-        },
-      });
+      // map.addSource("LC_daknong_tiff", {
+      //   type: "image",
+      //   url: "http://103.130.212.145:46928/api/public/anhvetinh/LC_daknong_tiff.gif",
+      //   coordinates: [
+      //     [107.20629162700004, 12.812316930000065],
+      //     [108.11636491700006, 12.812316930000065],
+      //     [108.11636491700006, 11.74900376100004],
+      //     [107.20629162700004, 11.74900376100004],
+      //   ],
+      // });
+      // map.addLayer({
+      //   id: "LC_daknong_tiff",
+      //   type: "raster",
+      //   source: "LC_daknong_tiff",
+      //   paint: {
+      //     "raster-fade-duration": 0,
+      //   },
+      // });
 
       map.addSource("ranhGioiHuyen", {
         type: "geojson",
@@ -717,7 +725,7 @@ const BanDoLopPhu = () => {
                   </label>
                 </div>
               </div>
-              <div
+              {/* <div
                 className="d-flex align-items-center"
                 style={{ padding: "8px 12px" }}
               >
@@ -755,7 +763,7 @@ const BanDoLopPhu = () => {
                     {translate("satelliteImage")}
                   </label>
                 </div>
-              </div>
+              </div> */}
               <div
                 className="d-flex align-items-center"
                 style={{ padding: "8px 12px" }}
@@ -1026,7 +1034,7 @@ const BanDoLopPhu = () => {
               placeholder={
                 selectSearch != "KHOANGCACH"
                   ? translate("searchKeyWord")
-                  : translate("searchDistance")
+                  : translate("searchBK")
               }
             />
           </div>
@@ -1138,7 +1146,7 @@ const BanDoLopPhu = () => {
                 marginRight: 12,
               }}
             >
-              {DATALICHTRINH.danhSachLichTrinh.map((v, k) => (
+              {dataLichTrinh.map((v, k) => (
                 <div
                   className="detailLichTrinh"
                   onClick={() => openLichTrinh(v)}
