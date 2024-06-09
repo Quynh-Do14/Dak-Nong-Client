@@ -67,6 +67,7 @@ const TourDetail = () => {
 
   const onGetDetailDiemDenAsync = async () => {
     const response = await api.getDiaDiemById(`dichvu/top/${param}`, () => {});
+    // console.log(response.diaDiem);
     setDetailTour(response.diaDiem);
     getAllHinhAnh(response.diaDiem);
     // const responses = await api.getAllDiaDiem(
@@ -1156,7 +1157,7 @@ const TourDetail = () => {
                   </li>
                   <li className="flex-detail">
                     <h6>{translate("type")} :</h6>{" "}
-                    <span>{translate(detailTour.tenDanhMuc)}</span>
+                    <span>{translationData(detailTour.tenDanhMuc, detailTour.tenDanhMucUS)}</span>
                   </li>
                   <li className="flex-detail">
                     <h6>{translate("address")} :</h6>{" "}

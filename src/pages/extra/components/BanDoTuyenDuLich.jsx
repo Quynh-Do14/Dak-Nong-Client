@@ -135,6 +135,14 @@ const BanDoTuyenDuLich = () => {
   };
   const [dataLichTrinh, setDataLichTrinh] = useState([]);
   const fecthData = async (style = dsStyleBanDo[0]) => {
+    const resGetDiaDiemGeometry = await api.getAllDiaDiemBanDo(``, setLoading);
+    var dataDsDiaDiemGeoJson = { ...resGetDiaDiemGeometry };
+    const resGetDanhMucConCuaDanhMucDiaDiem = await api.getDanhMucConCuaDanhMuc(
+      `idDanhMuc=${1}`,
+      setLoading
+    );
+    setDsDanhMucDiaDiemDuLich(resGetDanhMucConCuaDanhMucDiaDiem.result);
+    setDsDiemDuLich(dataDsDiaDiemGeoJson);
     const resGetAllLichTrinh = await api.getAllLichTrinh(``, setLoading);
     var dt = resGetAllLichTrinh.data.lichTrinhs;
     dt = dt.map((v) => {
@@ -188,6 +196,90 @@ const BanDoTuyenDuLich = () => {
       map.setTerrain({
         source: "mapbox-dem",
         exaggeration: 1.5,
+      });
+      resGetDanhMucConCuaDanhMucDiaDiem.result.map((v) => {
+        var uriImg = "";
+        if (
+          v.tenDanhMuc == "Văn hóa - lịch sử" &&
+          dataDsDiaDiemGeoJson.features.filter(
+            (v) => v.properties.tenDanhMuc == "Văn hóa - lịch sử"
+          ).length > 0
+        ) {
+          uriImg = "https://cdn-icons-png.flaticon.com/512/5778/5778440.png";
+        }
+        if (
+          v.tenDanhMuc == "Địa điểm tâm linh" &&
+          dataDsDiaDiemGeoJson.features.filter(
+            (v) => v.properties.tenDanhMuc == "Địa điểm tâm linh"
+          ).length > 0
+        ) {
+          uriImg = "https://cdn-icons-png.flaticon.com/512/2510/2510482.png";
+        }
+        if (
+          v.tenDanhMuc == "Du lịch khám phá" &&
+          dataDsDiaDiemGeoJson.features.filter(
+            (v) => v.properties.tenDanhMuc == "Du lịch khám phá"
+          ).length > 0
+        ) {
+          uriImg =
+            "https://iconape.com/wp-content/png_logo_vector/google-discover.png";
+        }
+        if (
+          v.tenDanhMuc == "Du lịch sinh thái" &&
+          dataDsDiaDiemGeoJson.features.filter(
+            (v) => v.properties.tenDanhMuc == "Du lịch sinh thái"
+          ).length > 0
+        ) {
+          uriImg = "https://cdn-icons-png.flaticon.com/512/3104/3104941.png";
+        }
+        if (
+          v.tenDanhMuc == "Du lịch nghỉ dưỡng" &&
+          dataDsDiaDiemGeoJson.features.filter(
+            (v) => v.properties.tenDanhMuc == "Du lịch nghỉ dưỡng"
+          ).length > 0
+        ) {
+          uriImg = "https://cdn-icons-png.flaticon.com/512/5273/5273660.png";
+        }
+        if (
+          v.tenDanhMuc == "Công trình kiến trúc" &&
+          dataDsDiaDiemGeoJson.features.filter(
+            (v) => v.properties.tenDanhMuc == "Công trình kiến trúc"
+          ).length > 0
+        ) {
+          uriImg =
+            "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png";
+        }
+        if (
+          v.tenDanhMuc == "Du lịch giải trí" &&
+          dataDsDiaDiemGeoJson.features.filter(
+            (v) => v.properties.tenDanhMuc == "Du lịch giải trí"
+          ).length > 0
+        ) {
+          uriImg =
+            "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png";
+        }
+        if (
+          v.tenDanhMuc == "Thương mại - ẩm thực" &&
+          dataDsDiaDiemGeoJson.features.filter(
+            (v) => v.properties.tenDanhMuc == "Thương mại - ẩm thực"
+          ).length > 0
+        ) {
+          uriImg = "https://cdn-icons-png.flaticon.com/512/1205/1205756.png";
+        }
+        if (
+          v.tenDanhMuc == "Khu bảo tồn" &&
+          dataDsDiaDiemGeoJson.features.filter(
+            (v) => v.properties.tenDanhMuc == "Khu bảo tồn"
+          ).length > 0
+        ) {
+          uriImg = "https://cdn-icons-png.flaticon.com/512/3937/3937245.png";
+        }
+        if (uriImg != "") {
+          map.loadImage(uriImg, (error, image) => {
+            if (error) throw error;
+            map.addImage(`img${v.idDanhMucDiaDiem}`, image);
+          });
+        }
       });
 
       map.addSource("ranhGioiHuyen", {
@@ -251,9 +343,129 @@ const BanDoTuyenDuLich = () => {
         layout: {},
         paint: {
           "line-color": "#1b84ff",
-          "line-width": 3,
+          "line-width": 6,
         },
       });
+      map.addLayer({
+        id: "tuyen_dl_labels",
+        type: "symbol",
+        source: "tuyen_dl",
+        layout: {
+          "text-field": ["get", "tentuyen"],
+          "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+          "text-size": 16,
+          "symbol-placement": "line",
+          "text-rotation-alignment": "map",
+          "text-allow-overlap": true, // Cho phép nhãn chồng lên nhau
+          "text-ignore-placement": true // Bỏ qua việc đặt nhãn sao cho không chồng lên nhau
+        },
+        paint: {
+          "text-color": "#000000",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 3,
+        },
+      });
+      map.addSource("diaDiemDuLich", {
+        type: "geojson",
+        data: `http://103.130.212.145:46928/api/diaDiem/getAllDiaDiemBanDo`,
+      });
+
+      for (const feature of dataDsDiaDiemGeoJson.features) {
+        // Add a layer for this symbol type if it hasn't been added already.
+        if (!map.getLayer(`poi-${feature.properties.idDanhMuc}`)) {
+          map.addLayer({
+            id: `poi-${feature.properties.idDanhMuc}`,
+            type: "symbol",
+            source: "diaDiemDuLich",
+            layout: {
+              "icon-image": `img${feature.properties.idDanhMuc}`,
+              // "icon-allow-overlap": true,
+              "icon-size": 0.05,
+              "text-field": ["get", "tenDiaDiem"],
+              "text-size": 11,
+              "text-offset": [0, 2],
+              "icon-offset": [0, -17],
+            },
+            paint: {
+              "text-color": "#004eff",
+              "text-halo-color": "#fff",
+              "text-halo-width": 2,
+            },
+            filter: ["==", "idDanhMuc", feature.properties.idDanhMuc],
+          });
+
+          map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const html = `<div>
+          <img src="${
+            e.features[0].properties.hinhAnh.indexOf("https") != -1
+              ? e.features[0].properties.hinhAnh
+              : e.features[0].properties.hinhAnh.indexOf("http") != -1
+              ? e.features[0].properties.hinhAnh
+              : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+          }" alt="" style="min-width: 280px;min-height: 120px;">
+          <div style="
+              padding: 20px;
+          ">
+              <p style="
+      color: #d32f2f;
+      font-size: 11px;
+      text-transform: uppercase;
+  ">${e.features[0].properties.tenDanhMuc}</p>
+              <a href="/tour-view?${
+                e.features[0].properties.idDiaDiem
+              }" style="
+      color: #333;
+      font-size: 18px;
+      width: 240px;
+      font-weight: 500;
+  ">${e.features[0].properties.tenDiaDiem}</a>
+              <p style="
+      font-size: 11px;
+      color: #333;
+      font-weight: 400;
+  ">${e.features[0].properties.gioMoCua} - ${
+              e.features[0].properties.gioDongCua
+            }</p>
+              <p style="
+      width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 3;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #333;
+  ">${e.features[0].properties.moTa}</p>
+          </div>
+      </div>`;
+
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            map.flyTo({
+              center: e.features[0].geometry.coordinates,
+              essential: true,
+              duration: 1000,
+            });
+
+            new mapboxgl.Popup()
+              .setLngLat(coordinates)
+              .setHTML(html)
+              .addTo(map);
+          });
+
+          map.on("mouseenter", `poi-${feature.properties.idDanhMuc}`, () => {
+            map.getCanvas().style.cursor = "pointer";
+          });
+
+          map.on("mouseleave", `poi-${feature.properties.idDanhMuc}`, () => {
+            map.getCanvas().style.cursor = "";
+          });
+        }
+      }
       map.on("click", `tuyen_dl`, (e) => {
         console.log(e);
         // const coordinates = e.features[0].geometry.coordinates.slice();
@@ -706,6 +918,99 @@ const BanDoTuyenDuLich = () => {
                   </label>
                 </div>
               </div>
+            </div>
+            <p
+              style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                padding: 8,
+                color: "#050505",
+                margin: "0px 12px",
+              }}
+            >
+              {translate("touristAttraction")} : {dsDiemDuLich.features.length}{" "}
+              {translate("destination").replace("Địa điểm du lịch", "điểm")}
+            </p>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              {dsDanhMucDiaDiemDuLich.map(
+                (v, k) =>
+                  dsDiemDuLich.features.filter(
+                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                  ).length > 0 && (
+                    <div
+                      key={k}
+                      className="d-flex align-items-center"
+                      style={{ padding: "8px 12px" }}
+                    >
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name={`poi-${v.idDanhMucDiaDiem}`}
+                          id={`poi-${v.idDanhMucDiaDiem}`}
+                          value={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            marginRight: 8,
+                          }}
+                          onClick={btDiaDiemDuLich}
+                          defaultChecked={true}
+                        />
+                        <img
+                          style={{
+                            width: 25,
+                            height: 25,
+                            marginRight: 8,
+                          }}
+                          src={
+                            v.tenDanhMuc == "Văn hóa - lịch sử"
+                              ? "https://cdn-icons-png.flaticon.com/512/5778/5778440.png"
+                              : v.tenDanhMuc == "Địa điểm tâm linh"
+                              ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
+                              : v.tenDanhMuc == "Du lịch khám phá"
+                              ? "https://iconape.com/wp-content/png_logo_vector/google-discover.png"
+                              : v.tenDanhMuc == "Du lịch sinh thái"
+                              ? "https://cdn-icons-png.flaticon.com/512/3104/3104941.png"
+                              : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
+                              ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
+                              : v.tenDanhMuc == "Công trình kiến trúc"
+                              ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
+                              : v.tenDanhMuc == "Du lịch giải trí"
+                              ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
+                              : v.tenDanhMuc == "Thương mại - ẩm thực"
+                              ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
+                              : v.tenDanhMuc == "Khu bảo tồn"
+                              ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
+                              : ""
+                          }
+                          alt=""
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                          style={{
+                            margin: 0,
+                          }}
+                        >
+                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
+                          {
+                            dsDiemDuLich.features.filter(
+                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                            ).length
+                          }{" "}
+                          {translate("destination").replace(
+                            "Địa điểm du lịch",
+                            "điểm"
+                          )}
+                          )
+                        </label>
+                      </div>
+                    </div>
+                  )
+              )}
             </div>
           </div>
         )}
