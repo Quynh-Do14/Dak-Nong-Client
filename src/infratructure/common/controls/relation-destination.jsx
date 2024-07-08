@@ -65,7 +65,7 @@ const RelationDestination = (props) => {
                                             <div className="deals-content ">
                                                 <div className="deals-image custom-image">
                                                     <a
-                                                    // href={`${ROUTE_PATH.VIEW_TOUR}?${it.properties.idDiaDiem}`}
+                                                    href={`${ROUTE_PATH.VIEW_TOUR}?${it.properties.idDiaDiem}`}
                                                     >
                                                         <img
                                                             src={
@@ -104,7 +104,7 @@ const RelationDestination = (props) => {
                                                         </li>
                                                     </ul>
                                                     <a
-                                                        // href={`${ROUTE_PATH.VIEW_TOUR}?${it.properties.idDiaDiem}`}
+                                                        href={`${ROUTE_PATH.VIEW_TOUR}?${it.properties.idDiaDiem}`}
                                                         className="deals-info-link text-truncate-origin"
                                                     >
                                                         {translationData(

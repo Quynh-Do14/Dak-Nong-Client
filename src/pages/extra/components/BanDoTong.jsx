@@ -290,11 +290,7 @@ const BanDoTong = () => {
           },
         });
 
-        map.setLayoutProperty(
-          "LC_daknong_tiff",
-          "visibility",
-          "none"
-        );
+        map.setLayoutProperty("LC_daknong_tiff", "visibility", "none");
 
         resGetDanhMucConCuaDanhMucDiaDiem.result.map((v) => {
           var uriImg = "";

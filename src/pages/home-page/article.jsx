@@ -36,7 +36,13 @@ const Article = ({ data = [] }) => {
                                                 <li className='white-space-nowrap'><i className="color-orange mr-10 fa fa-user"></i>Duong Nguyen </li>
                                                 <li className='white-space-nowrap'><i className="color-orange mr-10 fa fa-calendar"></i> <span>{convertDateOnly(it.ngayDang)} </span></li>
                                             </ul>
-                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} className="blog-title text-truncate-title-relation">
+                                            <a href={`${ROUTE_PATH.VIEW_ARTICLE}?${it.idTinTuc}`} style={{
+                                                 display: "-webkit-box",
+                                                 WebkitBoxOrient: "vertical",
+                                                 WebkitLineClamp: 2,
+                                                 overflow: "hidden",
+                                                 textOverflow: "ellipsis"
+                                            }} className="blog-title text-truncate-title-relation">
                                                 {translationData(it.tieuDe, it.tieuDeUS)}
                                             </a>
                                             <p className='text-truncate-description'>

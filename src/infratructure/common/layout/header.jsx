@@ -261,6 +261,12 @@ const HeaderPage = () => {
                               <ul
                                 style={{
                                   width: 400,
+                                  height: 510,
+                                  overflowY:
+                                    "scroll" /* border: '1px solid #ccc', */,
+                                  /* padding: 0, */
+                                  /* margin: 0, */
+                                  listStyleType: "none",
                                 }}
                               >
                                 {it.children.map((item, index) => (

@@ -1319,6 +1319,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
               left: 10,
               boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
               width: 380,
+              height: "calc(100vh - 104px - 180px)",
               overflowY: "scroll",
               paddingBottom: 12,
             }}
