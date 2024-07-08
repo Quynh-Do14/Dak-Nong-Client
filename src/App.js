@@ -25,6 +25,7 @@ import BanDoCoSoVatChatDuLich from "./pages/extra/components/BanDoCoSoVatChatDuL
 import BanDoAnhVeTinh from "./pages/extra/components/BanDoAnhVeTinh";
 import BanDoLopPhu from "./pages/extra/components/BanDoLopPhu";
 import BanDoLuongKhachDuLich from "./pages/extra/components/BanDoLuongKhachDuLich";
+import BanDoTong from "./pages/extra/components/BanDoTong";
 
 const RouteRoot = () => {
   return (
@@ -79,6 +80,10 @@ const RouteRoot = () => {
         <Route
           path={`/bandoluongkhachdulich`}
           element={<BanDoLuongKhachDuLich />}
+        />
+        <Route
+          path={`/bandotong`}
+          element={<BanDoTong />}
         />
 
         {/* <Route path={ROUTE_PATH.DESTINATION} element={<DestinationPage />} />

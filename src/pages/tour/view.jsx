@@ -305,7 +305,7 @@ const TourDetail = () => {
               ).length > 0
             ) {
               uriImg =
-                "https://iconape.com/wp-content/png_logo_vector/google-discover.png";
+                "https://cdn-icons-png.flaticon.com/512/7006/7006898.png";
             }
             if (
               v.tenDanhMuc == "Du lịch sinh thái" &&

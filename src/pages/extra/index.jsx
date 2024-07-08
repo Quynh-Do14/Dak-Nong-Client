@@ -19,6 +19,8 @@ import LoadingFullPageMap from "../../infratructure/common/controls/loadingMap";
 import * as MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import useTranslate from "../../core/common/hook/useTranslate";
 import { translationData } from "../../infratructure/utils/helper";
+import RainLayer from "mapbox-gl-rain-layer";
+
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
 
@@ -270,7 +272,7 @@ const ExtraComponent = () => {
             ).length > 0
           ) {
             uriImg =
-              "https://iconape.com/wp-content/png_logo_vector/google-discover.png";
+              "https://cdn-icons-png.flaticon.com/512/7006/7006898.png";
           }
           if (
             v.tenDanhMuc == "Du lịch sinh thái" &&
@@ -882,6 +884,16 @@ const ExtraComponent = () => {
             });
           }
         }
+        const rainLayer = new RainLayer({
+          id: "rain",
+          source: "rainviewer",
+          scale: "noaa",
+        });
+        map.addLayer(rainLayer);
+      rainLayer.on("refresh", (data) => {
+        console.log(data.timestamp);
+      });
+      map.setLayoutProperty("rain", "visibility", "none");
       });
     }
     setIsLoading(false);
@@ -1175,7 +1187,7 @@ const ExtraComponent = () => {
         }}
       >
         <div id="map" ref={mapContainer}></div>
-        {isLopBanDo && dsDanhMucDiaDiemDuLich.length > 0 && (
+        {isLopBanDo && dsDanhMucDiaDiemDuLich.length > 0 && dsDiemDuLich.features.length && (
           <div
             style={{
               backgroundColor: "#fff",
@@ -1377,7 +1389,7 @@ const ExtraComponent = () => {
                               : v.tenDanhMuc == "Địa điểm tâm linh"
                               ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
                               : v.tenDanhMuc == "Du lịch khám phá"
-                              ? "https://iconape.com/wp-content/png_logo_vector/google-discover.png"
+                              ? "https://cdn-icons-png.flaticon.com/512/7006/7006898.png"
                               : v.tenDanhMuc == "Du lịch sinh thái"
                               ? "https://cdn-icons-png.flaticon.com/512/3104/3104941.png"
                               : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
@@ -1658,6 +1670,64 @@ const ExtraComponent = () => {
                     </div>
                   )
               )}
+            </div>
+            <p
+              style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                padding: 8,
+                color: "#050505",
+                margin: "0px 12px",
+              }}
+            >
+              {translate("lopLuongMua")}
+            </p>
+            <div
+              style={{
+                paddingLeft: 20,
+              }}
+            >
+              <div
+                className="d-flex align-items-center"
+                style={{ padding: "8px 12px" }}
+              >
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name={`rain`}
+                    id={`rain`}
+                    value={`rain`}
+                    style={{
+                      marginRight: 8,
+                    }}
+                    onClick={btDiaDiemDuLich}
+                  />
+                  <img
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginRight: 8,
+                    }}
+                    src={
+                      "https://cdn-icons-png.flaticon.com/512/9342/9342255.png"
+                    }
+                    alt=""
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`rain`}
+                    style={{
+                      margin: 0,
+                    }}
+                  >
+                    {translate("lopLuongMua")}
+                  </label>
+                </div>
+              </div>
+              <img src="./assets/img/chuGiaiLuongMua.png" alt=""  style={{
+                maxWidth:50
+              }}/>
             </div>
           </div>
         )}

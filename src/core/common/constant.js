@@ -49,25 +49,23 @@ export default class Constants {
         label: "specialty",
         link: ROUTE_PATH.SPECIALTY,
       },
-      {
+      { 
         label: "map",
-        link: ROUTE_PATH.LAYOUT_MAP,
         children: [
           {
             id: 1,
-            label: "satelliteImageMapOfDakNong",
-            link: `/bandoanhvetinh`,
+            label: "naturalTourismResourcesMapOfDakNongProvince",
+            link: `/bandotainguyendulichtunhien`,
           },
           {
             id: 2,
-            label: "dakNongOverlayMap",
-            // link: `/bandolopphu`,
-            link: `/bandolopphu`,
+            label: "culturalTourismResourcesMapOfDakNongProvince",
+            link: `/bandotainguyendulichvanhoa`,
           },
           {
             id: 3,
-            label: "mapOfTouristAttractionsInDakNongProvince",
-            link: `/bandoluongkhachdulich`,
+            label: "bando",
+            link: `/map`,
           },
           {
             id: 4,
@@ -76,18 +74,29 @@ export default class Constants {
           },
           {
             id: 5,
-            label: "naturalTourismResourcesMapOfDakNongProvince",
-            link: `/bandotainguyendulichtunhien`,
+            label: "mapOfNaturalTourismResourcesOfTheProvinceDakNong",
+            link: "/bandocosovatchatdulich",
           },
           {
             id: 6,
-            label: "culturalTourismResourcesMapOfDakNongProvince",
-            link: `/bandotainguyendulichvanhoa`,
+            label: "mapOfTouristAttractionsInDakNongProvince",
+            link: `/bandoluongkhachdulich`,
           },
           {
             id: 7,
-            label: "mapOfNaturalTourismResourcesOfTheProvinceDakNong",
-            link: "/bandocosovatchatdulich",
+            label: "dakNongOverlayMap",
+            // link: `/bandolopphu`,
+            link: `/bandolopphu`,
+          },
+          {
+            id: 8,
+            label: "tourismAtlasOfDakNongProvince",
+            link: "/bandotong",
+          },
+          {
+            id: 9,
+            label: "satelliteImageMapOfDakNong",
+            link: `/bandoanhvetinh`,
           },
         ],
       },

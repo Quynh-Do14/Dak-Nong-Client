@@ -222,7 +222,7 @@ const BanDoTuyenDuLich = () => {
           ).length > 0
         ) {
           uriImg =
-            "https://iconape.com/wp-content/png_logo_vector/google-discover.png";
+            "https://cdn-icons-png.flaticon.com/512/7006/7006898.png";
         }
         if (
           v.tenDanhMuc == "Du lịch sinh thái" &&
@@ -357,7 +357,7 @@ const BanDoTuyenDuLich = () => {
           "symbol-placement": "line",
           "text-rotation-alignment": "map",
           "text-allow-overlap": true, // Cho phép nhãn chồng lên nhau
-          "text-ignore-placement": true // Bỏ qua việc đặt nhãn sao cho không chồng lên nhau
+          "text-ignore-placement": true, // Bỏ qua việc đặt nhãn sao cho không chồng lên nhau
         },
         paint: {
           "text-color": "#000000",
@@ -412,9 +412,7 @@ const BanDoTuyenDuLich = () => {
       font-size: 11px;
       text-transform: uppercase;
   ">${e.features[0].properties.tenDanhMuc}</p>
-              <a href="/tour-view?${
-                e.features[0].properties.idDiaDiem
-              }" style="
+              <a href="/tour-view?${e.features[0].properties.idDiaDiem}" style="
       color: #333;
       font-size: 18px;
       width: 240px;
@@ -816,204 +814,207 @@ const BanDoTuyenDuLich = () => {
         }}
       >
         <div id="map" ref={mapContainer}></div>
-        {isLopBanDo && (
-          <div
-            style={{
-              backgroundColor: "#fff",
-              padding: 4,
-              position: "absolute",
-              top: 12,
-              left: 10,
-              boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
-              width: 380,
-              overflowY: "scroll",
-              paddingBottom: 12,
-            }}
-          >
+        {isLopBanDo &&
+          dsDanhMucDiaDiemDuLich.length > 0 &&
+          dsDiemDuLich.features.length > 0 && (
             <div
-              className="d-flex flex-row justify-content-between"
               style={{
-                marginBottom: 12,
+                backgroundColor: "#fff",
+                padding: 4,
+                position: "absolute",
+                top: 12,
+                left: 10,
+                boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
+                width: 380,
+                overflowY: "scroll",
+                paddingBottom: 12,
               }}
             >
+              <div
+                className="d-flex flex-row justify-content-between"
+                style={{
+                  marginBottom: 12,
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: 15,
+                    fontWeight: "bold",
+                    padding: 8,
+                    color: "#094174",
+                    textAlign: "center",
+                    borderBottom: "1px solid #ccc",
+                    margin: "0px 12px",
+                  }}
+                >
+                  {translate("type")}
+                </p>
+                <button
+                  type="button"
+                  // className="close"
+                  aria-label="Close"
+                  onClick={() => {
+                    setIsLopBanDo(false);
+                  }}
+                  style={{
+                    padding: "4px 16px",
+                  }}
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
               <p
                 style={{
                   fontSize: 15,
                   fontWeight: "bold",
                   padding: 8,
-                  color: "#094174",
-                  textAlign: "center",
-                  borderBottom: "1px solid #ccc",
+                  color: "#050505",
                   margin: "0px 12px",
                 }}
               >
-                {translate("type")}
+                {translate("touristRouteMap")}
               </p>
-              <button
-                type="button"
-                // className="close"
-                aria-label="Close"
-                onClick={() => {
-                  setIsLopBanDo(false);
-                }}
-                style={{
-                  padding: "4px 16px",
-                }}
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <p
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                padding: 8,
-                color: "#050505",
-                margin: "0px 12px",
-              }}
-            >
-              {translate("touristRouteMap")}
-            </p>
-            <div
-              style={{
-                paddingLeft: 20,
-              }}
-            >
               <div
-                className="d-flex align-items-center"
-                style={{ padding: "8px 12px" }}
+                style={{
+                  paddingLeft: 20,
+                }}
               >
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name={`tuyen_dl`}
-                    id={`tuyen_dl`}
-                    value={`tuyen_dl`}
-                    style={{
-                      marginRight: 8,
-                    }}
-                    onClick={btDiaDiemDuLich}
-                    defaultChecked={true}
-                  />
-                  <img
-                    style={{
-                      width: 25,
-                      height: 25,
-                      marginRight: 8,
-                    }}
-                    src={
-                      "https://cdn-icons-png.flaticon.com/128/5264/5264589.png"
-                    }
-                    alt=""
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor={`tuyen_dl`}
-                    style={{
-                      margin: 0,
-                    }}
-                  >
-                    {translate("touristRoutes")}
-                  </label>
+                <div
+                  className="d-flex align-items-center"
+                  style={{ padding: "8px 12px" }}
+                >
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      name={`tuyen_dl`}
+                      id={`tuyen_dl`}
+                      value={`tuyen_dl`}
+                      style={{
+                        marginRight: 8,
+                      }}
+                      onClick={btDiaDiemDuLich}
+                      defaultChecked={true}
+                    />
+                    <img
+                      style={{
+                        width: 25,
+                        height: 25,
+                        marginRight: 8,
+                      }}
+                      src={
+                        "https://cdn-icons-png.flaticon.com/128/5264/5264589.png"
+                      }
+                      alt=""
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor={`tuyen_dl`}
+                      style={{
+                        margin: 0,
+                      }}
+                    >
+                      {translate("touristRoutes")}
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
-            <p
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                padding: 8,
-                color: "#050505",
-                margin: "0px 12px",
-              }}
-            >
-              {translate("touristAttraction")} : {dsDiemDuLich.features.length}{" "}
-              {translate("destination").replace("Địa điểm du lịch", "điểm")}
-            </p>
-            <div
-              style={{
-                paddingLeft: 20,
-              }}
-            >
-              {dsDanhMucDiaDiemDuLich.map(
-                (v, k) =>
-                  dsDiemDuLich.features.filter(
-                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                  ).length > 0 && (
-                    <div
-                      key={k}
-                      className="d-flex align-items-center"
-                      style={{ padding: "8px 12px" }}
-                    >
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name={`poi-${v.idDanhMucDiaDiem}`}
-                          id={`poi-${v.idDanhMucDiaDiem}`}
-                          value={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            marginRight: 8,
-                          }}
-                          onClick={btDiaDiemDuLich}
-                          defaultChecked={true}
-                        />
-                        <img
-                          style={{
-                            width: 25,
-                            height: 25,
-                            marginRight: 8,
-                          }}
-                          src={
-                            v.tenDanhMuc == "Văn hóa - lịch sử"
-                              ? "https://cdn-icons-png.flaticon.com/512/5778/5778440.png"
-                              : v.tenDanhMuc == "Địa điểm tâm linh"
-                              ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
-                              : v.tenDanhMuc == "Du lịch khám phá"
-                              ? "https://iconape.com/wp-content/png_logo_vector/google-discover.png"
-                              : v.tenDanhMuc == "Du lịch sinh thái"
-                              ? "https://cdn-icons-png.flaticon.com/512/3104/3104941.png"
-                              : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
-                              ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
-                              : v.tenDanhMuc == "Công trình kiến trúc"
-                              ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
-                              : v.tenDanhMuc == "Du lịch giải trí"
-                              ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
-                              : v.tenDanhMuc == "Thương mại - ẩm thực"
-                              ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
-                              : v.tenDanhMuc == "Khu bảo tồn"
-                              ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
-                              : ""
-                          }
-                          alt=""
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            margin: 0,
-                          }}
-                        >
-                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
-                          {
-                            dsDiemDuLich.features.filter(
-                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                            ).length
-                          }{" "}
-                          {translate("destination").replace(
-                            "Địa điểm du lịch",
-                            "điểm"
-                          )}
-                          )
-                        </label>
+              <p
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  padding: 8,
+                  color: "#050505",
+                  margin: "0px 12px",
+                }}
+              >
+                {translate("touristAttraction")} :{" "}
+                {dsDiemDuLich.features.length}{" "}
+                {translate("destination").replace("Địa điểm du lịch", "điểm")}
+              </p>
+              <div
+                style={{
+                  paddingLeft: 20,
+                }}
+              >
+                {dsDanhMucDiaDiemDuLich.map(
+                  (v, k) =>
+                    dsDiemDuLich.features.filter(
+                      (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                    ).length > 0 && (
+                      <div
+                        key={k}
+                        className="d-flex align-items-center"
+                        style={{ padding: "8px 12px" }}
+                      >
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name={`poi-${v.idDanhMucDiaDiem}`}
+                            id={`poi-${v.idDanhMucDiaDiem}`}
+                            value={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              marginRight: 8,
+                            }}
+                            onClick={btDiaDiemDuLich}
+                            defaultChecked={true}
+                          />
+                          <img
+                            style={{
+                              width: 25,
+                              height: 25,
+                              marginRight: 8,
+                            }}
+                            src={
+                              v.tenDanhMuc == "Văn hóa - lịch sử"
+                                ? "https://cdn-icons-png.flaticon.com/512/5778/5778440.png"
+                                : v.tenDanhMuc == "Địa điểm tâm linh"
+                                ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
+                                : v.tenDanhMuc == "Du lịch khám phá"
+                                ? "https://cdn-icons-png.flaticon.com/512/7006/7006898.png"
+                                : v.tenDanhMuc == "Du lịch sinh thái"
+                                ? "https://cdn-icons-png.flaticon.com/512/3104/3104941.png"
+                                : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
+                                ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
+                                : v.tenDanhMuc == "Công trình kiến trúc"
+                                ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
+                                : v.tenDanhMuc == "Du lịch giải trí"
+                                ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
+                                : v.tenDanhMuc == "Thương mại - ẩm thực"
+                                ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
+                                : v.tenDanhMuc == "Khu bảo tồn"
+                                ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
+                                : ""
+                            }
+                            alt=""
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              margin: 0,
+                            }}
+                          >
+                            {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
+                            {
+                              dsDiemDuLich.features.filter(
+                                (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                              ).length
+                            }{" "}
+                            {translate("destination").replace(
+                              "Địa điểm du lịch",
+                              "điểm"
+                            )}
+                            )
+                          </label>
+                        </div>
                       </div>
-                    </div>
-                  )
-              )}
+                    )
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
         {isDanhSachBanDo && (
           <div
             style={{

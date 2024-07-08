@@ -11,7 +11,7 @@ import { Drawer, Dropdown, Menu, Select, Space, Switch } from "antd";
 import { useRecoilState } from "recoil";
 import { LanguageState } from "../../../core/common/atoms/language/languageState";
 import useTranslate from "../../../core/common/hook/useTranslate";
-import proFileIcon from '../../../asset/img/extra/profile.png'
+import proFileIcon from "../../../asset/img/extra/profile.png";
 const HeaderPage = () => {
   const [isOpenPopupLogin, setIsOpenPopupLogin] = useState(false);
   const [isOpenModalRegister, setIsOpenModalRegister] = useState(false);
@@ -23,9 +23,7 @@ const HeaderPage = () => {
 
   const [isOpenShowDrawer, setIsOpenShowDrawer] = useState(false);
   const [swicthLanguage, setSwicthLanguage] = useState(
-    sessionStorage.getItem("language") == "en"
-      ? true
-      : false
+    sessionStorage.getItem("language") == "en" ? true : false
   );
   const [selectLanguage, setSelectLanguage] = useState(
     sessionStorage.getItem("language")
@@ -47,8 +45,8 @@ const HeaderPage = () => {
   };
   useEffect(() => {
     let storage = sessionStorage.getItem(Constants.TOKEN);
-    setStorage(storage)
-  }, [sessionStorage.getItem(Constants.TOKEN)])
+    setStorage(storage);
+  }, [sessionStorage.getItem(Constants.TOKEN)]);
 
   const onLogout = () => {
     setLoading(true);
@@ -105,7 +103,7 @@ const HeaderPage = () => {
     }
     setLoading(true);
     setTimeout(() => setLoading(false), 1000);
-  }
+  };
   // Ngôn ngữ
 
   useEffect(() => {
@@ -218,7 +216,6 @@ const HeaderPage = () => {
     );
   };
 
-
   return (
     <div>
       <header className="main-header style-one bg-white position-fixed">
@@ -254,23 +251,27 @@ const HeaderPage = () => {
                           <li key={index} className="dropdown">
                             <a
                               href={it.link}
-                              className={`${pathname == it.link ? "active" : ""
-                                }`}
+                              className={`${
+                                pathname == it.link ? "active" : ""
+                              }`}
                             >
                               {translate(it.label)}
                             </a>
-                            {it.children
-                              ?
-                              <ul>
-                                {
-                                  it.children.map((item, index) => (
-                                    <li key={index}><a href={item.link} className="">{translate(item.label)} </a></li>
-                                  ))
-                                }
+                            {it.children ? (
+                              <ul
+                                style={{
+                                  width: 400,
+                                }}
+                              >
+                                {it.children.map((item, index) => (
+                                  <li key={index}>
+                                    <a href={item.link} className="">
+                                      {translate(item.label)}{" "}
+                                    </a>
+                                  </li>
+                                ))}
                               </ul>
-                              :
-                              null
-                            }
+                            ) : null}
                           </li>
                         ))}
                       </ul>
@@ -308,16 +309,24 @@ const HeaderPage = () => {
                           //   <a>{translate("logOut")} </a>
                           // </li>
 
-                          <Dropdown overlay={listAction()} trigger={['click']}>
+                          <Dropdown overlay={listAction()} trigger={["click"]}>
                             <a onClick={(e) => e.preventDefault()}>
                               <Space>
                                 <div className="authentication d-flex align-items-center justify-content-start pointer">
                                   <div>
-                                    <img src={proFileIcon} className="avatar-img" />
+                                    <img
+                                      src={proFileIcon}
+                                      className="avatar-img"
+                                    />
                                   </div>
                                   <div>
-                                    <div className="current-user">{sessionStorage.getItem("firstName")} {sessionStorage.getItem("lastName")} </div>
-                                    <div className="current-role">{sessionStorage.getItem("role")}</div>
+                                    <div className="current-user">
+                                      {sessionStorage.getItem("firstName")}{" "}
+                                      {sessionStorage.getItem("lastName")}{" "}
+                                    </div>
+                                    <div className="current-role">
+                                      {sessionStorage.getItem("role")}
+                                    </div>
                                   </div>
                                 </div>
                               </Space>
@@ -375,8 +384,13 @@ const HeaderPage = () => {
                       <img src={proFileIcon} className="avatar-img" />
                     </div>
                     <div>
-                      <div className="current-user">{sessionStorage.getItem("firstName")} {sessionStorage.getItem("lastName")} </div>
-                      <div className="current-role">{sessionStorage.getItem("role")}</div>
+                      <div className="current-user">
+                        {sessionStorage.getItem("firstName")}{" "}
+                        {sessionStorage.getItem("lastName")}{" "}
+                      </div>
+                      <div className="current-role">
+                        {sessionStorage.getItem("role")}
+                      </div>
                     </div>
                   </li>
                   {Constants.Menu.List.map((it, index) => (

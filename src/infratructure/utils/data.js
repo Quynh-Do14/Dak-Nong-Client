@@ -47,6 +47,7 @@ export const translations = {
     footerInfo:
       "Come to Dak Nong To have truly memorable travel experiences Dak Nong, a wonderful land!",
     map: "Map",
+    listmap: "List Map",
     contactInfo: "Contact Information",
     address: "Address",
     phone: "Phone Number",
@@ -168,15 +169,18 @@ export const translations = {
 
     // Map ////////
     satelliteImageMapOfDakNong: "Satellite image map of Dak Nong",
-    dakNongOverlayMap: "Dak Nong overlay map",
-    mapOfTouristAttractionsInDakNongProvince: "Map of tourist attractions",
-    dakNongProvinceTouristRouteMap: "Dak Nong province tourist route map",
+    dakNongOverlayMap: "Map of current surface cover status in Dak Nong province in 2022",
+    mapOfTouristAttractionsInDakNongProvince: "Map of tourist flow in Dak Nong province",
+    dakNongProvinceTouristRouteMap: "Map of tourist routes of Dak Nong province",
+    bando: 'Map of tourist attractions in Dak Nong province',
     naturalTourismResourcesMapOfDakNongProvince:
-      "Natural tourism resources map",
+      "Map of natural tourism resources of Dak Nong province",
     culturalTourismResourcesMapOfDakNongProvince:
-      "Cultural tourism resources map",
+      "Map of cultural tourism resources of Dak Nong province",
     mapOfNaturalTourismResourcesOfTheProvinceDakNong:
-      "Map of natural tourism resources",
+      "Map of technical conditions for tourism in Dak Nong province",
+    tourismAtlasOfDakNongProvince: "Tourism Atlas of Dak Nong province",
+    anhvetinhlopphu: 'Overlay satellite image',
     /////
 
     touristRouteMap: "Tourist route map",
@@ -208,6 +212,7 @@ export const translations = {
     domesticCirculationCompany: "Domestic circulation company",
     otherAccommodationFacilities: "Other accommodation facilities",
     satelliteImage: "Satellite image",
+    lopLuongMua: "Precipitation class",
     tourismFacilities: "Tourism facilities",
     naturalTourismResources: "Natural tourism resources",
     culturalTourismResources: "Cultural tourism resources",
@@ -267,6 +272,7 @@ export const translations = {
     footerInfo:
       "Hãy đến với Đắk Nông Để có những trải nghiệm du lich thực sự đáng nhớ Đắk Nông, vùng đất tuyệt vời !",
     map: "Bản đồ",
+    listmap: "Các bản đồ khác",
     contactInfo: "Thông tin liên hệ",
     address: "Địa chỉ",
     phone: "SĐT Liên hệ",
@@ -329,7 +335,7 @@ export const translations = {
     ////
     nameTour: "Tên địa điểm",
     enterName: "Nhập tên",
-    district: "Quận huyện",
+    district: "TP/Huyện",
     nameFestival: "Tên Lễ hội",
     startDate: "Ngày bắt đầu",
     endDate: "Ngày kết thúc",
@@ -386,15 +392,18 @@ export const translations = {
     // Map ////////
 
     satelliteImageMapOfDakNong: "Bản đồ Ảnh vệ tinh",
-    dakNongOverlayMap: "Bản đồ lớp phủ",
-    mapOfTouristAttractionsInDakNongProvince: "Bản đồ luống khách du lịch",
-    dakNongProvinceTouristRouteMap: "Bản đồ tuyến du lịch",
+    dakNongOverlayMap: "Bản đồ hiện trạng lớp phủ bề mặt tỉnh Đắk Nông năm 2022",
+    mapOfTouristAttractionsInDakNongProvince: "Bản đồ luồng khách du lịch tỉnh Đắk Nông",
+    dakNongProvinceTouristRouteMap: "Bản đồ tuyến du lịch tỉnh Đắk Nông",
+    bando: 'Bản đồ điểm du lịch tỉnh Đắk Nông',
     naturalTourismResourcesMapOfDakNongProvince:
-      "Bản đồ Tài nguyên du lịch tự nhiên",
+      "Bản đồ tài nguyên du lịch tự nhiên tỉnh Đắk Nông",
     culturalTourismResourcesMapOfDakNongProvince:
-      "Bản đồ Tài nguyên du lịch văn hóa",
+      "Bản đồ tài nguyên du lịch văn hóa tỉnh Đắk Nông",
     mapOfNaturalTourismResourcesOfTheProvinceDakNong:
-      "Bản đồ cơ sở vật chất du lịch",
+      "Bản đồ điều kiện kỹ thuật du lịch tỉnh Đắk Nông",
+    tourismAtlasOfDakNongProvince: "Atlas du lịch tỉnh Đắk Nông",
+    anhvetinhlopphu: 'Ảnh lớp phủ',
     /////////////////
     touristRouteMap: "Bản đồ tuyến du lịch",
     touristRoutes: "Tuyến du lịch",
@@ -426,6 +435,7 @@ export const translations = {
     domesticCirculationCompany: "Cty lưu hành nội địa",
     otherAccommodationFacilities: "Cơ sở lưu trú khác",
     satelliteImage: "Ảnh vệ tinh",
+    lopLuongMua: "Lớp lượng mưa",
     tourismFacilities: "Cơ sở vật chất du lịch",
     naturalTourismResources: "Tài nguyên du lịch tự nhiên",
     culturalTourismResources: "Tài nguyên du lịch văn hoá",
@@ -437,7 +447,7 @@ export const translations = {
     farm: "Trang trại",
     abbey: "Tu viện",
     park: "Công viên",
-    riverStream: "Sông, oSuoiosF",
+    riverStream: "Sông, Suối",
     touristArea: "Khu du lịch",
     attractiveTouristDestinationArea: "Vùng điểm du lịch hấp dẫn",
     addressDN: "Đường 23/3, TP.Gia Nghĩa,Đắk Nông",
