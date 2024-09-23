@@ -74,6 +74,9 @@ const ExtraComponent = () => {
 
   const { translate } = useTranslate();
 
+  console.log(sessionStorage.getItem("language"));
+  
+
   const renderDropdownSearch = () => {
     if (selectSearch == "DIEMDULICH") {
       return (
@@ -271,8 +274,7 @@ const ExtraComponent = () => {
               (v) => v.properties.tenDanhMuc == "Du lịch khám phá"
             ).length > 0
           ) {
-            uriImg =
-              "https://cdn-icons-png.flaticon.com/512/7006/7006898.png";
+            uriImg = "https://cdn-icons-png.flaticon.com/512/7006/7006898.png";
           }
           if (
             v.tenDanhMuc == "Du lịch sinh thái" &&
@@ -493,7 +495,10 @@ const ExtraComponent = () => {
                 "icon-image": `img${feature.properties.idDanhMuc}`,
                 // "icon-allow-overlap": true,
                 "icon-size": 0.05,
-                "text-field": ["get", "tenDiaDiem"],
+                "text-field":
+                  sessionStorage.getItem("language") == "vi"
+                    ? ["get", "tenDiaDiem"]
+                    : ["get", "tenDiaDiemUS"],
                 "text-size": 11,
                 "text-offset": [0, 2],
                 "icon-offset": [0, -17],
@@ -523,7 +528,11 @@ const ExtraComponent = () => {
         color: #d32f2f;
         font-size: 11px;
         text-transform: uppercase;
-    ">${e.features[0].properties.tenDanhMuc}</p>
+    ">${
+      sessionStorage.getItem("language") == "vi"
+        ? e.features[0].properties.tenDanhMuc
+        : e.features[0].properties.tenDanhMucUS
+    }</p>
                 <a href="/tour-view?${
                   e.features[0].properties.idDiaDiem
                 }" style="
@@ -531,13 +540,23 @@ const ExtraComponent = () => {
         font-size: 18px;
         width: 240px;
         font-weight: 500;
-    ">${e.features[0].properties.tenDiaDiem}</a>
+    ">${
+      sessionStorage.getItem("language") == "vi"
+        ? e.features[0].properties.tenDiaDiem
+        : e.features[0].properties.tenDiaDiemUS
+    }</a>
                 <p style="
         font-size: 11px;
         color: #333;
         font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${
-                e.features[0].properties.gioDongCua
+    ">${
+      sessionStorage.getItem("language") == "vi"
+        ? e.features[0].properties.gioMoCua
+        : e.features[0].properties.gioMoCua
+    } - ${
+                sessionStorage.getItem("language") == "vi"
+                  ? e.features[0].properties.gioDongCua
+                  : e.features[0].properties.gioDongCua
               }</p>
                 <p style="
         width: 240px;
@@ -549,7 +568,11 @@ const ExtraComponent = () => {
         font-size: 13px;
         line-height: 1.6;
         color: #333;
-    ">${e.features[0].properties.moTa}</p>
+    ">${
+      sessionStorage.getItem("language") == "vi"
+        ? e.features[0].properties.moTa
+        : e.features[0].properties.moTaUS
+    }</p>
             </div>
         </div>`;
 
@@ -595,7 +618,10 @@ const ExtraComponent = () => {
                 "icon-image": `img${feature.properties.idDanhMuc}`,
                 // "icon-allow-overlap": true,
                 "icon-size": 0.05,
-                "text-field": ["get", "tenDiaDiem"],
+                "text-field":
+                  sessionStorage.getItem("language") == "vi"
+                    ? ["get", "tenDiaDiem"]
+                    : ["get", "tenDiaDiemUS"],
                 "text-size": 11,
                 "text-offset": [0, 2],
                 "icon-offset": [0, -17],
@@ -611,49 +637,67 @@ const ExtraComponent = () => {
             map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
               const coordinates = e.features[0].geometry.coordinates.slice();
               const html = `<div>
-            <img src="${
-              e.features[0].properties.hinhAnh.indexOf("https") != -1
-                ? e.features[0].properties.hinhAnh
-                : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                ? e.features[0].properties.hinhAnh
-                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-            }" alt="" style="min-width: 280px;min-height: 120px;">
-            <div style="
-                padding: 20px;
-            ">
-                <p style="
-        color: #d32f2f;
-        font-size: 11px;
-        text-transform: uppercase;
-    ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/tour-view?${
-                  e.features[0].properties.idDiaDiem
-                }" style="
-        color: #333;
-        font-size: 18px;
-        width: 240px;
-        font-weight: 500;
-    ">${e.features[0].properties.tenDiaDiem}</a>
-                <p style="
-        font-size: 11px;
-        color: #333;
-        font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${
-                e.features[0].properties.gioDongCua
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <div style="
+                  padding: 20px;
+              ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.tenDanhMuc
+          : e.features[0].properties.tenDanhMucUS
+      }</p>
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
+                  }" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.tenDiaDiem
+          : e.features[0].properties.tenDiaDiemUS
+      }</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.gioMoCua
+          : e.features[0].properties.gioMoCua
+      } - ${
+                sessionStorage.getItem("language") == "vi"
+                  ? e.features[0].properties.gioDongCua
+                  : e.features[0].properties.gioDongCua
               }</p>
-                <p style="
-        width: 240px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: 3;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        font-size: 13px;
-        line-height: 1.6;
-        color: #333;
-    ">${e.features[0].properties.moTa}</p>
-            </div>
-        </div>`;
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.moTa
+          : e.features[0].properties.moTaUS
+      }</p>
+              </div>
+          </div>`;
 
               while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -697,7 +741,10 @@ const ExtraComponent = () => {
                 "icon-image": `img${feature.properties.idDanhMuc}`,
                 // "icon-allow-overlap": true,
                 "icon-size": 0.05,
-                "text-field": ["get", "tenDiaDiem"],
+                "text-field":
+                  sessionStorage.getItem("language") == "vi"
+                    ? ["get", "tenDiaDiem"]
+                    : ["get", "tenDiaDiemUS"],
                 "text-size": 11,
                 "text-offset": [0, 2],
                 "icon-offset": [0, -17],
@@ -713,49 +760,67 @@ const ExtraComponent = () => {
             map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
               const coordinates = e.features[0].geometry.coordinates.slice();
               const html = `<div>
-            <img src="${
-              e.features[0].properties.hinhAnh.indexOf("https") != -1
-                ? e.features[0].properties.hinhAnh
-                : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                ? e.features[0].properties.hinhAnh
-                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-            }" alt="" style="min-width: 280px;min-height: 120px;">
-            <div style="
-                padding: 20px;
-            ">
-                <p style="
-        color: #d32f2f;
-        font-size: 11px;
-        text-transform: uppercase;
-    ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/tour-view?${
-                  e.features[0].properties.idDiaDiem
-                }" style="
-        color: #333;
-        font-size: 18px;
-        width: 240px;
-        font-weight: 500;
-    ">${e.features[0].properties.tenDiaDiem}</a>
-                <p style="
-        font-size: 11px;
-        color: #333;
-        font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${
-                e.features[0].properties.gioDongCua
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <div style="
+                  padding: 20px;
+              ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.tenDanhMuc
+          : e.features[0].properties.tenDanhMucUS
+      }</p>
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
+                  }" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.tenDiaDiem
+          : e.features[0].properties.tenDiaDiemUS
+      }</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.gioMoCua
+          : e.features[0].properties.gioMoCua
+      } - ${
+                sessionStorage.getItem("language") == "vi"
+                  ? e.features[0].properties.gioDongCua
+                  : e.features[0].properties.gioDongCua
               }</p>
-                <p style="
-        width: 240px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: 3;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        font-size: 13px;
-        line-height: 1.6;
-        color: #333;
-    ">${e.features[0].properties.moTa}</p>
-            </div>
-        </div>`;
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.moTa
+          : e.features[0].properties.moTaUS
+      }</p>
+              </div>
+          </div>`;
 
               while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -799,7 +864,10 @@ const ExtraComponent = () => {
                 "icon-image": `img${feature.properties.idDanhMuc}`,
                 // "icon-allow-overlap": true,
                 "icon-size": 0.05,
-                "text-field": ["get", "tenDiaDiem"],
+                "text-field":
+                  sessionStorage.getItem("language") == "vi"
+                    ? ["get", "tenDiaDiem"]
+                    : ["get", "tenDiaDiemUS"],
                 "text-size": 11,
                 "text-offset": [0, 2],
                 "icon-offset": [0, -17],
@@ -815,50 +883,67 @@ const ExtraComponent = () => {
             map.on("click", `poi-${feature.properties.idDanhMuc}`, (e) => {
               const coordinates = e.features[0].geometry.coordinates.slice();
               const html = `<div>
-            <img src="${
-              e.features[0].properties.hinhAnh.indexOf("https") != -1
-                ? e.features[0].properties.hinhAnh
-                : e.features[0].properties.hinhAnh.indexOf("http") != -1
-                ? e.features[0].properties.hinhAnh
-                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
-            }" alt="" style="min-width: 280px;min-height: 120px;">
-            <div style="
-                padding: 20px;
-            ">
-                <p style="
-        color: #d32f2f;
-        font-size: 11px;
-        text-transform: uppercase;
-    ">${e.features[0].properties.tenDanhMuc}</p>
-                <a href="/tour-view?${
-                  e.features[0].properties.idDiaDiem
-                }" style="
-        color: #333;
-        font-size: 18px;
-        width: 240px;
-        font-weight: 500;
-    ">${e.features[0].properties.tenDiaDiem}</a>
-                <p style="
-        font-size: 11px;
-        color: #333;
-        font-weight: 400;
-    ">${e.features[0].properties.gioMoCua} - ${
-                e.features[0].properties.gioDongCua
+              <img src="${
+                e.features[0].properties.hinhAnh.indexOf("https") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : e.features[0].properties.hinhAnh.indexOf("http") != -1
+                  ? e.features[0].properties.hinhAnh
+                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+              }" alt="" style="min-width: 280px;min-height: 120px;">
+              <div style="
+                  padding: 20px;
+              ">
+                  <p style="
+          color: #d32f2f;
+          font-size: 11px;
+          text-transform: uppercase;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.tenDanhMuc
+          : e.features[0].properties.tenDanhMucUS
+      }</p>
+                  <a href="/tour-view?${
+                    e.features[0].properties.idDiaDiem
+                  }" style="
+          color: #333;
+          font-size: 18px;
+          width: 240px;
+          font-weight: 500;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.tenDiaDiem
+          : e.features[0].properties.tenDiaDiemUS
+      }</a>
+                  <p style="
+          font-size: 11px;
+          color: #333;
+          font-weight: 400;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.gioMoCua
+          : e.features[0].properties.gioMoCua
+      } - ${
+                sessionStorage.getItem("language") == "vi"
+                  ? e.features[0].properties.gioDongCua
+                  : e.features[0].properties.gioDongCua
               }</p>
-                <p style="
-        width: 240px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: 3;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        font-size: 13px;
-        line-height: 1.6;
-        color: #333;
-    ">${e.features[0].properties.moTa}</p>
-            </div>
-        </div>`;
-
+                  <p style="
+          width: 240px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #333;
+      ">${
+        sessionStorage.getItem("language") == "vi"
+          ? e.features[0].properties.moTa
+          : e.features[0].properties.moTaUS
+      }</p>
+              </div>
+          </div>`;
               while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
               }
@@ -890,10 +975,10 @@ const ExtraComponent = () => {
           scale: "noaa",
         });
         map.addLayer(rainLayer);
-      rainLayer.on("refresh", (data) => {
-        console.log(data.timestamp);
-      });
-      map.setLayoutProperty("rain", "visibility", "none");
+        rainLayer.on("refresh", (data) => {
+          console.log(data.timestamp);
+        });
+        map.setLayoutProperty("rain", "visibility", "none");
       });
     }
     setIsLoading(false);
@@ -901,7 +986,7 @@ const ExtraComponent = () => {
 
   useEffect(() => {
     fecthData();
-  }, []);
+  }, [sessionStorage.getItem("language")]);
 
   const btDiaDiemDuLich = (e) => {
     document.getElementById(e.target.value).checked = e.target.checked;
@@ -1187,550 +1272,557 @@ const ExtraComponent = () => {
         }}
       >
         <div id="map" ref={mapContainer}></div>
-        {isLopBanDo && dsDanhMucDiaDiemDuLich.length > 0 && dsDiemDuLich.features.length && (
-          <div
-            style={{
-              backgroundColor: "#fff",
-              padding: 4,
-              position: "absolute",
-              top: 12,
-              left: 10,
-              boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
-              width: 380,
-              height: "calc(100vh - 104px - 180px)",
-              overflowY: "scroll",
-              paddingBottom: 12,
-            }}
-          >
+        {isLopBanDo &&
+          dsDanhMucDiaDiemDuLich.length > 0 &&
+          dsDiemDuLich.features.length && (
             <div
-              className="d-flex flex-row justify-content-between"
               style={{
-                marginBottom: 12,
+                backgroundColor: "#fff",
+                padding: 4,
+                position: "absolute",
+                top: 12,
+                left: 10,
+                boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.2)`,
+                width: 380,
+                height: "calc(100vh - 104px - 180px)",
+                overflowY: "scroll",
+                paddingBottom: 12,
               }}
             >
+              <div
+                className="d-flex flex-row justify-content-between"
+                style={{
+                  marginBottom: 12,
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: 15,
+                    fontWeight: "bold",
+                    padding: 8,
+                    color: "#094174",
+                    textAlign: "center",
+                    borderBottom: "1px solid #ccc",
+                    margin: "0px 12px",
+                  }}
+                >
+                  {translate("type")}
+                </p>
+                <button
+                  type="button"
+                  // className="close"
+                  aria-label="Close"
+                  onClick={() => {
+                    setIsLopBanDo(false);
+                  }}
+                  style={{
+                    padding: "4px 16px",
+                  }}
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {JSON.stringify(anhVeTinh) != "{}" &&
+                anhVeTinh.anhVeTinh != "" &&
+                anhVeTinh.anhChiSo != "" && (
+                  <>
+                    <p
+                      style={{
+                        fontSize: 15,
+                        fontWeight: "bold",
+                        padding: 8,
+                        color: "#050505",
+                        margin: "0px 12px",
+                      }}
+                    >
+                      AVT ({anhVeTinh.thoiGianBatDau} -{" "}
+                      {anhVeTinh.thoiGianKetThuc})
+                    </p>
+                    <div
+                      style={{
+                        paddingLeft: 20,
+                      }}
+                    >
+                      <div
+                        className="d-flex align-items-center"
+                        style={{ padding: "8px 12px" }}
+                      >
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name={`anhVeTinh`}
+                            id={`anhVeTinh`}
+                            value={`anhVeTinh`}
+                            style={{
+                              marginRight: 8,
+                            }}
+                            onClick={btDiaDiemDuLich}
+                            defaultChecked={true}
+                          />
+                          <img
+                            style={{
+                              width: 25,
+                              height: 25,
+                              marginRight: 8,
+                            }}
+                            src={
+                              "https://cdn-icons-png.flaticon.com/512/3419/3419993.png"
+                            }
+                            alt=""
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor={`anhVeTinh`}
+                            style={{
+                              margin: 0,
+                            }}
+                          >
+                            Sentinel 2
+                          </label>
+                        </div>
+                      </div>
+                      <div
+                        className="d-flex align-items-center"
+                        style={{ padding: "8px 12px" }}
+                      >
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name={`anhChiSo`}
+                            id={`anhChiSo`}
+                            value={`anhChiSo`}
+                            style={{
+                              marginRight: 8,
+                            }}
+                            onClick={btDiaDiemDuLich}
+                            defaultChecked={true}
+                          />
+                          <img
+                            style={{
+                              width: 25,
+                              height: 25,
+                              marginRight: 8,
+                            }}
+                            src={
+                              "https://thumb.tildacdn.com/tild3138-6438-4433-a266-383138636535/-/resize/592x/-/format/webp/RU_onesoil_12_NDVI_4.png"
+                            }
+                            alt=""
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor={`anhChiSo`}
+                            style={{
+                              margin: 0,
+                            }}
+                          >
+                            NDVI
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               <p
                 style={{
                   fontSize: 15,
                   fontWeight: "bold",
                   padding: 8,
-                  color: "#094174",
-                  textAlign: "center",
-                  borderBottom: "1px solid #ccc",
+                  color: "#050505",
                   margin: "0px 12px",
                 }}
               >
-                {translate("type")}
+                {translate("touristAttraction")} :{" "}
+                {dsDiemDuLich.features.length}{" "}
+                {translate("destination").replace("Địa điểm du lịch", "điểm")}
               </p>
-              <button
-                type="button"
-                // className="close"
-                aria-label="Close"
-                onClick={() => {
-                  setIsLopBanDo(false);
-                }}
-                style={{
-                  padding: "4px 16px",
-                }}
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            {JSON.stringify(anhVeTinh) != "{}" &&
-              anhVeTinh.anhVeTinh != "" &&
-              anhVeTinh.anhChiSo != "" && (
-                <>
-                  <p
-                    style={{
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      padding: 8,
-                      color: "#050505",
-                      margin: "0px 12px",
-                    }}
-                  >
-                    AVT ({anhVeTinh.thoiGianBatDau} -{" "}
-                    {anhVeTinh.thoiGianKetThuc})
-                  </p>
-                  <div
-                    style={{
-                      paddingLeft: 20,
-                    }}
-                  >
-                    <div
-                      className="d-flex align-items-center"
-                      style={{ padding: "8px 12px" }}
-                    >
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name={`anhVeTinh`}
-                          id={`anhVeTinh`}
-                          value={`anhVeTinh`}
-                          style={{
-                            marginRight: 8,
-                          }}
-                          onClick={btDiaDiemDuLich}
-                          defaultChecked={true}
-                        />
-                        <img
-                          style={{
-                            width: 25,
-                            height: 25,
-                            marginRight: 8,
-                          }}
-                          src={
-                            "https://cdn-icons-png.flaticon.com/512/3419/3419993.png"
-                          }
-                          alt=""
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`anhVeTinh`}
-                          style={{
-                            margin: 0,
-                          }}
-                        >
-                          Sentinel 2
-                        </label>
-                      </div>
-                    </div>
-                    <div
-                      className="d-flex align-items-center"
-                      style={{ padding: "8px 12px" }}
-                    >
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name={`anhChiSo`}
-                          id={`anhChiSo`}
-                          value={`anhChiSo`}
-                          style={{
-                            marginRight: 8,
-                          }}
-                          onClick={btDiaDiemDuLich}
-                          defaultChecked={true}
-                        />
-                        <img
-                          style={{
-                            width: 25,
-                            height: 25,
-                            marginRight: 8,
-                          }}
-                          src={
-                            "https://thumb.tildacdn.com/tild3138-6438-4433-a266-383138636535/-/resize/592x/-/format/webp/RU_onesoil_12_NDVI_4.png"
-                          }
-                          alt=""
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`anhChiSo`}
-                          style={{
-                            margin: 0,
-                          }}
-                        >
-                          NDVI
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-            <p
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                padding: 8,
-                color: "#050505",
-                margin: "0px 12px",
-              }}
-            >
-              {translate("touristAttraction")} : {dsDiemDuLich.features.length}{" "}
-              {translate("destination").replace("Địa điểm du lịch", "điểm")}
-            </p>
-            <div
-              style={{
-                paddingLeft: 20,
-              }}
-            >
-              {dsDanhMucDiaDiemDuLich.map(
-                (v, k) =>
-                  dsDiemDuLich.features.filter(
-                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                  ).length > 0 && (
-                    <div
-                      key={k}
-                      className="d-flex align-items-center"
-                      style={{ padding: "8px 12px" }}
-                    >
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name={`poi-${v.idDanhMucDiaDiem}`}
-                          id={`poi-${v.idDanhMucDiaDiem}`}
-                          value={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            marginRight: 8,
-                          }}
-                          onClick={btDiaDiemDuLich}
-                          defaultChecked={true}
-                        />
-                        <img
-                          style={{
-                            width: 25,
-                            height: 25,
-                            marginRight: 8,
-                          }}
-                          src={
-                            v.tenDanhMuc == "Văn hóa - lịch sử"
-                              ? "https://cdn-icons-png.flaticon.com/512/5778/5778440.png"
-                              : v.tenDanhMuc == "Địa điểm tâm linh"
-                              ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
-                              : v.tenDanhMuc == "Du lịch khám phá"
-                              ? "https://cdn-icons-png.flaticon.com/512/7006/7006898.png"
-                              : v.tenDanhMuc == "Du lịch sinh thái"
-                              ? "https://cdn-icons-png.flaticon.com/512/3104/3104941.png"
-                              : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
-                              ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
-                              : v.tenDanhMuc == "Công trình kiến trúc"
-                              ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
-                              : v.tenDanhMuc == "Du lịch giải trí"
-                              ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
-                              : v.tenDanhMuc == "Thương mại - ẩm thực"
-                              ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
-                              : v.tenDanhMuc == "Khu bảo tồn"
-                              ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
-                              : ""
-                          }
-                          alt=""
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            margin: 0,
-                          }}
-                        >
-                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
-                          {
-                            dsDiemDuLich.features.filter(
-                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                            ).length
-                          }{" "}
-                          {translate("destination").replace(
-                            "Địa điểm du lịch",
-                            "điểm"
-                          )}
-                          )
-                        </label>
-                      </div>
-                    </div>
-                  )
-              )}
-            </div>
-            <p
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                padding: 8,
-                color: "#050505",
-                margin: "0px 12px",
-              }}
-            >
-              {translate("accommodationPoint")}: {dsLuuTru.features.length}{" "}
-              {translate("destination").replace("Địa điểm du lịch", "điểm")}
-            </p>
-            <div
-              style={{
-                paddingLeft: 20,
-              }}
-            >
-              {dsDanhMucLuuTru.map(
-                (v, k) =>
-                  dsLuuTru.features.filter(
-                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                  ).length > 0 && (
-                    <div
-                      key={k}
-                      className="d-flex align-items-center"
-                      style={{ padding: "8px 12px" }}
-                    >
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name={`poi-${v.idDanhMucDiaDiem}`}
-                          id={`poi-${v.idDanhMucDiaDiem}`}
-                          value={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            marginRight: 8,
-                          }}
-                          onClick={btDiaDiemDuLich}
-                          defaultChecked={true}
-                        />
-                        <img
-                          style={{
-                            width: 25,
-                            height: 25,
-                            marginRight: 8,
-                          }}
-                          src={
-                            v.tenDanhMuc == "Homestay"
-                              ? "https://cdn-icons-png.flaticon.com/512/7059/7059852.png"
-                              : v.tenDanhMuc == "Khách sạn"
-                              ? "https://cdn-icons-png.flaticon.com/512/235/235889.png"
-                              : v.tenDanhMuc == "Nhà nghỉ"
-                              ? "https://cdn3.iconfinder.com/data/icons/flat-building-1/70/1-512.png"
-                              : ""
-                          }
-                          alt=""
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            margin: 0,
-                          }}
-                        >
-                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
-                          {
-                            dsLuuTru.features.filter(
-                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                            ).length
-                          }{" "}
-                          {translate("destination").replace(
-                            "Địa điểm du lịch",
-                            "điểm"
-                          )}
-                          )
-                        </label>
-                      </div>
-                    </div>
-                  )
-              )}
-            </div>
-            <p
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                padding: 8,
-                color: "#050505",
-                margin: "0px 12px",
-              }}
-            >
-              {translate("cuisine")} : {dsAmThuc.features.length}{" "}
-              {translate("destination").replace("Địa điểm du lịch", "điểm")}
-            </p>
-            <div
-              style={{
-                paddingLeft: 20,
-              }}
-            >
-              {dsDanhMucAmThuc.map(
-                (v, k) =>
-                  dsAmThuc.features.filter(
-                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                  ).length > 0 && (
-                    <div
-                      key={k}
-                      className="d-flex align-items-center"
-                      style={{ padding: "8px 12px" }}
-                    >
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name={`poi-${v.idDanhMucDiaDiem}`}
-                          id={`poi-${v.idDanhMucDiaDiem}`}
-                          value={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            marginRight: 8,
-                          }}
-                          onClick={btDiaDiemDuLich}
-                          defaultChecked={true}
-                        />
-                        <img
-                          style={{
-                            width: 25,
-                            height: 25,
-                            marginRight: 8,
-                          }}
-                          src={
-                            v.tenDanhMuc == "Nhà hàng"
-                              ? "https://cdn-icons-png.flaticon.com/512/4287/4287725.png"
-                              : ""
-                          }
-                          alt=""
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            margin: 0,
-                          }}
-                        >
-                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
-                          {
-                            dsAmThuc.features.filter(
-                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                            ).length
-                          }{" "}
-                          {translate("destination").replace(
-                            "Địa điểm du lịch",
-                            "điểm"
-                          )}
-                          )
-                        </label>
-                      </div>
-                    </div>
-                  )
-              )}
-            </div>
-            <p
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                padding: 8,
-                color: "#050505",
-                margin: "0px 12px",
-              }}
-            >
-              {translate("rentService")} : {dsPhuongTien.features.length}{" "}
-              {translate("destination").replace("Địa điểm du lịch", "điểm")}
-            </p>
-            <div
-              style={{
-                paddingLeft: 20,
-              }}
-            >
-              {dsDanhMucPhuongTien.map(
-                (v, k) =>
-                  dsPhuongTien.features.filter(
-                    (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                  ).length > 0 && (
-                    <div
-                      key={k}
-                      className="d-flex align-items-center"
-                      style={{ padding: "8px 12px" }}
-                    >
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name={`poi-${v.idDanhMucDiaDiem}`}
-                          id={`poi-${v.idDanhMucDiaDiem}`}
-                          value={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            marginRight: 8,
-                          }}
-                          onClick={btDiaDiemDuLich}
-                          defaultChecked={true}
-                        />
-                        <img
-                          style={{
-                            width: 25,
-                            height: 25,
-                            marginRight: 8,
-                          }}
-                          src={
-                            v.tenDanhMuc == "Xe máy"
-                              ? "https://cdn-icons-png.flaticon.com/512/1986/1986937.png"
-                              : v.tenDanhMuc == "Xe đạp"
-                              ? "https://cdn-icons-png.flaticon.com/512/2972/2972185.png"
-                              : v.tenDanhMuc == "Ô tô"
-                              ? "https://cdn-icons-png.flaticon.com/512/2554/2554936.png"
-                              : v.tenDanhMuc == "Xe điện"
-                              ? "https://cdn-icons-png.flaticon.com/512/1574/1574055.png"
-                              : ""
-                          }
-                          alt=""
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`poi-${v.idDanhMucDiaDiem}`}
-                          style={{
-                            margin: 0,
-                          }}
-                        >
-                          {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
-                          {
-                            dsPhuongTien.features.filter(
-                              (va) => va.properties.tenDanhMuc == v.tenDanhMuc
-                            ).length
-                          }{" "}
-                          {translate("destination").replace(
-                            "Địa điểm du lịch",
-                            "điểm"
-                          )}
-                          )
-                        </label>
-                      </div>
-                    </div>
-                  )
-              )}
-            </div>
-            <p
-              style={{
-                fontSize: 15,
-                fontWeight: "bold",
-                padding: 8,
-                color: "#050505",
-                margin: "0px 12px",
-              }}
-            >
-              {translate("lopLuongMua")}
-            </p>
-            <div
-              style={{
-                paddingLeft: 20,
-              }}
-            >
               <div
-                className="d-flex align-items-center"
-                style={{ padding: "8px 12px" }}
+                style={{
+                  paddingLeft: 20,
+                }}
               >
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name={`rain`}
-                    id={`rain`}
-                    value={`rain`}
-                    style={{
-                      marginRight: 8,
-                    }}
-                    onClick={btDiaDiemDuLich}
-                  />
-                  <img
-                    style={{
-                      width: 25,
-                      height: 25,
-                      marginRight: 8,
-                    }}
-                    src={
-                      "https://cdn-icons-png.flaticon.com/512/9342/9342255.png"
-                    }
-                    alt=""
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor={`rain`}
-                    style={{
-                      margin: 0,
-                    }}
-                  >
-                    {translate("lopLuongMua")}
-                  </label>
-                </div>
+                {dsDanhMucDiaDiemDuLich.map(
+                  (v, k) =>
+                    dsDiemDuLich.features.filter(
+                      (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                    ).length > 0 && (
+                      <div
+                        key={k}
+                        className="d-flex align-items-center"
+                        style={{ padding: "8px 12px" }}
+                      >
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name={`poi-${v.idDanhMucDiaDiem}`}
+                            id={`poi-${v.idDanhMucDiaDiem}`}
+                            value={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              marginRight: 8,
+                            }}
+                            onClick={btDiaDiemDuLich}
+                            defaultChecked={true}
+                          />
+                          <img
+                            style={{
+                              width: 25,
+                              height: 25,
+                              marginRight: 8,
+                            }}
+                            src={
+                              v.tenDanhMuc == "Văn hóa - lịch sử"
+                                ? "https://cdn-icons-png.flaticon.com/512/5778/5778440.png"
+                                : v.tenDanhMuc == "Địa điểm tâm linh"
+                                ? "https://cdn-icons-png.flaticon.com/512/2510/2510482.png"
+                                : v.tenDanhMuc == "Du lịch khám phá"
+                                ? "https://cdn-icons-png.flaticon.com/512/7006/7006898.png"
+                                : v.tenDanhMuc == "Du lịch sinh thái"
+                                ? "https://cdn-icons-png.flaticon.com/512/3104/3104941.png"
+                                : v.tenDanhMuc == "Du lịch nghỉ dưỡng"
+                                ? "https://cdn-icons-png.flaticon.com/512/5273/5273660.png"
+                                : v.tenDanhMuc == "Công trình kiến trúc"
+                                ? "https://cdn4.iconfinder.com/data/icons/hotel-105/64/hotel_building_architecture_tourism_travel_five_star-512.png"
+                                : v.tenDanhMuc == "Du lịch giải trí"
+                                ? "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_06-512.png"
+                                : v.tenDanhMuc == "Thương mại - ẩm thực"
+                                ? "https://cdn-icons-png.flaticon.com/512/1205/1205756.png"
+                                : v.tenDanhMuc == "Khu bảo tồn"
+                                ? "https://cdn-icons-png.flaticon.com/512/3937/3937245.png"
+                                : ""
+                            }
+                            alt=""
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              margin: 0,
+                            }}
+                          >
+                            {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
+                            {
+                              dsDiemDuLich.features.filter(
+                                (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                              ).length
+                            }{" "}
+                            {translate("destination").replace(
+                              "Địa điểm du lịch",
+                              "điểm"
+                            )}
+                            )
+                          </label>
+                        </div>
+                      </div>
+                    )
+                )}
               </div>
-              <img src="./assets/img/chuGiaiLuongMua.png" alt=""  style={{
-                maxWidth:50
-              }}/>
+              <p
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  padding: 8,
+                  color: "#050505",
+                  margin: "0px 12px",
+                }}
+              >
+                {translate("accommodationPoint")}: {dsLuuTru.features.length}{" "}
+                {translate("destination").replace("Địa điểm du lịch", "điểm")}
+              </p>
+              <div
+                style={{
+                  paddingLeft: 20,
+                }}
+              >
+                {dsDanhMucLuuTru.map(
+                  (v, k) =>
+                    dsLuuTru.features.filter(
+                      (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                    ).length > 0 && (
+                      <div
+                        key={k}
+                        className="d-flex align-items-center"
+                        style={{ padding: "8px 12px" }}
+                      >
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name={`poi-${v.idDanhMucDiaDiem}`}
+                            id={`poi-${v.idDanhMucDiaDiem}`}
+                            value={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              marginRight: 8,
+                            }}
+                            onClick={btDiaDiemDuLich}
+                            defaultChecked={true}
+                          />
+                          <img
+                            style={{
+                              width: 25,
+                              height: 25,
+                              marginRight: 8,
+                            }}
+                            src={
+                              v.tenDanhMuc == "Homestay"
+                                ? "https://cdn-icons-png.flaticon.com/512/7059/7059852.png"
+                                : v.tenDanhMuc == "Khách sạn"
+                                ? "https://cdn-icons-png.flaticon.com/512/235/235889.png"
+                                : v.tenDanhMuc == "Nhà nghỉ"
+                                ? "https://cdn3.iconfinder.com/data/icons/flat-building-1/70/1-512.png"
+                                : ""
+                            }
+                            alt=""
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              margin: 0,
+                            }}
+                          >
+                            {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
+                            {
+                              dsLuuTru.features.filter(
+                                (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                              ).length
+                            }{" "}
+                            {translate("destination").replace(
+                              "Địa điểm du lịch",
+                              "điểm"
+                            )}
+                            )
+                          </label>
+                        </div>
+                      </div>
+                    )
+                )}
+              </div>
+              <p
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  padding: 8,
+                  color: "#050505",
+                  margin: "0px 12px",
+                }}
+              >
+                {translate("cuisine")} : {dsAmThuc.features.length}{" "}
+                {translate("destination").replace("Địa điểm du lịch", "điểm")}
+              </p>
+              <div
+                style={{
+                  paddingLeft: 20,
+                }}
+              >
+                {dsDanhMucAmThuc.map(
+                  (v, k) =>
+                    dsAmThuc.features.filter(
+                      (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                    ).length > 0 && (
+                      <div
+                        key={k}
+                        className="d-flex align-items-center"
+                        style={{ padding: "8px 12px" }}
+                      >
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name={`poi-${v.idDanhMucDiaDiem}`}
+                            id={`poi-${v.idDanhMucDiaDiem}`}
+                            value={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              marginRight: 8,
+                            }}
+                            onClick={btDiaDiemDuLich}
+                            defaultChecked={true}
+                          />
+                          <img
+                            style={{
+                              width: 25,
+                              height: 25,
+                              marginRight: 8,
+                            }}
+                            src={
+                              v.tenDanhMuc == "Nhà hàng"
+                                ? "https://cdn-icons-png.flaticon.com/512/4287/4287725.png"
+                                : ""
+                            }
+                            alt=""
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              margin: 0,
+                            }}
+                          >
+                            {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
+                            {
+                              dsAmThuc.features.filter(
+                                (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                              ).length
+                            }{" "}
+                            {translate("destination").replace(
+                              "Địa điểm du lịch",
+                              "điểm"
+                            )}
+                            )
+                          </label>
+                        </div>
+                      </div>
+                    )
+                )}
+              </div>
+              <p
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  padding: 8,
+                  color: "#050505",
+                  margin: "0px 12px",
+                }}
+              >
+                {translate("rentService")} : {dsPhuongTien.features.length}{" "}
+                {translate("destination").replace("Địa điểm du lịch", "điểm")}
+              </p>
+              <div
+                style={{
+                  paddingLeft: 20,
+                }}
+              >
+                {dsDanhMucPhuongTien.map(
+                  (v, k) =>
+                    dsPhuongTien.features.filter(
+                      (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                    ).length > 0 && (
+                      <div
+                        key={k}
+                        className="d-flex align-items-center"
+                        style={{ padding: "8px 12px" }}
+                      >
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name={`poi-${v.idDanhMucDiaDiem}`}
+                            id={`poi-${v.idDanhMucDiaDiem}`}
+                            value={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              marginRight: 8,
+                            }}
+                            onClick={btDiaDiemDuLich}
+                            defaultChecked={true}
+                          />
+                          <img
+                            style={{
+                              width: 25,
+                              height: 25,
+                              marginRight: 8,
+                            }}
+                            src={
+                              v.tenDanhMuc == "Xe máy"
+                                ? "https://cdn-icons-png.flaticon.com/512/1986/1986937.png"
+                                : v.tenDanhMuc == "Xe đạp"
+                                ? "https://cdn-icons-png.flaticon.com/512/2972/2972185.png"
+                                : v.tenDanhMuc == "Ô tô"
+                                ? "https://cdn-icons-png.flaticon.com/512/2554/2554936.png"
+                                : v.tenDanhMuc == "Xe điện"
+                                ? "https://cdn-icons-png.flaticon.com/512/1574/1574055.png"
+                                : ""
+                            }
+                            alt=""
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor={`poi-${v.idDanhMucDiaDiem}`}
+                            style={{
+                              margin: 0,
+                            }}
+                          >
+                            {translationData(v.tenDanhMuc, v.tenDanhMucUS)} (
+                            {
+                              dsPhuongTien.features.filter(
+                                (va) => va.properties.tenDanhMuc == v.tenDanhMuc
+                              ).length
+                            }{" "}
+                            {translate("destination").replace(
+                              "Địa điểm du lịch",
+                              "điểm"
+                            )}
+                            )
+                          </label>
+                        </div>
+                      </div>
+                    )
+                )}
+              </div>
+              <p
+                style={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  padding: 8,
+                  color: "#050505",
+                  margin: "0px 12px",
+                }}
+              >
+                {translate("lopLuongMua")}
+              </p>
+              <div
+                style={{
+                  paddingLeft: 20,
+                }}
+              >
+                <div
+                  className="d-flex align-items-center"
+                  style={{ padding: "8px 12px" }}
+                >
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      name={`rain`}
+                      id={`rain`}
+                      value={`rain`}
+                      style={{
+                        marginRight: 8,
+                      }}
+                      onClick={btDiaDiemDuLich}
+                    />
+                    <img
+                      style={{
+                        width: 25,
+                        height: 25,
+                        marginRight: 8,
+                      }}
+                      src={
+                        "https://cdn-icons-png.flaticon.com/512/9342/9342255.png"
+                      }
+                      alt=""
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor={`rain`}
+                      style={{
+                        margin: 0,
+                      }}
+                    >
+                      {translate("lopLuongMua")}
+                    </label>
+                  </div>
+                </div>
+                <img
+                  src="./assets/img/chuGiaiLuongMua.png"
+                  alt=""
+                  style={{
+                    maxWidth: 50,
+                  }}
+                />
+              </div>
             </div>
-          </div>
-        )}
+          )}
         {isDanhSachBanDo && (
           <div
             style={{
