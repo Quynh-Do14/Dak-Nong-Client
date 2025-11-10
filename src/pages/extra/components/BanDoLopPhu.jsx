@@ -19,6 +19,14 @@ import LoadingFullPageMap from "../../../infratructure/common/controls/loadingMa
 import * as MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import useTranslate from "../../../core/common/hook/useTranslate";
 import { translationData } from "../../../infratructure/utils/helper";
+import {
+  MapboxExportControl,
+  Size,
+  PageOrientation,
+  Format,
+  DPI,
+} from "@watergis/mapbox-gl-export";
+import "@watergis/mapbox-gl-export/dist/mapbox-gl-export.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
 
@@ -178,6 +186,19 @@ const BanDoLopPhu = () => {
       "bottom-right"
     );
     map.addControl(new mapboxgl.NavigationControl());
+      map.addControl(
+        new MapboxExportControl({
+          accessToken:
+            "pk.eyJ1IjoiYXlhYW56YXZlcmkiLCJhIjoiY2ttZHVwazJvMm95YzJvcXM3ZTdta21rZSJ9.WMpQsXd5ur2gP8kFjpBo8g",
+          PageSize: Size.A3,
+          PageOrientation: PageOrientation.Portrait,
+          Format: Format.PDF,
+          DPI: DPI[96],
+          Crosshair: true,
+          PrintableArea: true,
+        }),
+        "top-right"
+      );
     map.on("load", () => {
       map.addSource("mapbox-dem", {
         type: "raster-dem",
@@ -192,7 +213,7 @@ const BanDoLopPhu = () => {
 
       map.addSource("LC_daknong_tiff", {
         type: "image",
-        url: "http://103.130.212.145:46928/api/public/anhvetinh/LC_daknong_tiff.gif",
+        url: "https://api.bandodulichdaknong.vn/api/public/anhvetinh/LC_daknong_tiff.gif",
         coordinates: [
           [107.20629162700004, 12.812316930000065],
           [108.11636491700006, 12.812316930000065],
@@ -211,7 +232,7 @@ const BanDoLopPhu = () => {
 
       map.addSource("ranhGioiHuyen", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
+        data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiHuyen`,
       });
       map.addLayer({
         id: "ranhGioiHuyen",
@@ -236,7 +257,7 @@ const BanDoLopPhu = () => {
       // Load an image from an external URL.
       map.addSource("ranhGioiTinh", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiTinh`,
+        data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiTinh`,
       });
       map.addLayer({
         id: "ranhGioiTinh",
@@ -261,7 +282,7 @@ const BanDoLopPhu = () => {
 
       map.addSource("tuyen_dl", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tuyen_dl`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tuyen_dl`,
       });
       map.addLayer({
         id: `tuyen_dl`,
@@ -443,7 +464,7 @@ const BanDoLopPhu = () => {
                   ? e.properties.hinhAnh
                   : e.properties.hinhAnh.indexOf("http") != -1
                   ? e.properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
@@ -827,7 +848,7 @@ const BanDoLopPhu = () => {
               >
                 <div className="form-check" style={{ paddingLeft: 0 }}>
                   <img
-                    src="http://103.130.212.145:46928/api/public/anhvetinh/z5327157684746_75715c1a873120cc3fb97a411f8f25ad.jpg"
+                    src="https://api.bandodulichdaknong.vn/api/public/anhvetinh/z5327157684746_75715c1a873120cc3fb97a411f8f25ad.jpg"
                     alt=""
                   />
                 </div>

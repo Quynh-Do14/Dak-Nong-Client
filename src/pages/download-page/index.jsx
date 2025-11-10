@@ -8,7 +8,7 @@ const DownLoadPage = () => {
           <h1 className="title">Tải ứng dụng </h1>
           <div className="btn-part">
             <a
-              href="http://103.130.212.145:46928/api/public/DuLichDakNong.apk"
+              href="https://api.bandodulichdaknong.vn/api/public/DuLichDakNong.apk"
               className="btn-download d-flex align-items-center justify-content-center"
             >
               <div>
@@ -20,7 +20,8 @@ const DownLoadPage = () => {
               <div className="name-btn">Dành cho Android</div>
             </a>
             <a
-              href="itms-services:///?action=download-manifest&amp;amp;url=https://drive.ekgis.vn/AppMobile/CayXanhCu.plist"
+              target="_blank"
+              href="itms-services:///?action=download-manifest&amp;url=https://api.bandodulichdaknong.vn/api/lichtrinh/plistTaiApp"
               className="btn-download d-flex align-items-center justify-content-center"
             >
               <div>

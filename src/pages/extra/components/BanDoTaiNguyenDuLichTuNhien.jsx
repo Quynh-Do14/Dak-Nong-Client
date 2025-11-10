@@ -19,6 +19,14 @@ import LoadingFullPageMap from "../../../infratructure/common/controls/loadingMa
 import * as MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import useTranslate from "../../../core/common/hook/useTranslate";
 import { translationData } from "../../../infratructure/utils/helper";
+import {
+  MapboxExportControl,
+  Size,
+  PageOrientation,
+  Format,
+  DPI,
+} from "@watergis/mapbox-gl-export";
+import "@watergis/mapbox-gl-export/dist/mapbox-gl-export.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
 
@@ -145,7 +153,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
     setDataLichTrinh(dt);
     try {
       const res = await api.getCuaTao(
-        `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien`
+        `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien`
       );
       if (res.features.length > 0) {
         setDsDiemDuLich(res);
@@ -187,6 +195,19 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       "bottom-right"
     );
     map.addControl(new mapboxgl.NavigationControl());
+      map.addControl(
+        new MapboxExportControl({
+          accessToken:
+            "pk.eyJ1IjoiYXlhYW56YXZlcmkiLCJhIjoiY2ttZHVwazJvMm95YzJvcXM3ZTdta21rZSJ9.WMpQsXd5ur2gP8kFjpBo8g",
+          PageSize: Size.A3,
+          PageOrientation: PageOrientation.Portrait,
+          Format: Format.PDF,
+          DPI: DPI[96],
+          Crosshair: true,
+          PrintableArea: true,
+        }),
+        "top-right"
+      );
     map.on("load", () => {
       map.addSource("mapbox-dem", {
         type: "raster-dem",
@@ -201,7 +222,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
 
       map.addSource("ranhGioiHuyen", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
+        data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiHuyen`,
       });
       map.addLayer({
         id: "ranhGioiHuyen",
@@ -226,7 +247,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       // Load an image from an external URL.
       map.addSource("ranhGioiTinh", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiTinh`,
+        data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiTinh`,
       });
       map.addLayer({
         id: "ranhGioiTinh",
@@ -258,7 +279,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       );
       map.addSource("khubaotonthiennhien", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Khu bảo tồn thiên nhiên'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Khu bảo tồn thiên nhiên'`,
       });
       map.addLayer({
         id: `khubaotonthiennhien`,
@@ -344,7 +365,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       );
       map.addSource("vuonquocgia", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Vườn quốc gia'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Vườn quốc gia'`,
       });
       map.addLayer({
         id: `vuonquocgia`,
@@ -430,7 +451,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       );
       map.addSource("hangdongdiachat", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Hang động địa chất'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Hang động địa chất'`,
       });
       map.addLayer({
         id: `hangdongdiachat`,
@@ -516,7 +537,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       );
       map.addSource("song", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Sông'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Sông'`,
       });
       map.addLayer({
         id: `song`,
@@ -602,7 +623,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       );
       map.addSource("thac", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Thác'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Thác'`,
       });
       map.addLayer({
         id: `thac`,
@@ -688,7 +709,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       );
       map.addSource("ho", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Hồ'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Hồ'`,
       });
       map.addLayer({
         id: `ho`,
@@ -774,7 +795,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       );
       map.addSource("dao", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Đảo'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Đảo'`,
       });
       map.addLayer({
         id: `dao`,
@@ -860,7 +881,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       );
       map.addSource("nuilua", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Núi lửa'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Núi lửa'`,
       });
       map.addLayer({
         id: `nuilua`,
@@ -946,7 +967,7 @@ const BanDoTaiNguyenDuLichTuNhien = () => {
       );
       map.addSource("khac", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Khác'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Khác'`,
       });
       map.addLayer({
         id: `khac`,

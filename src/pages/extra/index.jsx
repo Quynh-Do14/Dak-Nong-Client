@@ -20,6 +20,14 @@ import * as MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-d
 import useTranslate from "../../core/common/hook/useTranslate";
 import { translationData } from "../../infratructure/utils/helper";
 import RainLayer from "mapbox-gl-rain-layer";
+import {
+  MapboxExportControl,
+  Size,
+  PageOrientation,
+  Format,
+  DPI,
+} from "@watergis/mapbox-gl-export";
+import "@watergis/mapbox-gl-export/dist/mapbox-gl-export.css";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
@@ -75,7 +83,6 @@ const ExtraComponent = () => {
   const { translate } = useTranslate();
 
   console.log(sessionStorage.getItem("language"));
-  
 
   const renderDropdownSearch = () => {
     if (selectSearch == "DIEMDULICH") {
@@ -238,6 +245,19 @@ const ExtraComponent = () => {
         "bottom-right"
       );
       map.addControl(new mapboxgl.NavigationControl());
+      map.addControl(
+        new MapboxExportControl({
+          accessToken:
+            "pk.eyJ1IjoiYXlhYW56YXZlcmkiLCJhIjoiY2ttZHVwazJvMm95YzJvcXM3ZTdta21rZSJ9.WMpQsXd5ur2gP8kFjpBo8g",
+          PageSize: Size.A3,
+          PageOrientation: PageOrientation.Portrait,
+          Format: Format.PDF,
+          DPI: DPI[96],
+          Crosshair: true,
+          PrintableArea: true,
+        }),
+        "top-right"
+      );
       map.on("load", () => {
         map.addSource("mapbox-dem", {
           type: "raster-dem",
@@ -431,7 +451,7 @@ const ExtraComponent = () => {
 
         map.addSource("ranhGioiHuyen", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
+          data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiHuyen`,
         });
         map.addLayer({
           id: "ranhGioiHuyen",
@@ -456,7 +476,7 @@ const ExtraComponent = () => {
         // Load an image from an external URL.
         map.addSource("ranhGioiTinh", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiTinh`,
+          data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiTinh`,
         });
         map.addLayer({
           id: "ranhGioiTinh",
@@ -481,7 +501,7 @@ const ExtraComponent = () => {
 
         map.addSource("diaDiemDuLich", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiaDiemBanDo`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiaDiemBanDo`,
         });
 
         for (const feature of dataDsDiaDiemGeoJson.features) {
@@ -519,7 +539,7 @@ const ExtraComponent = () => {
                 ? e.features[0].properties.hinhAnh
                 : e.features[0].properties.hinhAnh.indexOf("http") != -1
                 ? e.features[0].properties.hinhAnh
-                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
             }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
@@ -604,7 +624,7 @@ const ExtraComponent = () => {
 
         map.addSource("luuTru", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemLuuTruBanDo`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiemLuuTruBanDo`,
         });
 
         for (const feature of dataDsLuuTruGeoJson.features) {
@@ -642,7 +662,7 @@ const ExtraComponent = () => {
                   ? e.features[0].properties.hinhAnh
                   : e.features[0].properties.hinhAnh.indexOf("http") != -1
                   ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
@@ -727,7 +747,7 @@ const ExtraComponent = () => {
 
         map.addSource("amThuc", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemAmThucBanDo`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiemAmThucBanDo`,
         });
 
         for (const feature of dataDsAmThucGeoJson.features) {
@@ -765,7 +785,7 @@ const ExtraComponent = () => {
                   ? e.features[0].properties.hinhAnh
                   : e.features[0].properties.hinhAnh.indexOf("http") != -1
                   ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
@@ -850,7 +870,7 @@ const ExtraComponent = () => {
 
         map.addSource("phuongTien", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemPhuongTienBanDo`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiemPhuongTienBanDo`,
         });
 
         for (const feature of dataDsPhuongTienGeoJson.features) {
@@ -888,7 +908,7 @@ const ExtraComponent = () => {
                   ? e.features[0].properties.hinhAnh
                   : e.features[0].properties.hinhAnh.indexOf("http") != -1
                   ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
@@ -1092,7 +1112,7 @@ const ExtraComponent = () => {
                   ? e.properties.hinhAnh
                   : e.properties.hinhAnh.indexOf("http") != -1
                   ? e.properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;

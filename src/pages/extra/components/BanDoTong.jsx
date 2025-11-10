@@ -19,6 +19,14 @@ import LoadingFullPageMap from "../../../infratructure/common/controls/loadingMa
 import * as MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import useTranslate from "../../../core/common/hook/useTranslate";
 import { translationData } from "../../../infratructure/utils/helper";
+import {
+  MapboxExportControl,
+  Size,
+  PageOrientation,
+  Format,
+  DPI,
+} from "@watergis/mapbox-gl-export";
+import "@watergis/mapbox-gl-export/dist/mapbox-gl-export.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
 
@@ -234,6 +242,19 @@ const BanDoTong = () => {
         "bottom-right"
       );
       map.addControl(new mapboxgl.NavigationControl());
+      map.addControl(
+        new MapboxExportControl({
+          accessToken:
+            "pk.eyJ1IjoiYXlhYW56YXZlcmkiLCJhIjoiY2ttZHVwazJvMm95YzJvcXM3ZTdta21rZSJ9.WMpQsXd5ur2gP8kFjpBo8g",
+          PageSize: Size.A3,
+          PageOrientation: PageOrientation.Portrait,
+          Format: Format.PDF,
+          DPI: DPI[96],
+          Crosshair: true,
+          PrintableArea: true,
+        }),
+        "top-right"
+      );
       map.on("load", () => {
         map.addSource("mapbox-dem", {
           type: "raster-dem",
@@ -248,7 +269,7 @@ const BanDoTong = () => {
 
         map.addSource("DakNong2022_Sentinel_tiff", {
           type: "image",
-          url: "http://103.130.212.145:46928/api/public/anhvetinh/DakNong2022_Sentinel_tiff.gif",
+          url: "https://api.bandodulichdaknong.vn/api/public/anhvetinh/DakNong2022_Sentinel_tiff.gif",
           coordinates: [
             [107.20629162700004, 12.812316930000065],
             [108.11636491700006, 12.812316930000065],
@@ -273,7 +294,7 @@ const BanDoTong = () => {
 
         map.addSource("LC_daknong_tiff", {
           type: "image",
-          url: "http://103.130.212.145:46928/api/public/anhvetinh/LC_daknong_tiff.gif",
+          url: "https://api.bandodulichdaknong.vn/api/public/anhvetinh/LC_daknong_tiff.gif",
           coordinates: [
             [107.20629162700004, 12.812316930000065],
             [108.11636491700006, 12.812316930000065],
@@ -473,7 +494,7 @@ const BanDoTong = () => {
 
         map.addSource("ranhGioiHuyen", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
+          data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiHuyen`,
         });
         map.addLayer({
           id: "ranhGioiHuyen",
@@ -498,7 +519,7 @@ const BanDoTong = () => {
         // Load an image from an external URL.
         map.addSource("ranhGioiTinh", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiTinh`,
+          data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiTinh`,
         });
         map.addLayer({
           id: "ranhGioiTinh",
@@ -523,7 +544,7 @@ const BanDoTong = () => {
 
         map.addSource("tuyen_dl", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tuyen_dl`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tuyen_dl`,
         });
         map.addLayer({
           id: `tuyen_dl`,
@@ -564,7 +585,7 @@ const BanDoTong = () => {
         );
         map.addSource("cho", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Chợ'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Chợ'`,
         });
         map.addLayer({
           id: `cho`,
@@ -650,7 +671,7 @@ const BanDoTong = () => {
         );
         map.addSource("benhvien", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Bệnh viện'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Bệnh viện'`,
         });
         map.addLayer({
           id: `benhvien`,
@@ -736,7 +757,7 @@ const BanDoTong = () => {
         );
         map.addSource("nganhang", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Ngân hàng'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Ngân hàng'`,
         });
         map.addLayer({
           id: `nganhang`,
@@ -822,7 +843,7 @@ const BanDoTong = () => {
         );
         map.addSource("sieuthitrungtamthuongmai", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Siêu thị, trung tâm thương mại'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Siêu thị, trung tâm thương mại'`,
         });
         map.addLayer({
           id: `sieuthitrungtamthuongmai`,
@@ -908,7 +929,7 @@ const BanDoTong = () => {
         );
         map.addSource("khachsan", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Khách sạn'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Khách sạn'`,
         });
         map.addLayer({
           id: `khachsan`,
@@ -994,7 +1015,7 @@ const BanDoTong = () => {
         );
         map.addSource("nhakhach", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà khách'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà khách'`,
         });
         map.addLayer({
           id: `nhakhach`,
@@ -1080,7 +1101,7 @@ const BanDoTong = () => {
         );
         map.addSource("nhanghi", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà nghỉ'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà nghỉ'`,
         });
         map.addLayer({
           id: `nhanghi`,
@@ -1166,7 +1187,7 @@ const BanDoTong = () => {
         );
         map.addSource("nhahang", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà hàng'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà hàng'`,
         });
         map.addLayer({
           id: `nhahang`,
@@ -1252,7 +1273,7 @@ const BanDoTong = () => {
         );
         map.addSource("quanan", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Quán ăn'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Quán ăn'`,
         });
         map.addLayer({
           id: `quanan`,
@@ -1338,7 +1359,7 @@ const BanDoTong = () => {
         );
         map.addSource("rapchieuphim", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Rạp chiếu phim'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Rạp chiếu phim'`,
         });
         map.addLayer({
           id: `rapchieuphim`,
@@ -1424,7 +1445,7 @@ const BanDoTong = () => {
         );
         map.addSource("ctyluhanhnoidia", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Cty lữ hành nội địa'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Cty lữ hành nội địa'`,
         });
         map.addLayer({
           id: `ctyluhanhnoidia`,
@@ -1510,7 +1531,7 @@ const BanDoTong = () => {
         );
         map.addSource("cosoluutrukhac", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Cơ sở lưu trú khác'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Cơ sở lưu trú khác'`,
         });
         map.addLayer({
           id: `cosoluutrukhac`,
@@ -1589,7 +1610,7 @@ const BanDoTong = () => {
 
         map.addSource("khoanhvungdulich", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diadiem/shp/khoanh_vung_diem_dl_hapdan`,
+          data: `https://api.bandodulichdaknong.vn/api/diadiem/shp/khoanh_vung_diem_dl_hapdan`,
         });
         map.addLayer({
           id: "khoanhvungdulich",
@@ -1621,7 +1642,7 @@ const BanDoTong = () => {
         );
         map.addSource("khudulich", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Khu du lịch'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Khu du lịch'`,
         });
         map.addLayer({
           id: `khudulich`,
@@ -1707,7 +1728,7 @@ const BanDoTong = () => {
         );
         map.addSource("hangdongdiachat", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Hang động địa chất'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Hang động địa chất'`,
         });
         map.addLayer({
           id: `hangdongdiachat`,
@@ -1793,7 +1814,7 @@ const BanDoTong = () => {
         );
         map.addSource("songsuoi", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Sông, suối'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Sông, suối'`,
         });
         map.addLayer({
           id: `songsuoi`,
@@ -1879,7 +1900,7 @@ const BanDoTong = () => {
         );
         map.addSource("ditichlichsu", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Di tích lịch sử'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Di tích lịch sử'`,
         });
         map.addLayer({
           id: `ditichlichsu`,
@@ -1965,7 +1986,7 @@ const BanDoTong = () => {
         );
         map.addSource("thac", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Thác'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Thác'`,
         });
         map.addLayer({
           id: `thac`,
@@ -2051,7 +2072,7 @@ const BanDoTong = () => {
         );
         map.addSource("ho", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Hồ'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Hồ'`,
         });
         map.addLayer({
           id: `ho`,
@@ -2137,7 +2158,7 @@ const BanDoTong = () => {
         );
         map.addSource("congvien", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Công viên'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Công viên'`,
         });
         map.addLayer({
           id: `congvien`,
@@ -2223,7 +2244,7 @@ const BanDoTong = () => {
         );
         map.addSource("tuvien", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Tu viện'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Tu viện'`,
         });
         map.addLayer({
           id: `tuvien`,
@@ -2309,7 +2330,7 @@ const BanDoTong = () => {
         );
         map.addSource("trangtrai", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Trang trại'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Trang trại'`,
         });
         map.addLayer({
           id: `trangtrai`,
@@ -2395,7 +2416,7 @@ const BanDoTong = () => {
         );
         map.addSource("thienvien", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Thiền viện'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Thiền viện'`,
         });
         map.addLayer({
           id: `thienvien`,
@@ -2481,7 +2502,7 @@ const BanDoTong = () => {
         );
         map.addSource("baotangnhatrungbay", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Bảo tàng, nhà trưng bày'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Bảo tàng, nhà trưng bày'`,
         });
         map.addLayer({
           id: `baotangnhatrungbay`,
@@ -2567,7 +2588,7 @@ const BanDoTong = () => {
         );
         map.addSource("chua", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Chùa'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Chùa'`,
         });
         map.addLayer({
           id: `chua`,
@@ -2653,7 +2674,7 @@ const BanDoTong = () => {
         );
         map.addSource("tuongdai", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Tượng đài'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Tượng đài'`,
         });
         map.addLayer({
           id: `tuongdai`,
@@ -2739,7 +2760,7 @@ const BanDoTong = () => {
         );
         map.addSource("khac", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Khác'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/diemdl_daknong?where=and phanloai like 'Khác'`,
         });
         map.addLayer({
           id: `khac`,
@@ -2825,7 +2846,7 @@ const BanDoTong = () => {
         );
         map.addSource("khubaotonthiennhien", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Khu bảo tồn thiên nhiên'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Khu bảo tồn thiên nhiên'`,
         });
         map.addLayer({
           id: `khubaotonthiennhien`,
@@ -2911,7 +2932,7 @@ const BanDoTong = () => {
         );
         map.addSource("vuonquocgia", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Vườn quốc gia'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Vườn quốc gia'`,
         });
         map.addLayer({
           id: `vuonquocgia`,
@@ -2997,7 +3018,7 @@ const BanDoTong = () => {
         );
         map.addSource("song", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Sông'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Sông'`,
         });
         map.addLayer({
           id: `song`,
@@ -3083,7 +3104,7 @@ const BanDoTong = () => {
         );
         map.addSource("dao", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Đảo'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Đảo'`,
         });
         map.addLayer({
           id: `dao`,
@@ -3169,7 +3190,7 @@ const BanDoTong = () => {
         );
         map.addSource("nuilua", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Núi lửa'`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/dl_tunhien?where=and phanloai like 'Núi lửa'`,
         });
         map.addLayer({
           id: `nuilua`,
@@ -3248,7 +3269,7 @@ const BanDoTong = () => {
 
         map.addSource("diaDiemDuLich", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiaDiemBanDo`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiaDiemBanDo`,
         });
 
         for (const feature of dataDsDiaDiemGeoJson.features) {
@@ -3283,7 +3304,7 @@ const BanDoTong = () => {
                 ? e.features[0].properties.hinhAnh
                 : e.features[0].properties.hinhAnh.indexOf("http") != -1
                 ? e.features[0].properties.hinhAnh
-                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
             }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
@@ -3350,7 +3371,7 @@ const BanDoTong = () => {
 
         map.addSource("luuTru", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemLuuTruBanDo`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiemLuuTruBanDo`,
         });
 
         for (const feature of dataDsLuuTruGeoJson.features) {
@@ -3385,7 +3406,7 @@ const BanDoTong = () => {
                 ? e.features[0].properties.hinhAnh
                 : e.features[0].properties.hinhAnh.indexOf("http") != -1
                 ? e.features[0].properties.hinhAnh
-                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
             }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
@@ -3452,7 +3473,7 @@ const BanDoTong = () => {
 
         map.addSource("amThuc", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemAmThucBanDo`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiemAmThucBanDo`,
         });
 
         for (const feature of dataDsAmThucGeoJson.features) {
@@ -3487,7 +3508,7 @@ const BanDoTong = () => {
                 ? e.features[0].properties.hinhAnh
                 : e.features[0].properties.hinhAnh.indexOf("http") != -1
                 ? e.features[0].properties.hinhAnh
-                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
             }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
@@ -3554,7 +3575,7 @@ const BanDoTong = () => {
 
         map.addSource("phuongTien", {
           type: "geojson",
-          data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemPhuongTienBanDo`,
+          data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiemPhuongTienBanDo`,
         });
 
         for (const feature of dataDsPhuongTienGeoJson.features) {
@@ -3589,7 +3610,7 @@ const BanDoTong = () => {
                 ? e.features[0].properties.hinhAnh
                 : e.features[0].properties.hinhAnh.indexOf("http") != -1
                 ? e.features[0].properties.hinhAnh
-                : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
             }" alt="" style="min-width: 280px;min-height: 120px;">
             <div style="
                 padding: 20px;
@@ -3766,7 +3787,7 @@ const BanDoTong = () => {
                   ? e.properties.hinhAnh
                   : e.properties.hinhAnh.indexOf("http") != -1
                   ? e.properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
@@ -6172,7 +6193,7 @@ const BanDoTong = () => {
                 >
                   <div className="form-check" style={{ paddingLeft: 0 }}>
                     <img
-                      src="http://103.130.212.145:46928/api/public/anhvetinh/z5327157684746_75715c1a873120cc3fb97a411f8f25ad.jpg"
+                      src="https://api.bandodulichdaknong.vn/api/public/anhvetinh/z5327157684746_75715c1a873120cc3fb97a411f8f25ad.jpg"
                       alt=""
                     />
                   </div>
@@ -6554,7 +6575,7 @@ const BanDoTong = () => {
                 style={{ padding: "8px 12px", flexWrap: "wrap" }}
               >
                 <img
-                  src="http://103.130.212.145:46928/api/public/bieudo/doanhthu.png"
+                  src="https://api.bandodulichdaknong.vn/api/public/bieudo/doanhthu.png"
                   alt=""
                   style={{
                     maxWidth: "100%",
@@ -6562,7 +6583,7 @@ const BanDoTong = () => {
                   }}
                 />
                 <img
-                  src="http://103.130.212.145:46928/api/public/bieudo/khachnoidia.png"
+                  src="https://api.bandodulichdaknong.vn/api/public/bieudo/khachnoidia.png"
                   alt=""
                   style={{
                     maxWidth: "100%",
@@ -6570,7 +6591,7 @@ const BanDoTong = () => {
                   }}
                 />
                 <img
-                  src="http://103.130.212.145:46928/api/public/bieudo/khachquocte.png"
+                  src="https://api.bandodulichdaknong.vn/api/public/bieudo/khachquocte.png"
                   alt=""
                   style={{
                     maxWidth: "100%",
@@ -6578,7 +6599,7 @@ const BanDoTong = () => {
                   }}
                 />
                 <img
-                  src="http://103.130.212.145:46928/api/public/bieudo/nhanluc.png"
+                  src="https://api.bandodulichdaknong.vn/api/public/bieudo/nhanluc.png"
                   alt=""
                   style={{
                     maxWidth: "100%",

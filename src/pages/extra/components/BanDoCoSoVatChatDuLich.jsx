@@ -19,6 +19,14 @@ import LoadingFullPageMap from "../../../infratructure/common/controls/loadingMa
 import * as MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import useTranslate from "../../../core/common/hook/useTranslate";
 import { translationData } from "../../../infratructure/utils/helper";
+import {
+  MapboxExportControl,
+  Size,
+  PageOrientation,
+  Format,
+  DPI,
+} from "@watergis/mapbox-gl-export";
+import "@watergis/mapbox-gl-export/dist/mapbox-gl-export.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
 
@@ -145,7 +153,7 @@ const BanDoCoSoVatChatDuLich = () => {
     setDataLichTrinh(dt);
     try {
       const res = await api.getCuaTao(
-        `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point`
+        `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point`
       );
       if (res.features.length > 0) {
         setDsDiemDuLich(res);
@@ -187,6 +195,19 @@ const BanDoCoSoVatChatDuLich = () => {
       "bottom-right"
     );
     map.addControl(new mapboxgl.NavigationControl());
+      map.addControl(
+        new MapboxExportControl({
+          accessToken:
+            "pk.eyJ1IjoiYXlhYW56YXZlcmkiLCJhIjoiY2ttZHVwazJvMm95YzJvcXM3ZTdta21rZSJ9.WMpQsXd5ur2gP8kFjpBo8g",
+          PageSize: Size.A3,
+          PageOrientation: PageOrientation.Portrait,
+          Format: Format.PDF,
+          DPI: DPI[96],
+          Crosshair: true,
+          PrintableArea: true,
+        }),
+        "top-right"
+      );
     map.on("load", () => {
       map.addSource("mapbox-dem", {
         type: "raster-dem",
@@ -201,7 +222,7 @@ const BanDoCoSoVatChatDuLich = () => {
 
       map.addSource("ranhGioiHuyen", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
+        data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiHuyen`,
       });
       map.addLayer({
         id: "ranhGioiHuyen",
@@ -226,7 +247,7 @@ const BanDoCoSoVatChatDuLich = () => {
       // Load an image from an external URL.
       map.addSource("ranhGioiTinh", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiTinh`,
+        data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiTinh`,
       });
       map.addLayer({
         id: "ranhGioiTinh",
@@ -258,7 +279,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("cho", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Chợ'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Chợ'`,
       });
       map.addLayer({
         id: `cho`,
@@ -344,7 +365,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("benhvien", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Bệnh viện'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Bệnh viện'`,
       });
       map.addLayer({
         id: `benhvien`,
@@ -430,7 +451,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("nganhang", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Ngân hàng'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Ngân hàng'`,
       });
       map.addLayer({
         id: `nganhang`,
@@ -516,7 +537,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("sieuthitrungtamthuongmai", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Siêu thị, trung tâm thương mại'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Siêu thị, trung tâm thương mại'`,
       });
       map.addLayer({
         id: `sieuthitrungtamthuongmai`,
@@ -602,7 +623,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("khachsan", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Khách sạn'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Khách sạn'`,
       });
       map.addLayer({
         id: `khachsan`,
@@ -688,7 +709,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("nhakhach", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà khách'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà khách'`,
       });
       map.addLayer({
         id: `nhakhach`,
@@ -774,7 +795,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("nhanghi", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà nghỉ'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà nghỉ'`,
       });
       map.addLayer({
         id: `nhanghi`,
@@ -860,7 +881,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("nhahang", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà hàng'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Nhà hàng'`,
       });
       map.addLayer({
         id: `nhahang`,
@@ -946,7 +967,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("quanan", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Quán ăn'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Quán ăn'`,
       });
       map.addLayer({
         id: `quanan`,
@@ -1032,7 +1053,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("rapchieuphim", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Rạp chiếu phim'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Rạp chiếu phim'`,
       });
       map.addLayer({
         id: `rapchieuphim`,
@@ -1118,7 +1139,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("ctyluhanhnoidia", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Cty lữ hành nội địa'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Cty lữ hành nội địa'`,
       });
       map.addLayer({
         id: `ctyluhanhnoidia`,
@@ -1204,7 +1225,7 @@ const BanDoCoSoVatChatDuLich = () => {
       );
       map.addSource("cosoluutrukhac", {
         type: "geojson",
-        data: `http://103.130.212.145:46928/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Cơ sở lưu trú khác'`,
+        data: `https://api.bandodulichdaknong.vn/api/diaDiem/shp/tonghop_point?where=and phanloai like 'Cơ sở lưu trú khác'`,
       });
       map.addLayer({
         id: `cosoluutrukhac`,

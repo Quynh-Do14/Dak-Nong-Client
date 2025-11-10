@@ -19,7 +19,14 @@ import Evaluate from "./evaluate";
 import LoginPopup from "../../infratructure/common/popup/login-popup";
 import RegisterPopup from "../../infratructure/common/popup/register-modal";
 import { WarningMessage } from "../../infratructure/common/toast/toastMessage";
-
+import {
+  MapboxExportControl,
+  Size,
+  PageOrientation,
+  Format,
+  DPI,
+} from "@watergis/mapbox-gl-export";
+import "@watergis/mapbox-gl-export/dist/mapbox-gl-export.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnRkMTAxMDIwMDAiLCJhIjoiY2tvbzJ4anl1MDZjMzJwbzNpcnA5NXZpcCJ9.dePfFDv0RlCLnWoDq1zHlw";
 
@@ -266,6 +273,19 @@ const TourDetail = () => {
           "bottom-right"
         );
         map.addControl(new mapboxgl.NavigationControl());
+        map.addControl(
+          new MapboxExportControl({
+            accessToken:
+              "pk.eyJ1IjoiYXlhYW56YXZlcmkiLCJhIjoiY2ttZHVwazJvMm95YzJvcXM3ZTdta21rZSJ9.WMpQsXd5ur2gP8kFjpBo8g",
+            PageSize: Size.A3,
+            PageOrientation: PageOrientation.Portrait,
+            Format: Format.PDF,
+            DPI: DPI[96],
+            Crosshair: true,
+            PrintableArea: true,
+          }),
+          "top-right"
+        );
         map.on("load", () => {
           map.addSource("mapbox-dem", {
             type: "raster-dem",
@@ -472,7 +492,7 @@ const TourDetail = () => {
 
           map.addSource("ranhGioiHuyen", {
             type: "geojson",
-            data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiHuyen`,
+            data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiHuyen`,
           });
           map.addLayer({
             id: "ranhGioiHuyen",
@@ -497,7 +517,7 @@ const TourDetail = () => {
           // Load an image from an external URL.
           map.addSource("ranhGioiTinh", {
             type: "geojson",
-            data: `http://103.130.212.145:46928/api/quanHuyen/ranhGioiTinh`,
+            data: `https://api.bandodulichdaknong.vn/api/quanHuyen/ranhGioiTinh`,
           });
           map.addLayer({
             id: "ranhGioiTinh",
@@ -569,7 +589,7 @@ const TourDetail = () => {
                   ? e.features[0].properties.hinhAnh
                   : e.features[0].properties.hinhAnh.indexOf("http") != -1
                   ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
@@ -645,7 +665,7 @@ const TourDetail = () => {
 
           map.addSource("luuTru", {
             type: "geojson",
-            data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemLuuTruBanDo`,
+            data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiemLuuTruBanDo`,
           });
 
           for (const feature of dataDsLuuTruGeoJson.features) {
@@ -680,7 +700,7 @@ const TourDetail = () => {
                   ? e.features[0].properties.hinhAnh
                   : e.features[0].properties.hinhAnh.indexOf("http") != -1
                   ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
@@ -756,7 +776,7 @@ const TourDetail = () => {
 
           map.addSource("amThuc", {
             type: "geojson",
-            data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemAmThucBanDo`,
+            data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiemAmThucBanDo`,
           });
 
           for (const feature of dataDsAmThucGeoJson.features) {
@@ -791,7 +811,7 @@ const TourDetail = () => {
                   ? e.features[0].properties.hinhAnh
                   : e.features[0].properties.hinhAnh.indexOf("http") != -1
                   ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
@@ -867,7 +887,7 @@ const TourDetail = () => {
 
           map.addSource("phuongTien", {
             type: "geojson",
-            data: `http://103.130.212.145:46928/api/diaDiem/getAllDiemPhuongTienBanDo`,
+            data: `https://api.bandodulichdaknong.vn/api/diaDiem/getAllDiemPhuongTienBanDo`,
           });
 
           for (const feature of dataDsPhuongTienGeoJson.features) {
@@ -902,7 +922,7 @@ const TourDetail = () => {
                   ? e.features[0].properties.hinhAnh
                   : e.features[0].properties.hinhAnh.indexOf("http") != -1
                   ? e.features[0].properties.hinhAnh
-                  : `http://103.130.212.145:46928/${e.features[0].properties.hinhAnh}`
+                  : `https://api.bandodulichdaknong.vn/${e.features[0].properties.hinhAnh}`
               }" alt="" style="min-width: 280px;min-height: 120px;">
               <div style="
                   padding: 20px;
@@ -1157,7 +1177,12 @@ const TourDetail = () => {
                   </li>
                   <li className="flex-detail">
                     <h6>{translate("type")} :</h6>{" "}
-                    <span>{translationData(detailTour.tenDanhMuc, detailTour.tenDanhMucUS)}</span>
+                    <span>
+                      {translationData(
+                        detailTour.tenDanhMuc,
+                        detailTour.tenDanhMucUS
+                      )}
+                    </span>
                   </li>
                   <li className="flex-detail">
                     <h6>{translate("address")} :</h6>{" "}
